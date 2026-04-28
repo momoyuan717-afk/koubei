@@ -215,7 +215,7 @@ body {
 }
 .stat-metric:last-child { border-right: none; }
 .stat-label { font-size: 11px; color: var(--text-muted); font-weight: 500; letter-spacing: .3px; margin-bottom: 8px; }
-.stat-value { font-size: 26px; font-weight: 700; color: var(--text-primary); margin-bottom: 4px; letter-spacing: -0.5px; }
+.stat-value { font-size: 22px; font-weight: 700; color: var(--text-primary); margin-bottom: 4px; letter-spacing: -0.5px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .stat-sub { font-size: 11px; color: var(--text-secondary); }
 .model-tag { display: inline-block; font-size: 10px; font-weight: 600; padding: 2px 8px; border-radius: 20px; margin-top: 8px; }
 .su7-tag { background: var(--mi-orange-light); color: var(--su7); }
@@ -652,8 +652,8 @@ const WEEKS = [
     dataNote: null,
     stats: [],
     statsV2: {
-      su7: { comments:'509,544', commentsSub:'本周累计评论', notes:'33,814', notesSub:'涉及笔记篇数', exposure:'4.6亿+', exposureSub:'评论总曝光量', nps:6.45, npsPrev:11, npsChange:-41.4 },
-      yu7: { comments:'34,356', commentsSub:'本周累计评论', notes:'4,472', notesSub:'涉及笔记篇数', exposure:'2,022.9万', exposureSub:'评论总曝光量', nps:7.61, npsPrev:11, npsChange:-30.8 },
+      su7: { comments:'509,544', commentsSub:'本周累计评论', notes:'33,814', notesSub:'涉及笔记篇数', exposure:'4.6亿+', exposureSub:'评论总曝光量', nps:6, npsPrev:11, npsChange:-41 },
+      yu7: { comments:'34,356', commentsSub:'本周累计评论', notes:'4,472', notesSub:'涉及笔记篇数', exposure:'2,023万', exposureSub:'评论总曝光量', nps:8, npsPrev:11, npsChange:-31 },
     },
     keywords: {
       su7: { recommend: 'https://ep-redim-i1.xhscdn.com/redcity_open/20260428/d02fa4f402aa45e4a1bb014722ed282f.png', complain: 'https://ep-redim-i2.xhscdn.com/redcity_open/20260428/f951efbe5c374dfc8abafc3ad98f4579.png' },
@@ -789,8 +789,27 @@ function renderWeekBtns(){
   });
 }
 
+const EMPTY_PLACEHOLDER = `<div style="display:flex;flex-direction:column;align-items:center;justify-content:center;padding:60px 20px;gap:16px;color:#AAAAAA;">
+  <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" opacity="0.4"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+  <div style="font-size:16px;font-weight:600;color:#BBBBBB;">数据更新中</div>
+  <div style="font-size:13px;color:#CCCCCC;">本周期数据将于每周三 09:30 自动更新</div>
+</div>`;
+
+function isEmpty(w){ return w.statsV2.su7.comments === '-'; }
+
 function render(w){
   if(ch1){try{ch1.dispose();}catch(e){}} if(ch2){try{ch2.dispose();}catch(e){}}
+
+  // 空数据周期：只显示总览骨架 + 占位提示
+  if(isEmpty(w)){
+    document.getElementById('mainContent').innerHTML=`
+      ${sec('📊','一、核心数据总览',statsH(w))}
+      <div class="section">${EMPTY_PLACEHOLDER}</div>
+    `;
+    document.getElementById('footerArea').innerHTML=`<strong>数据说明：</strong>${w.footerNote}`;
+    return;
+  }
+
   document.getElementById('mainContent').innerHTML=`
 
     ${sec('📊','一、核心数据总览',statsH(w))}
@@ -835,8 +854,8 @@ function sec(ic,title,body){return`<div class="section"><div class="section-titl
 function npsTag(v,change){
   if(v==null) return '';
   const arrow = change==null ? '' : change>=0
-    ? `<span style="color:#FF6900;font-size:11px;font-weight:600;margin-left:6px">▲ +${Math.abs(change)}%</span>`
-    : `<span style="color:#1A1A1A;font-size:11px;font-weight:600;margin-left:6px">▼ ${change}%</span>`;
+    ? `<span style="color:#FF6900;font-size:11px;font-weight:600;margin-left:6px">▲ +${Math.round(Math.abs(change))}%</span>`
+    : `<span style="color:#1A1A1A;font-size:11px;font-weight:600;margin-left:6px">▼ ${Math.round(Math.abs(change))}%</span>`;
   return `<div class="stat-metric nps-metric">
     <div class="stat-label">笔记 NPS</div>
     <div class="stat-value" style="font-size:22px">${v}${arrow}</div>
