@@ -806,7 +806,7 @@ function render(w){
       ${sec('📊','一、核心数据总览',statsH(w))}
       <div class="section">${EMPTY_PLACEHOLDER}</div>
     `;
-    document.getElementById('footerArea').innerHTML=`<strong>数据说明：</strong>${w.footerNote}`;
+    document.getElementById('footerArea').innerHTML=`小红书汽车商业化品牌营销运营 · 报告生成日期：${w.generatedAt}`;
     return;
   }
 
@@ -822,7 +822,7 @@ function render(w){
     ${sec('👥','八、用户画像分析',portraitH(w))}
 
   `;
-  document.getElementById('footerArea').innerHTML=`<strong>数据说明：</strong>${w.footerNote}<br>本报告由 nono 自动生成 · 小红书汽车商业化品牌营销运营 · 报告生成日期：${w.generatedAt}`;
+  document.getElementById('footerArea').innerHTML=`小红书汽车商业化品牌营销运营 · 报告生成日期：${w.generatedAt}`;
   setTimeout(()=>{
     ch1=echarts.init(document.getElementById('chart-su7'));
     ch2=echarts.init(document.getElementById('chart-yu7'));
