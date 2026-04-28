@@ -652,8 +652,8 @@ const WEEKS = [
     dataNote: null,
     stats: [],
     statsV2: {
-      su7: { comments:'509,544', commentsSub:'本周累计评论', notes:'33,814', notesSub:'涉及笔记篇数', exposure:'4.6亿+', exposureSub:'评论总曝光量', nps:6, npsPrev:11, npsChange:-41 },
-      yu7: { comments:'34,356', commentsSub:'本周累计评论', notes:'4,472', notesSub:'涉及笔记篇数', exposure:'2,023万', exposureSub:'评论总曝光量', nps:8, npsPrev:11, npsChange:-31 },
+      su7: { comments:'509,544', commentsSub:'本周累计评论', notes:'33,814', notesSub:'涉及笔记篇数', exposure:'4.6亿+', exposureSub:'评论总曝光量', nps:6.5, npsPrev:11, npsChange:-41.4 },
+      yu7: { comments:'34,356', commentsSub:'本周累计评论', notes:'4,472', notesSub:'涉及笔记篇数', exposure:'2,023万', exposureSub:'评论总曝光量', nps:7.6, npsPrev:11, npsChange:-30.8 },
     },
     keywords: {
       su7: { recommend: 'https://ep-redim-i1.xhscdn.com/redcity_open/20260428/d02fa4f402aa45e4a1bb014722ed282f.png', complain: 'https://ep-redim-i2.xhscdn.com/redcity_open/20260428/f951efbe5c374dfc8abafc3ad98f4579.png' },
@@ -854,8 +854,8 @@ function sec(ic,title,body){return`<div class="section"><div class="section-titl
 function npsTag(v,change){
   if(v==null) return '';
   const arrow = change==null ? '' : change>=0
-    ? `<span style="color:#FF6900;font-size:11px;font-weight:600;margin-left:6px">▲ +${Math.round(Math.abs(change))}%</span>`
-    : `<span style="color:#1A1A1A;font-size:11px;font-weight:600;margin-left:6px">▼ ${Math.round(Math.abs(change))}%</span>`;
+    ? `<span style="color:#FF6900;font-size:11px;font-weight:600;margin-left:6px">▲ +${Math.abs(change).toFixed(1)}%</span>`
+    : `<span style="color:#1A1A1A;font-size:11px;font-weight:600;margin-left:6px">▼ ${Math.abs(change).toFixed(1)}%</span>`;
   return `<div class="stat-metric nps-metric">
     <div class="stat-label">笔记 NPS</div>
     <div class="stat-value" style="font-size:22px">${v}${arrow}</div>
