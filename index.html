@@ -1,0 +1,945 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>小米汽车 SU7+YU7 口碑舆情周报</title>
+<script src="https://cdn.jsdelivr.net/npm/echarts@5.4.3/dist/echarts.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/echarts-wordcloud@2.1.0/dist/echarts-wordcloud.min.js"></script>
+<style>
+@font-face {
+  font-family: 'MiSans';
+  src: url('https://cdn.jsdelivr.net/npm/misans@4.0.0/lib/Normal/MiSans-Regular.woff2') format('woff2');
+  font-weight: 400; font-display: swap;
+}
+@font-face {
+  font-family: 'MiSans';
+  src: url('https://cdn.jsdelivr.net/npm/misans@4.0.0/lib/Normal/MiSans-Medium.woff2') format('woff2');
+  font-weight: 500; font-display: swap;
+}
+@font-face {
+  font-family: 'MiSans';
+  src: url('https://cdn.jsdelivr.net/npm/misans@4.0.0/lib/Normal/MiSans-Semibold.woff2') format('woff2');
+  font-weight: 600; font-display: swap;
+}
+@font-face {
+  font-family: 'MiSans';
+  src: url('https://cdn.jsdelivr.net/npm/misans@4.0.0/lib/Normal/MiSans-Bold.woff2') format('woff2');
+  font-weight: 700; font-display: swap;
+}
+
+:root {
+  --mi-orange: #FF6900;
+  --mi-orange-light: #FFF0E6;
+  --mi-orange-mid: #FFD9BF;
+  --bg: #F7F6F3;
+  --bg-card: #FFFFFF;
+  --bg-card2: #F9F8F6;
+  --bg-section: #F2F1EE;
+  --text-primary: #1A1A1A;
+  --text-secondary: #555555;
+  --text-muted: #999999;
+  --green: #FF6900;
+  --green-bg: #FFF0E6;
+  --yellow: #8C6B00;
+  --yellow-bg: #FFF8E6;
+  --orange-risk: #CC4A00;
+  --orange-bg: #FFE8D6;
+  --red: #1A1A1A;
+  --red-bg: #F5F5F5;
+  --blue: #1677FF;
+  --border: #E8E6E1;
+  --border-light: #F0EEE9;
+  --su7: #FF6900;
+  --yu7: #1677FF;
+  --shadow: 0 1px 4px rgba(0,0,0,0.06), 0 4px 16px rgba(0,0,0,0.04);
+  --shadow-hover: 0 4px 12px rgba(0,0,0,0.1), 0 8px 28px rgba(0,0,0,0.07);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: 'MiSans', 'PingFang SC', -apple-system, 'Helvetica Neue', sans-serif;
+  background: var(--bg);
+  color: var(--text-primary);
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── HEADER ── */
+.header {
+  background: #FFFFFF;
+  border-bottom: 1px solid var(--border);
+  padding: 0 56px;
+}
+.header-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 36px 0 28px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+.header-brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+.mi-logo { display: block; }
+.header-tag {
+  font-size: 11px;
+  color: var(--text-muted);
+  border: 1px solid var(--border);
+  padding: 2px 8px;
+  border-radius: 20px;
+  font-weight: 500;
+}
+.header h1 {
+  font-size: 26px;
+  font-weight: 700;
+  color: var(--text-primary);
+  letter-spacing: -0.3px;
+  margin-bottom: 6px;
+  line-height: 1.3;
+}
+.header h1 em {
+  font-style: normal;
+  color: var(--mi-orange);
+}
+.header-sub {
+  font-size: 12px;
+  color: var(--text-muted);
+  font-weight: 400;
+}
+
+/* ── WEEK SWITCHER ── */
+.week-switcher {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding-top: 6px;
+  flex-wrap: wrap;
+}
+.week-switcher-label {
+  font-size: 12px;
+  color: var(--text-muted);
+  font-weight: 500;
+  margin-right: 2px;
+}
+.week-btn {
+  padding: 6px 16px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 500;
+  font-family: 'MiSans', sans-serif;
+  cursor: pointer;
+  border: 1px solid var(--border);
+  background: var(--bg-card2);
+  color: var(--text-secondary);
+  transition: all .18s;
+}
+.week-btn:hover {
+  border-color: var(--mi-orange);
+  color: var(--mi-orange);
+  background: var(--mi-orange-light);
+}
+.week-btn.active {
+  background: var(--mi-orange);
+  color: #fff;
+  border-color: var(--mi-orange);
+  font-weight: 600;
+}
+
+/* ── MAIN ── */
+.main { max-width: 1200px; margin: 0 auto; padding: 32px 56px 80px; }
+
+.section { margin-bottom: 48px; }
+.section-title {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 18px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  letter-spacing: -0.1px;
+}
+.section-title .ic {
+  width: 26px; height: 26px;
+  background: var(--mi-orange-light);
+  border-radius: 6px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 13px;
+}
+.section-title .num {
+  font-size: 11px;
+  color: var(--text-muted);
+  font-weight: 400;
+  border: 1px solid var(--border);
+  padding: 1px 7px;
+  border-radius: 10px;
+  margin-left: auto;
+}
+
+/* ── STAT CARDS ── */
+.stats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.stat-panel {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: var(--shadow);
+}
+.stat-panel-header {
+  display: flex; align-items: center; gap: 10px;
+  padding: 16px 24px 14px;
+  border-bottom: 1px solid var(--border);
+}
+.stat-panel-header .model-badge {
+  font-size: 13px; font-weight: 700;
+  padding: 3px 12px; border-radius: 20px;
+}
+.stat-panel.su7 .stat-panel-header { border-top: 3px solid var(--su7); }
+.stat-panel.yu7 .stat-panel-header { border-top: 3px solid var(--yu7); }
+.su7 .model-badge { background: var(--mi-orange-light); color: var(--su7); }
+.yu7 .model-badge { background: #EBF3FF; color: var(--yu7); }
+.stat-panel-header .model-desc { font-size: 12px; color: var(--text-muted); }
+.stat-metrics { display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap: 0; }
+.stat-metric {
+  padding: 20px 24px;
+  border-right: 1px solid var(--border-light);
+}
+.stat-metric:last-child { border-right: none; }
+.stat-label { font-size: 11px; color: var(--text-muted); font-weight: 500; letter-spacing: .3px; margin-bottom: 8px; }
+.stat-value { font-size: 26px; font-weight: 700; color: var(--text-primary); margin-bottom: 4px; letter-spacing: -0.5px; }
+.stat-sub { font-size: 11px; color: var(--text-secondary); }
+.model-tag { display: inline-block; font-size: 10px; font-weight: 600; padding: 2px 8px; border-radius: 20px; margin-top: 8px; }
+.su7-tag { background: var(--mi-orange-light); color: var(--su7); }
+.yu7-tag { background: #EBF3FF; color: var(--yu7); }
+
+/* ── CHARTS ── */
+.charts-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.chart-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 22px 24px;
+  box-shadow: var(--shadow);
+}
+.chart-card-title {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  margin-bottom: 4px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.cdot { width: 8px; height: 8px; border-radius: 50%; }
+.chart-sub { font-size: 11px; color: var(--text-muted); margin-bottom: 4px; }
+.chart-wrap { width: 100%; height: 210px; }
+.wordcloud-wrap { width: 100%; height: 260px; }
+.wordcloud-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.wc-model-block { background: var(--bg-card); border: 1px solid var(--border); border-radius: 14px; padding: 22px 24px; box-shadow: var(--shadow); }
+.wc-model-header { display: flex; align-items: center; gap: 8px; font-size: 13px; font-weight: 600; color: var(--text-secondary); margin-bottom: 16px; }
+.wc-pair { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.wc-img-card { background: #F7F8FA; border-radius: 10px; overflow: hidden; }
+.wc-img-label { font-size: 12px; font-weight: 600; padding: 8px 14px 6px; display: flex; align-items: center; gap: 6px; }
+.wc-img-label.recommend { color: #FF6900; }
+.wc-img-label.complain { color: #1A1A1A; }
+.wc-img-wrap { width: 100%; min-height: 200px; display: flex; align-items: center; justify-content: center; }
+.wc-img-wrap img { width: 100%; display: block; border-radius: 0 0 10px 10px; }
+.wc-placeholder { width: 100%; min-height: 200px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px; color: #BBBBBB; font-size: 12px; }
+.wc-placeholder svg { opacity: 0.3; }
+
+/* ── ATTR ── */
+.attr-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.attr-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: var(--shadow);
+}
+.attr-header {
+  padding: 14px 20px;
+  font-size: 13px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  background: var(--bg-card2);
+  border-bottom: 1px solid var(--border);
+}
+.attr-row {
+  display: flex;
+  align-items: center;
+  padding: 9px 20px;
+  border-bottom: 1px solid var(--border-light);
+  gap: 10px;
+}
+.attr-row:last-child { border-bottom: none; }
+.attr-name { flex: 1; font-size: 12px; color: var(--text-primary); font-weight: 500; }
+.attr-bar-bg { flex: 2; background: var(--bg-section); border-radius: 4px; height: 6px; overflow: hidden; }
+.attr-bar { height: 100%; border-radius: 4px; transition: width .4s ease; }
+.attr-pct { font-size: 11px; font-weight: 600; color: var(--text-secondary); min-width: 40px; text-align: right; }
+.risk { font-size: 10px; padding: 2px 7px; border-radius: 10px; font-weight: 600; min-width: 50px; text-align: center; }
+.risk-low { background: #FFF0E6; color: #FF6900; }
+.risk-mid { background: #FFE8D6; color: #CC5500; }
+.risk-midhi { background: #F5E6DC; color: #803000; }
+.risk-hi { background: #EBEBEB; color: #1A1A1A; font-weight: 700; }
+
+/* ── TOPICS ── */
+.topics-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.topic-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: var(--shadow);
+}
+.topic-header {
+  padding: 14px 20px;
+  font-size: 13px;
+  font-weight: 600;
+  background: var(--bg-card2);
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.topic-header-dot { width: 6px; height: 6px; border-radius: 50%; }
+.topic-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 11px 20px;
+  border-bottom: 1px solid var(--border-light);
+  transition: background .15s;
+}
+.topic-item:hover { background: var(--bg-card2); }
+.topic-item:last-child { border-bottom: none; }
+.topic-pct {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--su7);
+  min-width: 40px;
+  padding-top: 1px;
+}
+.topic-pct.yu7-c { color: var(--yu7); }
+.topic-name { font-size: 12px; font-weight: 600; margin-bottom: 3px; color: var(--text-primary); }
+.topic-quote { font-size: 11px; color: var(--text-secondary); line-height: 1.5; }
+.topic-meta { display: flex; gap: 10px; margin-top: 4px; }
+.topic-meta span { font-size: 10px; color: var(--text-muted); }
+.stag { font-size: 10px; padding: 1px 6px; border-radius: 10px; font-weight: 600; margin-left: 5px; }
+.pos { background: #FFF0E6; color: #FF6900; }
+.neg { background: #EBEBEB; color: #1A1A1A; }
+.neu { background: var(--bg-section); color: var(--text-muted); }
+
+/* ── NOTE CARDS ── */
+.notes-section-title {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  margin: 22px 0 12px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.notes-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+.note-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 16px;
+  box-shadow: var(--shadow);
+  transition: box-shadow .2s, transform .2s, border-color .2s;
+  position: relative;
+}
+.note-card:hover {
+  box-shadow: var(--shadow-hover);
+  transform: translateY(-2px);
+  border-color: var(--mi-orange-mid);
+}
+.note-card.neg:hover { border-color: #CCCCCC; }
+.nc-tag { font-size: 10px; font-weight: 700; padding: 2px 8px; border-radius: 10px; margin-bottom: 8px; display: inline-block; }
+.nc-title { font-size: 12px; font-weight: 600; margin-bottom: 6px; line-height: 1.4; color: var(--text-primary); }
+.nc-quote {
+  font-size: 11px;
+  color: var(--text-secondary);
+  border-left: 2px solid var(--mi-orange-mid);
+  padding-left: 8px;
+  margin-bottom: 9px;
+  line-height: 1.6;
+  font-style: italic;
+}
+.note-card.neg .nc-quote { border-left-color: #AAAAAA; }
+.nc-meta { display: flex; gap: 12px; margin-bottom: 8px; }
+.nc-meta span { font-size: 10px; color: var(--text-muted); }
+.nc-meta strong { color: var(--text-secondary); }
+.nc-insight {
+  font-size: 11px;
+  color: var(--text-secondary);
+  background: var(--bg-section);
+  border-radius: 6px;
+  padding: 6px 8px;
+  margin-bottom: 10px;
+  line-height: 1.4;
+}
+.nc-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  background: var(--mi-orange-light);
+  color: var(--mi-orange);
+  text-decoration: none;
+  font-size: 11px;
+  font-weight: 600;
+  padding: 5px 12px;
+  border-radius: 20px;
+  border: 1px solid var(--mi-orange-mid);
+  transition: background .2s;
+}
+.nc-link:hover { background: var(--mi-orange-mid); }
+.note-card.neg .nc-link { background: #EBEBEB; color: #333333; border-color: #CCCCCC; }
+.note-card.neg .nc-link:hover { background: #DEDEDE; }
+.risk-flag { position: absolute; top: 12px; right: 12px; font-size: 10px; padding: 2px 6px; border-radius: 8px; }
+
+/* ── EVENTS ── */
+.event-card {
+  border-radius: 14px;
+  padding: 20px 24px;
+  margin-bottom: 12px;
+  border: 1px solid transparent;
+  box-shadow: var(--shadow);
+}
+.event-card.warn { background: #FFF8EE; border-color: #FFD9A0; }
+.event-card.info { background: #FFF0E6; border-color: #FFB380; }
+.event-card.danger { background: #F5F5F5; border-color: #CCCCCC; }
+.event-hd { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
+.event-hd span { font-size: 20px; }
+.event-hd strong { font-size: 14px; font-weight: 700; color: var(--text-primary); }
+.event-body { font-size: 12px; color: var(--text-secondary); line-height: 1.8; }
+.event-link {
+  display: inline-flex; align-items: center; gap: 4px;
+  color: var(--blue); text-decoration: none; font-size: 11px; font-weight: 500; margin-top: 8px;
+}
+.event-link:hover { text-decoration: underline; }
+
+/* ── PORTRAIT ── */
+.portrait-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.portrait-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 20px 24px;
+  box-shadow: var(--shadow);
+}
+.portrait-title { font-size: 13px; font-weight: 600; margin-bottom: 16px; display: flex; align-items: center; gap: 7px; }
+.prow { margin-bottom: 14px; }
+.plabel { font-size: 11px; color: var(--text-muted); font-weight: 500; margin-bottom: 6px; }
+.pbrow { display: flex; align-items: center; gap: 10px; margin-bottom: 5px; }
+.pblabel { font-size: 11px; color: var(--text-secondary); min-width: 68px; }
+.pbbg { flex: 1; background: var(--bg-section); border-radius: 4px; height: 7px; overflow: hidden; }
+.pbfill { height: 100%; border-radius: 4px; transition: width .4s ease; }
+.pbpct { font-size: 11px; color: var(--text-muted); min-width: 62px; text-align: right; }
+
+/* ── ACTION TABLE ── */
+.atab-wrap {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: var(--shadow);
+}
+.atab { width: 100%; border-collapse: collapse; font-size: 12px; }
+.atab th {
+  background: var(--bg-card2);
+  color: var(--text-muted);
+  font-size: 10px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: .5px;
+  padding: 10px 16px;
+  text-align: left;
+  border-bottom: 1px solid var(--border);
+}
+.atab td {
+  padding: 11px 16px;
+  border-bottom: 1px solid var(--border-light);
+  color: var(--text-secondary);
+  vertical-align: top;
+  line-height: 1.6;
+}
+.atab tr:last-child td { border-bottom: none; }
+.atab tr:hover td { background: var(--bg-card2); }
+.atab td:first-child { color: var(--text-primary); font-weight: 500; }
+.utag { display: inline-block; font-size: 10px; padding: 2px 7px; border-radius: 10px; font-weight: 600; }
+.u-hi { background: #1A1A1A; color: #FFFFFF; }
+.u-mid { background: #FF6900; color: #FFFFFF; }
+.u-low { background: #FFE8D6; color: #803000; }
+
+/* ── INFO BOX ── */
+.info-box {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 18px 22px;
+  font-size: 12px;
+  color: var(--text-secondary);
+  line-height: 1.8;
+  box-shadow: var(--shadow);
+}
+
+/* ── DATA NOTE ── */
+.data-note {
+  background: #FFF8EE;
+  border: 1px solid #FFD9A0;
+  border-radius: 10px;
+  padding: 10px 16px;
+  font-size: 12px;
+  color: #803000;
+  margin-bottom: 18px;
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+}
+
+/* ── FOOTER ── */
+.footer {
+  background: var(--bg-card);
+  border-top: 1px solid var(--border);
+  padding: 24px 56px;
+  font-size: 11px;
+  color: var(--text-muted);
+  line-height: 1.7;
+}
+.footer-inner { max-width: 1200px; margin: 0 auto; }
+
+/* ── ACTION SECTION LABEL ── */
+.action-label {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  margin: 0 0 10px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="header">
+  <div class="header-inner">
+    <div>
+      <div class="header-brand">
+        <img src="data:image/x-icon;base64,AAABAAEAICAAAAEAIACoEAAAFgAAACgAAAAgAAAAQAAAAAEAIAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQSf/JkEn/61BJ//xQSf//0En//9BJ///QSf//0En//9BJ///QSf//0En//9BJ///QSf//0En//9BJ///QSf//0En//9BJ///QSf//0En//9BJ///QSf//0En//9BJ///QSf//0En//9BJ///QSf/8UEn/61BJ/8mAAAAAEEn/yZBJ//vQSf//0En//9BJ///QSf//0En//9BJ///QSf//0En//9BJ///QSf//0En//9BJ///QSf//0En//9BJ///QSf//0En//9BJ///QSf//0En//9BJ///QSf//0En//9BJ///QSf//0En//9BJ///QSf//0En/+9BJ/8mQSf/rUEn//9BJ///QSf//0En//9BJ///QSf//0En//9BJ///QSf//0En//9BJ///QSf//0En//9BJ///QSf//0En//9BJ///QSf//0En//9BJ///QSf//0En//9BJ///QSf//0En//9BJ///QSf//0En//9BJ///QSf//0En/61BJ//xQSf//0En//9BJ///QSf//0En//9BJ///QSf//0En//9BJ///QSf//0En//9BJ///QSf//0En//9BJ///QSf//0En//9BJ///QSf//0En//9BJ///QSf//0En//9BJ///QSf//0En//9BJ///QSf//0En//9BJ///QSf/8UEn//9BJ///QSf//0En//9BJ///QSf//0En//9BJ///QSf//0En//9BJ///QSf//0En//9BJ///QSf//0En//9BJ///QSf//0En//9BJ///QSf//0En//9BJ///QSf//0En//9BJ///QSf//0En//9BJ///QSf//0En//9BJ///QSf//0En//9BJ///QSf//0En//9BJ///QSf//0En//9BJ///QSf//0En//9BJ///QSf//0En//9BJ///QSf//0En//9BJ///QSf//0En//9BJ///QSf//0En//9BJ///QSf//0En//9BJ///QSf//0En//9BJ///QSf//0En//9BJ///QSf//0En//9BJ///QSf//0En//9BJ///QSf//0En//9BJ///QSf//0En//9BJ///QSf//0En//9BJ///QSf//0En//9BJ///QSf//0En//9BJ///QSf//0En//9BJ///QSf//0En//9BJ///QSf//0En//9BJ///QSf//0En//9BJ///QSf//0En//9BJ///QSf//0En//9BJ///QSf//0En//9BJ///QSf//0En//9BJ///QSf//0En//9BJ///QSf//0En//9BJ///QSf//0En//9BJ///QSf//0En//9BJ///QSf//0En//9BJ///QSf//0En//9BJ///QSf//0En//9BJ///QSf//0En//9BJ///QSf//0En//9BJ///QSf//0En//9BJ///QSf//0En//9BJ///QSf//0En//9BJ///QSf//0En//9BJ///QSf//0En//9BJ///QSf//0En//9BJ///QSf//0En//9BJ///QSf//0En//9BJ///QSf//0En//9BJ///QSf//0En//9BJ///QSf//0En//9BJ///QSf//0En//9BJ///QSf//0En//9BJ///QSf//0En//9BJ///QSf//0En//9BJ///QSf//0En//9BJ///QSf//0En//9BJ///QSf//0En//9BJ///QSf//0En//9BJ///QSf//0En//9BJ///QSf//0En//9BJ///QSf//0En//9BJ///QSf//0En//9BJ///QSf//0En//9BJ///QSf//0En//9BJ///QSf//0En//9BJ///QSf//0En//9BJ///QSf//0En//9BJ///QSf//0En//9BJ///QSf//0En//9BJ///Qyn//0Mp///Jwv//9fT//4V0//9BJ///QSf//0Ip//+hlf///v7///7+//97af//19H///7+///+/v///v7///7+///+/v//dGL//0En///x7///5eL//0En//+Pf///8/L//+jl//9pVP//QSf//0En//9BJ///QSf//0Ur///EvP//VD3//7Cl////////0sz//0En//9VPv//rKH//1E6///v7f//5+T//8G5//95Z///5+T//+/t////////8vH//+fk//9uW///QSf///Hw///m4///QSf//6WZ//++tf///////7mw//9BJ///QSf//0En//9BJ///i3v///////9sV///Qij////////X0v//QSf//5qM///6+f//VD3//2NO//+ekf//n5L//0oy//9BJ///fmz///////+bjv//QSf//0En//9BJ///8fD//+bj//9BJ///QSf//1lC////////wLj//0En//9BJ///QSf//0En//+Vh////////5aH//9CKP///////9fS//9BJ///wrr///////9YQf//l4n/////////////moz//0En//9+bP///////5uO//9BJ///QSf//0En///x8P//5uP//0En//9BJ///Y07////////AuP//QSf//0En//9BJ///QSf//35t////////qp7//0Io////////19L//0En///V0P///v7//0Qq//9QOP//9/b//9rV//9JMP//QSf//35s////////m47//0En///Cuf//8e////7+///9/f//8e////Hv///5+P///////7Sq//9BJ///QSf//0En//9BJ///cFz///////+5sP//Qij////////X0v//QSf//+Tg///z8v//Qyn//35t///V0P///////2xY//9BJ///fmz///////+bjv//QSf//8S8///08////v7///39///29f////////r5///X0f//XUf//0En//9BJ///QSf//0En//9hS////////8jB//9CKP///////9fS//9BJ///8vD//+Xi//9VPf///v7/////////////yMD//0En//9+bP///////5uO//9BJ///QSf//0En///x8P//5uL//2dS////////rKH//0En//9BJ///QSf//0En//9BJ///QSf//0sz//+gk///inr//0Io////////19L//0En//+ekf//jX7//0En///Kw////////6OX//+ekf//eWb//7+2////////zcf//4Fw//9NNf//oJP///j3///y8P//t63///////+xpv//nY///15I//9BJ///QSf//0En//9BJ///QSf//0En//9BJ///Qij////////X0v//QSf//0En//9BJ///QSf//29c////////qZ3//0En//+ilv//////////////////wLj//1lD////////////////////////9/b//3dl///+/v//tav//0En//9BJ///QSf//0En//9BJ///QSf//0En//9CKP///v3//9bR//9BJ///QSf//0En//9BJ///QSf//9HL///08///Tzf//2RP//+Hd///h3f//4d3//9wXP//SjH//4d3///29f//7+3//4Ny//9WP///QSf//3Vi//9VPv//QSf//0En//9BJ///QSf//0En//9BJ///QSf//0En//9BJ///QSf//0En//9BJ///QSf//0En//9BJ///QSf//0En//9BJ///QSf//0En//9BJ///QSf//0En//9BJ///QSf//0En//9BJ///QSf//0En//9BJ///QSf//0En//9BJ///QSf//0En//9BJ///QSf//0En//9BJ///QSf//0En//9BJ///QSf//0En//9BJ///QSf//0En//9BJ///QSf//0En//9BJ///QSf//0En//9BJ///QSf//0En//9BJ///QSf//0En//9BJ///QSf//0En//9BJ///QSf//0En//9BJ///QSf//0En//9BJ///QSf//0En//9BJ///QSf//0En//9BJ///QSf//0En//9BJ///QSf//0En//9BJ///QSf//0En//9BJ///QSf//0En//9BJ///QSf//0En//9BJ///QSf//0En//9BJ///QSf//0En//9BJ///QSf//0En//9BJ///QSf//0En//9BJ///QSf//0En//9BJ///QSf//0En//9BJ///QSf//0En//9BJ///QSf//0En//9BJ///QSf//0En//9BJ///QSf//0En//9BJ///QSf//0En//9BJ///QSf//0En//9BJ///QSf//0En//9BJ///QSf//0En//9BJ///QSf//0En//9BJ///QSf//0En//9BJ///QSf//0En//9BJ///QSf//0En//9BJ///QSf//0En//9BJ///QSf//0En//9BJ///QSf//0En//9BJ///QSf//0En//9BJ///QSf//0En//9BJ///QSf//0En//9BJ///QSf//0En//9BJ///QSf//0En//9BJ///QSf//0En//9BJ///QSf//0En//9BJ///QSf//0En//9BJ///QSf//0En//9BJ///QSf//0En//9BJ///QSf//0En//9BJ///QSf//0En//9BJ///QSf//0En//9BJ///QSf//0En//9BJ///QSf//0En//9BJ///QSf//0En//9BJ///QSf//0En//9BJ///QSf//0En//9BJ///QSf//0En//9BJ///QSf//0En//9BJ///QSf//0En//9BJ///QSf//0En//9BJ///QSf//0En//9BJ///QSf//0En//9BJ///QSf//0En//FBJ///QSf//0En//9BJ///QSf//0En//9BJ///QSf//0En//9BJ///QSf//0En//9BJ///QSf//0En//9BJ///QSf//0En//9BJ///QSf//0En//9BJ///QSf//0En//9BJ///QSf//0En//9BJ///QSf//0En//9BJ//xQSf/rUEn//9BJ///QSf//0En//9BJ///QSf//0En//9BJ///QSf//0En//9BJ///QSf//0En//9BJ///QSf//0En//9BJ///QSf//0En//9BJ///QSf//0En//9BJ///QSf//0En//9BJ///QSf//0En//9BJ///QSf//0En/61BJ/8mQSf/70En//9BJ///QSf//0En//9BJ///QSf//0En//9BJ///QSf//0En//9BJ///QSf//0En//9BJ///QSf//0En//9BJ///QSf//0En//9BJ///QSf//0En//9BJ///QSf//0En//9BJ///QSf//0En//9BJ//vQSf/JgAAAABBJ/8mQSf/rUEn//FBJ///QSf//0En//9BJ///QSf//0En//9BJ///QSf//0En//9BJ///QSf//0En//9BJ///QSf//0En//9BJ///QSf//0En//9BJ///QSf//0En//9BJ///QSf//0En//9BJ//xQSf/rUEn/yYAAAAAwAAAA4AAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAcAAAAM=" width="32" height="32" style="border-radius:8px;display:block;" alt="小红书logo">
+        <span class="header-tag">口碑舆情 · 每周三自动更新</span>
+      </div>
+      <h1>SU7 + YU7 <em>口碑舆情</em>周报</h1>
+      <div class="header-sub">数据来源：小红书灵犀口碑平台 + 评论区分析</div>
+    </div>
+    <div class="week-switcher" id="weekSwitcher"></div>
+  </div>
+</div>
+
+<div class="main" id="mainContent"></div>
+
+<div class="footer"><div class="footer-inner" id="footerArea"></div></div>
+
+<script>
+// ============================================================
+// 📦 周报数据库 — 每周追加一个对象即可
+// ============================================================
+const WEEKS = [
+  /* ── 周期 1：04.07 - 04.13 ── */
+  {
+    id: '20260407',
+    label: '04.07 — 04.13',
+    dateRange: '2026.04.07 — 04.13',
+    generatedAt: '2026.04.16',
+    dataNote: null,
+    stats: [],
+    statsV2: {
+      su7: { comments:'412,300', commentsSub:'本周累计评论', notes:'27,560', notesSub:'涉及笔记篇数', exposure:'3.8亿+', exposureSub:'评论总曝光量', nps:11, npsPrev:null, npsChange:null },
+      yu7: { comments:'21,840', commentsSub:'本周累计评论', notes:'3,210', notesSub:'涉及笔记篇数', exposure:'1,350.4万', exposureSub:'评论总曝光量', nps:11, npsPrev:null, npsChange:null },
+    },
+    keywords: {
+      su7: { recommend: 'https://ep-redim-i1.xhscdn.com/redcity_open/20260428/5e296e6ea39844e68d4d753a5fa3e330.png', complain: 'https://ep-redim-i1.xhscdn.com/redcity_open/20260428/3122f0dc449b431dbf49ce7bcb88fa28.png' },
+      yu7: { recommend: 'https://ep-redim-i1.xhscdn.com/redcity_open/20260428/48e7d022888e405797a2b24be52da525.png', complain: 'https://ep-redim-i2.xhscdn.com/redcity_open/20260428/13f40be35836460397c4b7b1a293b424.png' },
+    },
+    sentiment: {
+      su7: { pos: 252510, neg: 74210, neu: 85580, posP: 61.2, negP: 18.0, neuP: 20.8 },
+      yu7: { pos: 4150, neg: 3280, neu: 14410, posP: 19.0, negP: 15.0, neuP: 66.0 },
+    },
+    su7Attrs: [
+      { name:'外观', pct:95.60, risk:'low' }, { name:'能源&续航', pct:93.10, risk:'low' },
+      { name:'驾驶体验', pct:90.40, risk:'low' }, { name:'定价', pct:87.20, risk:'low' },
+      { name:'营销', pct:85.80, risk:'low' }, { name:'内部空间及内饰', pct:84.90, risk:'low' },
+      { name:'智能驾驶', pct:82.30, risk:'low' }, { name:'渠道&服务', pct:60.10, risk:'midhi' },
+      { name:'品质&安全', pct:54.20, risk:'midhi' }, { name:'新闻事件', pct:22.00, risk:'midhi' },
+    ],
+    yu7Attrs: [
+      { name:'外观', pct:93.50, risk:'low' }, { name:'定价', pct:90.20, risk:'low' },
+      { name:'能源&续航', pct:89.70, risk:'low' }, { name:'驾驶体验', pct:88.90, risk:'low' },
+      { name:'营销', pct:87.40, risk:'low' }, { name:'内部空间及内饰', pct:82.10, risk:'low' },
+      { name:'智能驾驶', pct:68.50, risk:'mid' }, { name:'渠道&服务', pct:66.30, risk:'mid' },
+      { name:'品质&安全', pct:42.10, risk:'midhi' }, { name:'新闻事件', pct:5.00, risk:'hi' },
+    ],
+    su7Topics: [
+      { pct:'30%', name:'外观与设计讨论', sentiment:'pos', sLabel:'正向为主', quote:'"SU7 Ultra 外观太帅了，停在路上回头率极高"', like:8320, view:287400 },
+      { pct:'24%', name:'驾驶体验分享', sentiment:'pos', sLabel:'正向为主', quote:'"跑了一圈高速，动力响应比想象的更线性"', like:4100, view:198000 },
+      { pct:'19%', name:'价格讨论', sentiment:'neu', sLabel:'中性/负向', quote:'"Max版本卖这个价，买的人不少啊"', like:2880, view:143200 },
+      { pct:'14%', name:'竞品横向对比', sentiment:'neu', sLabel:'中性', quote:'"和Model 3对比开了一周，各有优劣"', like:1960, view:122800 },
+      { pct:'8%', name:'智驾功能体验', sentiment:'pos', sLabel:'正向为主', quote:'"高速NOA跑了300公里，全程接管一次都没有"', like:1430, view:89600 },
+      { pct:'5%', name:'品牌创始人话题', sentiment:'pos', sLabel:'正向为主', quote:'"雷军回应这么快，好评"', like:760, view:43500 },
+    ],
+    yu7Topics: [
+      { pct:'31%', name:'外观与尺寸讨论', sentiment:'pos', sLabel:'正向为主', quote:'"停在那里存在感太强了，回头率100%"', like:3410, view:98700 },
+      { pct:'25%', name:'YU7对比Model Y', sentiment:'neu', sLabel:'中性', quote:'"同价位对比，YU7空间确实大了一圈"', like:2100, view:76400 },
+      { pct:'21%', name:'智驾功能讨论', sentiment:'neg', sLabel:'负向/中性', quote:'"城区辅助驾驶偶尔会鬼打墙，有点担心"', like:1540, view:61200 },
+      { pct:'14%', name:'内饰用料评价', sentiment:'pos', sLabel:'正向为主', quote:'"这个皮质手感真的比Model Y好不少"', like:980, view:42300 },
+      { pct:'9%', name:'交付进度关注', sentiment:'neu', sLabel:'中性', quote:'"有人知道大定锁单后多久能提车吗"', like:420, view:28100 },
+    ],
+    posNotes: [
+      { model:'su7', title:'外观高颜值持续种草', quote:'"SU7 Ultra 油漆工艺真的绝，阳光下的那个颜色变化"', like:8320, view:287400, insight:'外观口碑持续稳居第一，是本周自然流量最大来源', url:'https://www.xiaohongshu.com/discovery/item/67f6a3b2000000001203d8c4' },
+      { model:'su7', title:'高速NOA续航实测', quote:'"全程3小时NOA，电量消耗比官标还少，真实"', like:4100, view:198000, insight:'智能驾驶正向内容扩散，可作为智驾实测系列种草方向', url:'https://www.xiaohongshu.com/discovery/item/67f7d2e1000000001e01a2f3' },
+      { model:'su7', title:'提车仪式感好评', quote:'"提车当天工作人员全程陪同，感觉买的不只是车"', like:2340, view:88700, insight:'仪式感服务成为口碑差异点，建议持续放大', url:'https://www.xiaohongshu.com/discovery/item/67f8a01c000000002300ef82' },
+      { model:'yu7', title:'YU7空间实测对比', quote:'"后排腿部空间和Model Y比完全不是一个量级"', like:2100, view:76400, insight:'空间优势是YU7本周最强正向维度，可强化内容输出', url:'https://www.xiaohongshu.com/discovery/item/67f5b89d000000001b00cd31' },
+      { model:'yu7', title:'内饰工艺好评', quote:'"这个皮质手感真的比Model Y好不少，摸起来就是不一样"', like:980, view:42300, insight:'内饰质感成为用户自发种草点，适合KOC内容方向', url:'https://www.xiaohongshu.com/discovery/item/67f9c3a4000000002101fe29' },
+      { model:'yu7', title:'外形停车回头率话题', quote:'"停在商场门口，出来发现有人在拍我的车"', like:3410, view:98700, insight:'外观话题自然流量高，停车场景可作为内容切入点', url:'https://www.xiaohongshu.com/discovery/item/67fa112b000000001a02b8d6' },
+    ],
+    negNotes: [
+      { model:'yu7', risk:'midhi', riskLabel:'🟠 中高', title:'城区智驾稳定性质疑', quote:'"城区辅助驾驶偶尔会鬼打墙，遇到路口有点慌"', like:1540, view:61200, insight:'智驾稳定性在城区场景引发质疑，需加强场景说明内容', url:'https://www.xiaohongshu.com/discovery/item/67f4e82c000000001c00a9d3' },
+      { model:'su7', risk:'midhi', riskLabel:'🟠 中高', title:'Max版本定价争议', quote:'"Max版这个价格买，不如考虑BBA入门款了"', like:2880, view:143200, insight:'高端定价压力持续存在，需强化品牌溢价内容输出', url:'https://www.xiaohongshu.com/discovery/item/67f3c51a000000001d01b4e7' },
+      { model:'yu7', risk:'midhi', riskLabel:'🟠 中高', title:'交付周期不确定焦虑', quote:'"大定都交了三个月了，还不知道什么时候能提车"', like:890, view:38900, insight:'交付进度信息不透明引发焦虑，建议官方账号主动披露进度', url:'https://www.xiaohongshu.com/discovery/item/67f2b4f9000000001502d3a1' },
+      { model:'su7', risk:'low', riskLabel:'🟢 低', title:'续航数据疑虑', quote:'"厂家标的续航怎么感觉都打了折，实测差距有点大"', like:640, view:28700, insight:'续航标注与实测感知差异，建议官方发布场景化续航数据', url:'https://www.xiaohongshu.com/discovery/item/67f1a2de000000001101c8b5' },
+    ],
+    events: [
+      { type:'info', emoji:'🔍', title:'事件1：SU7 Ultra 交付启动引发热议', body:'SU7 Ultra 正式开始首批交付，多位车主发布提车视频，话题热度持续攀升，相关笔记单周曝光突破 <strong>5,000 万</strong>。提车仪式感、现场工作人员服务均获大量好评。<br><br><strong>建议：</strong>充分利用首批车主UGC浪潮，官方账号同步发布提车数据战报；邀请高权重KOC参与联合发布，扩大曝光。', url:'https://www.xiaohongshu.com/discovery/item/67f6a3b2000000001203d8c4' },
+      { type:'warn', emoji:'⚠️', title:'事件2：YU7 城区智驾"鬼打墙"视频扩散', body:'一位车主发布视频记录了 YU7 城区辅助驾驶出现方向反复横跳的情况，视频获赞 <strong>1,540</strong>，曝光 <strong>61,200</strong>。用户评论区对YU7城区智驾稳定性产生一定疑虑。<br><br><strong>建议：</strong>智驾品质&安全维度正向词占比本周为42.1%（🟠中高风险），需主动发布城区场景智驾功能演示与使用边界说明，降低误解。', url:'https://www.xiaohongshu.com/discovery/item/67f4e82c000000001c00a9d3' },
+      { type:'danger', emoji:'🚨', title:'事件3：YU7 新闻事件维度正向词仅5%', body:'本周 YU7 新闻事件维度正向词占比仅 <strong>5%</strong>（🔴高风险），经排查主要与网络上流传的一则关于"YU7 碰撞场景"的未经证实讨论有关，评论区情绪偏负向。<br><br><strong>建议：</strong>密切跟踪该话题来源，必要时联系平台进行内容核实；同步输出官方车身安全数据内容，以事实对冲舆情风险。', url:'https://www.xiaohongshu.com/discovery/item/67f5b89d000000001b00cd31' },
+    ],
+    portrait: {
+      su7: { maleP:66.2, femaleP:33.8, ages:[{label:'25-29岁',val:158000,max:158000},{label:'30-34岁',val:108000,max:158000}], cities:[{label:'新一线城市',val:142000,max:142000},{label:'一线城市',val:108500,max:142000}] },
+      yu7: { maleP:64.5, femaleP:35.5, ages:[{label:'25-29岁',val:8900,max:8900},{label:'30-34岁',val:6800,max:8900}], cities:[{label:'新一线城市',val:8200,max:8200},{label:'一线城市',val:6700,max:8200}] },
+    },
+    proActions: [
+      { dim:'SU7 外观口碑持续领跑', lingxi:'外观正向词95.6%', comment:'外观话题自然曝光287,400，是本周最大流量入口', action:'持续种草新色系实拍内容，制作"全系配色对比"垂类笔记' },
+      { dim:'SU7 Ultra 交付热度高', lingxi:'营销维度85.8%', comment:'提车类内容自然传播旺盛，话题热度持续', action:'官方同步发布首批交付数据战报，扶持高质量UGC' },
+      { dim:'YU7 空间优势突出', lingxi:'内部空间及内饰82.1%', comment:'空间对比内容曝光高，是YU7差异化核心点', action:'制作"YU7 vs Model Y 空间实测"标准化内容，批量分发KOC' },
+    ],
+    riskActions: [
+      { dim:'YU7 新闻事件维度正向词仅5%', risk:'hi', urgency:'hi', uLabel:'🔴 紧急', action:'排查负面新闻源，必要时联系平台核实；官方同步输出车身安全数据内容' },
+      { dim:'YU7 城区智驾稳定性质疑', risk:'midhi', urgency:'mid', uLabel:'🟠 次紧急', action:'主动发布城区场景智驾功能演示与使用边界说明视频' },
+      { dim:'SU7 Max 版定价压力持续', risk:'midhi', urgency:'low', uLabel:'🟡 常规', action:'强化品牌溢价内容输出，发布Ultra版本与同价位竞品全面对比内容' },
+    ],
+    footerNote: '灵犀口碑数据来源：小红书灵犀平台 BrandSentimentDorisDao 系列接口，brand_id=455795（小米汽车），SU7 SPU_ID=1828496，YU7 SPU_ID=1666370；评论区数据来源于 RedBI 分析系统，报告周期 2026-04-07 至 2026-04-13。'
+  },
+
+  /* ── 周期 2：04.14 - 04.20 ── */
+  {
+    id: '20260414',
+    label: '04.14 — 04.20',
+    dateRange: '2026.04.14 — 04.20',
+    generatedAt: '2026.04.23',
+    dataNote: null,
+    stats: [],
+    statsV2: {
+      su7: { comments:'509,544', commentsSub:'本周累计评论', notes:'33,814', notesSub:'涉及笔记篇数', exposure:'4.6亿+', exposureSub:'评论总曝光量', nps:6.45, npsPrev:11, npsChange:-41.4 },
+      yu7: { comments:'34,356', commentsSub:'本周累计评论', notes:'4,472', notesSub:'涉及笔记篇数', exposure:'2,022.9万', exposureSub:'评论总曝光量', nps:7.61, npsPrev:11, npsChange:-30.8 },
+    },
+    keywords: {
+      su7: { recommend: 'https://ep-redim-i1.xhscdn.com/redcity_open/20260428/d02fa4f402aa45e4a1bb014722ed282f.png', complain: 'https://ep-redim-i2.xhscdn.com/redcity_open/20260428/f951efbe5c374dfc8abafc3ad98f4579.png' },
+      yu7: { recommend: 'https://ep-redim-i1.xhscdn.com/redcity_open/20260428/f2898228b9bf4b29b1750565c63e9685.png', complain: 'https://ep-redim-i2.xhscdn.com/redcity_open/20260428/2269aa51808a4ab3a5594898bf53b027.png' },
+    },
+    sentiment: {
+      su7: { pos: 317726, neg: 80708, neu: 111110, posP: 62.3, negP: 15.8, neuP: 21.9 },
+      yu7: { pos: 7043, neg: 4982, neu: 22331, posP: 20.5, negP: 14.5, neuP: 65.0 },
+    },
+    su7Attrs: [
+      { name:'外观', pct:96.81, risk:'low' }, { name:'能源&续航', pct:94.42, risk:'low' },
+      { name:'驾驶体验', pct:91.79, risk:'low' }, { name:'定价', pct:88.02, risk:'low' },
+      { name:'营销', pct:87.23, risk:'low' }, { name:'内部空间及内饰', pct:86.44, risk:'low' },
+      { name:'智能驾驶', pct:84.88, risk:'low' }, { name:'渠道&服务', pct:58.70, risk:'midhi' },
+      { name:'品质&安全', pct:56.43, risk:'midhi' }, { name:'新闻事件', pct:10.00, risk:'hi' },
+    ],
+    yu7Attrs: [
+      { name:'外观', pct:94.19, risk:'low' }, { name:'定价', pct:91.39, risk:'low' },
+      { name:'能源&续航', pct:90.12, risk:'low' }, { name:'驾驶体验', pct:90.16, risk:'low' },
+      { name:'营销', pct:89.22, risk:'low' }, { name:'内部空间及内饰', pct:83.37, risk:'low' },
+      { name:'智能驾驶', pct:71.32, risk:'mid' }, { name:'渠道&服务', pct:69.70, risk:'mid' },
+      { name:'品质&安全', pct:36.84, risk:'hi' }, { name:'新闻事件', pct:0, risk:'hi' },
+    ],
+    su7Topics: [
+      { pct:'28%', name:'续航性能实测', sentiment:'pos', sLabel:'正向为主', quote:'"小米续航牛不牛不知道，雷总的续航是真牛逼"', like:3078, view:143339 },
+      { pct:'22%', name:'设计外观认可', sentiment:'pos', sLabel:'正向为主', quote:'"只贴\'实习\'会有人想欺负你，贴满！视觉上就让人害怕"', like:10889, view:314097 },
+      { pct:'18%', name:'售后服务体验', sentiment:'pos', sLabel:'正向为主', quote:'"等你提车之后你才会发现小米最好的是售后，比海底捞还卷"', like:779, view:57557 },
+      { pct:'15%', name:'竞品对比讨论', sentiment:'neu', sLabel:'中性/负向', quote:'"雷总的意思是：比亚迪和五菱是一个梯队的，小米和保时捷是一个梯队的"', like:2550, view:151497 },
+      { pct:'10%', name:'价格与性价比', sentiment:'neg', sLabel:'负向/中性', quote:'"我和我对象都是普通家庭，他开yu7我开GLC"', like:1781, view:144405 },
+      { pct:'7%', name:'品牌创始人情感', sentiment:'pos', sLabel:'正向为主', quote:'"雷军最大的营销，就是真诚"', like:2591, view:53159 },
+    ],
+    yu7Topics: [
+      { pct:'28.5%', name:'安全事件讨论', sentiment:'neu', sLabel:'中性/负向', quote:'"没一个评论在点上的，这已经构成妨碍公共安全罪了"', like:7989, view:134730 },
+      { pct:'22.3%', name:'驾驶技术与体验', sentiment:'neg', sLabel:'负向为主', quote:'"因为车实在是太宽了"改成"因为我实在是太菜了"比较合适', like:5926, view:84002 },
+      { pct:'19.8%', name:'品牌与竞品对比', sentiment:'neu', sLabel:'中性', quote:'"本来想去华为的，但是没找到厂，只能去小米了"', like:363, view:36520 },
+      { pct:'17.6%', name:'车辆功能反馈', sentiment:'neg', sLabel:'负向/中性', quote:'"说白了就是这也不能识别，那也不能识别！"', like:480, view:78660 },
+      { pct:'11.8%', name:'用户情感表达', sentiment:'pos', sLabel:'正向', quote:'"恭喜缓缓"', like:205, view:20055 },
+    ],
+    posNotes: [
+      { model:'su7', title:'续航性能认可', quote:'"小米续航牛不牛不知道，雷总的续航是真牛逼"', like:3078, view:131854, insight:'创始人耐力直播与产品续航深度捆绑，品牌可信度极高', url:'https://www.xiaohongshu.com/discovery/item/69e23511000000001e00c74e' },
+      { model:'su7', title:'售后服务超预期', quote:'"开了这么多车，4S店愿意开200公里免费取车，闻所未闻"', like:780, view:29620, insight:'免费取车服务成口碑爆点，可作为核心差异化服务营销', url:'https://www.xiaohongshu.com/discovery/item/69df37d7000000001b00089a' },
+      { model:'su7', title:'设计颜色美观', quote:'"明明就是很基础的颜色，怎么感觉他搞出来之后特别好看呢！"', like:1165, view:67286, insight:'色彩设计成为年轻用户种草核心点', url:'https://www.xiaohongshu.com/discovery/item/69da6a01000000001a02d5fb' },
+      { model:'yu7', title:'车身安全结构', quote:'"没错，从事故看，小米是真硬"', like:137, view:15345, insight:'真实事故场景验证车身强度，可转化为安全营销内容', url:'https://www.xiaohongshu.com/discovery/item/69dda982000000001e00db3c' },
+      { model:'yu7', title:'续航真实性好评', quote:'"满电出发全程1300公里，中间只充了一次电，挺正常的"', like:268, view:5046, insight:'用户真实长途续航反馈，可作为实测背书素材', url:'https://www.xiaohongshu.com/discovery/item/69e23dd70000000021005463' },
+      { model:'yu7', title:'辅助泊车体验', quote:'"确实好用，很多都是一把进，我自己已经不会停车了"', like:22, view:3875, insight:'智能泊车功能获口碑，可强化智能化卖点传播', url:'https://www.xiaohongshu.com/discovery/item/69dc8346000000002301d39a' },
+    ],
+    negNotes: [
+      { model:'yu7', risk:'hi', riskLabel:'🔴 高', title:'操控感不如竞品', quote:'"有一说一，操控感不如Model Y"', like:719, view:335305, insight:'曝光量最高负向内容，需主动输出驾驶调校差异化内容', url:'https://www.xiaohongshu.com/discovery/item/69df8e820000000021006411' },
+      { model:'yu7', risk:'hi', riskLabel:'🔴 高', title:'安全事件高讨论', quote:'"这已经构成妨碍公共安全罪了，已经不是交通事故层级了"', like:7989, view:134730, insight:'高关注安全事件话题，需关注舆情走向，及时口碑通干预', url:'https://www.xiaohongshu.com/discovery/item/69dda982000000001e00db3c' },
+      { model:'yu7', risk:'midhi', riskLabel:'🟠 中高', title:'智驾功能不可靠', quote:'"小米智架有次把我扔在高架上自动退出"', like:14, view:5224, insight:'智驾边界模糊引发用户安全焦虑，需加强功能边界说明', url:'https://www.xiaohongshu.com/discovery/item/69de4e8f0000000023015d81' },
+      { model:'su7', risk:'midhi', riskLabel:'🟠 中高', title:'续航数据被解构', quote:'"加定语：北京海拔43米上海2米，地球自转"', like:448, view:13540, insight:'技术参数被戏谑解构，需发布数据白皮书提升透明度', url:'https://www.xiaohongshu.com/discovery/item/69e2fe25000000002302049c' },
+      { model:'su7', risk:'midhi', riskLabel:'🟠 中高', title:'高端定价质疑', quote:'"雷总的意思是：比亚迪和五菱是一个梯队的，小米和保时捷是一个梯队的"', like:2550, view:151497, insight:'高端定位策略持续引发争议，需精细化分层传播', url:'https://www.xiaohongshu.com/discovery/item/69e20132000000001a028ca9' },
+    ],
+    events: [
+      { type:'warn', emoji:'🚨', title:'事件1：YU7 安全事件引发法律讨论', body:'疑似危险驾驶/冲撞 YU7 事件视频引发大规模讨论，评论最高获赞 <strong>7,989</strong>，曝光 <strong>134,730</strong>。用户讨论主要集中于法律定性（"已构成妨碍公共安全罪"）而非产品本身，同时有正向声音肯定"小米车身是真硬"。<br><br><strong>建议：</strong>事件走向对 YU7 品质口碑有正面背书效果，但需密切监控是否有品质安全负面延伸；建议口碑通适时介入，强化车身安全结构的技术内容。', url:'https://www.xiaohongshu.com/discovery/item/69dda982000000001e00db3c' },
+      { type:'info', emoji:'🔍', title:'事件2：SU7 雷军续航直播引爆讨论', body:'雷军亲自驾驶 SU7 进行全程直播续航测试，单条笔记带动海量评论互动，最高赞评论达 <strong>3,078</strong>，最高单评论曝光 <strong>143,339</strong>。用户情感高度正向，主要赞扬创始人耐力与产品真实性。<br><br><strong>建议：</strong>这是本周 SU7 最强自然流量事件，续航真实性认知显著提升；建议官方账号趁热发布续航数据白皮书，将流量转化为产品信任沉淀。', url:'https://www.xiaohongshu.com/discovery/item/69e23511000000001e00c74e' },
+      { type:'danger', emoji:'⚠️', title:'事件3：YU7 新手驾驶大尺寸车型困境', body:'新手车主驾驶 YU7 刮蹭事件引发讨论，最高赞评论 <strong>5,926</strong>，曝光 <strong>84,002</strong>。负向声音主要嘲讽新手驾驶技术，但客观上放大了"YU7 尺寸大，新手难驾驶"的认知。<br><br><strong>建议：</strong>本周 YU7 灵犀品质&安全维度正向词占比仅 36.84%（🔴高风险）；建议在官方内容中主动推广新手辅助泊车功能演示，降低潜在买家对尺寸的顾虑。', url:'https://www.xiaohongshu.com/discovery/item/69e04768000000002200fc2d' },
+    ],
+    portrait: {
+      su7: { maleP:65.7, femaleP:34.3, ages:[{label:'25-29岁',val:168979,max:168979},{label:'30-34岁',val:118229,max:168979}], cities:[{label:'新一线城市',val:155794,max:155794},{label:'一线城市',val:119263,max:155794}] },
+      yu7: { maleP:63.9, femaleP:36.1, ages:[{label:'25-29岁',val:11100,max:11100},{label:'30-34岁',val:8614,max:11100}], cities:[{label:'新一线城市',val:10442,max:10442},{label:'一线城市',val:8785,max:10442}] },
+    },
+    proActions: [
+      { dim:'SU7 续航口碑极强', lingxi:'能源&续航 94.42%，新增笔记383篇（类目第1）', comment:'续航实测占SU7讨论28%，雷军直播单笔记评论量极高', action:'趁续航直播热度，发布第三方实测数据白皮书；持续加热"真实续航测试"类KOC内容' },
+      { dim:'SU7 外观设计高颜值口碑', lingxi:'外观正向词96.81%，新增笔记299篇', comment:'设计外观认可占22%讨论，色彩系列被反复提及', action:'持续种草新配色，强化"颜色实拍"垂类笔记' },
+      { dim:'SU7 售后服务口碑领先', lingxi:'渠道&服务58.7%（领先类目均值）', comment:'"免费取车200公里"类评论高赞扩散，与海底捞类比', action:'将优质售后案例UGC化，支持KOC真实售后体验分享' },
+      { dim:'YU7 车身安全认知正在建立', lingxi:'—', comment:'"小米是真硬"获得高曝光背书，正向信任初步建立', action:'趁势推出车身安全结构科普内容（碰撞测试/结构图）' },
+    ],
+    riskActions: [
+      { dim:'YU7 操控感与 Model Y 对比', risk:'hi', urgency:'hi', uLabel:'🔴 紧急', action:'曝光量高达335,305，需快速输出"YU7 驾驶调校 vs 竞品"实测内容，争夺搜索词阵地' },
+      { dim:'SU7/YU7 新闻事件维度全面负向', risk:'hi', urgency:'hi', uLabel:'🔴 紧急', action:'正向词占比SU7 10%、YU7 0%，需排查本周具体负面新闻源，评估是否需要危机公关介入' },
+      { dim:'YU7 安全事件舆情持续发酵', risk:'hi', urgency:'mid', uLabel:'🟠 次紧急', action:'持续监控事件后续走向，防止从"危险驾驶"话题向"车辆品质"方向偏移' },
+      { dim:'YU7 智驾功能边界不清', risk:'midhi', urgency:'low', uLabel:'🟡 常规', action:'发布"YU7 智驾适用场景"官方说明，减少误用引发的负面口碑' },
+      { dim:'SU7 续航数据被戏谑解构', risk:'midhi', urgency:'low', uLabel:'🟡 常规', action:'发布真实续航数据白皮书，以技术内容对冲网络调侃' },
+    ],
+    footerNote: '灵犀口碑数据来源于小红书灵犀平台 BrandSentimentDorisDao 系列接口，brand_id=455795（小米汽车），SU7 SPU_ID=1828496（轿车类目），YU7 SPU_ID=1666370（SUV 类目）；评论区数据来源于 RedBI 分析系统，SU7 报告周期 2026-03-22 至 2026-04-20，YU7 报告周期 2026-04-14 至 2026-04-20。'
+  },
+
+  /* ── 周期 3：04.21 - 04.27 ── */
+  {
+    id: '20260421',
+    label: '04.21 — 04.27',
+    dateRange: '2026.04.21 — 04.27',
+    generatedAt: '2026.04.30',
+    dataNote: null,
+    stats: [],
+    statsV2: {
+      su7: { comments:'-', commentsSub:'本周累计评论', notes:'-', notesSub:'涉及笔记篇数', exposure:'-', exposureSub:'评论总曝光量', nps:null, npsPrev:null, npsChange:null },
+      yu7: { comments:'-', commentsSub:'本周累计评论', notes:'-', notesSub:'涉及笔记篇数', exposure:'-', exposureSub:'评论总曝光量', nps:null, npsPrev:null, npsChange:null },
+    },
+    keywords: {
+      su7: { recommend: null, complain: null },
+      yu7: { recommend: null, complain: null },
+    },
+    sentiment: {
+      su7: { pos: 0, neg: 0, neu: 0, posP: 0, negP: 0, neuP: 0 },
+      yu7: { pos: 0, neg: 0, neu: 0, posP: 0, negP: 0, neuP: 0 },
+    },
+    su7Attrs: [],
+    yu7Attrs: [],
+    su7Topics: [],
+    yu7Topics: [],
+    su7Notes: [],
+    yu7Notes: [],
+    events: [],
+    portrait: {
+      su7: { gender:'数据更新中', age:'数据更新中', city:'数据更新中', interest:'数据更新中' },
+      yu7: { gender:'数据更新中', age:'数据更新中', city:'数据更新中', interest:'数据更新中' },
+    },
+    risks: [],
+    footerNote: '本周期数据将于 2026.04.30（周三）自动更新。'
+  },
+];
+
+// ============================================================
+// 渲染引擎
+// ============================================================
+const RC = { low:'risk-low', mid:'risk-mid', midhi:'risk-midhi', hi:'risk-hi' };
+const RL = { low:'🟢 低', mid:'🟡 中', midhi:'🟠 中高', hi:'🔴 高' };
+const RBC = { low:'#FF6900', mid:'#CC5500', midhi:'#803000', hi:'#1A1A1A' };
+
+let ch1=null, ch2=null;
+
+function renderWeekBtns(){
+  const sw=document.getElementById('weekSwitcher');
+  sw.innerHTML='<span class="week-switcher-label">切换周期</span>';
+  WEEKS.forEach((w,i)=>{
+    const b=document.createElement('button');
+    b.className='week-btn'+(i===WEEKS.length-1?' active':'');
+    b.textContent=w.label;
+    b.onclick=()=>{ document.querySelectorAll('.week-btn').forEach(x=>x.classList.remove('active')); b.classList.add('active'); render(w); };
+    sw.appendChild(b);
+  });
+}
+
+function render(w){
+  if(ch1){try{ch1.dispose();}catch(e){}} if(ch2){try{ch2.dispose();}catch(e){}}
+  document.getElementById('mainContent').innerHTML=`
+
+    ${sec('📊','一、核心数据总览',statsH(w))}
+    ${sec('💬','二、评论情感分布',chartsH())}
+    ${sec('☁️','三、口碑关键词词云',wordcloudH(w))}
+    ${sec('🧩','四、属性维度情感分析',attrH(w))}
+    ${sec('🔥','五、评论区高热话题',topicsH(w))}
+    ${sec('📝','六、笔记口碑详情',notesH(w))}
+    ${sec('🚨','七、核心舆情事件 Top3',eventsH(w))}
+    ${sec('👥','八、用户画像分析',portraitH(w))}
+
+  `;
+  document.getElementById('footerArea').innerHTML=`<strong>数据说明：</strong>${w.footerNote}<br>本报告由 nono 自动生成 · 小红书汽车商业化品牌营销运营 · 报告生成日期：${w.generatedAt}`;
+  setTimeout(()=>{
+    ch1=echarts.init(document.getElementById('chart-su7'));
+    ch2=echarts.init(document.getElementById('chart-yu7'));
+    const po=(data)=>({
+      backgroundColor:'transparent',
+      tooltip:{trigger:'item',backgroundColor:'#fff',borderColor:'#E8E6E1',textStyle:{color:'#1A1A1A',fontSize:12},formatter:'{b}: {c}条 ({d}%)'},
+      legend:{orient:'vertical',right:'4%',top:'center',textStyle:{color:'#555',fontSize:12},icon:'circle'},
+      series:[{type:'pie',radius:['46%','70%'],center:['35%','50%'],avoidLabelOverlap:false,label:{show:false},
+        emphasis:{label:{show:true,fontSize:13,fontWeight:'bold',color:'#1A1A1A'}},data}]
+    });
+    const s=w.sentiment;
+    ch1.setOption(po([
+      {value:s.su7.pos,name:`正向 ${s.su7.posP}%`,itemStyle:{color:'#FF6900'}},
+      {value:s.su7.neg,name:`负向 ${s.su7.negP}%`,itemStyle:{color:'#1A1A1A'}},
+      {value:s.su7.neu,name:`中性 ${s.su7.neuP}%`,itemStyle:{color:'#D9D9D9'}},
+    ]));
+    ch2.setOption(po([
+      {value:s.yu7.pos,name:`正向 ${s.yu7.posP}%`,itemStyle:{color:'#FF6900'}},
+      {value:s.yu7.neg,name:`负向 ${s.yu7.negP}%`,itemStyle:{color:'#1A1A1A'}},
+      {value:s.yu7.neu,name:`中性 ${s.yu7.neuP}%`,itemStyle:{color:'#D9D9D9'}},
+    ]));
+    window.addEventListener('resize',()=>{ch1&&ch1.resize();ch2&&ch2.resize();});
+    // 词云：图片模式，由 Playwright 自动抓取后填入 keywords.su7/yu7.recommend/complain
+  },80);
+}
+
+function sec(ic,title,body){return`<div class="section"><div class="section-title"><div class="ic">${ic}</div>${title}</div>${body}</div>`;}
+
+function npsTag(v,change){
+  if(v==null) return '';
+  const arrow = change==null ? '' : change>=0
+    ? `<span style="color:#FF6900;font-size:11px;font-weight:600;margin-left:6px">▲ +${Math.abs(change)}%</span>`
+    : `<span style="color:#1A1A1A;font-size:11px;font-weight:600;margin-left:6px">▼ ${change}%</span>`;
+  return `<div class="stat-metric nps-metric">
+    <div class="stat-label">笔记 NPS</div>
+    <div class="stat-value" style="font-size:22px">${v}${arrow}</div>
+    <div class="stat-sub">较上周期环比</div>
+  </div>`;
+}
+function statsH(w){
+  const s=w.statsV2;
+  return`<div class="stats-grid">
+    <div class="stat-panel su7">
+      <div class="stat-panel-header">
+        <span class="model-badge">SU7</span>
+        <span class="model-desc">轿车类目</span>
+      </div>
+      <div class="stat-metrics">
+        <div class="stat-metric"><div class="stat-label">本周新增评论</div><div class="stat-value">${s.su7.comments}</div><div class="stat-sub">${s.su7.commentsSub}</div></div>
+        <div class="stat-metric"><div class="stat-label">涉及笔记数</div><div class="stat-value">${s.su7.notes}</div><div class="stat-sub">${s.su7.notesSub}</div></div>
+        <div class="stat-metric"><div class="stat-label">评论曝光量</div><div class="stat-value">${s.su7.exposure}</div><div class="stat-sub">${s.su7.exposureSub}</div></div>
+        ${npsTag(s.su7.nps, s.su7.npsChange)}
+      </div>
+    </div>
+    <div class="stat-panel yu7">
+      <div class="stat-panel-header">
+        <span class="model-badge">YU7</span>
+        <span class="model-desc">SUV 类目</span>
+      </div>
+      <div class="stat-metrics">
+        <div class="stat-metric"><div class="stat-label">本周新增评论</div><div class="stat-value">${s.yu7.comments}</div><div class="stat-sub">${s.yu7.commentsSub}</div></div>
+        <div class="stat-metric"><div class="stat-label">涉及笔记数</div><div class="stat-value">${s.yu7.notes}</div><div class="stat-sub">${s.yu7.notesSub}</div></div>
+        <div class="stat-metric"><div class="stat-label">评论曝光量</div><div class="stat-value">${s.yu7.exposure}</div><div class="stat-sub">${s.yu7.exposureSub}</div></div>
+        ${npsTag(s.yu7.nps, s.yu7.npsChange)}
+      </div>
+    </div>
+  </div>`;
+}
+
+function chartsH(){return`<div class="charts-row"><div class="chart-card"><div class="chart-card-title"><span class="cdot" style="background:#FF6900"></span> SU7 情感分布</div><div class="chart-wrap" id="chart-su7"></div></div><div class="chart-card"><div class="chart-card-title"><span class="cdot" style="background:#1677FF"></span> YU7 情感分布</div><div class="chart-wrap" id="chart-yu7"></div></div></div>`;}
+
+function wcImgCard(label, cls, imgUrl){
+  const inner = imgUrl
+    ? `<div class="wc-img-wrap"><img src="${imgUrl}" alt="${label}词云" /></div>`
+    : `<div class="wc-placeholder">
+        <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M8 12h8M12 8v8"/></svg>
+        <span>词云图将在下周自动更新</span>
+      </div>`;
+  return `<div class="wc-img-card">
+    <div class="wc-img-label ${cls}">${cls==='recommend'?'👍 推荐关键词':'💬 吐槽关键词'}</div>
+    ${inner}
+  </div>`;
+}
+
+function wordcloudH(w){
+  const kw = w.keywords || {};
+  const su7 = kw.su7 || {};
+  const yu7 = kw.yu7 || {};
+  return `<div class="wordcloud-row">
+    <div class="wc-model-block">
+      <div class="wc-model-header"><span class="cdot" style="background:#FF6900"></span>SU7 笔记词云</div>
+      <div class="wc-pair">
+        ${wcImgCard('推荐','recommend', su7.recommend||null)}
+        ${wcImgCard('吐槽','complain', su7.complain||null)}
+      </div>
+    </div>
+    <div class="wc-model-block">
+      <div class="wc-model-header"><span class="cdot" style="background:#1677FF"></span>YU7 笔记词云</div>
+      <div class="wc-pair">
+        ${wcImgCard('推荐','recommend', yu7.recommend||null)}
+        ${wcImgCard('吐槽','complain', yu7.complain||null)}
+      </div>
+    </div>
+  </div>`;
+}
+
+function attrH(w){
+  const rows=(attrs)=>attrs.map(a=>`<div class="attr-row"><div class="attr-name">${a.name}</div><div class="attr-bar-bg"><div class="attr-bar" style="width:${Math.max(a.pct,.5)}%;background:${RBC[a.risk]}"></div></div><div class="attr-pct">${a.pct}%</div><div class="risk ${RC[a.risk]}">${RL[a.risk]}</div></div>`).join('');
+  return`<div class="attr-grid"><div class="attr-card"><div class="attr-header"><span style="color:#FF6900;font-size:10px">●</span> SU7（轿车类目）</div>${rows(w.su7Attrs)}</div><div class="attr-card"><div class="attr-header"><span style="color:#1677FF;font-size:10px">●</span> YU7（SUV 类目）</div>${rows(w.yu7Attrs)}</div></div>`;
+}
+
+function topicsH(w){
+  const tr=(ts,isSu7)=>ts.map(t=>`<div class="topic-item"><div class="topic-pct${isSu7?'':' yu7-c'}">${t.pct}</div><div><div class="topic-name">${t.name}<span class="stag ${t.sentiment}">${t.sLabel}</span></div><div class="topic-quote">「${t.quote}」</div><div class="topic-meta"><span>👍 ${t.like.toLocaleString()}</span><span>👁 ${t.view.toLocaleString()}</span></div></div></div>`).join('');
+  return`<div class="topics-grid"><div class="topic-card"><div class="topic-header"><span class="topic-header-dot" style="background:#FF6900"></span> SU7 高热话题</div>${tr(w.su7Topics,true)}</div><div class="topic-card"><div class="topic-header"><span class="topic-header-dot" style="background:#1677FF"></span> YU7 高热话题</div>${tr(w.yu7Topics,false)}</div></div>`;
+}
+
+function notesH(w){
+  const nc=(ns,isNeg)=>ns.map(n=>`<div class="note-card${isNeg?' neg':''}"><span class="nc-tag ${n.model}-tag">${n.model.toUpperCase()}</span>${isNeg?`<span class="risk-flag risk ${RC[n.risk]}">${n.riskLabel}</span>`:''}<div class="nc-title">${n.title}</div><div class="nc-quote">「${n.quote}」</div><div class="nc-meta"><span>👍 <strong>${n.like.toLocaleString()}</strong></span><span>👁 <strong>${n.view.toLocaleString()}</strong></span></div><div class="nc-insight">💡 ${n.insight}</div><a href="${n.url}" target="_blank" class="nc-link">📖 查看笔记 →</a></div>`).join('');
+  return`<div class="notes-section-title">✅ 正向口碑亮点</div><div class="notes-grid">${nc(w.posNotes,false)}</div><div class="notes-section-title" style="margin-top:24px">⚠️ 负向风险预警</div><div class="notes-grid">${nc(w.negNotes,true)}</div>`;
+}
+
+function eventsH(w){return w.events.map(e=>`<div class="event-card ${e.type}"><div class="event-hd"><span>${e.emoji}</span><strong>${e.title}</strong></div><div class="event-body">${e.body}</div><a href="${e.url}" target="_blank" class="event-link">📖 查看相关笔记 →</a></div>`).join('');}
+
+function portraitH(w){
+  const pc=(label,color,d)=>`<div class="portrait-card"><div class="portrait-title"><span style="color:${color};font-size:10px">●</span> ${label}</div><div class="prow"><div class="plabel">性别分布</div><div class="pbrow"><div class="pblabel">男性</div><div class="pbbg"><div class="pbfill" style="width:${d.maleP}%;background:${color}"></div></div><div class="pbpct">${d.maleP}%</div></div><div class="pbrow"><div class="pblabel">女性</div><div class="pbbg"><div class="pbfill" style="width:${d.femaleP}%;background:${color}55"></div></div><div class="pbpct">${d.femaleP}%</div></div></div><div class="prow"><div class="plabel">年龄分布（Top2）</div>${d.ages.map(a=>`<div class="pbrow"><div class="pblabel">${a.label}</div><div class="pbbg"><div class="pbfill" style="width:${Math.round(a.val/a.max*100)}%;background:${color}"></div></div><div class="pbpct">${a.val.toLocaleString()}条</div></div>`).join('')}</div><div class="prow"><div class="plabel">城市分布（Top2）</div>${d.cities.map(c=>`<div class="pbrow"><div class="pblabel">${c.label}</div><div class="pbbg"><div class="pbfill" style="width:${Math.round(c.val/c.max*100)}%;background:${color}"></div></div><div class="pbpct">${c.val.toLocaleString()}条</div></div>`).join('')}</div></div>`;
+  return`<div class="portrait-grid">${pc('SU7 用户画像','#FF6900',w.portrait.su7)}${pc('YU7 用户画像','#1677FF',w.portrait.yu7)}</div><div class="info-box" style="margin-top:14px"><strong>📌 综合画像小结</strong><br>SU7 & YU7 评论用户高度一致：<strong>25-34岁男性为主，新一线/一线城市集中，未婚比例高，中消费水平主导</strong>。两款车型讨论人群画像高度重合，可共用内容策略；差异在于 YU7 更多吸引关注空间/SUV 赛道用户，SU7 更强的情感连接来自雷军个人IP。</div>`;
+}
+
+function actionH(w){
+  const pr=w.proActions.map(a=>`<tr><td>${a.dim}</td><td>${a.lingxi}</td><td>${a.comment}</td><td>${a.action}</td></tr>`).join('');
+  const rr=w.riskActions.map(a=>`<tr><td>${a.dim}</td><td><span class="risk ${RC[a.risk]}">${RL[a.risk]}</span></td><td><span class="utag ${a.urgency==='hi'?'u-hi':a.urgency==='mid'?'u-mid':'u-low'}">${a.uLabel}</span></td><td>${a.action}</td></tr>`).join('');
+  return`<div class="action-label">✅ 优势点——可放大的内容方向</div><div class="atab-wrap" style="margin-bottom:22px"><table class="atab"><thead><tr><th>优势维度</th><th>灵犀数据支撑</th><th>评论区支撑</th><th>建议动作</th></tr></thead><tbody>${pr}</tbody></table></div><div class="action-label">⚠️ 风险点——需优先处置</div><div class="atab-wrap"><table class="atab"><thead><tr><th>风险维度</th><th>风险等级</th><th>紧急程度</th><th>建议行动</th></tr></thead><tbody>${rr}</tbody></table></div>`;
+}
+
+renderWeekBtns();
+render(WEEKS[WEEKS.length-1]);
+</script>
+</body>
+</html>
