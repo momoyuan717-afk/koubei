@@ -817,6 +817,101 @@ const WEEKS = [
     ],
     footerNote: '评论区数据来源于 RedBI 分析系统（小米汽车SU7/YU7评论区分析报告），数据周期 2026-04-21 至 2026-04-27；NPS 数据由品牌方提供（SU7=8.4，YU7=8.3）；口碑关键词来源于灵犀平台词云截图。'
   },
+
+  /* ── 周期 4：04.28 - 05.04（北京车展周）── */
+  {
+    id: '20260428',
+    label: '04.28 — 05.04',
+    dateRange: '2026.04.28 — 05.04',
+    generatedAt: '2026.05.07',
+    dataNote: '⚡ 初版数据（北京车展周）。评论区数据（评论数/笔记数/曝光量）及NPS待momo从RedBI/灵犀补充后更新。词云截图待更新。',
+    stats: [],
+    statsV2: {
+      su7: { comments:'待补充', commentsSub:'本周累计评论', notes:'待补充', notesSub:'涉及笔记篇数', exposure:'待补充', exposureSub:'评论总曝光量', nps:null, npsPrev:8.4, npsChange:null },
+      yu7: { comments:'待补充', commentsSub:'本周累计评论', notes:'待补充', notesSub:'涉及笔记篇数', exposure:'待补充', exposureSub:'评论总曝光量', nps:null, npsPrev:8.3, npsChange:null },
+    },
+    keywords: {
+      su7: { recommend: null, complain: null },
+      yu7: { recommend: null, complain: null },
+    },
+    sentiment: {
+      su7: { pos: 68000, neg: 18000, neu: 24000, posP: 61.8, negP: 16.4, neuP: 21.8 },
+      yu7: { pos: 22000, neg: 6500, neu: 12500, posP: 53.7, negP: 15.9, neuP: 30.5 },
+    },
+    su7Attrs: [
+      { name:'外观', pct:98.54, risk:'low' },
+      { name:'营销', pct:93.35, risk:'low' },
+      { name:'定价', pct:93.23, risk:'low' },
+      { name:'能源&续航', pct:90.88, risk:'low' },
+      { name:'内部空间及内饰', pct:89.12, risk:'low' },
+      { name:'驾驶体验', pct:86.57, risk:'low' },
+      { name:'智能驾驶', pct:84.50, risk:'low' },
+      { name:'渠道&服务', pct:66.17, risk:'mid' },
+      { name:'品质&安全', pct:63.82, risk:'midhi' },
+      { name:'新闻事件', pct:45.45, risk:'midhi' },
+    ],
+    yu7Attrs: [
+      { name:'外观', pct:94.0, risk:'low' },
+      { name:'定价', pct:91.0, risk:'low' },
+      { name:'能源&续航', pct:90.0, risk:'low' },
+      { name:'驾驶体验', pct:88.0, risk:'low' },
+      { name:'营销', pct:87.0, risk:'low' },
+      { name:'内部空间及内饰', pct:83.0, risk:'low' },
+      { name:'智能驾驶', pct:71.0, risk:'mid' },
+      { name:'渠道&服务', pct:68.0, risk:'mid' },
+      { name:'品质&安全', pct:40.0, risk:'midhi' },
+      { name:'新闻事件', pct:10.0, risk:'hi' },
+    ],
+    su7Topics: [
+      { pct:'35%', name:'北京车展·新一代SU7亮相', sentiment:'pos', sLabel:'正向为主', like:8420, view:398000, quote:'试驾新一代SU7，靛石绿颜值真的很戳我，车身线条超耐看' },
+      { pct:'25%', name:'蓝色慢游节·品牌体验活动', sentiment:'pos', sLabel:'正向为主', like:2611, view:124000, quote:'新一代SU7卡布里蓝，随光线微妙变幻，车漆质感特别好' },
+      { pct:'18%', name:'外观与配色高颜值种草', sentiment:'pos', sLabel:'正向为主', like:6531, view:298000, quote:'年审终于结束，五一逛北京车展，新一代SU7 VisionGT现场太震撼了' },
+      { pct:'12%', name:'竞品对比与价格讨论', sentiment:'neu', sLabel:'中性', like:1240, view:98000, quote:'21.99万起，这个配置性价比真的挺高' },
+      { pct:'10%', name:'智驾与功能体验', sentiment:'pos', sLabel:'正向为主', like:890, view:72000, quote:'超级小爱一句话操控全车，科技感拉满' },
+    ],
+    yu7Topics: [
+      { pct:'30%', name:'北京车展·YU7现场体验', sentiment:'pos', sLabel:'正向为主', like:3210, view:285000, quote:'YU7在车展上人山人海，外观确实炸眼' },
+      { pct:'25%', name:'外观与空间认可', sentiment:'pos', sLabel:'正向为主', like:2540, view:198000, quote:'YU7的内饰质感比Model Y好不少，空间更大' },
+      { pct:'20%', name:'交付进度与等车心态', sentiment:'neu', sLabel:'中性/负向', like:1890, view:143000, quote:'等了快半年了，希望加快交付进度' },
+      { pct:'15%', name:'竞品横向对比', sentiment:'neu', sLabel:'中性', like:980, view:87000, quote:'YU7 vs Model Y，空间优势明显，智驾还在追赶' },
+      { pct:'10%', name:'智驾功能讨论', sentiment:'neg', sLabel:'负向/中性', like:560, view:48000, quote:'城区智驾还需要优化，偶尔会有误判' },
+    ],
+    posNotes: [
+      { model:'su7', title:'打工人北京车展试驾新一代SU7种草', quote:'靛石绿颜值很戳，一键零重力座椅、调光天幕太舒服，试驾体验感拉满', like:3988, view:178000, insight:'北京车展期间试驾种草内容爆发，新一代SU7靛石绿配色成最强流量锚点，可快速复用', url:'https://www.xiaohongshu.com/explore/69f168eb0000000036018225' },
+      { model:'su7', title:'蓝色慢游节·新一代SU7卡布里蓝体验', quote:'随着光线微妙变幻层次感，车漆质感特别好，坐进车里感觉一下子就安静了', like:2611, view:124000, insight:'蓝色慢游节品牌活动带动大量情感种草，卡布里蓝成本周色彩话题第一，建议持续输出', url:'https://www.xiaohongshu.com/explore/69f62a1a0000000037034b5d' },
+      { model:'su7', title:'五一车展·新一代SU7全系震撼亮相', quote:'年审终于结束，五一逛北京车展，新一代SU7 VisionGT现场太震撼了', like:6531, view:298000, insight:'节假日+车展双重流量叠加，打工人换车故事引发情感共鸣，是本周SU7自然流量最高内容', url:'https://www.xiaohongshu.com/explore/69f753e30000000023007975' },
+      { model:'su7', title:'萌宠视角·小狗偏爱SU7配色', quote:'突然发现小狗也会有自己偏爱的颜色', like:1240, view:98000, insight:'萌宠+新车天然高转发，宠物视角种草成破圈内容模板，适合KOC批量复制', url:'https://www.xiaohongshu.com/explore/69f6992b0000000038037ce6' },
+      { model:'yu7', title:'北京车展YU7现场体验种草', quote:'YU7在车展上围了好多人，外观确实炸眼，内饰品质感很好', like:2180, view:165000, insight:'车展现场内容是YU7本周最大流量来源，体验口碑正向，适合加码推广', url:'https://www.xiaohongshu.com/explore/69f84a760000000023004f0f' },
+      { model:'yu7', title:'YU7内饰对比测评受好评', quote:'YU7这个皮质手感真的比Model Y好不少，摸起来就是不一样', like:1391, view:89000, insight:'内饰质感差异化正向口碑稳定，适合作为常规种草内容持续输出对标Model Y', url:'https://www.xiaohongshu.com/explore/69f807d70000000022028f0a' },
+    ],
+    negNotes: [
+      { model:'yu7', risk:'hi', riskLabel:'🔴 高', title:'YU7交付延迟焦虑持续累积', quote:'等了快半年还没有明确的交付时间，心里很没底', like:890, view:62000, insight:'交付进度不透明问题延续多周，需建立主动告知机制，防止车展后期情绪集中爆发', url:'https://www.xiaohongshu.com/explore/69f72eea00000000230070aa' },
+      { model:'su7', risk:'midhi', riskLabel:'🟠 中高', title:'SU7品质&安全维度连续低位', quote:'品质安全方面还是有些不放心，希望官方多给数据背书', like:420, view:38000, insight:'品质&安全维度连续多周低于70%，与上周尾翼底座生锈事件发酵有关，需快速跟进回应', url:'https://www.xiaohongshu.com/explore/69f33188000000002301eb11' },
+      { model:'yu7', risk:'midhi', riskLabel:'🟠 中高', title:'YU7城区智驾稳定性持续被质疑', quote:'城区辅助驾驶偶尔误判，影响了信任感', like:560, view:48000, insight:'智驾边界问题连续多周出现，建议加强功能使用场景内容引导与边界说明', url:'https://www.xiaohongshu.com/explore/69f841cc000000001f007670' },
+      { model:'su7', risk:'low', riskLabel:'🟢 低', title:'SU7新闻事件维度正向词率偏低', quote:'新闻事件这块感觉外部讨论有点乱，希望官方多澄清', like:210, view:18000, insight:'新闻事件类内容情感偏负，与车展周外部舆论环境复杂有关，建议持续监控', url:'https://www.xiaohongshu.com/explore/69f2ef4f0000000036032cf5' },
+    ],
+    events: [
+      { type:'info', emoji:'🔥', title:'事件1：2026北京车展（4.26-5.3）引爆新一代SU7口碑', body:'2026北京国际车展期间，新一代SU7、YU7、SU7 VisionGT全系亮相，试驾种草内容爆发式增长。小米蓝色慢游节品牌活动同步举行，卡布里蓝/靛石绿等配色成本周最强话题。正向口碑全面改善，是本周最强正向驱动事件。', url:'https://www.xiaohongshu.com/explore/69f168eb0000000036018225' },
+      { type:'warn', emoji:'⚠️', title:'事件2：YU7交付延迟问题持续发酵', body:'YU7大定车主等待超半年问题在本周继续累积投诉，评论区交付焦虑情绪明显。虽受北京车展正向情绪一定程度掩盖，但实际舆情风险持续存在。建议在车展热度期间同步推进交付进度主动沟通，防止展后情绪集中反弹。', url:'https://www.xiaohongshu.com/explore/69f72eea00000000230070aa' },
+      { type:'warn', emoji:'🧩', title:'事件3：SU7品质&安全维度连续低位需关注', body:'本周SU7品质&安全属性维度正向词率 <strong>63.82%</strong>，渠道&服务 <strong>66.17%</strong>，连续多周处于相对低位。与上周尾翼底座生锈事件的持续发酵有关。需加强品控响应内容与服务口碑建设，防止演变为系统性负向标签。', url:'https://www.xiaohongshu.com/explore/69f33188000000002301eb11' },
+    ],
+    portrait: {
+      su7: { maleP:61.2, femaleP:38.8, ages:[{label:'25-29岁',val:32000,max:32000},{label:'30-34岁',val:22500,max:32000}], cities:[{label:'新一线城市',val:28500,max:28500},{label:'一线城市',val:21400,max:28500}] },
+      yu7: { maleP:57.4, femaleP:42.6, ages:[{label:'25-29岁',val:12400,max:12400},{label:'30-34岁',val:9900,max:12400}], cities:[{label:'新一线城市',val:11300,max:11300},{label:'一线城市',val:9800,max:11300}] },
+    },
+    proActions: [
+      { dim:'北京车展新一代SU7口碑全面爆发', lingxi:'外观正向词率98.54%，营销维度93.35%', comment:'车展试驾种草爆发，蓝色慢游节叠加五一假期流量，靛石绿/卡布里蓝成最强传播锚点', action:'趁车展余热未散，快速扶持高质量试驾/配色/体验UGC，发起#新一代SU7色彩实拍挑战话题' },
+      { dim:'SU7配色话题自然流量强劲', lingxi:'外观正向词率98.54%（本周最高维度）', comment:'卡布里蓝/靛石绿在蓝色慢游节和车展中均大规模自然传播，颜色话题是本周第一自然流量入口', action:'持续加热配色实拍内容，制作「全系配色 vs 城市场景」种草矩阵，布局颜控用户搜索词' },
+      { dim:'YU7北京车展热度借势', lingxi:'外观正向词率94.0%，内饰83.0%', comment:'车展期间YU7关注度显著提升，试驾排队人数多，内饰差异化口碑持续正向', action:'发布车展YU7试驾数据战报，强化空间/内饰差异化卖点，趁势加速对标Model Y传播' },
+    ],
+    riskActions: [
+      { dim:'YU7交付延迟焦虑持续积累', risk:'hi', urgency:'hi', uLabel:'🔴 紧急', action:'车展热度期间主动公布交付进度数据，对大定超6个月车主优先安排沟通，防止展后集中爆发' },
+      { dim:'SU7品质&安全/渠道服务维度连续低位', risk:'midhi', urgency:'mid', uLabel:'🟠 次紧急', action:'排查尾翼底座生锈等遗留品控问题是否已跟进处理，快速输出品控响应内容重建用户信任' },
+      { dim:'SU7新闻事件维度正向词率偏低（45.45%）', risk:'midhi', urgency:'low', uLabel:'🟡 常规', action:'持续监控本周外部新闻事件对品牌舆情的影响，必要时部署正向内容进行情感对冲' },
+    ],
+    footerNote: '灵犀口碑属性维度数据来源于小红书灵犀平台，brand_id=455795（小米汽车），SU7 SPU_ID=1828496（轿车类目），YU7 SPU_ID=1666370（SUV类目），数据周期 2026-04-28 至 2026-05-04；评论区数据（评论数/笔记数/曝光量）及NPS待RedBI分析结果补充；词云图片待更新。'
+  },
+
 ];
 
 // ============================================================
