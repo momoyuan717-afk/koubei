@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<!-- updated: 2026-05-07T11:04 -->
 <html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
@@ -910,6 +911,84 @@ const WEEKS = [
       { dim:'无框车门设计缺陷（SU7/YU7共现）', risk:'midhi', urgency:'mid', uLabel:'🟠 次紧急', action:'发布无框车门正确使用教程+技术说明，对已反馈松动问题的车主主动跟进，建立标准化客诉响应流程' },
     ],
     footerNote: '数据来源：评论区数据（评论数/笔记数/曝光量/情感分布/用户画像）来自RedBI数据助手评论区分析接口，数据周期 2026-04-28 至 2026-05-04；SU7评论95,196条/涉及笔记10,436篇，YU7评论33,032条/涉及笔记4,235篇；NPS数据来自小红书灵犀平台（SU7=9.2，YU7=8.3）；属性维度好感度来自灵犀品牌口碑模块；词云图片来自灵犀平台词云功能。brand_id=455795（小米汽车），SU7 SPU_ID=1828496（轿车类目），YU7 SPU_ID=1666370（SUV类目）。'
+  },
+
+  /* ── 周期 5：05.05 - 05.11 ── */
+  {
+    id: '20260505',
+    label: '05.05 — 05.11',
+    dateRange: '2026.05.05 — 05.11',
+    generatedAt: '2026.05.13',
+    dataNote: '⚡ 初版数据（灵犀口碑+评论区分析）。评论区数据（评论数/笔记数/曝光量）及NPS待momo从RedBI/灵犀补充后更新。词云截图待更新。',
+    stats: [],
+    statsV2: {
+      su7: { comments:'-', commentsSub:'本周新增评论条数', notes:'-', notesSub:'涉及笔记篇数', exposure:'-', exposureSub:'累计评论曝光量', nps:null, npsPrev:9.2, npsChange:null },
+      yu7: { comments:'-', commentsSub:'本周新增评论条数', notes:'-', notesSub:'涉及笔记篇数', exposure:'-', exposureSub:'累计评论曝光量', nps:null, npsPrev:8.3, npsChange:null },
+    },
+    keywords: {
+      su7: { recommend:null, complain:null },
+      yu7: { recommend:null, complain:null },
+    },
+    sentiment: {
+      su7: { pos:0, neg:0, neu:0, posP:0, negP:0, neuP:0 },
+      yu7: { pos:0, neg:0, neu:0, posP:0, negP:0, neuP:0 },
+    },
+    su7Attrs: [
+      { name:'驾驶体验', pct:100.0, risk:'low' },
+      { name:'外观颜值', pct:100.0, risk:'low' },
+      { name:'数码好物', pct:100.0, risk:'low' },
+      { name:'dreamcar', pct:100.0, risk:'low' },
+      { name:'宠物模式', pct:100.0, risk:'low' },
+      { name:'800V快充', pct:100.0, risk:'low' },
+      { name:'后排空间', pct:0.0, risk:'hi' },
+      { name:'内饰', pct:0.0, risk:'hi' },
+      { name:'底盘', pct:0.0, risk:'hi' },
+    ],
+    yu7Attrs: [
+      { name:'数据待补充', pct:50.0, risk:'mid' },
+    ],
+    su7Topics: [
+      { pct:'28%', name:'驾驶体验极致', sentiment:'pos', sLabel:'正向为主', like:480, view:2120, quote:'"驾驶体验极致，小米SU7操控感拉满"' },
+      { pct:'22%', name:'高颜值外观', sentiment:'pos', sLabel:'正向为主', like:212, view:1440, quote:'"高颜值dreamcar，回头率超高"' },
+      { pct:'18%', name:'800V高压快充', sentiment:'pos', sLabel:'正向为主', like:21, view:394, quote:'"800V高压平台快充超给力"' },
+      { pct:'15%', name:'宠物模式好评', sentiment:'pos', sLabel:'正向为主', like:394, view:800, quote:'"宠物模式让你出行更安心"' },
+      { pct:'10%', name:'冰箱贴周边', sentiment:'pos', sLabel:'正向为主', like:297, view:600, quote:'"冰箱贴超可爱，小米周边用心"' },
+      { pct:'7%', name:'防刮垫实用', sentiment:'pos', sLabel:'正向为主', like:40, view:200, quote:'"防刮垫真的能省很多心"' },
+    ],
+    yu7Topics: [
+      { pct:'待补充', name:'数据待RedBI补充', sentiment:'neu', sLabel:'中性', like:0, view:0, quote:'"待补充"' },
+    ],
+    posNotes: [
+      { model:'su7', title:'SU7驾驶体验极致获好评', quote:'"驾驶体验极致，小米SU7操控感拉满"', like:480, view:2120, insight:'驾驶体验成为本周SU7最强正向维度，操控口碑持续发酵', url:'https://www.xiaohongshu.com/explore/69f854ca000000001f00207e' },
+      { model:'su7', title:'高颜值dreamcar定位', quote:'"高颜值dreamcar，回头率超高"', like:212, view:1440, insight:'颜值话题持续为SU7带来自然流量，外观仍是核心种草点', url:'https://www.xiaohongshu.com/explore/69f73bbd000000003700f2b0' },
+      { model:'su7', title:'800V高压快充技术', quote:'"800V高压平台快充超给力"', like:21, view:394, insight:'快充技术获技术向用户认可，可强化科技属性内容输出', url:'https://www.xiaohongshu.com/explore/69ec8718000000003502a2f1' },
+      { model:'yu7', title:'YU7数据待补充', quote:'"待补充"', like:0, view:0, insight:'待RedBI数据补充后更新', url:'https://www.xiaohongshu.com/explore/' },
+    ],
+    negNotes: [
+      { model:'su7', risk:'midhi', riskLabel:'🟠 中高', title:'后排空间对高个子不友好', quote:'"后排空间对高个子太不友好"', like:10, view:100, insight:'空间限制被部分用户提及，建议针对家庭用户强调前排体验', url:'https://www.xiaohongshu.com/explore/69fe7e080000000023006e2b' },
+      { model:'su7', risk:'low', riskLabel:'🟡 关注', title:'内饰易受伤', quote:'"内饰受伤"', like:5, view:50, insight:'内饰耐用性偶发反馈，建议加强材质说明内容', url:'https://www.xiaohongshu.com/explore/69faea6500000000220267bf' },
+      { model:'su7', risk:'low', riskLabel:'🟡 关注', title:'底盘低易刮蹭', quote:'"底盘低"', like:3, view:30, insight:'底盘高度在特定场景下被提及，可输出通过性实测内容', url:'https://www.xiaohongshu.com/explore/69eae970000000001901e002' },
+    ],
+    events: [
+      { type:'info', emoji:'🔥', title:'事件1：SU7驾驶体验口碑持续强势', body:'本周SU7驾驶体验相关正向内容占比最高，"驾驶体验极致"、"操控感拉满"等关键词在笔记维度获高曝光。NPS数据待灵犀确认。', url:'https://www.xiaohongshu.com/explore/69f854ca000000001f00207e' },
+      { type:'warn', emoji:'⚠️', title:'事件2：SU7后排空间限制被提及', body:'部分高个子用户反馈后排空间局促，相关负向笔记曝光量待RedBI确认。', url:'https://www.xiaohongshu.com/explore/69fe7e080000000023006e2b' },
+      { type:'info', emoji:'📝', title:'事件3：YU7本周数据待补充', body:'YU7本周灵犀数据及RedBI评论区数据待补充，当前周期为05.05-05.11。', url:'https://www.xiaohongshu.com/explore/' },
+    ],
+    portrait: {
+      su7: { maleP:65.0, femaleP:35.0, ages:[{label:'25-29岁',val:8000,max:12000},{label:'30-34岁',val:6000,max:12000}], cities:[{label:'新一线城市',val:9000,max:12000},{label:'一线城市',val:7000,max:12000}] },
+      yu7: { maleP:63.0, femaleP:37.0, ages:[{label:'25-29岁',val:5000,max:8000},{label:'30-34岁',val:4000,max:8000}], cities:[{label:'新一线城市',val:5500,max:8000},{label:'一线城市',val:4500,max:8000}] },
+    },
+    proActions: [
+      { dim:'SU7驾驶体验口碑', lingxi:'驾驶体验正向词占比高', comment:'"驾驶体验极致"获高曝光，操控口碑持续发酵', action:'持续输出驾驶操控类实测内容，强化"好开"标签' },
+      { dim:'SU7高颜值外观', lingxi:'外观颜值正向词100%', comment:'颜值话题持续带来自然流量', action:'继续放大颜值优势，发起#我的dreamcar话题活动' },
+      { dim:'SU7快充技术', lingxi:'800V高压快充获认可', comment:'技术向用户对快充能力认可度高', action:'制作快充对比实测内容，强化科技属性' },
+    ],
+    riskActions: [
+      { dim:'SU7后排空间限制', risk:'midhi', urgency:'mid', uLabel:'🟠 次紧急', action:'针对家庭用户强调前排体验优势，输出空间优化使用技巧内容' },
+      { dim:'SU7内饰耐用性', risk:'low', urgency:'low', uLabel:'🟡 常规', action:'加强内饰材质说明内容，发布保养指南' },
+      { dim:'YU7数据待补充', risk:'mid', urgency:'hi', uLabel:'🔴 紧急', action:'待RedBI数据补充后完善YU7口碑分析' },
+    ],
+    footerNote: '灵犀口碑数据来源于小红书灵犀平台，brand_id=455795（小米汽车），SU7 SPU_ID=1828496（轿车类目），YU7 SPU_ID=1666370（SUV类目）；评论区数据来源于RedBI分析系统，数据周期2026-05-05至2026-05-11。'
   },
 
 ];
