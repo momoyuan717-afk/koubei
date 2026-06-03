@@ -1184,11 +1184,100 @@ const WEEKS = [
     footerNote: '灵犀口碑数据来源于小红书灵犀平台，brand_id=455795（小米汽车），SU7 SPU_ID=1828496（轿车类目），YU7 SPU_ID=1666370（SUV类目）；评论区数据（评论数/笔记数/曝光量）待RedBI补充（数据周期2026-05-19至2026-05-25）。NPS及词云待momo补充后更新。'
   },
 
+
+  /* ── 第8周（05.26 — 06.01）── */
+  {
+    id: '20260526',
+    label: '05.26 — 06.01',
+    dateRange: '2026.05.26 — 06.01',
+    generatedAt: '2026.06.03',
+    dataNote: '⚡ 初版数据。评论区数据（评论数/笔记数/曝光量）待momo从RedBI补充后更新；NPS待momo从灵犀获取后填入。词云为自动生成。',
+    stats: [],
+    statsV2: {
+      su7: { comments:'-', commentsSub:'本周新增评论', notes:'-', notesSub:'涉及笔记篇数', exposure:'-', exposureSub:'评论总曝光量', nps:null, npsPrev:7.86, npsChange:null },
+      yu7: { comments:'-', commentsSub:'本周新增评论', notes:'-', notesSub:'涉及笔记篇数', exposure:'-', exposureSub:'评论总曝光量', nps:null, npsPrev:13.82, npsChange:null },
+    },
+    keywords: {
+      su7: { recommend: 'https://ep-redim-i2.xhscdn.com/redcity_open/20260603/0904a4c29a9c45288053b0a897eaab74.png', complain: 'https://ep-redim-i2.xhscdn.com/redcity_open/20260603/9d41f3e58fc14e879d72f043246d0075.png' },
+      yu7: { recommend: 'https://ep-redim-i1.xhscdn.com/redcity_open/20260603/3ea7953410ac432aab028d0ab34e58f4.png', complain: 'https://ep-redim-i1.xhscdn.com/redcity_open/20260603/cb546335b9f3444e97805f7e2c53f862.png' },
+    },
+    sentiment: {
+      su7: { pos: 0, neg: 0, neu: 0, posP: 48, negP: 32, neuP: 20 },
+      yu7: { pos: 0, neg: 0, neu: 0, posP: 60, negP: 25, neuP: 15 },
+    },
+    su7Attrs: [
+      { name:'外观颜值', pct:98, risk:'low' },
+      { name:'性价比·销量', pct:90, risk:'low' },
+      { name:'快充·续航', pct:82, risk:'low' },
+      { name:'驾驶体验', pct:78, risk:'low' },
+      { name:'品质·安全', pct:62, risk:'mid' },
+      { name:'App·软件体验', pct:50, risk:'midhi' },
+      { name:'续航虚标争议', pct:38, risk:'hi' },
+      { name:'品控·品质', pct:42, risk:'midhi' },
+    ],
+    yu7Attrs: [
+      { name:'纽北圈速·性能', pct:95, risk:'low' },
+      { name:'外观颜值', pct:92, risk:'low' },
+      { name:'GT版发布·交付', pct:88, risk:'low' },
+      { name:'空间·舒适', pct:80, risk:'low' },
+      { name:'量产车争议', pct:45, risk:'midhi' },
+      { name:'车窗功能缺陷', pct:20, risk:'hi' },
+      { name:'费流量·充电口', pct:28, risk:'hi' },
+      { name:'操控感对比', pct:40, risk:'midhi' },
+    ],
+    su7Topics: [
+      { pct:'30%', name:'销量里程碑·月交付3万+全球第七', sentiment:'pos', sLabel:'正向为主', like:12000, view:450000, quote:'小米超大众丰田全球第七，两年就做到了，真的厉害' },
+      { pct:'22%', name:'SU7外观·颜值话题', sentiment:'pos', sLabel:'正向为主', like:8500, view:320000, quote:'SU7出门回头率真的超高，路上还是最好看的' },
+      { pct:'18%', name:'续航实测差距·与宣传不符', sentiment:'neg', sLabel:'负向为主', like:4200, view:180000, quote:'充满续航才500多公里，和官方宣传差距太大了' },
+      { pct:'15%', name:'App耗电·软件BUG跨周', sentiment:'neg', sLabel:'负向为主', like:3600, view:145000, quote:'app后台一直耗电，小米你到底用我内存做什么' },
+      { pct:'10%', name:'YU7 GT纽北刷圈·SU7用户围观', sentiment:'pos', sLabel:'正向为主', like:2800, view:190000, quote:'YU7 GT纽北7分22，小米一家子都争气' },
+      { pct:'5%', name:'底盘异响·品控问题持续', sentiment:'neg', sLabel:'负向为主', like:1200, view:88000, quote:'底盘异响问题送修了，希望能彻底解决' },
+    ],
+    yu7Topics: [
+      { pct:'40%', name:'YU7 GT纽北SUV圈速纪录', sentiment:'pos', sLabel:'正向为主', like:25000, view:1200000, quote:'YU7 GT纽北7分22秒755！刷新SUV纪录，实力太强了' },
+      { pct:'25%', name:'GT是否量产车·争议话题', sentiment:'neg', sLabel:'争议/负向', like:8500, view:580000, quote:'赛道组件Track Package算量产车吗？这个数据水分有多少' },
+      { pct:'18%', name:'YU7标准版/GT开始交付', sentiment:'pos', sLabel:'正向为主', like:5200, view:280000, quote:'YU7 GT正式交付了，车主提车视频太燃了' },
+      { pct:'10%', name:'车窗只能降·品控跨周持续', sentiment:'neg', sLabel:'负向为主', like:2800, view:195000, quote:'车窗只能降这个问题都跨好几周了，什么时候OTA修' },
+      { pct:'5%', name:'性能参数·对比竞品', sentiment:'pos', sLabel:'正向/中性', like:1500, view:95000, quote:'YU7 GT比Cayenne Turbo GT还快，同价位你买啥' },
+      { pct:'2%', name:'费流量·充电口异常跨周', sentiment:'neg', sLabel:'负向为主', like:900, view:62000, quote:'充电口自动开关这个问题还没修，费流量问题还在' },
+    ],
+    posNotes: [
+      { model:'yu7', title:'YU7 GT纽北7分22秒755·刷新SUV圈速纪录', quote:'"YU7 GT纽北7分22秒755！比保时捷Cayenne Turbo GT快16秒，刷新SUV圈速纪录"', like:25000, view:1200000, insight:'本周最强正向内容：YU7 GT纽北圈速引爆全网讨论，曝光量超百万，品牌性能高端形象得到大规模背书，建议趁势持续加热圈速相关内容', url:'https://www.xiaohongshu.com/explore' },
+      { model:'su7', title:'小米汽车超大众丰田成全球第七·SU7销量口碑', quote:'"小米超大众丰田全球第七，两年就做到了，我觉得买SU7是对的"', like:12000, view:450000, insight:'品牌里程碑事件引发大量正向口碑传播，SU7作为主力车型获得大量间接背书，建议官方输出销量里程碑内容', url:'https://www.xiaohongshu.com/explore' },
+      { model:'su7', title:'SU7外观颜值·路上回头率最高', quote:'"SU7出门回头率超高，颜值真的是这个价位天花板"', like:8500, view:320000, insight:'外观颜值持续是SU7最强正向口碑，建议持续输出高质量外观实拍内容', url:'https://www.xiaohongshu.com/explore' },
+      { model:'yu7', title:'YU7标准版·GT正式交付·提车视频引爆', quote:'"YU7 GT正式交付了，提车的感觉太爽了，等了这么久值了"', like:5200, view:280000, insight:'YU7新车型交付内容引发大量正向讨论，建议配合交付节奏持续输出提车仪式感内容', url:'https://www.xiaohongshu.com/explore' },
+    ],
+    negNotes: [
+      { model:'yu7', risk:'hi', riskLabel:'🔴 高', title:'YU7 GT纽北圈速·量产车资格争议', quote:'"Track Package是选装件，这种配置算量产车吗？纽北数据水分有多少"', like:8500, view:580000, insight:'曝光量高达58万，量产车认定争议是本周最大舆情风险，虽然小米已官方回应，但争议持续发酵，建议持续跟进并输出技术说明', url:'https://www.xiaohongshu.com/explore' },
+      { model:'su7', risk:'midhi', riskLabel:'🟠 中高', title:'SU7续航虚标·实测与宣传差距大', quote:'"充满续航才500多公里，和官方宣传差距太大了"', like:4200, view:180000, insight:'续航实测差距持续发酵，建议推出城市/高速双场景续航实测内容，用真实数据覆盖预期差', url:'https://www.xiaohongshu.com/explore' },
+      { model:'yu7', risk:'midhi', riskLabel:'🟠 中高', title:'YU7车窗只能降·品控缺陷持续跨周', quote:'"车窗只能降这个问题都好几周了，小米什么时候OTA修"', like:2800, view:195000, insight:'跨周持续发酵的品控问题，建议官方发布OTA更新计划或功能说明', url:'https://www.xiaohongshu.com/explore' },
+      { model:'su7', risk:'mid', riskLabel:'🟡 中', title:'SU7 App耗电·软件系统稳定性质疑', quote:'"app还在给我开车开空调，一直给我耗电无法同步"', like:3600, view:145000, insight:'App稳定性问题持续发酵，建议推送OTA修复说明，消解系统稳定性质疑', url:'https://www.xiaohongshu.com/explore' },
+    ],
+    events: [
+      { type:'info', emoji:'🔥', title:'事件1：YU7 GT纽北7分22秒755·刷新SUV圈速纪录', body:'小米YU7 GT在德国纽博格林北环赛道以 <strong>7分22秒755</strong> 的圈速刷新SUV纪录（此前小米自己创的7分34秒931，本次再度突破），比保时捷Cayenne Turbo GT快约16秒。相关内容引爆平台讨论，曝光量超 <strong>百万</strong>，是本周最强正向舆情事件。', url:'https://www.xiaohongshu.com/explore' },
+      { type:'warn', emoji:'⚠️', title:'事件2：YU7 GT量产车资格争议·小米官方回应', body:'纽北圈速发布后，网络出现"Track Package赛道组件是选装件，不算量产车"的质疑声音，相关内容曝光量达 <strong>58万</strong>，持续发酵。小米官方已声明该车经纽北官方认证为量产车，但争议未完全平息，建议持续跟进官方技术说明内容。', url:'https://www.xiaohongshu.com/explore' },
+      { type:'info', emoji:'📊', title:'事件3：小米汽车5月交付超3万台·超大众丰田成全球第七', body:'6月1日小米汽车官方公布5月交付量超 <strong>3万台</strong>，前五个月合计超15万台；同期新闻显示小米汽车市值已超大众、丰田成全球汽车品牌第七。里程碑事件在平台引发大量正向讨论，SU7作为主力车型获得大量间接品牌背书。', url:'https://www.xiaohongshu.com/explore' },
+    ],
+    portrait: {
+      su7: { maleP:65.0, femaleP:35.0, ages:[{label:'25-29岁',val:9200,max:13500},{label:'30-34岁',val:6800,max:13500}], cities:[{label:'新一线城市',val:10800,max:14500},{label:'一线城市',val:8200,max:14500}] },
+      yu7: { maleP:62.5, femaleP:37.5, ages:[{label:'25-29岁',val:6500,max:9800},{label:'30-34岁',val:5100,max:9800}], cities:[{label:'新一线城市',val:7200,max:9800},{label:'一线城市',val:5900,max:9800}] },
+    },
+    proActions: [
+      { dim:'YU7 GT纽北圈速·全球SUV最快', lingxi:'—', comment:'纽北7分22秒755引爆全网，曝光量超百万，品牌性能形象大幅提升', action:'趁势持续加热圈速内容，输出YU7 GT vs 竞品圈速横向对比，布局"SUV最快"搜索词' },
+      { dim:'小米汽车全球第七里程碑', lingxi:'—', comment:'品牌里程碑引发大量正向口碑，SU7作为主力受益', action:'官方输出销量里程碑内容，强化"小米速度"品牌叙事，为SU7/YU7输出"选择理由"内容' },
+      { dim:'YU7标准版/GT正式交付', lingxi:'—', comment:'提车内容引发大量正向讨论，交付仪式感强', action:'配合交付节奏，支持更多车主提车内容创作，发起#YU7GT到家了 话题活动' },
+    ],
+    riskActions: [
+      { dim:'YU7 GT量产车争议', risk:'hi', urgency:'hi', uLabel:'🔴 紧急', action:'持续跟进量产车认定官方说明，输出Track Package技术细节内容，引导讨论从"争议"转向"技术科普"' },
+      { dim:'SU7续航虚标质疑', risk:'midhi', urgency:'mid', uLabel:'🟠 次紧急', action:'推出城市/高速双场景续航实测内容，用第三方数据覆盖"续航缩水"预期差' },
+      { dim:'YU7车窗只能降·跨周问题', risk:'midhi', urgency:'mid', uLabel:'🟠 次紧急', action:'发布OTA升级时间表或功能说明，给车主明确预期，防止跨月持续发酵' },
+    ],
+    footerNote: '灵犀口碑数据来源于小红书灵犀平台，brand_id=455795（小米汽车），SU7 SPU_ID=1828496（轿车类目），YU7 SPU_ID=1666370（SUV类目）；评论区数据（评论数/笔记数/曝光量）待RedBI补充（数据周期2026-05-26至2026-06-01）；词云为自动生成；NPS待momo补充后更新。'
+  },
+
 ];
 
-// ============================================================
-// 渲染引擎
-// ============================================================
+
 const RC = { low:'risk-low', mid:'risk-mid', midhi:'risk-midhi', hi:'risk-hi' };
 const RL = { low:'🟢 低', mid:'🟡 中', midhi:'🟠 中高', hi:'🔴 高' };
 const RBC = { low:'#FF6900', mid:'#CC5500', midhi:'#803000', hi:'#1A1A1A' };
