@@ -1,0 +1,1700 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>小米SU7 × 小红书 一方数据洞察报告</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700;900&display=swap');
+
+  :root {
+    --red: #FF2442;
+    --red-light: #FFF0F2;
+    --red-mid: #FFD6DC;
+    --pink: #FF6B8A;
+    --coral: #FF8566;
+    --orange: #FF6900;
+    --yellow: #FFD700;
+    --dark: #1A1A1A;
+    --gray-800: #333;
+    --gray-600: #666;
+    --gray-400: #999;
+    --gray-200: #F0F0F0;
+    --gray-100: #F7F7F7;
+    --white: #FFFFFF;
+    --card-radius: 20px;
+    --blue-hl: rgba(0,55,255,0.10);
+    --border: #EFEFEF;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: "PingFang SC", "Noto Sans SC", -apple-system, "Helvetica Neue", sans-serif;
+    background: #FFF5F6;
+    color: var(--dark);
+    font-size: 14px;
+    line-height: 1.7;
+  }
+
+  /* ===== TOP NAV ===== */
+  .top-nav {
+    position: sticky; top: 0; z-index: 999;
+    background: rgba(255,255,255,0.95);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--red-mid);
+    padding: 0 24px;
+    display: flex; align-items: center; gap: 16px;
+    height: 52px;
+  }
+  .nav-logo {
+    display: flex; align-items: center; gap: 8px; text-decoration: none; flex-shrink: 0;
+  }
+  .nav-logo svg { width: 32px; height: 32px; }
+  .nav-title {
+    font-size: 15px; font-weight: 700; color: var(--dark);
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  }
+  .nav-links {
+    display: flex; gap: 4px; overflow-x: auto; flex-shrink: 0;
+    margin-left: auto; padding: 0 4px;
+    scrollbar-width: none;
+  }
+  .nav-links::-webkit-scrollbar { display: none; }
+  .nav-links a {
+    white-space: nowrap; padding: 4px 12px;
+    border-radius: 20px; font-size: 12px; font-weight: 500;
+    color: var(--gray-600); text-decoration: none;
+    border: 1px solid var(--border);
+    transition: all 0.2s;
+  }
+  .nav-links a:hover, .nav-links a.active {
+    background: var(--red); color: #fff; border-color: var(--red);
+  }
+
+  /* ===== HERO ===== */
+  .hero {
+    background: linear-gradient(135deg, #FF2442 0%, #FF6B8A 50%, #FF8566 100%);
+    padding: 48px 24px 40px;
+    text-align: center;
+    position: relative; overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Ccircle cx='30' cy='30' r='20'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    opacity: 0.3;
+  }
+  .hero-tag {
+    display: inline-block;
+    background: rgba(255,255,255,0.25);
+    color: #fff; font-size: 12px; font-weight: 600;
+    padding: 4px 14px; border-radius: 20px;
+    margin-bottom: 16px; letter-spacing: 1px;
+    border: 1px solid rgba(255,255,255,0.4);
+  }
+  .hero h1 {
+    font-size: 26px; font-weight: 900; color: #fff;
+    line-height: 1.3; margin-bottom: 12px;
+    position: relative;
+  }
+  .hero-subtitle {
+    font-size: 13px; color: rgba(255,255,255,0.85);
+    position: relative;
+  }
+  .hero-stats {
+    display: flex; justify-content: center; gap: 32px;
+    margin-top: 28px; position: relative;
+  }
+  .hero-stat {
+    text-align: center;
+  }
+  .hero-stat-num {
+    font-size: 28px; font-weight: 900; color: #fff;
+    line-height: 1;
+  }
+  .hero-stat-label {
+    font-size: 11px; color: rgba(255,255,255,0.8);
+    margin-top: 4px;
+  }
+
+  /* ===== LAYOUT ===== */
+  .page-body {
+    max-width: 860px; margin: 0 auto;
+    padding: 24px 16px 60px;
+  }
+
+  /* ===== SECTION ===== */
+  .section { margin-bottom: 32px; }
+  .section-header {
+    display: flex; align-items: center; gap: 10px;
+    margin-bottom: 16px;
+  }
+  .section-num {
+    width: 28px; height: 28px; border-radius: 50%;
+    background: var(--red); color: #fff;
+    font-size: 12px; font-weight: 700;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+  .section-title {
+    font-size: 18px; font-weight: 800; color: var(--dark);
+  }
+  .section-sub {
+    font-size: 13px; font-weight: 700; color: var(--dark);
+    margin: 20px 0 10px;
+    display: flex; align-items: center; gap: 6px;
+  }
+  .section-sub::before {
+    content: '';
+    display: block; width: 3px; height: 14px;
+    background: var(--red); border-radius: 2px; flex-shrink: 0;
+  }
+
+  /* ===== CARD ===== */
+  .card {
+    background: var(--white);
+    border-radius: var(--card-radius);
+    padding: 20px;
+    margin-bottom: 12px;
+    box-shadow: 0 2px 12px rgba(255,36,66,0.06);
+    border: 1px solid rgba(255,36,66,0.08);
+  }
+  .card-sm {
+    background: var(--white);
+    border-radius: 14px;
+    padding: 16px;
+    margin-bottom: 10px;
+    border: 1px solid var(--border);
+  }
+
+  /* ===== INSIGHT BLOCK ===== */
+  .insight {
+    background: var(--red-light);
+    border-left: 4px solid var(--red);
+    border-radius: 0 14px 14px 0;
+    padding: 16px 18px;
+    margin: 14px 0;
+  }
+  .insight-tag {
+    display: inline-flex; align-items: center; gap: 4px;
+    background: var(--red); color: #fff;
+    font-size: 11px; font-weight: 700;
+    padding: 2px 10px; border-radius: 20px;
+    margin-bottom: 10px;
+  }
+  .insight p, .insight li { margin-bottom: 6px; font-size: 13px; color: var(--gray-800); }
+  .insight strong, .insight b { color: var(--red); }
+  .insight ul, .insight ol { padding-left: 18px; }
+  .insight li { margin-bottom: 8px; }
+
+  /* ===== KEY NUMBER ===== */
+  .kn { color: var(--red); font-weight: 800; }
+  .kn-blue { color: #3357D9; font-weight: 700; }
+
+  /* ===== BIG STAT CARDS ===== */
+  .stat-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px;
+    margin: 14px 0;
+  }
+  .stat-card {
+    background: var(--white);
+    border-radius: 16px;
+    padding: 16px 12px;
+    text-align: center;
+    border: 1px solid rgba(255,36,66,0.12);
+    box-shadow: 0 2px 8px rgba(255,36,66,0.06);
+  }
+  .stat-card .big { font-size: 24px; font-weight: 900; color: var(--red); line-height: 1; }
+  .stat-card .label { font-size: 11px; color: var(--gray-600); margin-top: 4px; }
+  .stat-card .sub { font-size: 10px; color: var(--gray-400); }
+  .stat-card.highlight { background: var(--red); }
+  .stat-card.highlight .big { color: #fff; }
+  .stat-card.highlight .label { color: rgba(255,255,255,0.85); }
+  .stat-card.highlight .sub { color: rgba(255,255,255,0.7); }
+
+  /* ===== TABLES ===== */
+  .table-wrap { overflow-x: auto; border-radius: 12px; margin: 12px 0; }
+  table {
+    width: 100%; border-collapse: collapse;
+    font-size: 12px; border-radius: 12px; overflow: hidden;
+  }
+  th {
+    background: var(--dark); color: #fff;
+    padding: 10px 12px; text-align: left;
+    font-weight: 600; font-size: 11px; white-space: nowrap;
+  }
+  td {
+    padding: 9px 12px;
+    border-bottom: 1px solid #F5F5F5;
+    vertical-align: top; font-size: 12px;
+  }
+  tr:last-child td { border-bottom: none; }
+  tr:nth-child(even) td { background: #FAFAFA; }
+  tr:hover td { background: #FFF5F6; }
+  .th-red { background: var(--red) !important; }
+
+  /* ===== HEATMAP ===== */
+  .hm-table th { background: #1A1A1A; }
+  .hm-table td { text-align: center; font-weight: 700; font-size: 12px; }
+  .hm-60 { background: #D32F2F !important; color: #fff; }
+  .hm-45 { background: #EF5350 !important; color: #fff; }
+  .hm-25 { background: #FF8A65 !important; color: #fff; }
+  .hm-low { background: #FFCCBC !important; color: #6D3820; }
+  .hm-na { background: #F5F5F5 !important; color: #bbb; font-weight: 400; }
+
+  /* ===== TIMELINE ===== */
+  .timeline {
+    position: relative; padding: 8px 0 0;
+    overflow-x: auto;
+  }
+  .tl-track {
+    display: flex; align-items: flex-start;
+    min-width: 640px; position: relative;
+    padding: 0 8px;
+  }
+  .tl-track::before {
+    content: ''; position: absolute;
+    top: 20px; left: 30px; right: 30px;
+    height: 3px; background: linear-gradient(90deg, var(--red), var(--pink));
+    border-radius: 2px; z-index: 0;
+  }
+  .tl-item {
+    flex: 1; display: flex; flex-direction: column;
+    align-items: center; position: relative; z-index: 1;
+    min-width: 90px;
+  }
+  .tl-dot {
+    width: 14px; height: 14px; border-radius: 50%;
+    background: var(--red); border: 3px solid #fff;
+    box-shadow: 0 0 0 2px var(--red);
+    margin-bottom: 10px; flex-shrink: 0;
+  }
+  .tl-dot.star {
+    width: 22px; height: 22px;
+    box-shadow: 0 0 0 3px var(--red), 0 2px 10px rgba(255,36,66,0.4);
+    background: var(--red);
+  }
+  .tl-emoji { font-size: 14px; margin-bottom: 2px; }
+  .tl-date { font-size: 11px; font-weight: 800; color: var(--red); text-align: center; }
+  .tl-label { font-size: 10px; color: var(--gray-600); text-align: center; line-height: 1.4; max-width: 80px; margin-top: 4px; }
+
+  /* ===== TAGS ===== */
+  .tag { display: inline-flex; align-items: center; gap: 3px; font-size: 11px; font-weight: 600; padding: 2px 8px; border-radius: 20px; white-space: nowrap; }
+  .tag-dan { background: #FCE4EC; color: #C2185B; }
+  .tag-corp { background: #E3F2FD; color: #1565C0; }
+  .tag-kos { background: #E8F5E9; color: #2E7D32; }
+  .tag-ugc { background: #F5F5F5; color: #616161; }
+
+  /* ===== NOTE LINKS ===== */
+  .note-link {
+    color: var(--red); text-decoration: none; font-size: 12px;
+    display: inline-flex; align-items: center; gap: 4px;
+  }
+  .note-link:hover { text-decoration: underline; }
+  .note-item {
+    display: flex; align-items: baseline; gap: 8px;
+    padding: 10px 12px;
+    border-bottom: 1px solid #F5F5F5;
+    font-size: 12px;
+  }
+  .note-item:last-child { border-bottom: none; }
+  .note-rank { font-size: 16px; min-width: 26px; flex-shrink: 0; }
+  .note-body { flex: 1; }
+  .note-meta { color: var(--gray-600); font-size: 11px; margin-top: 3px; line-height: 1.5; }
+  .note-list { list-style: none; background: var(--white); border-radius: 16px; overflow: hidden; border: 1px solid var(--border); }
+
+  /* ===== DONUT / BAR CHARTS (CSS) ===== */
+  .bar-chart { margin: 12px 0; }
+  .bar-row { display: flex; align-items: center; gap: 8px; margin-bottom: 8px; }
+  .bar-label { font-size: 11px; color: var(--gray-600); min-width: 80px; text-align: right; flex-shrink: 0; }
+  .bar-track { flex: 1; height: 22px; background: #F0F0F0; border-radius: 11px; overflow: hidden; position: relative; }
+  .bar-fill { height: 100%; border-radius: 11px; display: flex; align-items: center; justify-content: flex-end; padding-right: 8px; transition: width 0.6s ease; }
+  .bar-fill span { font-size: 10px; font-weight: 700; color: #fff; }
+  .bar-red { background: linear-gradient(90deg, var(--pink), var(--red)); }
+  .bar-coral { background: linear-gradient(90deg, #FFB366, var(--coral)); }
+  .bar-blue { background: linear-gradient(90deg, #5B8DEF, #3357D9); }
+  .bar-gray { background: linear-gradient(90deg, #bbb, #888); }
+  .bar-green { background: linear-gradient(90deg, #66BB6A, #2E7D32); }
+  .bar-yellow { background: linear-gradient(90deg, #FFD54F, #FFA000); }
+
+  /* ===== GRID 2 COL ===== */
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 12px 0; }
+  .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin: 12px 0; }
+  .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin: 12px 0; }
+
+  /* ===== MINI STAT ===== */
+  .mini-stat { background: var(--white); border-radius: 12px; padding: 12px 14px; border: 1px solid var(--border); }
+  .mini-stat .num { font-size: 20px; font-weight: 900; color: var(--red); }
+  .mini-stat .lbl { font-size: 11px; color: var(--gray-600); }
+
+  /* ===== BADGE PILL ===== */
+  .pill { display: inline-block; background: var(--red-light); color: var(--red); font-size: 11px; font-weight: 700; padding: 3px 10px; border-radius: 20px; }
+  .pill-blue { background: #EEF2FF; color: #3357D9; }
+  .pill-dark { background: var(--dark); color: #fff; }
+  .pill-green { background: #E8F5E9; color: #2E7D32; }
+
+  /* ===== PATH BLOCK ===== */
+  .path-block {
+    background: #F5F5F5; border-radius: 8px;
+    padding: 8px 12px; font-family: monospace; font-size: 11px;
+    color: var(--gray-600); margin: 4px 0;
+    border-left: 3px solid #ddd;
+  }
+
+  /* ===== STACKED BAR ===== */
+  .stacked-bar { margin: 10px 0; }
+  .stacked-row { margin-bottom: 10px; }
+  .stacked-label { font-size: 11px; font-weight: 600; color: var(--gray-800); margin-bottom: 4px; }
+  .stacked-track { display: flex; height: 28px; border-radius: 14px; overflow: hidden; }
+  .stacked-seg {
+    display: flex; align-items: center; justify-content: center;
+    font-size: 10px; font-weight: 700; color: #fff;
+    min-width: 28px;
+  }
+  .seg-red { background: var(--red); }
+  .seg-pink { background: var(--pink); }
+  .seg-coral { background: var(--coral); }
+  .seg-dark { background: #6D3820; }
+  .stacked-legend { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 8px; }
+  .legend-item { display: flex; align-items: center; gap: 4px; font-size: 10px; color: var(--gray-600); }
+  .legend-dot { width: 10px; height: 10px; border-radius: 3px; flex-shrink: 0; }
+
+  /* ===== CONTENT TYPE BADGE ===== */
+  .content-group {
+    background: linear-gradient(135deg, #FFF0F2, #FFF8F5);
+    border-radius: 14px; padding: 14px 16px; margin-bottom: 12px;
+    border: 1px solid var(--red-mid);
+  }
+  .content-group-title {
+    font-size: 13px; font-weight: 700; color: var(--dark);
+    margin-bottom: 10px; display: flex; align-items: center; gap: 6px;
+  }
+  .trophy { color: var(--orange); font-size: 14px; }
+
+  /* ===== MOTIVATION CARD ===== */
+  .motive-card {
+    background: var(--white); border-radius: 14px;
+    padding: 14px; border: 1px solid var(--border);
+    margin-bottom: 8px;
+  }
+  .motive-header {
+    display: flex; align-items: center; justify-content: space-between;
+    margin-bottom: 8px;
+  }
+  .motive-icon { font-size: 18px; }
+  .motive-pct { font-size: 18px; font-weight: 900; color: var(--red); }
+  .motive-title { font-size: 13px; font-weight: 700; color: var(--dark); margin-bottom: 4px; }
+  .motive-desc { font-size: 11px; color: var(--gray-600); }
+
+  /* ===== EMOTION RING ===== */
+  .emotion-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin: 12px 0; }
+  .emotion-card {
+    background: var(--white); border-radius: 14px; padding: 14px 10px;
+    text-align: center; border: 1px solid var(--border);
+  }
+  .emotion-pct { font-size: 22px; font-weight: 900; color: var(--red); }
+  .emotion-type { font-size: 10px; color: var(--gray-600); margin-top: 4px; }
+  .emotion-label { font-size: 11px; font-weight: 600; color: var(--dark); margin-top: 2px; }
+
+  /* ===== SCROLLBAR ===== */
+  ::-webkit-scrollbar { width: 4px; height: 4px; }
+  ::-webkit-scrollbar-thumb { background: var(--red-mid); border-radius: 2px; }
+
+  /* ===== DIVIDER ===== */
+  .divider { height: 1px; background: var(--red-mid); margin: 20px 0; opacity: 0.4; }
+
+  /* ===== RESPONSIVE ===== */
+  @media (max-width: 600px) {
+    .stat-grid { grid-template-columns: repeat(3, 1fr); }
+    .grid-2 { grid-template-columns: 1fr; }
+    .grid-4 { grid-template-columns: repeat(2, 1fr); }
+    .hero h1 { font-size: 20px; }
+    .nav-links { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ===== TOP NAV ===== -->
+<nav class="top-nav">
+  <a class="nav-logo" href="#">
+    <span class="nav-title">小米SU7 × 小红书 一方数据洞察报告</span>
+  </a>
+  <div class="nav-links">
+    <a href="#s-summary">总结</a>
+    <a href="#s-data">数据资产</a>
+    <a href="#s-value">平台价值</a>
+    <a href="#s-portrait">用户画像</a>
+    <a href="#s-path">用户路径</a>
+    <a href="#s-motive">决策动机</a>
+    <a href="#s-notes">高效笔记</a>
+  </div>
+</nav>
+
+<!-- ===== HERO ===== -->
+<div class="hero">
+  <div class="hero-tag">🚗 小米SU7 × 小红书 · 一方数据洞察</div>
+  <h1>平台不只是种草入口<br>更是临门转化的核心阵地</h1>
+  <p class="hero-subtitle">全链路渗透率分析 · 10个人群包 · 四组对比</p>
+  <div class="hero-stats">
+    <div class="hero-stat">
+      <div class="hero-stat-num">63.34%</div>
+      <div class="hero-stat-label">AIPS对试驾首周渗透</div>
+    </div>
+    <div class="hero-stat">
+      <div class="hero-stat-num">+20pp</div>
+      <div class="hero-stat-label">试驾渗透高于线索</div>
+    </div>
+    <div class="hero-stat">
+      <div class="hero-stat-num">10</div>
+      <div class="hero-stat-label">分析人群包</div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== BODY ===== -->
+<div class="page-body">
+
+<!-- ======================================== -->
+<!-- 总体结论 -->
+<!-- ======================================== -->
+<section class="section" id="s-summary">
+  <div class="section-header">
+    <div class="section-num">总</div>
+    <div class="section-title">总体结论</div>
+  </div>
+
+  <div class="insight">
+    <div class="insight-tag">💡 核心洞察</div>
+    <p>小红书AIPS人群对<strong>试驾用户渗透率高达 63.34%</strong>，对线索人群达42-47%，试驾渗透率系统性高于线索<strong>+20pp</strong>，高于行业基准——<strong>平台不只是种草入口，更是用户深度决策和临门转化的核心阵地</strong>。</p>
+  </div>
+
+  <!-- 5大发现 -->
+  <div class="section-sub">五大板块发现及建议</div>
+
+  <div class="card">
+    <div style="display:flex;align-items:flex-start;gap:12px;">
+      <div style="width:32px;height:32px;border-radius:50%;background:var(--red);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:13px;flex-shrink:0;">1</div>
+      <div>
+        <div style="font-weight:700;font-size:13px;margin-bottom:4px;">⏱️ 决策周期</div>
+        <div style="font-size:12px;color:var(--gray-800);">
+          <span class="kn">线索用户7天内快速决策占比约28-32%</span>，试驾用户<span class="kn">30-60天长周期决策占比44-59%</span>
+          <ul style="margin-top:6px;padding-left:16px;color:var(--gray-600);">
+            <li>线索用户：发布会事件驱动冲动效应显著，留资门槛低，决策链短</li>
+            <li>试驾用户：担忧情绪占37%，需更长"养草"沉淀，平台内容在1-2个月决策期内持续发挥</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div style="display:flex;align-items:flex-start;gap:12px;">
+      <div style="width:32px;height:32px;border-radius:50%;background:var(--red);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:13px;flex-shrink:0;">2</div>
+      <div>
+        <div style="font-weight:700;font-size:13px;margin-bottom:4px;">🔍 搜索场域</div>
+        <div style="font-size:12px;color:var(--gray-800);">
+          <span class="kn">颜色词是最大流量入口</span>
+          <div style="margin-top:6px;color:var(--gray-600);">卡布里蓝内容词在试驾人群中出现<strong>845次</strong>，超过品牌词排第一。搜索布局按四层优先级：品牌词防守 → 决策触发词（落地价/月供）→ 颜色破圈词 → 竞品拦截词。新色上市<strong>72小时内</strong>必须铺开颜色实拍，抢占搜索流量窗口。</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div style="display:flex;align-items:flex-start;gap:12px;">
+      <div style="width:32px;height:32px;border-radius:50%;background:var(--red);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:13px;flex-shrink:0;">3</div>
+      <div>
+        <div style="font-weight:700;font-size:13px;margin-bottom:4px;">📝 内容场域</div>
+        <div style="font-size:12px;color:var(--gray-800);">
+          <span class="kn">蒲公英种草、企业号关单，分工明确</span>
+          <ul style="margin-top:6px;padding-left:16px;color:var(--gray-600);">
+            <li><span class="tag tag-dan">🌸 蒲公英达人</span> 线索首周总阅读反超企业号，情感/颜色内容是留资核心驱动；优先合作女性、生活方式、汽车颜值测评、户外亲子类博主</li>
+            <li><span class="tag tag-corp">🏢 企业号</span> 侧重常态化「月供/首付/政策」内容，活动激励内容直接推动到店，ROI高</li>
+            <li><span class="tag tag-kos">💡 KOS</span> 主打「颜色选择+价格确认」组合内容，同步维护地域权益内容</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div style="display:flex;align-items:flex-start;gap:12px;">
+      <div style="width:32px;height:32px;border-radius:50%;background:var(--red);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:13px;flex-shrink:0;">4</div>
+      <div>
+        <div style="font-weight:700;font-size:13px;margin-bottom:4px;">📡 触点分工</div>
+        <div style="font-size:12px;color:var(--gray-800);">
+          <span class="kn">蒲公英负责种草破圈，KOS承接「颜色+价格」决策，企业号专注政策/地域权益临门关单</span>
+          <div style="margin-top:6px;color:var(--gray-600);">试驾用户更依赖信息流被动触达，但在最终决策前会主动搜索确认。视频内容更擅长触发兴趣/留资意向，对推动深度决策的效果相对弱于图文。</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div style="display:flex;align-items:flex-start;gap:12px;">
+      <div style="width:32px;height:32px;border-radius:50%;background:var(--red);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:13px;flex-shrink:0;">5</div>
+      <div>
+        <div style="font-weight:700;font-size:13px;margin-bottom:4px;">🎯 人群调优</div>
+        <div style="font-size:12px;color:var(--gray-800);">
+          <span class="kn">加码科技体验，重构小城靓妈</span>
+          <ul style="margin-top:6px;padding-left:16px;color:var(--gray-600);">
+            <li>✅ <strong>科技体验（高匹配）：</strong>智驾实测、参数评测、蒲公英技术体验</li>
+            <li>✅ <strong>驾驶享受（稳定）：</strong>驾驶测评+驾感内容</li>
+            <li>⚠️ <strong>小城靓妈（稍弱）：</strong>拆分更新分场景，放宽城市层级</li>
+            <li>⚠️ <strong>从容驾驶（稍弱）：</strong>补充「副驾/家庭舒适」细分场景</li>
+          </ul>
+          <div style="margin-top:8px;"><span style="color:#3357D9;font-weight:700;">新增两组：</span>线索人群通过蒲公英颜色/场景内容、KOS/企业号试驾活动激励再营销；试驾人群通过主投企业号价格权益+车主口碑、提车记录再深度触达</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================================== -->
+<!-- 一、数据资产说明 -->
+<!-- ======================================== -->
+<section class="section" id="s-data">
+  <div class="section-header">
+    <div class="section-num">一</div>
+    <div class="section-title">数据资产说明</div>
+  </div>
+
+  <div class="card">
+    <div class="section-sub" style="margin-top:0;">1.1 数据资产总览</div>
+    <p style="font-size:12px;color:var(--gray-600);margin-bottom:12px;">本次分析共涉及 <span class="kn">10 个人群包</span>，分两类：</p>
+
+    <div style="font-weight:700;font-size:12px;margin:12px 0 6px;color:var(--red);">一方人群（4个）</div>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>人群包名称</th><th>GroupID</th><th>时间范围</th><th>含义</th></tr></thead>
+        <tbody>
+          <tr><td>SU7 线索首周</td><td>19526133</td><td>3.13–3.22</td><td>发布会事件驱动期留资用户</td></tr>
+          <tr><td>SU7 试驾首周</td><td>19526238</td><td>3.13–3.22</td><td>发布会事件驱动期试驾用户</td></tr>
+          <tr><td>SU7 线索首月</td><td>19526254</td><td>3.23–5.5</td><td>持续种草+IP叠加期留资用户</td></tr>
+          <tr><td>SU7 试驾首月</td><td>19526266</td><td>3.23–5.5</td><td>持续种草+IP叠加期试驾用户</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div style="font-weight:700;font-size:12px;margin:14px 0 6px;color:var(--red);">平台人群（6个）</div>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>人群包名称</th><th>GroupID</th><th>截面时间</th></tr></thead>
+        <tbody>
+          <tr><td>小米SU7 AIPS 0322</td><td>19559862</td><td>3.22</td></tr>
+          <tr><td>小米SU7 AIPS 0505</td><td>19390007</td><td>5.5</td></tr>
+          <tr><td>小米SU7 种草人群 0322</td><td>19560449</td><td>3.22</td></tr>
+          <tr><td>小米SU7 种草人群 0505</td><td>19559775</td><td>5.5</td></tr>
+          <tr><td>小米SU7 TI人群 0322</td><td>19559825</td><td>3.22</td></tr>
+          <tr><td>小米SU7 TI人群 0505</td><td>19559817</td><td>5.5</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="section-sub" style="margin-top:0;">1.2 关键时间轴</div>
+    <div class="timeline">
+      <div class="tl-track">
+        <div class="tl-item">
+          <div class="tl-dot"></div>
+          <div class="tl-date">3.13–3.18</div>
+          <div class="tl-label">发布会预热种草期（持续内容铺量）</div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-emoji">⭐</div>
+          <div class="tl-dot star"></div>
+          <div class="tl-date">3.19</div>
+          <div class="tl-label">小米SU7发布会 + 首销日</div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-dot"></div>
+          <div class="tl-date">3.13–3.22</div>
+          <div class="tl-label">事件驱动转化高峰（首周）</div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-dot"></div>
+          <div class="tl-date">3.23–4.27</div>
+          <div class="tl-label">首月常规种草沉淀期</div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-dot"></div>
+          <div class="tl-date">4.28–5.05</div>
+          <div class="tl-label">🔵蓝色慢游节IP叠加期（小红书×小米）</div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-dot"></div>
+          <div class="tl-date">3.23–5.5</div>
+          <div class="tl-label">首月整体：含IP叠加完整沉淀周期</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================================== -->
+<!-- 二、平台价值验证 -->
+<!-- ======================================== -->
+<section class="section" id="s-value">
+  <div class="section-header">
+    <div class="section-num">二</div>
+    <div class="section-title">平台价值验证</div>
+  </div>
+
+  <div class="insight">
+    <div class="insight-tag">💡 洞察</div>
+    <ul>
+      <li><strong>AIPS人群：</strong>对线索渗透 <span class="kn">42–48%</span>，处于健康区间；对试驾首周渗透 <span class="kn">63.34%</span>，对试驾首月渗透 <span class="kn">58.29%</span></li>
+      <li><strong>TI 人群：</strong>是平台价值体系中转化效率最高的杠杆。对试驾首周渗透率达 <span class="kn">46.05%</span>，对试驾首月渗透率达 <span class="kn">44.49%</span></li>
+      <li>试驾渗透率系统性高于线索约 <span class="kn">+20pp</span>，印证<strong>「越接近成交，平台价值越显著」</strong>的行业规律</li>
+    </ul>
+  </div>
+
+  <!-- 大数字展示 -->
+  <div class="stat-grid">
+    <div class="stat-card highlight">
+      <div class="big">63.34%</div>
+      <div class="label">AIPS → 试驾首周</div>
+      <div class="sub">渗透率峰值 ★</div>
+    </div>
+    <div class="stat-card">
+      <div class="big" style="color:var(--red);">58.29%</div>
+      <div class="label">AIPS → 试驾首月</div>
+      <div class="sub">渗透率</div>
+    </div>
+    <div class="stat-card">
+      <div class="big" style="color:var(--red);">46.05%</div>
+      <div class="label">TI → 试驾首周</div>
+      <div class="sub">高于行业标准</div>
+    </div>
+  </div>
+
+  <div class="section-sub">2.1 全链路渗透率矩阵</div>
+  <p style="font-size:11px;color:var(--gray-400);margin-bottom:10px;">渗透率 = 平台人群与一方人群的交集人数 / 一方人群总人数，反映平台对一方转化用户的覆盖贡献度</p>
+
+  <div class="table-wrap">
+    <table class="hm-table">
+      <thead>
+        <tr>
+          <th>平台人群</th>
+          <th>线索首周</th>
+          <th>线索首月</th>
+          <th>试驾首周</th>
+          <th>试驾首月</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td style="font-weight:700;">AIPS 0322</td>
+          <td class="hm-25">42.15%</td>
+          <td class="hm-na">—</td>
+          <td class="hm-60">63.34% ★</td>
+          <td class="hm-na">—</td>
+        </tr>
+        <tr>
+          <td style="font-weight:700;">AIPS 0505</td>
+          <td class="hm-na">—</td>
+          <td class="hm-45">46.82%</td>
+          <td class="hm-na">—</td>
+          <td class="hm-45">58.29%</td>
+        </tr>
+        <tr>
+          <td style="font-weight:700;">种草人群 0322</td>
+          <td class="hm-25">27.98%</td>
+          <td class="hm-na">—</td>
+          <td class="hm-45">51.65%<br><span style="font-size:10px;font-weight:400;">高于行业标准</span></td>
+          <td class="hm-na">—</td>
+        </tr>
+        <tr>
+          <td style="font-weight:700;">种草人群 0505</td>
+          <td class="hm-na">—</td>
+          <td class="hm-25">35.18%</td>
+          <td class="hm-na">—</td>
+          <td class="hm-45">50.09%</td>
+        </tr>
+        <tr>
+          <td style="font-weight:700;">TI 人群 0322</td>
+          <td class="hm-low">21.11%</td>
+          <td class="hm-na">—</td>
+          <td class="hm-25">46.05%<br><span style="font-size:10px;font-weight:400;">高于行业标准</span></td>
+          <td class="hm-na">—</td>
+        </tr>
+        <tr>
+          <td style="font-weight:700;">TI 人群 0505</td>
+          <td class="hm-na">—</td>
+          <td class="hm-25">27.56%</td>
+          <td class="hm-na">—</td>
+          <td class="hm-25">44.49%</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:8px;font-size:10px;color:var(--gray-600);">
+    <span style="display:flex;align-items:center;gap:4px;"><span style="width:12px;height:12px;background:#D32F2F;border-radius:3px;display:inline-block;"></span>≥60%</span>
+    <span style="display:flex;align-items:center;gap:4px;"><span style="width:12px;height:12px;background:#EF5350;border-radius:3px;display:inline-block;"></span>45–60%</span>
+    <span style="display:flex;align-items:center;gap:4px;"><span style="width:12px;height:12px;background:#FF8A65;border-radius:3px;display:inline-block;"></span>25–45%</span>
+    <span style="display:flex;align-items:center;gap:4px;"><span style="width:12px;height:12px;background:#FFCCBC;border-radius:3px;display:inline-block;"></span>&lt;25%</span>
+    <span style="display:flex;align-items:center;gap:4px;"><span style="width:12px;height:12px;background:#F5F5F5;border:1px solid #ddd;border-radius:3px;display:inline-block;"></span>时间口径不匹配</span>
+  </div>
+</section>
+
+<!-- ======================================== -->
+<!-- 三、用户画像 -->
+<!-- ======================================== -->
+<section class="section" id="s-portrait">
+  <div class="section-header">
+    <div class="section-num">三</div>
+    <div class="section-title">首周 vs 首月用户画像对比</div>
+  </div>
+
+  <div class="section-sub" style="margin-top:0;">3.1 人群基础画像对比</div>
+
+  <div class="insight">
+    <div class="insight-tag">💡 关键差异解读</div>
+    <ul>
+      <li><strong>男性主导：试驾转化更强</strong><br>试驾首周男性占比高达 <span class="kn">73.89%</span>，比线索首周高出约 11pp——男性用户从种草到到店的转化路径更短、意愿更强，是驱动试驾转化的绝对核心人群，内容触达应以技术性、竞品对比类内容为主。</li>
+      <li><strong>女性破圈：</strong>线索首月女性占比 <span class="kn">41.98%</span>，是4组中最高，印证小红书图文种草内容对女性用户的渗透效果——持续运营带来的破圈效应在女性群体中更明显</li>
+      <li><strong>一线城市异常突出：</strong>线索首月 <span class="kn">25.41%</span> vs 首周 <span class="kn">17.25%</span>（+8pp），契合一线城市用户审美，首月内容种草在一线高消费人群中传播效率更高</li>
+      <li><strong>手机生态协同：</strong>试驾用户小米手机占比 <span class="kn">58–59%</span> vs 线索 <span class="kn">52–55%</span>，品牌生态用户决策路径更短、转化更深</li>
+      <li><strong>年龄集中度：</strong>试驾首周26-30岁高度集中 <span class="kn">41.43%</span>，决策精准度远高于线索人群</li>
+    </ul>
+  </div>
+
+  <!-- 4大关键数字 -->
+  <div class="grid-2">
+    <div class="stat-card">
+      <div class="big">41.98%</div>
+      <div class="label">线索首月女性占比</div>
+      <div class="sub">4组中最高 ↑ +5pp</div>
+    </div>
+    <div class="stat-card">
+      <div class="big">25.41%</div>
+      <div class="label">线索首月一线城市</div>
+      <div class="sub">vs 首周17.25% +8pp</div>
+    </div>
+    <div class="stat-card">
+      <div class="big">58-59%</div>
+      <div class="label">试驾人群小米手机</div>
+      <div class="sub">高于线索52-55%</div>
+    </div>
+    <div class="stat-card">
+      <div class="big">41.43%</div>
+      <div class="label">试驾首周26-30岁</div>
+      <div class="sub">年龄高度集中</div>
+    </div>
+  </div>
+
+  <div class="table-wrap" style="margin-top:12px;">
+    <table>
+      <thead><tr><th>维度</th><th>线索首周</th><th>线索首月</th><th>试驾首周</th><th>试驾首月</th></tr></thead>
+      <tbody>
+        <tr><td><strong>男性占比</strong></td><td>62.96%</td><td>58.03%</td><td><span class="kn"><strong>73.89% ↑</strong></span></td><td>70.60%</td></tr>
+        <tr><td><strong>女性占比</strong></td><td>37.05%</td><td><span class="kn"><strong>41.98% ↑</strong></span></td><td>26.12%</td><td>29.41%</td></tr>
+        <tr><td><strong>年龄峰值</strong></td><td>26–30岁（31.40%）</td><td>26–30岁（29.70%）</td><td>26–30岁（<span class="kn"><strong>41.43%</strong></span>）</td><td>26–30岁（36.65%）</td></tr>
+        <tr><td><strong>城市 Top1</strong></td><td>新一线（26.53%）</td><td>新一线（27.04%）</td><td>新一线（27.75%）</td><td>新一线（<span class="kn"><strong>30.59%</strong></span>）</td></tr>
+        <tr><td><strong>一线城市占比</strong></td><td>17.25%</td><td><span class="kn"><strong>25.41% ↑</strong></span></td><td>21.33%</td><td>20.26%</td></tr>
+        <tr><td><strong>小米手机用户</strong></td><td>54.83%</td><td>51.86%</td><td>58.52%</td><td><span class="kn"><strong>58.83%</strong></span></td></tr>
+        <tr><td><strong>华为手机用户</strong></td><td>16.67%</td><td><span class="kn"><strong>19.37% ↑</strong></span></td><td>16.86%</td><td>15.74%</td></tr>
+        <tr><td><strong>消费水平</strong></td><td>中消费 75.81%</td><td>中消费 75.11%</td><td>中消费 75.87%</td><td>中消费 74.59%</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="section-sub">3.2 生活方式标签对比（二十大人群 TGI）</div>
+
+  <div class="insight">
+    <div class="insight-tag">💡 洞察</div>
+    <ul>
+      <li><strong>「野趣探索家」</strong> 是所有组中TGI最高的标签（试驾首周 <span class="kn">848</span>），与SU7户外、探索的品牌调性高度契合</li>
+      <li><strong>「未来原住民」</strong>（科技潮流偏好者）TGI也很突出，与小米科技品牌属性相互印证</li>
+    </ul>
+  </div>
+
+  <div class="bar-chart">
+    <div class="bar-row">
+      <div class="bar-label">野趣探索家</div>
+      <div class="bar-track"><div class="bar-fill bar-red" style="width:100%"><span>试驾首周 848</span></div></div>
+    </div>
+    <div class="bar-row">
+      <div class="bar-label">未来原住民</div>
+      <div class="bar-track"><div class="bar-fill bar-red" style="width:84%"><span>试驾首周 716</span></div></div>
+    </div>
+    <div class="bar-row">
+      <div class="bar-label">自我超越者</div>
+      <div class="bar-track"><div class="bar-fill bar-red" style="width:62%"><span>试驾首周 523</span></div></div>
+    </div>
+    <div class="bar-row">
+      <div class="bar-label">质感男士</div>
+      <div class="bar-track"><div class="bar-fill bar-coral" style="width:57%"><span>试驾首周 479</span></div></div>
+    </div>
+    <div class="bar-row">
+      <div class="bar-label">自由畅行</div>
+      <div class="bar-track"><div class="bar-fill bar-coral" style="width:38%"><span>试驾首周 322</span></div></div>
+    </div>
+    <div class="bar-row">
+      <div class="bar-label">高消耗中年</div>
+      <div class="bar-track"><div class="bar-fill bar-gray" style="width:33%"><span>试驾首周 276</span></div></div>
+    </div>
+    <div class="bar-row">
+      <div class="bar-label">爆肝青年</div>
+      <div class="bar-track"><div class="bar-fill bar-gray" style="width:32%"><span>试驾首周 268</span></div></div>
+    </div>
+    <div class="bar-row">
+      <div class="bar-label">社会新鲜人</div>
+      <div class="bar-track"><div class="bar-fill bar-gray" style="width:31%"><span>试驾首周 259</span></div></div>
+    </div>
+  </div>
+
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>生活方式标签</th><th>线索首周</th><th>试驾首周</th><th>线索首月</th><th>试驾首月</th></tr></thead>
+      <tbody>
+        <tr><td><strong>野趣探索家</strong></td><td>407</td><td><span class="kn"><strong>848</strong></span></td><td>564</td><td><span class="kn"><strong>773</strong></span></td></tr>
+        <tr><td><strong>未来原住民</strong></td><td>357</td><td><span class="kn"><strong>716</strong></span></td><td>425</td><td><span class="kn"><strong>613</strong></span></td></tr>
+        <tr><td><strong>自我超越者</strong></td><td>281</td><td><span class="kn"><strong>523</strong></span></td><td>375</td><td><span class="kn"><strong>496</strong></span></td></tr>
+        <tr><td><strong>质感男士</strong></td><td>284</td><td><span class="kn"><strong>479</strong></span></td><td>325</td><td><span class="kn"><strong>434</strong></span></td></tr>
+        <tr><td><strong>自由畅行</strong></td><td>210</td><td><span class="kn"><strong>322</strong></span></td><td>233</td><td><span class="kn"><strong>292</strong></span></td></tr>
+        <tr><td><strong>高消耗中年</strong></td><td>205</td><td><span class="kn"><strong>276</strong></span></td><td>289</td><td>241</td></tr>
+        <tr><td><strong>爆肝青年</strong></td><td>177</td><td><span class="kn"><strong>268</strong></span></td><td>216</td><td><span class="kn"><strong>257</strong></span></td></tr>
+        <tr><td><strong>社会新鲜人</strong></td><td>—</td><td>259</td><td>201</td><td><span class="kn"><strong>247</strong></span></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="divider"></div>
+  <div class="section-sub">投放情况分析</div>
+
+  <div class="insight" style="margin-bottom:12px;">
+    <div class="insight-tag">📊 大盘基线</div>
+    <p>CTR <span class="kn">9.17%</span> ｜ I+TI 转化率 <span class="kn">1.82%</span> ｜ 好策略流水占比 <span class="kn">58.5%</span></p>
+    <p style="margin-top:4px;font-size:11px;color:var(--gray-600);">🏆 标记 = 该类型流水 ≥ 1000，且 CTR / I+TI 转化率 / 好策略流水占比 中<strong>至少 2 项</strong>高于大盘基线</p>
+    <p style="margin-top:4px;font-size:11px;color:var(--gray-600);">表中数值为该内容类型在该人群包下所有笔记的加权汇总（按流水加权）。代表笔记仅作链接参考。</p>
+  </div>
+
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th></th><th>消耗（有复计）</th><th>CTR</th><th>I+TI转化率</th><th>好策略流水占比</th></tr></thead>
+      <tbody>
+        <tr><td><strong>小城靓妈</strong></td><td>22,673</td><td><span class="kn">10.0%</span></td><td><span class="kn">2.16%</span></td><td>63%</td></tr>
+        <tr><td><strong>从容驾驶</strong></td><td>85,761</td><td>9.8%</td><td><span class="kn">2.04%</span></td><td>59%</td></tr>
+        <tr><td><strong>驾驶享受</strong></td><td>28,577</td><td><span class="kn">10.1%</span></td><td>1.76%</td><td>55%</td></tr>
+        <tr><td><strong>科技体验</strong></td><td>25,286</td><td><span class="kn">10.3%</span></td><td><span class="kn">2.11%</span></td><td>58%</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- 人群笔记内容分析 -->
+  <div class="content-group" style="margin-top:14px;">
+    <div class="content-group-title">👥 【26A】从容驾控者-调整版V4（总流水 85,761）</div>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>内容类型</th><th>流水</th><th>笔记数</th><th>CTR</th><th>I+TI转化率</th><th>好策略流水占比</th><th>代表笔记</th></tr></thead>
+        <tbody>
+          <tr style="background:#FFF0F2;"><td><span class="trophy">🏆</span> <strong>萌宠/小狗叙事</strong></td><td><span class="kn">42,510</span></td><td>8</td><td><span class="kn">11.26%</span></td><td><span class="kn">2.56%</span></td><td><span class="kn">89.5%</span></td><td><a class="note-link" href="https://www.xiaohongshu.com/explore/69f5644400000000350296fc" target="_blank">小狗我叻今天当车模啦 ↗</a></td></tr>
+          <tr><td>色彩-卡布里蓝(治愈)</td><td>41,074</td><td>18</td><td>6.70%</td><td>1.13%</td><td>29.3%</td><td><a class="note-link" href="https://www.xiaohongshu.com/explore/69f72eea00000000230070aa" target="_blank">进入上海全是卡布里蓝的街区 ↗</a></td></tr>
+          <tr><td>决策-选车/试驾/对标</td><td>1,313</td><td>1</td><td>7.01%</td><td>1.54%</td><td>22.0%</td><td><a class="note-link" href="https://www.xiaohongshu.com/explore/69f6d229000000003603186b" target="_blank">拿到中国驾照去探索新能源车的世界，结果... ↗</a></td></tr>
+          <tr><td>生活方式-张园/慢生活</td><td>864</td><td>1</td><td>5.89%</td><td>0.60%</td><td>0.0%</td><td><a class="note-link" href="https://www.xiaohongshu.com/explore/69f6fb6b000000001f007771" target="_blank">这抹蓝里，藏着不用赶路的自由 ↗</a></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="content-group">
+    <div class="content-group-title">👥 【内部】驾驶享受（增加理性决策配置）（总流水 28,577）</div>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>内容类型</th><th>流水</th><th>笔记数</th><th>CTR</th><th>I+TI转化率</th><th>好策略流水占比</th><th>代表笔记</th></tr></thead>
+        <tbody>
+          <tr style="background:#FFF0F2;"><td><span class="trophy">🏆</span> <strong>色彩-靛石绿(豪车感)</strong></td><td><span class="kn">11,192</span></td><td>24</td><td><span class="kn">11.20%</span></td><td>1.78%</td><td><span class="kn">83.8%</span></td><td><a class="note-link" href="https://www.xiaohongshu.com/explore/69b40c9b0000000022003080" target="_blank">小米这抹绿真的过目不忘 ↗</a></td></tr>
+          <tr><td>色彩-卡布里蓝(治愈)</td><td>10,634</td><td>17</td><td>7.56%</td><td>1.07%</td><td>27.6%</td><td><a class="note-link" href="https://www.xiaohongshu.com/explore/69b688f7000000001a030b77" target="_blank">阴天的崂山上，怎么拍出卡布里蓝的自在模样 ↗</a></td></tr>
+          <tr style="background:#FFF0F2;"><td><span class="trophy">🏆</span> <strong>色彩-赤霞红/其他色</strong></td><td><span class="kn">4,524</span></td><td>2</td><td><span class="kn">11.07%</span></td><td>1.28%</td><td><span class="kn">65.5%</span></td><td><a class="note-link" href="https://www.xiaohongshu.com/explore/69b4fa78000000001a023a5c" target="_blank">新SU7｜自古红蓝出CP ↗</a></td></tr>
+          <tr style="background:#FFF0F2;"><td><span class="trophy">🏆</span> <strong>决策-选车/试驾/对标</strong></td><td><span class="kn">2,022</span></td><td>3</td><td><span class="kn">10.51%</span></td><td><span class="kn">3.52%</span></td><td>23.5%</td><td><a class="note-link" href="https://www.xiaohongshu.com/explore/69af90af0000000006032040" target="_blank">女生！入手小米SU7新款合适吗！🤔 ↗</a></td></tr>
+          <tr><td>色彩-多色实车横评</td><td>205</td><td>3</td><td>7.41%</td><td>1.03%</td><td>0.5%</td><td><a class="note-link" href="https://www.xiaohongshu.com/explore/69b7ece3000000002301de4c" target="_blank">遛娃新发现｜小米9色车颜值封神 ↗</a></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="content-group">
+    <div class="content-group-title">👥 【26A】科技体验派-调整版V3（总流水 25,286）</div>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>内容类型</th><th>流水</th><th>笔记数</th><th>CTR</th><th>I+TI转化率</th><th>好策略流水占比</th><th>代表笔记</th></tr></thead>
+        <tbody>
+          <tr style="background:#FFF0F2;"><td><span class="trophy">🏆</span> <strong>萌宠/小狗叙事</strong></td><td><span class="kn">13,141</span></td><td>8</td><td><span class="kn">11.96%</span></td><td><span class="kn">2.64%</span></td><td><span class="kn">90.2%</span></td><td><a class="note-link" href="https://www.xiaohongshu.com/explore/69f5644400000000350296fc" target="_blank">小狗我叻今天当车模啦 ↗</a></td></tr>
+          <tr><td>色彩-卡布里蓝(治愈)</td><td>11,578</td><td>18</td><td>6.57%</td><td>1.10%</td><td>22.8%</td><td><a class="note-link" href="https://www.xiaohongshu.com/explore/69f72eea00000000230070aa" target="_blank">进入上海全是卡布里蓝的街区 ↗</a></td></tr>
+          <tr><td>决策-选车/试驾/对标</td><td>347</td><td>1</td><td>6.98%</td><td>1.27%</td><td>22.6%</td><td><a class="note-link" href="https://www.xiaohongshu.com/explore/69f6d229000000003603186b" target="_blank">拿到中国驾照去探索新能源车的世界，结果... ↗</a></td></tr>
+          <tr><td>生活方式-张园/慢生活</td><td>220</td><td>1</td><td>5.43%</td><td>0.49%</td><td>0.0%</td><td><a class="note-link" href="https://www.xiaohongshu.com/explore/69f6fb6b000000001f007771" target="_blank">这抹蓝里，藏着不用赶路的自由 ↗</a></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="content-group">
+    <div class="content-group-title">👥 【26A】小城靓妈（总流水 21,892）</div>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>内容类型</th><th>流水</th><th>笔记数</th><th>CTR</th><th>I+TI转化率</th><th>好策略流水占比</th><th>代表笔记</th></tr></thead>
+        <tbody>
+          <tr style="background:#FFF0F2;"><td><span class="trophy">🏆</span> <strong>萌宠/小狗叙事</strong></td><td><span class="kn">13,147</span></td><td>8</td><td><span class="kn">10.84%</span></td><td><span class="kn">2.50%</span></td><td><span class="kn">86.8%</span></td><td><a class="note-link" href="https://www.xiaohongshu.com/explore/69f6992b0000000038037ce6" target="_blank">突然发现小狗也会有自己偏爱的颜色 ↗</a></td></tr>
+          <tr><td>色彩-卡布里蓝(治愈)</td><td>8,368</td><td>18</td><td>6.37%</td><td>1.11%</td><td>26.9%</td><td><a class="note-link" href="https://www.xiaohongshu.com/explore/69f72eea00000000230070aa" target="_blank">进入上海全是卡布里蓝的街区 ↗</a></td></tr>
+          <tr><td>决策-选车/试驾/对标</td><td>279</td><td>1</td><td>7.25%</td><td>1.37%</td><td>34.3%</td><td><a class="note-link" href="https://www.xiaohongshu.com/explore/69f6d229000000003603186b" target="_blank">拿到中国驾照去探索新能源车的世界，结果... ↗</a></td></tr>
+          <tr><td>生活方式-张园/慢生活</td><td>99</td><td>1</td><td>7.09%</td><td>0.76%</td><td>0.9%</td><td><a class="note-link" href="https://www.xiaohongshu.com/explore/69f6fb6b000000000000000000000079" target="_blank">查看笔记 →</a></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ======================================== -->
+<!-- 四、用户路径 -->
+<!-- ======================================== -->
+<section class="section" id="s-path">
+  <div class="section-header">
+    <div class="section-num">四</div>
+    <div class="section-title">用户路径对比分析</div>
+  </div>
+
+  <!-- 4.1 决策周期 -->
+  <div class="section-sub" style="margin-top:0;">4.1 决策周期分析</div>
+
+  <div class="insight">
+    <div class="insight-tag">💡 洞察</div>
+    <p><strong>线索用户决策更快，试驾用户决策更长</strong></p>
+    <ul style="margin-top:6px;">
+      <li><strong>线索用户：</strong>7天内快速决策占比约 <span class="kn">28-32%</span>，≤3步快速转化约占 <span class="kn">45-46%</span>——被内容即时激活，留资门槛低，发布会冲动效应显著</li>
+      <li><strong>试驾用户：</strong>30-60天长周期决策占比 <span class="kn">44-59%</span>，大量出现「信息流↔视频内流」「搜索↔阅读」交替——非冲动行为，而是经过充分种草的高质量用户</li>
+    </ul>
+    <p style="margin-top:8px;"><strong>运营建议：</strong>线索人群重点布局短决策路径内容（价格/颜色/配置直接对比）；试驾人群需布局60天以上持续种草内容矩阵。</p>
+  </div>
+
+  <!-- 决策周期堆叠条 -->
+  <div class="stacked-bar">
+    <div class="stacked-row">
+      <div class="stacked-label">线索首周</div>
+      <div class="stacked-track">
+        <div class="stacked-seg seg-red" style="width:31.98%">32%</div>
+        <div class="stacked-seg seg-pink" style="width:7.40%">7%</div>
+        <div class="stacked-seg seg-coral" style="width:22.49%">22%</div>
+        <div class="stacked-seg seg-dark" style="width:38.13%">38%</div>
+      </div>
+    </div>
+    <div class="stacked-row">
+      <div class="stacked-label">试驾首周</div>
+      <div class="stacked-track">
+        <div class="stacked-seg seg-red" style="width:15.14%">15%</div>
+        <div class="stacked-seg seg-pink" style="width:8.97%">9%</div>
+        <div class="stacked-seg seg-coral" style="width:17.20%">17%</div>
+        <div class="stacked-seg seg-dark" style="width:58.69%">59%</div>
+      </div>
+    </div>
+    <div class="stacked-row">
+      <div class="stacked-label">线索首月</div>
+      <div class="stacked-track">
+        <div class="stacked-seg seg-red" style="width:28.22%">28%</div>
+        <div class="stacked-seg seg-pink" style="width:10.10%">10%</div>
+        <div class="stacked-seg seg-coral" style="width:18.00%">18%</div>
+        <div class="stacked-seg seg-dark" style="width:43.67%">44%</div>
+      </div>
+    </div>
+    <div class="stacked-row">
+      <div class="stacked-label">试驾首月</div>
+      <div class="stacked-track">
+        <div class="stacked-seg seg-red" style="width:16.63%">17%</div>
+        <div class="stacked-seg seg-pink" style="width:12.35%">12%</div>
+        <div class="stacked-seg seg-coral" style="width:26.37%">26%</div>
+        <div class="stacked-seg seg-dark" style="width:44.66%">45%</div>
+      </div>
+    </div>
+    <div class="stacked-legend">
+      <div class="legend-item"><div class="legend-dot" style="background:var(--red);"></div>7天内（快速决策）</div>
+      <div class="legend-item"><div class="legend-dot" style="background:var(--pink);"></div>7-14天</div>
+      <div class="legend-item"><div class="legend-dot" style="background:var(--coral);"></div>14-30天</div>
+      <div class="legend-item"><div class="legend-dot" style="background:#6D3820;"></div>30-60天</div>
+    </div>
+  </div>
+
+  <div class="table-wrap" style="margin-top:12px;">
+    <table>
+      <thead><tr><th>决策周期</th><th>线索首周</th><th>试驾首周</th><th>线索首月</th><th>试驾首月</th></tr></thead>
+      <tbody>
+        <tr><td>7天内（快速决策）</td><td><span class="kn"><strong>31.98%</strong></span></td><td>15.14%</td><td><span class="kn"><strong>28.22%</strong></span></td><td>16.63%</td></tr>
+        <tr><td>7-14天</td><td>7.40%</td><td>8.97%</td><td>10.10%</td><td>12.35%</td></tr>
+        <tr><td>14-30天</td><td>22.49%</td><td>17.20%</td><td>18.00%</td><td>26.37%</td></tr>
+        <tr><td>30-60天</td><td>38.13%</td><td><span class="kn"><strong>58.69%</strong></span></td><td>43.67%</td><td><span class="kn"><strong>44.66%</strong></span></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- 4.2 触点贡献 -->
+  <div class="section-sub">4.2 分触点贡献分析</div>
+  <p style="font-size:11px;color:var(--gray-400);margin-bottom:10px;">路径：首阅→种草→留资→试驾（路径顺序正序最长路径六步）| 决策笔记范围：小米SU7 本SPU笔记及PU所在行业笔记（轿车）</p>
+
+  <div class="insight">
+    <div class="insight-tag">💡 洞察</div>
+    <ul>
+      <li><strong>信息流是最大触点：</strong>整体阅读量最大的场域（<span class="kn">44-54%</span>）；试驾首周信息流高达 <span class="kn">54.19%</span>（高于线索），深度决策用户更多通过信息流被动发现内容</li>
+      <li><strong>搜索流是"临门一脚"：</strong>末次触达中占比 <span class="kn">33-37%</span>，用户在最终做决策前会主动搜索确认</li>
+      <li><strong>视频内流：线索人群 &gt; 试驾人群</strong>——视频更擅长触发兴趣/留资意向，对推动深度决策（试驾）效果相对弱于图文</li>
+      <li><strong>竞品搜索路径</strong>在两组人群中均有出现，试驾用户竞品比较行为更活跃</li>
+    </ul>
+  </div>
+
+  <!-- 触点可视化 -->
+  <div class="card-sm">
+    <div style="font-size:12px;font-weight:700;margin-bottom:10px;color:var(--dark);">各渠道阅读占比（全程）</div>
+    <div class="bar-chart">
+      <div style="font-size:11px;color:var(--gray-600);margin-bottom:6px;">📱 信息流</div>
+      <div class="bar-row" style="margin-bottom:4px;">
+        <div class="bar-label">线索首周</div>
+        <div class="bar-track"><div class="bar-fill bar-red" style="width:85%"><span>45.94%</span></div></div>
+      </div>
+      <div class="bar-row" style="margin-bottom:4px;">
+        <div class="bar-label">试驾首周</div>
+        <div class="bar-track"><div class="bar-fill bar-red" style="width:100%"><span>54.19% ↑最高</span></div></div>
+      </div>
+      <div class="bar-row" style="margin-bottom:4px;">
+        <div class="bar-label">线索首月</div>
+        <div class="bar-track"><div class="bar-fill bar-red" style="width:81%"><span>43.88%</span></div></div>
+      </div>
+      <div class="bar-row" style="margin-bottom:16px;">
+        <div class="bar-label">试驾首月</div>
+        <div class="bar-track"><div class="bar-fill bar-red" style="width:87%"><span>46.88%</span></div></div>
+      </div>
+
+      <div style="font-size:11px;color:var(--gray-600);margin-bottom:6px;">🔍 搜索流</div>
+      <div class="bar-row" style="margin-bottom:4px;">
+        <div class="bar-label">线索首周</div>
+        <div class="bar-track"><div class="bar-fill bar-blue" style="width:94%"><span>32.32%</span></div></div>
+      </div>
+      <div class="bar-row" style="margin-bottom:4px;">
+        <div class="bar-label">试驾首周</div>
+        <div class="bar-track"><div class="bar-fill bar-blue" style="width:89%"><span>30.50%</span></div></div>
+      </div>
+      <div class="bar-row" style="margin-bottom:4px;">
+        <div class="bar-label">线索首月</div>
+        <div class="bar-track"><div class="bar-fill bar-blue" style="width:99%"><span>33.79%</span></div></div>
+      </div>
+      <div class="bar-row" style="margin-bottom:16px;">
+        <div class="bar-label">试驾首月</div>
+        <div class="bar-track"><div class="bar-fill bar-blue" style="width:100%"><span>34.23% ↑最高</span></div></div>
+      </div>
+
+      <div style="font-size:11px;color:var(--gray-600);margin-bottom:6px;">📹 视频内流</div>
+      <div class="bar-row" style="margin-bottom:4px;">
+        <div class="bar-label">线索首周</div>
+        <div class="bar-track"><div class="bar-fill bar-coral" style="width:96%"><span>18.54% ↑</span></div></div>
+      </div>
+      <div class="bar-row" style="margin-bottom:4px;">
+        <div class="bar-label">试驾首周</div>
+        <div class="bar-track"><div class="bar-fill bar-coral" style="width:55%"><span>10.62%</span></div></div>
+      </div>
+      <div class="bar-row" style="margin-bottom:4px;">
+        <div class="bar-label">线索首月</div>
+        <div class="bar-track"><div class="bar-fill bar-coral" style="width:100%"><span>19.39% ↑最高</span></div></div>
+      </div>
+      <div class="bar-row">
+        <div class="bar-label">试驾首月</div>
+        <div class="bar-track"><div class="bar-fill bar-coral" style="width:76%"><span>14.66%</span></div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 末次触达 -->
+  <div class="table-wrap" style="margin-top:12px;">
+    <div style="font-size:12px;font-weight:700;margin-bottom:6px;color:var(--dark);">末次触达场域（转化前最后一次触点）</div>
+    <table>
+      <thead><tr><th>触点场域</th><th>线索首周</th><th>试驾首周</th><th>线索首月</th><th>试驾首月</th></tr></thead>
+      <tbody>
+        <tr><td>信息流</td><td>44.61%</td><td>50.71%</td><td>41.62%</td><td>47.07%</td></tr>
+        <tr><td>搜索流</td><td>33.14%</td><td><span class="kn"><strong>32.29%</strong></span></td><td><span class="kn"><strong>36.81%</strong></span></td><td>33.76%</td></tr>
+        <tr><td>视频内流</td><td>18.77%</td><td>12.61%</td><td>17.85%</td><td>16.48%</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- 高频路径 -->
+  <div class="section-sub" style="margin-top:18px;">高频路径汇总</div>
+  <div class="grid-2">
+    <div class="card-sm">
+      <div style="font-size:11px;font-weight:700;color:var(--red);margin-bottom:8px;">线索首周</div>
+      <div style="font-size:11px;color:var(--gray-800);margin-bottom:4px;">信息流→转化 <strong>27.51%</strong></div>
+      <div style="font-size:11px;color:var(--gray-600);margin-bottom:4px;">视频内流→转化 9.92%</div>
+      <div style="font-size:11px;color:var(--gray-600);margin-bottom:4px;">其他搜索→搜后阅读→转化 5.45%</div>
+      <div style="font-size:11px;color:var(--gray-600);margin-bottom:4px;">本SPU搜索→搜后阅读→转化 3.07%</div>
+      <div style="font-size:11px;color:var(--gray-600);">视频内流→信息流→转化 1.96%</div>
+    </div>
+    <div class="card-sm">
+      <div style="font-size:11px;font-weight:700;color:var(--red);margin-bottom:8px;">试驾首周</div>
+      <div style="font-size:11px;color:var(--gray-800);margin-bottom:4px;">信息流→转化 <strong>20.56%</strong></div>
+      <div style="font-size:11px;color:var(--gray-600);margin-bottom:4px;">视频内流→转化 2.62%</div>
+      <div style="font-size:11px;color:var(--gray-600);margin-bottom:4px;">本SPU搜索→搜后阅读→转化 2.43%</div>
+      <div style="font-size:11px;color:var(--gray-600);margin-bottom:4px;">其他搜索→搜后阅读→转化 2.43%</div>
+      <div style="font-size:11px;color:var(--gray-600);">视频内流→信息流→转化 2.24%</div>
+    </div>
+    <div class="card-sm">
+      <div style="font-size:11px;font-weight:700;color:var(--red);margin-bottom:8px;">线索首月</div>
+      <div style="font-size:11px;color:var(--gray-800);margin-bottom:4px;">信息流→转化 <strong>24.97%</strong></div>
+      <div style="font-size:11px;color:var(--gray-600);margin-bottom:4px;">视频内流→转化 9.99%</div>
+      <div style="font-size:11px;color:var(--gray-600);margin-bottom:4px;">其他搜索→搜后阅读→转化 8.48%</div>
+      <div style="font-size:11px;color:var(--gray-600);margin-bottom:4px;">信息流→其他搜索→搜后阅读→转化 3.72%</div>
+      <div style="font-size:11px;color:var(--gray-600);">本SPU搜索→搜后阅读→转化 2.09%</div>
+    </div>
+    <div class="card-sm">
+      <div style="font-size:11px;font-weight:700;color:var(--red);margin-bottom:8px;">试驾首月</div>
+      <div style="font-size:11px;color:var(--gray-800);margin-bottom:4px;">信息流→转化 <strong>20.07%</strong></div>
+      <div style="font-size:11px;color:var(--gray-600);margin-bottom:4px;">视频内流→转化 3.56%</div>
+      <div style="font-size:11px;color:var(--gray-600);margin-bottom:4px;">其他搜索→搜后阅读→转化 3.21%</div>
+      <div style="font-size:11px;color:var(--gray-600);margin-bottom:4px;">信息流→视频内流→转化 2.26%</div>
+      <div style="font-size:11px;color:var(--gray-600);">本SPU搜索→搜后阅读→转化 2.26%</div>
+    </div>
+  </div>
+
+  <!-- 快速转化合并 -->
+  <div class="table-wrap" style="margin-top:12px;">
+    <div style="font-size:12px;font-weight:700;margin-bottom:6px;color:var(--dark);">快速转化路径（≤3步即转化）</div>
+    <table>
+      <thead><tr><th>路径类型</th><th>线索首周</th><th>试驾首周</th><th>线索首月</th><th>试驾首月</th></tr></thead>
+      <tbody>
+        <tr><td>信息流→转化（1步）</td><td><span class="kn">27.51%</span></td><td>20.56%</td><td>24.97%</td><td>20.07%</td></tr>
+        <tr><td>视频内流→转化（1步）</td><td>9.92%</td><td>2.62%</td><td>9.99%</td><td>3.56%</td></tr>
+        <tr><td>搜索→搜后阅读→转化（2步）</td><td>8.52%</td><td>4.86%</td><td>10.57%</td><td>5.47%</td></tr>
+        <tr><td><strong>≤3步合计</strong></td><td><span class="kn"><strong>~46%</strong></span></td><td>~26%</td><td><span class="kn"><strong>~45%</strong></span></td><td>~29%</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- 长链路路径 -->
+  <div class="card-sm" style="margin-top:12px;">
+    <div style="font-size:12px;font-weight:700;margin-bottom:8px;color:var(--dark);">🔄 长链路高频路径（试驾人群特有）</div>
+    <div style="font-size:11px;color:var(--gray-600);margin-bottom:8px;">试驾用户中路径4-6步的高频结构：信息流和视频内流交替循环型（深度种草特征）</div>
+    <div class="path-block">信息流→其他搜索→搜后阅读→信息流→其他搜索→搜后阅读 · 试驾首周 2.06%</div>
+    <div class="path-block">视频内流→信息流→视频内流→信息流→视频内流→信息流 · 试驾首周 2.06%</div>
+    <div class="path-block">信息流→视频内流→信息流→视频内流→信息流→视频内流 · 试驾首周 1.68%</div>
+    <div class="path-block">信息流→视频内流→信息流→视频内流→信息流→视频内流 · 试驾首月 1.66%</div>
+  </div>
+
+  <!-- 搜索路径分析 -->
+  <div class="table-wrap" style="margin-top:12px;">
+    <div style="font-size:12px;font-weight:700;margin-bottom:6px;color:var(--dark);">搜索路径分析（主动搜索行为）</div>
+    <table>
+      <thead><tr><th>搜索类型</th><th>线索首周</th><th>试驾首周</th><th>线索首月</th><th>试驾首月</th></tr></thead>
+      <tbody>
+        <tr><td>本SPU搜索→转化</td><td>3.07%</td><td>2.43%</td><td>2.09%</td><td>2.26%</td></tr>
+        <tr><td>其他搜索→转化</td><td>5.45%</td><td>2.43%</td><td>8.48%</td><td>3.21%</td></tr>
+        <tr><td>竞品搜索→转化</td><td>1.54%</td><td>0.93%</td><td>1.74%</td><td>1.19%</td></tr>
+        <tr><td>品类搜索→转化</td><td>1.40%</td><td>0.93%</td><td>1.05%</td><td>1.66%</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ======================================== -->
+<!-- 决策动机 -->
+<!-- ======================================== -->
+<section class="section" id="s-motive">
+  <div class="section-header">
+    <div class="section-num">动</div>
+    <div class="section-title">决策类型与心路历程</div>
+  </div>
+
+  <!-- 4.3 总览 -->
+  <div class="insight">
+    <div class="insight-tag">💡 四组横向核心规律</div>
+    <ol>
+      <li><strong>产品功能</strong>始终是四组第一大动机（<span class="kn">24-28%</span>），智驾/底盘/激光雷达是核心词</li>
+      <li><strong>颜值外观</strong>在试驾首周跃升至第二（<span class="kn">16.3%</span>），卡布里蓝（<span class="kn">845次</span>）超越所有其他关键词——颜色是到店试驾最直接的驱动力</li>
+      <li><strong>场景体验</strong>从线索首周的第五位（<span class="kn">10.9%</span>）上升至线索首月第三位（<span class="kn">15.3%</span>）</li>
+      <li><strong>价格政策</strong>在试驾首月达到最高（<span class="kn">17.6%</span>），是临门一脚的核心驱动</li>
+    </ol>
+  </div>
+
+  <!-- 4.31 决策动机汇总 -->
+  <div class="section-sub">4.31 决策动机类型汇总</div>
+
+  <div class="grid-2">
+    <div class="motive-card">
+      <div class="motive-header">
+        <div><div class="motive-icon">🔧</div><div class="motive-title">产品功能导向型</div></div>
+        <div class="motive-pct">27.5%</div>
+      </div>
+      <div class="motive-desc">四组最高，始终排第一。核心词：智驾/底盘/激光雷达/辅助驾驶</div>
+      <div style="margin-top:8px;"><span class="pill">线索首周 27.5%</span> <span class="pill">试驾首周 27.0%</span></div>
+    </div>
+    <div class="motive-card">
+      <div class="motive-header">
+        <div><div class="motive-icon">💰</div><div class="motive-title">价格政策导向型</div></div>
+        <div class="motive-pct">17.6%</div>
+      </div>
+      <div class="motive-desc">试驾首月占比最高，临门一脚最强驱动力。核心词：落地价/月供/首付/补贴</div>
+      <div style="margin-top:8px;"><span class="pill">试驾首月最高 17.6%</span></div>
+    </div>
+    <div class="motive-card">
+      <div class="motive-header">
+        <div><div class="motive-icon">🎨</div><div class="motive-title">颜值外观导向型</div></div>
+        <div class="motive-pct">16.3%</div>
+      </div>
+      <div class="motive-desc">试驾首周排第二。卡布里蓝845次超越品牌词排第一。核心词：卡布里蓝/靛石绿/赤霞红</div>
+      <div style="margin-top:8px;"><span class="pill">试驾首周最高 16.3%</span></div>
+    </div>
+    <div class="motive-card">
+      <div class="motive-header">
+        <div><div class="motive-icon">🚗</div><div class="motive-title">场景体验导向型</div></div>
+        <div class="motive-pct">15.3%</div>
+      </div>
+      <div class="motive-desc">随时间增长（10.9%→15.3%）。核心词：零重力座椅/音响/氛围灯</div>
+      <div style="margin-top:8px;"><span class="pill">线索首月 15.3% ↑</span></div>
+    </div>
+    <div class="motive-card">
+      <div class="motive-header">
+        <div><div class="motive-icon">👥</div><div class="motive-title">社交认同/用车感受型</div></div>
+        <div class="motive-pct">14.2%</div>
+      </div>
+      <div class="motive-desc">四组占比稳定（12-15%），贯穿全程。核心词：女生/年轻人/闺蜜/朋友</div>
+      <div style="margin-top:8px;"><span class="pill">稳定驱动力</span></div>
+    </div>
+    <div class="motive-card">
+      <div class="motive-header">
+        <div><div class="motive-icon">🏷️</div><div class="motive-title">品牌品类筛选型</div></div>
+        <div class="motive-pct">17.1%</div>
+      </div>
+      <div class="motive-desc">线索首周最高，随时间下降。核心词：20万新能源/蔚来/特斯拉</div>
+      <div style="margin-top:8px;"><span class="pill">线索首周最高 17.1%</span></div>
+    </div>
+  </div>
+
+  <div class="table-wrap" style="margin-top:12px;">
+    <table>
+      <thead><tr><th>决策动机类型</th><th>线索首周</th><th>线索首月</th><th>试驾首周</th><th>试驾首月</th><th>代表搜索词</th><th>代表内容关键词</th><th>代表笔记</th></tr></thead>
+      <tbody>
+        <tr><td>🔧 产品功能导向型</td><td><span class="kn">27.5%</span></td><td><span class="kn">26.8%</span></td><td><span class="kn">27.0%</span></td><td><span class="kn">24.0%</span></td><td>小米su7新款 · su7轮毂 · 标准版pro max区别</td><td>智驾 · 底盘 · 激光雷达 · 辅助驾驶</td><td><a class="note-link" href="https://www.xiaohongshu.com/explore/67a706840000000018006f96" target="_blank">小米su7pro｜首次高速智驾体验分享 ↗</a><br><a class="note-link" href="https://www.xiaohongshu.com/explore/69b675a50000000021005e05" target="_blank">SU7老款vs新一代，车漆两种质感? ↗</a><br><a class="note-link" href="https://www.xiaohongshu.com/explore/67a96958000000001703a228" target="_blank">小米SU7三个版本怎么选，一文教会 ↗</a></td></tr>
+        <tr><td>💰 价格政策导向型</td><td>16.4%</td><td>17.3%</td><td>12.9%</td><td><span class="kn">17.6%</span></td><td>小米su7落地价 · 首付和月供 · 新su7落地价</td><td>20-30w新能源 · 免费 · 优惠 · 优惠价</td><td><a class="note-link" href="https://www.xiaohongshu.com/explore/69de00da000000001d01d2e6" target="_blank">小米su7新政策！4月崩了！ ↗</a><br><a class="note-link" href="https://www.xiaohongshu.com/explore/69ce4f26000000001f002f41" target="_blank">💰首付3w开走小米SU7｜昆明高新店 ↗</a></td></tr>
+        <tr><td>🎨 颜值外观导向型</td><td>13.9%</td><td>11.6%</td><td><span class="kn">16.3%</span></td><td>15.3%</td><td>小米su7颜色 · 新su7颜色 · 靛石绿 · 卡布里蓝</td><td>卡布里蓝 · 靛石绿 · 赤霞红 · 流金粉</td><td><a class="note-link" href="https://www.xiaohongshu.com/explore/69c1116c0000000020039c9c" target="_blank">一次看完小米新SU7的9种神仙配色 ↗</a><br><a class="note-link" href="https://www.xiaohongshu.com/explore/69b911c5000000001a0285dd" target="_blank">同色系OOTD🌿被9色新SU7狠狠圈粉 ↗</a><br><a class="note-link" href="https://www.xiaohongshu.com/explore/67fdc915000000000703797c" target="_blank">都说网友眼光好 帮我选选黑还是白 ↗</a></td></tr>
+        <tr><td>🚗 场景体验导向型</td><td>10.9%</td><td>15.3%</td><td>13.3%</td><td>15.1%</td><td>小米su7新款内饰 · su7内饰 · su7音响</td><td>舒适与便利 · 零重力座椅 · 座椅相关 · 音响</td><td><a class="note-link" href="https://www.xiaohongshu.com/explore/69242fc5000000000d03bc59" target="_blank">小米su7｜在车上午休情绪价值拉满了 ↗</a><br><a class="note-link" href="https://www.xiaohongshu.com/explore/69b12e9d0000000015033b28" target="_blank">小米su7｜i人周末宅车里都干点啥 ↗</a><br><a class="note-link" href="https://www.xiaohongshu.com/explore/69b7ece3000000002301de4c" target="_blank">遛娃新发现｜小米9色车颜值封神 ↗</a></td></tr>
+        <tr><td>👥 社交认同/用车感受型</td><td>14.2%</td><td>12.7%</td><td>14.9%</td><td>14.2%</td><td>小米试驾 · 为啥买车别人说酸话</td><td>女生 · 年轻人 · 闺蜜 · 朋友</td><td><a class="note-link" href="https://www.xiaohongshu.com/explore/69cde441000000001e00e90b" target="_blank">和闺蜜冲新SU7！流金粉实车美到心巴上 ↗</a><br><a class="note-link" href="https://www.xiaohongshu.com/explore/674c7ee00000000006017131" target="_blank">年终奖到手，有点小钱女生买车攻略 ↗</a><br><a class="note-link" href="https://www.xiaohongshu.com/explore/69cbc2d3000000001a02435c" target="_blank">终于提上新款su7啦！ ↗</a></td></tr>
+        <tr><td>🏷️ 品牌品类筛选型</td><td>17.1%</td><td>16.3%</td><td>15.6%</td><td>13.7%</td><td>20万左右新能源车 · 蔚来et5 · 特斯拉model-3</td><td>新能源 · 纯电 · 特斯拉Model 3 · 理想L7</td><td><a class="note-link" href="https://www.xiaohongshu.com/explore/68bc17f5000000001c006c8d" target="_blank">20多w你很难绕过去的10款纯电轿车 ↗</a><br><a class="note-link" href="https://www.xiaohongshu.com/explore/69bd937a000000002202913a" target="_blank">新一代小米SU7卖不动了，20万买车怎么选？ ↗</a></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- 4.32 下钻 - 产品功能 -->
+  <div class="divider"></div>
+  <div class="section-sub">4.32 决策动机下钻：🔧 产品功能导向型</div>
+  <p style="font-size:12px;color:var(--gray-600);margin-bottom:10px;">以产品参数和技术能力为决策核心，重点验证智驾系统、底盘性能、续航能力等硬核功能指标。是四组中占比<strong>始终最高</strong>的决策动机。</p>
+
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>关键词</th><th>线索首周</th><th>线索首月</th><th>试驾首周</th><th>试驾首月</th></tr></thead>
+      <tbody>
+        <tr><td><strong>智驾</strong></td><td>315次</td><td>202次</td><td><span class="kn">629次</span></td><td><span class="kn">561次</span></td></tr>
+        <tr><td><strong>轮毂</strong></td><td>158次</td><td>107次</td><td>378次</td><td>289次</td></tr>
+        <tr><td><strong>激光雷达</strong></td><td>123次</td><td>86次</td><td>259次</td><td>244次</td></tr>
+        <tr><td><strong>辅助驾驶</strong></td><td>122次</td><td>84次</td><td>299次</td><td>244次</td></tr>
+        <tr><td><strong>底盘</strong></td><td>110次</td><td>111次</td><td>260次</td><td>251次</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- 4.33 情感驱动 -->
+  <div class="divider"></div>
+  <div class="section-sub">4.33 情感驱动分布</div>
+
+  <div class="insight">
+    <div class="insight-tag">💡 洞察</div>
+    <ul>
+      <li><strong>试驾首周理性程度最高（88%）：</strong>发布会刚结束，参数热度最高，用户带着明确产品认知来试驾，几乎是纯理性行为</li>
+      <li><strong>试驾首月担忧情绪显著（37%）：</strong>"能按时交付吗""售后网点在哪"——高意向用户从"想买"到"敢买"的最后阻碍</li>
+      <li><strong>线索首月安全感需求：</strong>首月留资用户更关注售后网络和OTA更新，长期持有信心是留资障碍之一</li>
+    </ul>
+  </div>
+
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
+    <div class="card-sm">
+      <div style="font-size:12px;font-weight:700;color:var(--red);margin-bottom:8px;">线索首周</div>
+      <div class="emotion-grid" style="grid-template-columns:repeat(3,1fr);">
+        <div class="emotion-card"><div class="emotion-pct">65%</div><div class="emotion-label">理性驱动</div><div class="emotion-type">功能实用</div></div>
+        <div class="emotion-card"><div class="emotion-pct">25%</div><div class="emotion-label">感性驱动</div><div class="emotion-type">情感价值</div></div>
+        <div class="emotion-card"><div class="emotion-pct">10%</div><div class="emotion-label">混合驱动</div><div class="emotion-type">理性感性</div></div>
+      </div>
+    </div>
+    <div class="card-sm">
+      <div style="font-size:12px;font-weight:700;color:var(--red);margin-bottom:8px;">线索首月</div>
+      <div class="emotion-grid" style="grid-template-columns:repeat(3,1fr);">
+        <div class="emotion-card"><div class="emotion-pct" style="font-size:18px;">76%</div><div class="emotion-label">理性驱动</div><div class="emotion-type">配置/性价比</div></div>
+        <div class="emotion-card"><div class="emotion-pct" style="font-size:18px;">14%</div><div class="emotion-label">安全感</div><div class="emotion-type">品牌可靠</div></div>
+        <div class="emotion-card"><div class="emotion-pct" style="font-size:18px;">10%</div><div class="emotion-label">身份认同</div><div class="emotion-type">米粉标签</div></div>
+      </div>
+    </div>
+    <div class="card-sm">
+      <div style="font-size:12px;font-weight:700;color:var(--red);margin-bottom:8px;">试驾首周</div>
+      <div class="emotion-grid" style="grid-template-columns:repeat(3,1fr);">
+        <div class="emotion-card"><div class="emotion-pct" style="font-size:18px;">88%</div><div class="emotion-label">理性驱动</div><div class="emotion-type">技术参数</div></div>
+        <div class="emotion-card"><div class="emotion-pct" style="font-size:18px;">8%</div><div class="emotion-label">安全感</div><div class="emotion-type">车辆保护</div></div>
+        <div class="emotion-card"><div class="emotion-pct" style="font-size:18px;">4%</div><div class="emotion-label">身份认同</div><div class="emotion-type">品牌忠诚</div></div>
+      </div>
+    </div>
+    <div class="card-sm">
+      <div style="font-size:12px;font-weight:700;color:var(--red);margin-bottom:8px;">试驾首月</div>
+      <div class="emotion-grid" style="grid-template-columns:repeat(3,1fr);">
+        <div class="emotion-card"><div class="emotion-pct" style="font-size:18px;">68%</div><div class="emotion-label">理性驱动</div><div class="emotion-type">核心驱动</div></div>
+        <div class="emotion-card"><div class="emotion-pct" style="font-size:18px;">32%</div><div class="emotion-label">感性驱动</div><div class="emotion-type">辅助驱动</div></div>
+        <div class="emotion-card" style="border-color:var(--red-mid);background:var(--red-light);"><div class="emotion-pct" style="font-size:18px;">37%</div><div class="emotion-label" style="color:var(--red);">担忧情绪</div><div class="emotion-type" style="color:var(--red);">购买阻力</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 4.34 临门一脚 -->
+  <div class="divider"></div>
+  <div class="section-sub">4.34 转化"临门一脚"</div>
+
+  <div class="insight">
+    <div class="insight-tag">💡 洞察</div>
+    <p><strong>线索转化的"临门一脚"从价格/颜色，转向产品确认/体验验证</strong><br>首周留资最后一步是确认价格（<span class="kn">40%</span>）和选颜色（<span class="kn">30%</span>）；首月则需要确认配置版本（<span class="kn">62%</span>）和看真实体验（<span class="kn">31%</span>）。</p>
+    <p style="margin-top:8px;"><strong>试驾转化的"临门一脚"在首月极度依赖真实口碑</strong><br>首月试驾用户<span class="kn">80%</span>的转化最后一步是"真实体验验证"——UGC车主内容和KOS垂类测评是首月最关键的转化内容类型。</p>
+    <p style="margin-top:8px;"><strong>促销信息对试驾首周有显著拉力，首月吸引力逐步下降</strong><br>首周适合打"活动/权益"节点，首月应转向"用车体验/车主故事"内容类型。</p>
+  </div>
+
+  <!-- 4个临门一脚 -->
+  <div class="grid-2">
+    <div class="card-sm">
+      <div style="font-weight:700;font-size:12px;color:var(--red);margin-bottom:8px;">💰 线索首周</div>
+      <div style="display:flex;flex-direction:column;gap:6px;">
+        <div style="display:flex;justify-content:space-between;align-items:center;font-size:11px;"><span>价格确认型</span><span class="kn" style="font-size:14px;font-weight:900;">40%</span></div>
+        <div style="height:6px;background:#F0F0F0;border-radius:3px;"><div style="width:40%;height:100%;background:var(--red);border-radius:3px;"></div></div>
+        <div style="display:flex;justify-content:space-between;align-items:center;font-size:11px;"><span>颜色决策型</span><span class="kn" style="font-size:14px;font-weight:900;">30%</span></div>
+        <div style="height:6px;background:#F0F0F0;border-radius:3px;"><div style="width:30%;height:100%;background:var(--pink);border-radius:3px;"></div></div>
+        <div style="display:flex;justify-content:space-between;align-items:center;font-size:11px;"><span>用户体验型</span><span style="font-size:14px;font-weight:900;color:#666;">30%</span></div>
+        <div style="height:6px;background:#F0F0F0;border-radius:3px;"><div style="width:30%;height:100%;background:#999;border-radius:3px;"></div></div>
+      </div>
+    </div>
+    <div class="card-sm">
+      <div style="font-weight:700;font-size:12px;color:var(--red);margin-bottom:8px;">📋 线索首月</div>
+      <div style="display:flex;flex-direction:column;gap:6px;">
+        <div style="display:flex;justify-content:space-between;align-items:center;font-size:11px;"><span>产品确认型</span><span class="kn" style="font-size:14px;font-weight:900;">62%</span></div>
+        <div style="height:6px;background:#F0F0F0;border-radius:3px;"><div style="width:62%;height:100%;background:var(--red);border-radius:3px;"></div></div>
+        <div style="display:flex;justify-content:space-between;align-items:center;font-size:11px;"><span>体验验证型</span><span class="kn" style="font-size:14px;font-weight:900;">31%</span></div>
+        <div style="height:6px;background:#F0F0F0;border-radius:3px;"><div style="width:31%;height:100%;background:var(--pink);border-radius:3px;"></div></div>
+        <div style="display:flex;justify-content:space-between;align-items:center;font-size:11px;"><span>机会驱动型</span><span style="font-size:14px;font-weight:900;color:#666;">7%</span></div>
+        <div style="height:6px;background:#F0F0F0;border-radius:3px;"><div style="width:7%;height:100%;background:#999;border-radius:3px;"></div></div>
+      </div>
+    </div>
+    <div class="card-sm">
+      <div style="font-weight:700;font-size:12px;color:var(--red);margin-bottom:8px;">🚗 试驾首周</div>
+      <div style="display:flex;flex-direction:column;gap:6px;">
+        <div style="display:flex;justify-content:space-between;align-items:center;font-size:11px;"><span>型号确认型</span><span class="kn" style="font-size:14px;font-weight:900;">70%</span></div>
+        <div style="height:6px;background:#F0F0F0;border-radius:3px;"><div style="width:70%;height:100%;background:var(--red);border-radius:3px;"></div></div>
+        <div style="display:flex;justify-content:space-between;align-items:center;font-size:11px;"><span>促销驱动型</span><span class="kn" style="font-size:14px;font-weight:900;">20%</span></div>
+        <div style="height:6px;background:#F0F0F0;border-radius:3px;"><div style="width:20%;height:100%;background:var(--pink);border-radius:3px;"></div></div>
+        <div style="display:flex;justify-content:space-between;align-items:center;font-size:11px;"><span>服务保障型</span><span style="font-size:14px;font-weight:900;color:#666;">10%</span></div>
+        <div style="height:6px;background:#F0F0F0;border-radius:3px;"><div style="width:10%;height:100%;background:#999;border-radius:3px;"></div></div>
+      </div>
+    </div>
+    <div class="card-sm">
+      <div style="font-weight:700;font-size:12px;color:var(--red);margin-bottom:8px;">⭐ 试驾首月</div>
+      <div style="display:flex;flex-direction:column;gap:6px;">
+        <div style="display:flex;justify-content:space-between;align-items:center;font-size:11px;"><span>真实体验验证</span><span class="kn" style="font-size:14px;font-weight:900;">80%</span></div>
+        <div style="height:6px;background:#F0F0F0;border-radius:3px;"><div style="width:80%;height:100%;background:var(--red);border-radius:3px;"></div></div>
+        <div style="display:flex;justify-content:space-between;align-items:center;font-size:11px;"><span>配件功能确认</span><span style="font-size:14px;font-weight:900;color:#666;">15%</span></div>
+        <div style="height:6px;background:#F0F0F0;border-radius:3px;"><div style="width:15%;height:100%;background:var(--coral);border-radius:3px;"></div></div>
+        <div style="display:flex;justify-content:space-between;align-items:center;font-size:11px;"><span>价格最终确认</span><span style="font-size:14px;font-weight:900;color:#999;">5%</span></div>
+        <div style="height:6px;background:#F0F0F0;border-radius:3px;"><div style="width:5%;height:100%;background:#ccc;border-radius:3px;"></div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 内容类型分工总结 -->
+  <div class="insight" style="margin-top:16px;">
+    <div class="insight-tag">💡 「临门一脚」内容类型分工总结</div>
+    <ul>
+      <li><span class="tag tag-dan">🌸 蒲公英</span> 线索人群最高效的留资驱动，以颜色种草、智驾体验、生活场景为核心；强在情感共鸣和真实感；试驾阶段作为颜色+情绪层补充，以自然流量渗透为主</li>
+      <li><span class="tag tag-kos" style="margin-top:4px;">💡 KOS</span> 颜色选择+价格决策的精准承接，试驾人群首月权益类内容阅读次数高（<span class="kn">9-11次</span>），强在"真实用户+具体方案"的信任感</li>
+      <li><span class="tag tag-corp" style="margin-top:4px;">🏢 企业号</span> 试驾人群绝对主力，月供/首付/政策类内容单篇最高 <span class="kn">21次</span>，是临门一脚效率最高的内容类型；负责大规模覆盖和价格心理突破</li>
+      <li><span class="tag tag-ugc" style="margin-top:4px;">👤 UGC</span> 真实车主故事，在线索首月和试驾人群中均有高频出现，强化「真实用户已买」的社会证明效应</li>
+    </ul>
+    <p style="margin-top:10px;font-size:12px;"><strong>核心规律：</strong>线索转化依赖「蒲公英情感种草」，试驾转化依赖「企业号/KOS价格权益」，两种内容形式不可替代、缺一不可。</p>
+  </div>
+</section>
+
+<!-- ======================================== -->
+<!-- 高效笔记 -->
+<!-- ======================================== -->
+<section class="section" id="s-notes">
+  <div class="section-header">
+    <div class="section-num">笔</div>
+    <div class="section-title">各周期高驱动转化笔记</div>
+  </div>
+
+  <!-- 线索首周 -->
+  <div class="section-sub" style="margin-top:0;">线索首周 · 驱动留资的TOP笔记（颜色确认+价格确认）</div>
+  <ul class="note-list">
+    <li class="note-item">
+      <div class="note-rank">🥇</div>
+      <div class="note-body">
+        <div><span class="tag tag-kos">💡 KOS</span> <a class="note-link" href="https://www.xiaohongshu.com/explore/69c1116c0000000020039c9c" target="_blank">一次看完小米新SU7的9种神仙配色，我Pick… ↗</a> <span class="pill" style="font-size:10px;">⬆️ 线索首周最高</span></div>
+        <div class="note-meta">来源词：「流金粉要加钱吗」「标准版pro max区别」，颜色+版本双决策覆盖</div>
+      </div>
+    </li>
+    <li class="note-item">
+      <div class="note-rank">🥈</div>
+      <div class="note-body">
+        <div><span class="tag tag-kos">💡 KOS</span> <a class="note-link" href="https://www.xiaohongshu.com/explore/67fdc915000000000703797c" target="_blank">都说网友眼光好 帮我选选黑还是白 ↗</a></div>
+        <div class="note-meta">来源词：「小米su7黑白色」，颜色决策最高效承接</div>
+      </div>
+    </li>
+    <li class="note-item">
+      <div class="note-rank">🥉</div>
+      <div class="note-body">
+        <div><span class="tag tag-kos">💡 KOS</span> <a class="note-link" href="https://www.xiaohongshu.com/explore/67fdf4f4000000001a0058df" target="_blank">预算4w·拿下酷酷🖤黑武士智能轿跑SU7 ↗</a></div>
+        <div class="note-meta">来源词：「su7颜色价格」，价格+颜色双重触发</div>
+      </div>
+    </li>
+    <li class="note-item">
+      <div class="note-rank">4</div>
+      <div class="note-body">
+        <div><span class="tag tag-kos">💡 KOS</span> <a class="note-link" href="https://www.xiaohongshu.com/explore/69b634120000000021006f64" target="_blank">属于中国的绿，实在是雅✨ ↗</a></div>
+        <div class="note-meta">靛石绿颜值确认，颜值导向用户临门一脚</div>
+      </div>
+    </li>
+    <li class="note-item">
+      <div class="note-rank">5</div>
+      <div class="note-body">
+        <div><span class="tag tag-dan">🌸 蒲公英</span> <a class="note-link" href="https://www.xiaohongshu.com/explore/67a706840000000018006f96" target="_blank">小米su7pro·首次高速智驾体验分享 ↗</a></div>
+        <div class="note-meta">来源词：「su7智驾」，功能型用户最后一次技术验证</div>
+      </div>
+    </li>
+    <li class="note-item">
+      <div class="note-rank">6</div>
+      <div class="note-body">
+        <div><span class="tag tag-dan">🌸 蒲公英</span> <a class="note-link" href="https://www.xiaohongshu.com/explore/69242fc5000000000d03bc59" target="_blank">小米su7·没想到在车上午休情绪价值拉满了 ↗</a></div>
+        <div class="note-meta">来源词：「su7内饰」，场景化情绪内容触发社交型留资</div>
+      </div>
+    </li>
+    <li class="note-item">
+      <div class="note-rank">7</div>
+      <div class="note-body">
+        <div><span class="tag tag-dan">🌸 蒲公英</span> <a class="note-link" href="https://www.xiaohongshu.com/explore/69afc4b6000000001b01e2bf" target="_blank">小米su7·靠一辆车搞副业变现五位数啦！ ↗</a></div>
+        <div class="note-meta">自然流量，差异化生活方式内容种草</div>
+      </div>
+    </li>
+  </ul>
+
+  <!-- 线索首月 -->
+  <div class="section-sub" style="margin-top:20px;">线索首月 · 驱动留资的TOP笔记（蒲公英场景+智驾内容主导）</div>
+  <ul class="note-list">
+    <li class="note-item">
+      <div class="note-rank">🥇</div>
+      <div class="note-body">
+        <div><span class="tag tag-dan">🌸 蒲公英</span> <a class="note-link" href="https://www.xiaohongshu.com/explore/69c1116c0000000020039c9c" target="_blank">一次看完小米新SU7的9种神仙配色，我Pick… ↗</a></div>
+        <div class="note-meta">来源词：「流金粉要加钱吗」「标准版pro max区别」，颜色决策最终确认</div>
+      </div>
+    </li>
+    <li class="note-item">
+      <div class="note-rank">🥈</div>
+      <div class="note-body">
+        <div><span class="tag tag-dan">🌸 蒲公英</span> <a class="note-link" href="https://www.xiaohongshu.com/explore/67a706840000000018006f96" target="_blank">小米su7pro·首次高速智驾体验分享 ↗</a></div>
+        <div class="note-meta">来源词：「su7智驾」，功能探索型用户最后一次验证</div>
+      </div>
+    </li>
+    <li class="note-item">
+      <div class="note-rank">🥉</div>
+      <div class="note-body">
+        <div><span class="tag tag-dan">🌸 蒲公英</span> <a class="note-link" href="https://www.xiaohongshu.com/explore/69242fc5000000000d03bc59" target="_blank">小米su7·没想到在车上午休情绪价值拉满了 ↗</a></div>
+        <div class="note-meta">来源词：「su7内饰」，场景体验验证</div>
+      </div>
+    </li>
+    <li class="note-item">
+      <div class="note-rank">4</div>
+      <div class="note-body">
+        <div><span class="tag tag-dan">🌸 蒲公英</span> <a class="note-link" href="https://www.xiaohongshu.com/explore/69cde441000000001e00e90b" target="_blank">和闺蜜冲新SU7！流金粉实车美到心巴上💙 ↗</a></div>
+        <div class="note-meta">闺蜜社交场景，女性用户情感共鸣触发留资</div>
+      </div>
+    </li>
+    <li class="note-item">
+      <div class="note-rank">5</div>
+      <div class="note-body">
+        <div><span class="tag tag-dan">🌸 蒲公英</span> <a class="note-link" href="https://www.xiaohongshu.com/explore/69afc4b6000000001b01e2bf" target="_blank">小米su7·靠一辆车搞副业变现五位数啦！ ↗</a></div>
+        <div class="note-meta">差异化生活方式种草</div>
+      </div>
+    </li>
+    <li class="note-item">
+      <div class="note-rank">6</div>
+      <div class="note-body">
+        <div><span class="tag tag-kos">💡 KOS</span> <a class="note-link" href="https://www.xiaohongshu.com/explore/69ae3b1900000000150318af" target="_blank">SU7展车‼️‼️捡漏的速来‼️ ↗</a></div>
+        <div class="note-meta">来源词：「女生车」，展车捡漏信息触发即时留资</div>
+      </div>
+    </li>
+    <li class="note-item">
+      <div class="note-rank">7</div>
+      <div class="note-body">
+        <div><span class="tag tag-corp">🏢 企业号</span> <a class="note-link" href="https://www.xiaohongshu.com/explore/69bd5760000000002103b631" target="_blank">新SU7上市！21.99w起权益拉满！ ↗</a></div>
+        <div class="note-meta">来源词：「小米su7」，价格+权益组合直接触达</div>
+      </div>
+    </li>
+  </ul>
+
+  <!-- 试驾首周 -->
+  <div class="section-sub" style="margin-top:20px;">试驾首周 · 推动到店的TOP笔记（颜色确认+活动激励+品牌信任）</div>
+  <ul class="note-list">
+    <li class="note-item">
+      <div class="note-rank">🥇</div>
+      <div class="note-body">
+        <div><span class="tag tag-corp">🏢 企业号</span> <a class="note-link" href="https://www.xiaohongshu.com/explore/698b247c0000000015020703" target="_blank">新一代小米SU7颜色合集 你喜欢哪个颜色👌 ↗</a></div>
+        <div class="note-meta">来源词：「新旧款对比」「靛石绿」，帮用户做最后颜色决定</div>
+      </div>
+    </li>
+    <li class="note-item">
+      <div class="note-rank">🥈</div>
+      <div class="note-body">
+        <div><span class="tag tag-corp">🏢 企业号</span> <a class="note-link" href="https://www.xiaohongshu.com/explore/69a7f6dd000000001a01fa89" target="_blank">新一代小米SU7很顶！闭眼冲小订🚗 ↗</a></div>
+        <div class="note-meta">信任强化，降低最后的决策犹豫</div>
+      </div>
+    </li>
+    <li class="note-item">
+      <div class="note-rank">🥉</div>
+      <div class="note-body">
+        <div><span class="tag tag-corp">🏢 企业号</span> <a class="note-link" href="https://www.xiaohongshu.com/explore/6970f093000000001a01fe4f" target="_blank">小米SU7试驾领1:64合金车模 ↗</a></div>
+        <div class="note-meta">活动激励，直接推动到店行动</div>
+      </div>
+    </li>
+    <li class="note-item">
+      <div class="note-rank">4</div>
+      <div class="note-body">
+        <div><span class="tag tag-corp">🏢 企业号</span> <a class="note-link" href="https://www.xiaohongshu.com/explore/69a3bc8f000000002202db8a" target="_blank">纽北三冠王温柔以待小米SU7 Ultra ↗</a></div>
+        <div class="note-meta">品牌技术信任最终强化</div>
+      </div>
+    </li>
+    <li class="note-item">
+      <div class="note-rank">5</div>
+      <div class="note-body">
+        <div><span class="tag tag-corp">🏢 企业号</span> <a class="note-link" href="https://www.xiaohongshu.com/explore/69bc0d7000000000280086e6" target="_blank">宾利赛车绿？新SU7第三款车色实拍！ ↗</a></div>
+        <div class="note-meta">颜色内容持续触发，驱动到店确认</div>
+      </div>
+    </li>
+    <li class="note-item">
+      <div class="note-rank">6</div>
+      <div class="note-body">
+        <div><span class="tag tag-kos">💡 KOS</span> <a class="note-link" href="https://www.xiaohongshu.com/explore/69a530870000000022020ac3" target="_blank">小米SU7 MAX 改色 星辰宝蓝 ↗</a></div>
+        <div class="note-meta">来源词：「小米su7改色」，已决策用户研究个性化方案</div>
+      </div>
+    </li>
+    <li class="note-item">
+      <div class="note-rank">7</div>
+      <div class="note-body">
+        <div><span class="tag tag-dan">🌸 蒲公英</span> <a class="note-link" href="https://www.xiaohongshu.com/explore/69b78076000000001a021601" target="_blank">同色系OOTD🌿被新SU7这抹靛石绿拿捏 ↗</a></div>
+        <div class="note-meta">靛石绿颜值场景，自然流量渗透</div>
+      </div>
+    </li>
+    <li class="note-item">
+      <div class="note-rank">8</div>
+      <div class="note-body">
+        <div><span class="tag tag-dan">🌸 蒲公英</span> <a class="note-link" href="https://www.xiaohongshu.com/explore/69bb72570000000021013ee9" target="_blank">粉上SU7了！小米新色也太温柔了🫧💕 ↗</a></div>
+        <div class="note-meta">新色种草，颜色情绪触发</div>
+      </div>
+    </li>
+  </ul>
+
+  <!-- 试驾首月 -->
+  <div class="section-sub" style="margin-top:20px;">试驾首月 · 推动到店的TOP笔记（价格权益核心驱动、颜色+竞品比较场景）</div>
+  <ul class="note-list">
+    <li class="note-item">
+      <div class="note-rank">🥇</div>
+      <div class="note-body">
+        <div><span class="tag tag-corp">🏢 企业号</span> <a class="note-link" href="https://www.xiaohongshu.com/explore/68ad52da000000001b01e7b6" target="_blank">月供1000➕|00后女生拿下人生第一辆车🚗 ↗</a></div>
+        <div class="note-meta">来源词：「买车」，极低月供消解首付心理门槛</div>
+      </div>
+    </li>
+    <li class="note-item">
+      <div class="note-rank">🥈</div>
+      <div class="note-body">
+        <div><span class="tag tag-corp">🏢 企业号</span> <a class="note-link" href="https://www.xiaohongshu.com/explore/69de00da000000001d01d2e6" target="_blank">小米su7新政策！4月崩了！ ↗</a></div>
+        <div class="note-meta">来源词：「买车浙江」，政策变化激发决策紧迫感</div>
+      </div>
+    </li>
+    <li class="note-item">
+      <div class="note-rank">🥉</div>
+      <div class="note-body">
+        <div><span class="tag tag-ugc">👤 UGC</span> <a class="note-link" href="https://www.xiaohongshu.com/explore/69dfae3d000000001b023542" target="_blank">粉色值得！🎀新su7落地要花多少钱？ ↗</a></div>
+        <div class="note-meta">颜色+价格组合，真实用户视角触发最后确认</div>
+      </div>
+    </li>
+    <li class="note-item">
+      <div class="note-rank">4</div>
+      <div class="note-body">
+        <div><span class="tag tag-corp">🏢 企业号</span> <a class="note-link" href="https://www.xiaohongshu.com/explore/69bfc25500000000210130be" target="_blank">00后轻松拿下小米新SU7💜月供445💰香麻了✨ ↗</a></div>
+        <div class="note-meta">超低月供打破首付认知门槛</div>
+      </div>
+    </li>
+    <li class="note-item">
+      <div class="note-rank">5</div>
+      <div class="note-body">
+        <div><span class="tag tag-kos">💡 KOS</span> <a class="note-link" href="https://www.xiaohongshu.com/explore/69ce4f26000000001f002f41" target="_blank">💰首付3w开走小米SU7|昆明高新店 ↗</a></div>
+        <div class="note-meta">来源词：「买车」，低首付具体方案直接驱动行动</div>
+      </div>
+    </li>
+    <li class="note-item">
+      <div class="note-rank">6</div>
+      <div class="note-body">
+        <div><span class="tag tag-kos">💡 KOS</span> <a class="note-link" href="https://www.xiaohongshu.com/explore/69cc9aed000000002003b0da" target="_blank">香晕了…补贴加码‼️新一代SU7立省69000😭 ↗</a></div>
+        <div class="note-meta">来源词：「浙江补贴」，补贴政策触发紧迫感</div>
+      </div>
+    </li>
+    <li class="note-item">
+      <div class="note-rank">7</div>
+      <div class="note-body">
+        <div><span class="tag tag-kos">💡 KOS</span> <a class="note-link" href="https://www.xiaohongshu.com/explore/69db590e000000001a03491e" target="_blank">00后的我4.99w拿下新款su7啦 ↗</a></div>
+        <div class="note-meta">真实低首付故事，强社会证明效应</div>
+      </div>
+    </li>
+    <li class="note-item">
+      <div class="note-rank">8</div>
+      <div class="note-body">
+        <div><span class="tag tag-dan">🌸 蒲公英</span> <a class="note-link" href="https://www.xiaohongshu.com/explore/69cde441000000001e00e90b" target="_blank">和闺蜜冲新SU7！流金粉实车美到心巴上💙 ↗</a></div>
+        <div class="note-meta">颜色情绪驱动社交认同型用户最终行动</div>
+      </div>
+    </li>
+    <li class="note-item">
+      <div class="note-rank">9</div>
+      <div class="note-body">
+        <div><span class="tag tag-dan">🌸 蒲公英</span> <a class="note-link" href="https://www.xiaohongshu.com/explore/69c3c32600000000220019bc" target="_blank">25万级赛道，你选新一代SU7还是Model 3？ ↗</a></div>
+        <div class="note-meta">竞品对比触发最终选择</div>
+      </div>
+    </li>
+  </ul>
+
+</section>
+
+</div><!-- end page-body -->
+
+<script>
+// Active nav on scroll
+const sections = document.querySelectorAll('section[id]');
+const navLinks = document.querySelectorAll('.nav-links a');
+function updateNav() {
+  let current = '';
+  sections.forEach(s => {
+    if (s.getBoundingClientRect().top <= 80) current = s.id;
+  });
+  navLinks.forEach(a => {
+    a.classList.toggle('active', a.getAttribute('href') === '#' + current);
+  });
+}
+window.addEventListener('scroll', updateNav, { passive: true });
+updateNav();
+
+// Smooth scroll
+navLinks.forEach(a => {
+  a.addEventListener('click', e => {
+    const id = a.getAttribute('href').slice(1);
+    const el = document.getElementById(id);
+    if (el) { e.preventDefault(); el.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
+  });
+});
+</script>
+</body>
+</html>
