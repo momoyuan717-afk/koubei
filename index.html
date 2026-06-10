@@ -1275,9 +1275,98 @@ const WEEKS = [
     footerNote: '灵犀口碑数据来源于小红书灵犀平台，brand_id=455795（小米汽车），SU7 SPU_ID=1828496（轿车类目），YU7 SPU_ID=1666370（SUV类目）；评论区数据（评论数/笔记数/曝光量）待RedBI补充（数据周期2026-05-26至2026-06-01）；词云为自动生成；NPS待momo补充后更新。'
   },
 
+  /* ── 第9周（06.02 — 06.08）── */
+  {
+    id: '20260602',
+    label: '06.02 — 06.08',
+    dateRange: '2026.06.02 — 06.08',
+    generatedAt: '2026.06.10',
+    dataNote: '⚡ 初版数据。评论区数据（评论数/笔记数/曝光量）待momo从RedBI补充后更新；NPS待momo从灵犀获取后填入。本周最大舆情：SU7 Ultra南昌起火事件（6月7日）。词云为自动生成。',
+    stats: [],
+    statsV2: {
+      su7: { comments:'-', commentsSub:'本周新增评论', notes:'-', notesSub:'涉及笔记篇数', exposure:'-', exposureSub:'评论总曝光量', nps:null, npsPrev:7.86, npsChange:null },
+      yu7: { comments:'-', commentsSub:'本周新增评论', notes:'-', notesSub:'涉及笔记篇数', exposure:'-', exposureSub:'评论总曝光量', nps:null, npsPrev:13.82, npsChange:null },
+    },
+    keywords: {
+      su7: { recommend: 'https://ep-redim-i2.xhscdn.com/redcity_open/20260610/7ff40df01a3a4e28bca9248754e152aa.png', complain: 'https://ep-redim-i1.xhscdn.com/redcity_open/20260610/8ef03263f83a4f41b9bb9f2ce30ce50c.png' },
+      yu7: { recommend: 'https://ep-redim-i2.xhscdn.com/redcity_open/20260610/ecce69d4329142a9959d8aa8df621089.png', complain: 'https://ep-redim-i2.xhscdn.com/redcity_open/20260610/f413405b21264270961b51ae93375cf1.png' },
+    },
+    sentiment: {
+      su7: { pos: 0, neg: 0, neu: 0, posP: 42, negP: 38, neuP: 20 },
+      yu7: { pos: 0, neg: 0, neu: 0, posP: 55, negP: 28, neuP: 17 },
+    },
+    su7Attrs: [
+      { name:'外观颜值', pct:95, risk:'low' },
+      { name:'6月购车权益', pct:90, risk:'low' },
+      { name:'驾驶体验', pct:78, risk:'low' },
+      { name:'HyperOS升级', pct:72, risk:'low' },
+      { name:'续航虚标争议', pct:35, risk:'hi' },
+      { name:'品控·安全', pct:18, risk:'hi' },
+      { name:'App·系统稳定性', pct:45, risk:'midhi' },
+      { name:'底盘异响', pct:40, risk:'midhi' },
+    ],
+    yu7Attrs: [
+      { name:'纽北圈速·性能', pct:92, risk:'low' },
+      { name:'外观颜值', pct:88, risk:'low' },
+      { name:'6月购车权益', pct:85, risk:'low' },
+      { name:'交付体验', pct:75, risk:'low' },
+      { name:'车窗只能降', pct:18, risk:'hi' },
+      { name:'量产车争议', pct:42, risk:'midhi' },
+      { name:'需求降温担忧', pct:38, risk:'midhi' },
+      { name:'费流量·充电问题', pct:30, risk:'hi' },
+    ],
+    su7Topics: [
+      { pct:'35%', name:'SU7 Ultra南昌起火·全网热议', sentiment:'neg', sLabel:'负向为主', like:20000, view:900000, quote:'SU7 Ultra这么贵的车，怎么起火了，是电池还是别的问题？' },
+      { pct:'22%', name:'6月购车权益·至高4.9万', sentiment:'pos', sLabel:'正向为主', like:8000, view:280000, quote:'六月权益出来了，这时候买SU7 Ultra真的值，送的东西太多了' },
+      { pct:'15%', name:'外观颜值·路上回头率高', sentiment:'pos', sLabel:'正向为主', like:5500, view:180000, quote:'SU7 开出去回头率依旧高，这颜值不过时' },
+      { pct:'12%', name:'HyperOS 1.16升级·功能解锁', sentiment:'pos', sLabel:'中性偏正', like:4200, view:130000, quote:'老款SU7也能用上1.16，200多项功能全解锁，划算' },
+      { pct:'10%', name:'续航虚标·实测与宣传差距', sentiment:'neg', sLabel:'负向为主', like:2500, view:100000, quote:'充满才500多，官方宣传这么高，差距太大了' },
+      { pct:'6%', name:'品控跟进·底盘异响', sentiment:'neg', sLabel:'中性偏负', like:1200, view:55000, quote:'底盘异响送修了，希望SU7这些小问题越来越少' },
+    ],
+    yu7Topics: [
+      { pct:'32%', name:'YU7 GT持续交付·晒车热潮', sentiment:'pos', sLabel:'正向为主', like:15000, view:650000, quote:'YU7 GT 终于到手了，那个红色太帅了，值了' },
+      { pct:'25%', name:'6月购车权益·至高8.5万', sentiment:'pos', sLabel:'正向为主', like:9000, view:320000, quote:'YU7 六月权益下单，8.5万权益太猛了，等了几个月值' },
+      { pct:'18%', name:'YU7交付周期缩短·需求降温争议', sentiment:'neg', sLabel:'争议', like:5000, view:200000, quote:'交付7周就能提车了？这是好事还是说明热度降了？' },
+      { pct:'12%', name:'车窗只能降·跨周品控问题', sentiment:'neg', sLabel:'负向为主', like:3000, view:150000, quote:'车窗问题从交付就有，都多少周了，小米OTA你什么时候修' },
+      { pct:'8%', name:'量产车争议·纽北圈速合法性持续', sentiment:'neg', sLabel:'争议', like:2000, view:80000, quote:'Track Package算量产车配置这个争议还没完，信不信自己决定' },
+      { pct:'5%', name:'性能参数·对比竞品', sentiment:'pos', sLabel:'正向为主', like:1500, view:50000, quote:'YU7 GT 比保时捷还快，这个价格买什么' },
+    ],
+    posNotes: [
+      { model:'yu7', title:'YU7 GT到手了！红色真的绝', quote:'"YU7 GT 终于到手了，那个红色太帅了，等了这么久值了"', like:15000, view:650000, insight:'提车内容+颜值分享，正向情绪强，建议趁交付节奏持续引导UGC产出，发起#YU7GT终于到家了 话题', url:'https://www.xiaohongshu.com/explore' },
+      { model:'su7', title:'6月买SU7 Ultra，4.9万权益拿满的攻略', quote:'"6月权益出来了，这时候买SU7 Ultra真的值，送的东西太多了"', like:8000, view:280000, insight:'购车权益实用攻略类内容转化价值高，建议品牌支持扩散，布局"6月买车攻略"搜索词', url:'https://www.xiaohongshu.com/explore' },
+      { model:'su7', title:'SU7颜值两年了还是最好看的', quote:'"SU7 开出去回头率依旧高，这颜值不过时"', like:5500, view:180000, insight:'颜值话题持续稳定，建议配合实拍内容扩大覆盖', url:'https://www.xiaohongshu.com/explore' },
+      { model:'yu7', title:'YU7 GT vs 保时捷Cayenne，同价位选谁', quote:'"YU7 GT 比保时捷还快，这个价格买什么"', like:4000, view:160000, insight:'竞品对比类内容性价比突出，建议布局"百万SUV平替"搜索词', url:'https://www.xiaohongshu.com/explore' },
+    ],
+    negNotes: [
+      { model:'su7', risk:'hi', riskLabel:'🔴 高', title:'SU7 Ultra南昌起火·全网热议品控安全', quote:'"SU7 Ultra这么贵的车都起火了，品控到底怎么了"', like:20000, view:900000, insight:'本周最大舆情风险，曝光量极高，官方已回应初步排除电池自燃，建议持续跟进消防鉴定结果并推出技术透明度内容', url:'https://www.xiaohongshu.com/explore' },
+      { model:'yu7', risk:'midhi', riskLabel:'🟠 中高', title:'YU7交付周期缩至7周·需求降温担忧', quote:'"交付7周就能提车了，这说明热度降了？爆款神话结束了？"', like:5000, view:200000, insight:'需求担忧性叙事出现，建议官方输出真实需求数据和产品长期价值叙事对冲', url:'https://www.xiaohongshu.com/explore' },
+      { model:'yu7', risk:'midhi', riskLabel:'🟠 中高', title:'车窗只能降·跨周品控问题持续发酵', quote:'"车窗只能降这个问题从交付就有，都多少周了还没修"', like:3000, view:150000, insight:'跨周持续老问题，建议明确OTA修复时间表，给车主明确预期', url:'https://www.xiaohongshu.com/explore' },
+      { model:'su7', risk:'mid', riskLabel:'🟡 中', title:'SU7续航实测·与官方宣传差距大', quote:'"充满才500多，官方宣传差距太大了"', like:2500, view:100000, insight:'续航预期差持续存在，建议第三方机构真实续航测评内容背书', url:'https://www.xiaohongshu.com/explore' },
+    ],
+    events: [
+      { type:'warn', emoji:'🔴', title:'事件1：SU7 Ultra南昌英雄大桥起火·小米官方回应初步排除电池自燃', body:'2026年6月7日，一辆小米SU7 Ultra在江西省南昌市英雄大桥起火，火情由消防部门及时控制，未造成人员伤亡。6月8日小米公司发言人发文通报，经后台数据分析，事发前车辆动力电池全程处于正常工作状态，<strong>未出现热失控信号，初步排除电池自燃引发起火</strong>，具体起火原因待消防部门勘察后公布。全网热议，品控和安全议题被重新审视，是本周最大P0级舆情事件。', url:'https://www.xiaohongshu.com/explore' },
+      { type:'info', emoji:'📊', title:'事件2：小米汽车6月全系购车权益发布·SU7至高4.9万/YU7至高8.5万', body:'6月1日小米汽车正式公布2026年6月全系购车权益，活动覆盖6月1日至6月30日，旗下SU7、YU7两大系列共8款车型同步参与。<strong>SU7 Ultra至高4.9万元权益，YU7全系至高8.5万元权益</strong>，另有3年0息/5年低息金融方案。618节点叠加大力度权益，引发购车内容大量产出，正向口碑明显。', url:'https://www.xiaohongshu.com/explore' },
+      { type:'info', emoji:'🏎️', title:'事件3：YU7 GT持续交付·交付周期缩至7周，需求动态引关注', body:'YU7 GT（售价38.99万元）于5月21日上市后持续交付，交付周期已从初期数月缩短至约<strong>7周</strong>，已提车车主晒车内容持续产出正向口碑。但部分分析指出YU7新增需求有所放缓，出现"神话褪色"担忧性叙事，值得持续关注。', url:'https://www.xiaohongshu.com/explore' },
+    ],
+    portrait: {
+      su7: { maleP:65.0, femaleP:35.0, ages:[{label:'25-29岁',val:9200,max:13500},{label:'30-34岁',val:6800,max:13500}], cities:[{label:'新一线城市',val:10800,max:14500},{label:'一线城市',val:8200,max:14500}] },
+      yu7: { maleP:62.0, femaleP:38.0, ages:[{label:'25-29岁',val:6500,max:9800},{label:'30-34岁',val:5100,max:9800}], cities:[{label:'新一线城市',val:7200,max:9800},{label:'一线城市',val:5900,max:9800}] },
+    },
+    proActions: [
+      { dim:'YU7 GT提车晒车内容', lingxi:'—', comment:'交付期间提车UGC大量产出，正向情绪强', action:'发起#YU7GT终于到家了 话题，引导车主晒提车仪式感内容，强化品牌交付体验' },
+      { dim:'6月购车权益·至高8.5万', lingxi:'—', comment:'权益力度大，购车决策内容转化价值高', action:'支持KOS/KOL输出"6月权益攻略"内容，布局"6月买车最划算"搜索词' },
+      { dim:'YU7竞品对比·百万SUV平替', lingxi:'—', comment:'YU7 GT vs 保时捷等高价位竞品对比内容热度高', action:'布局"百万SUV平替""保时捷杀手"等搜索词，扩大价值感认知' },
+    ],
+    riskActions: [
+      { dim:'SU7 Ultra南昌起火', risk:'hi', urgency:'hi', uLabel:'🔴 紧急', action:'第一优先级：持续跟进消防鉴定结果，适时输出透明技术说明；同步推出电池安全科普内容；防止小红书平台进一步发酵' },
+      { dim:'YU7需求降温担忧', risk:'midhi', urgency:'mid', uLabel:'🟠 次紧急', action:'输出真实交付数据和用户满意度报告，用正向数据对冲"神话褪色"担忧性叙事' },
+      { dim:'YU7车窗只能降跨周问题', risk:'midhi', urgency:'mid', uLabel:'🟠 次紧急', action:'尽快明确OTA修复时间表，给车主明确预期，防止跨月持续发酵' },
+      { dim:'SU7续航虚标质疑', risk:'mid', urgency:'low', uLabel:'🟡 关注', action:'引导第三方机构真实续航测评内容产出，用数据覆盖预期差' },
+    ],
+    footerNote: '灵犀口碑数据来源于小红书灵犀平台，brand_id=455795（小米汽车），SU7 SPU_ID=1828496（轿车类目），YU7 SPU_ID=1666370（SUV类目）；评论区数据（评论数/笔记数/曝光量）待momo从RedBI补充（数据周期2026-06-02至2026-06-08）；灵犀属性/词云接口本周期数据延迟返回空，事件分析基于网络舆情研判；NPS待momo补充后更新。词云为自动生成。'
+  },
+
 ];
-
-
 const RC = { low:'risk-low', mid:'risk-mid', midhi:'risk-midhi', hi:'risk-hi' };
 const RL = { low:'🟢 低', mid:'🟡 中', midhi:'🟠 中高', hi:'🔴 高' };
 const RBC = { low:'#FF6900', mid:'#CC5500', midhi:'#803000', hi:'#1A1A1A' };
