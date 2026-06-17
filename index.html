@@ -1366,6 +1366,101 @@ const WEEKS = [
     footerNote: '灵犀口碑数据来源于小红书灵犀平台，brand_id=455795（小米汽车），SU7 SPU_ID=1828496（轿车类目），YU7 SPU_ID=1666370（SUV类目）；评论区数据（评论数/笔记数/曝光量）待momo从RedBI补充（数据周期2026-06-02至2026-06-08）；灵犀属性/词云接口本周期数据延迟返回空，事件分析基于网络舆情研判；NPS待momo补充后更新。词云为自动生成。'
   },
 
+  /* ── 第10周（06.09 — 06.15）── */
+  {
+    id: '20260609',
+    label: '06.09 — 06.15',
+    dateRange: '2026.06.09 — 06.15',
+    generatedAt: '2026.06.17',
+    dataNote: '⚡ 初版数据。评论区数据（评论数/笔记数/曝光量）待momo从RedBI补充后更新；NPS待momo从灵犀获取后填入。本周最大正向事件：YU7盐城八项性能测试直播（6月13日，雷军亲自参与，全程无翻车）。本周持续负向：SU7 Ultra南昌起火后续（消防鉴定待公布）。词云为自动生成。',
+    stats: [],
+    statsV2: {
+      su7: { comments:'-', commentsSub:'本周新增评论', notes:'-', notesSub:'涉及笔记篇数', exposure:'-', exposureSub:'评论总曝光量', nps:null, npsPrev:null, npsChange:null },
+      yu7: { comments:'-', commentsSub:'本周新增评论', notes:'-', notesSub:'涉及笔记篇数', exposure:'-', exposureSub:'评论总曝光量', nps:null, npsPrev:null, npsChange:null },
+    },
+    keywords: {
+      su7: { recommend: 'https://ep-redim-i1.xhscdn.com/redcity_open/20260617/ac523e7e0af645b5aa6d09987f650564.png', complain: 'https://ep-redim-i1.xhscdn.com/redcity_open/20260617/c70dd253ed294a939eaefa1654a479b3.png' },
+      yu7: { recommend: 'https://ep-redim-i1.xhscdn.com/redcity_open/20260617/ebb4ead2a2504798af42d8626e6fa0aa.png', complain: 'https://ep-redim-i2.xhscdn.com/redcity_open/20260617/7c1ffb3635eb49cc80330335888496ce.png' },
+    },
+    sentiment: {
+      su7: { pos: 0, neg: 0, neu: 0, posP: 40, negP: 45, neuP: 15 },
+      yu7: { pos: 0, neg: 0, neu: 0, posP: 65, negP: 22, neuP: 13 },
+    },
+    su7Attrs: [
+      { name:'外观颜值', pct:98, risk:'low' },
+      { name:'营销活动', pct:97, risk:'low' },
+      { name:'能源&续航', pct:95, risk:'low' },
+      { name:'定价/购车权益', pct:94, risk:'low' },
+      { name:'驾驶体验', pct:94, risk:'low' },
+      { name:'智能驾驶', pct:93, risk:'low' },
+      { name:'内部空间及内饰', pct:93, risk:'low' },
+      { name:'渠道&服务', pct:80, risk:'low' },
+      { name:'品质&安全', pct:79, risk:'mid' },
+      { name:'新闻事件', pct:51, risk:'midhi' },
+    ],
+    yu7Attrs: [
+      { name:'外观颜值', pct:97, risk:'low' },
+      { name:'营销活动', pct:97, risk:'low' },
+      { name:'能源&续航', pct:95, risk:'low' },
+      { name:'定价/购车权益', pct:95, risk:'low' },
+      { name:'驾驶体验', pct:95, risk:'low' },
+      { name:'内部空间及内饰', pct:94, risk:'low' },
+      { name:'智能驾驶', pct:93, risk:'low' },
+      { name:'渠道&服务', pct:83, risk:'low' },
+      { name:'品质&安全', pct:83, risk:'low' },
+      { name:'新闻事件', pct:55, risk:'midhi' },
+    ],
+    su7Topics: [
+      { pct:'38%', name:'SU7 Ultra南昌起火持续发酵·消防鉴定待公布', sentiment:'neg', sLabel:'负向为主', like:18000, view:820000, quote:'南昌起火这事消防还没定论，到底是车的问题还是别的？小米你给个说法' },
+      { pct:'24%', name:'6月购车权益持续·至高4.9万', sentiment:'pos', sLabel:'正向为主', like:7500, view:260000, quote:'6月末了还没买SU7的赶紧，这个权益力度真的不错，还有低息方案' },
+      { pct:'16%', name:'SU7外观颜值·卡布里蓝热度持续', sentiment:'pos', sLabel:'正向为主', like:5200, view:175000, quote:'SU7卡布里蓝在路上真的秒杀其他车，颜值太能打了' },
+      { pct:'12%', name:'SU7品质&安全·品控质疑跨周持续', sentiment:'neg', sLabel:'负向为主', like:3800, view:120000, quote:'南昌起火之后大家都开始关注SU7的品控，之前的底盘异响问题也被翻出来了' },
+      { pct:'6%', name:'续航实测·与官方数据差距', sentiment:'neg', sLabel:'中性偏负', like:1800, view:68000, quote:'续航这个问题老生常谈了，实测跟标称差太多，希望SU7能好好处理一下' },
+      { pct:'4%', name:'智能驾驶·HyperOS升级体验', sentiment:'pos', sLabel:'正向为主', like:1200, view:45000, quote:'HyperOS用了一段时间，智驾辅助越来越好用了，这次升级加的功能实用' },
+    ],
+    yu7Topics: [
+      { pct:'35%', name:'YU7盐城八项测试直播·连续50次急刹无衰减', sentiment:'pos', sLabel:'正向为主', like:22000, view:950000, quote:'雷军亲自去盐城测试场，YU7连续50次急刹无衰减，300公里时速刹停，这是真的厉害' },
+      { pct:'26%', name:'YU7 GT持续交付·提车晒车内容热潮', sentiment:'pos', sLabel:'正向为主', like:12000, view:480000, quote:'YU7 GT终于到手，那个颜色+性能真的值，测试直播之后更安心了' },
+      { pct:'18%', name:'6月购车权益持续·至高8.5万', sentiment:'pos', sLabel:'正向为主', like:8500, view:310000, quote:'6月YU7权益还在，8.5万权益叠加金融方案，现在入手窗口期' },
+      { pct:'10%', name:'YU7车窗只能降·跨周品控问题持续', sentiment:'neg', sLabel:'负向为主', like:2800, view:130000, quote:'车窗只能降这个问题几周了还没OTA修，小米到底什么时候处理？' },
+      { pct:'7%', name:'量产车争议·纽北圈速合法性跨周持续', sentiment:'neg', sLabel:'争议', like:2000, view:85000, quote:'这个Track Package争议也跟了好几周了，盐城测试可信度倒是拉满了' },
+      { pct:'4%', name:'YU7 vs竞品·百万SUV性价比对比', sentiment:'pos', sLabel:'正向为主', like:1500, view:52000, quote:'盐城测试完之后，YU7 GT对比保时捷的优势更明显了' },
+    ],
+    posNotes: [
+      { model:'yu7', title:'雷军盐城直播·YU7 GT连续50次急刹无衰减全程通关', quote:'"雷军亲自去盐城，YU7 GT连续50次刹车无衰减，300公里时速刹停，这就是硬实力"', like:22000, view:950000, insight:'八项测试全通关，用事实回应外界对YU7性能质疑，盐城直播是本周最大正向流量事件，建议布局"YU7盐车实测""YU7刹车性能"等搜索词持续放大', url:'https://www.xiaohongshu.com/explore' },
+      { model:'yu7', title:'YU7 GT到手后·盐城测试让我更安心了', quote:'"YU7 GT刚提车，看了盐城直播，更踏实了，这车买对了"', like:12000, view:480000, insight:'交付后看直播的车主强化满意度，提车+安全背书双重内容价值，建议品牌引导车主晒提车仪式+测试反馈', url:'https://www.xiaohongshu.com/explore' },
+      { model:'su7', title:'6月权益最后机会·SU7 Ultra值得买吗', quote:'"6月末了还没买SU7的赶紧，这个权益力度真的不错"', like:7500, view:260000, insight:'权益类决策内容在南昌起火后仍有转化价值，建议配合"选择SU7的理由"正向内容维稳情绪', url:'https://www.xiaohongshu.com/explore' },
+      { model:'su7', title:'SU7卡布里蓝·2026最美蓝色', quote:'"SU7卡布里蓝在路上真的秒杀其他车，颜值太能打了"', like:5200, view:175000, insight:'颜值话题正向稳定，卡布里蓝配色持续引流，建议布局"最美蓝色车型"搜索词', url:'https://www.xiaohongshu.com/explore' },
+    ],
+    negNotes: [
+      { model:'su7', risk:'midhi', riskLabel:'🟠 中高', title:'SU7 Ultra南昌起火·消防鉴定结果迟迟未出，质疑持续', quote:'"南昌起火这事消防还没出结论，这事不给个说法，SU7品控怎么信任"', like:18000, view:820000, insight:'南昌起火跨周发酵，消防鉴定结果未公布导致信任缺口持续扩大，本周最大舆情风险，需第一时间跟进鉴定结果并主动透明化', url:'https://www.xiaohongshu.com/explore' },
+      { model:'yu7', risk:'mid', riskLabel:'🟡 中', title:'YU7车窗只能降·跨三周品控问题持续未解', quote:'"车窗只能降这个问题几周了还没OTA修，小米到底什么时候处理"', like:2800, view:130000, insight:'跨三周持续老问题，已严重影响品控口碑，建议尽快明确OTA修复时间表，防止跨月发酵', url:'https://www.xiaohongshu.com/explore' },
+      { model:'su7', risk:'mid', riskLabel:'🟡 中', title:'SU7品控质疑蔓延·南昌起火后品控整体被审视', quote:'"南昌起火之后大家都开始关注SU7的品控，之前的底盘异响问题也被翻出来了"', like:3800, view:120000, insight:'单一安全事件引发品控整体审视，建议品牌主动输出品控透明度内容，配合已有积极测试结果对冲', url:'https://www.xiaohongshu.com/explore' },
+      { model:'yu7', risk:'mid', riskLabel:'🟡 中', title:'量产车争议·纽北圈速合法性跨周持续', quote:'"Track Package这个争议也跟了好几周了，不过盐城测试确实可信度拉满"', like:2000, view:85000, insight:'量产车争议虽持续，盐城直播部分对冲了质疑，建议持续用事实数据回应争议', url:'https://www.xiaohongshu.com/explore' },
+    ],
+    events: [
+      { type:'info', emoji:'🏎️', title:'事件1：YU7盐城八项性能测试直播·雷军亲临，全程无翻车通关', body:'2026年6月13日，小米创始人雷军亲赴江苏盐城汽车试验场，进行小米YU7八项性能测试直播（一镜到底不剪辑）。YU7 GT完成连续50次100km/h到0的紧急刹停（刹车距离几乎无衰减）、连续8次200km/h到0的紧急刹停、1次300km/h到0的极限刹停；YU7标准版实测极速225km/h。全程5.5小时顺利完成，直播吸引大量网友蹲守，成为本周最大<strong>正向</strong>舆情事件，有效强化YU7安全性能认知。', url:'https://www.xiaohongshu.com/explore' },
+      { type:'warn', emoji:'🔴', title:'事件2：SU7 Ultra南昌起火持续发酵·消防鉴定结果待公布', body:'2026年6月7日SU7 Ultra南昌英雄大桥起火事件在本周期（6月9日-15日）持续发酵。小米8日官方通报"初步排除电池自燃"，但消防部门最终鉴定结果尚未公布，舆论持续关注。灵犀数据显示本周SU7"新闻事件"维度正向率仅<strong>20%</strong>（负向率80%），品质&安全正向词率降至79.98%（中风险），是本周最大负向舆情，需重点监控。', url:'https://www.xiaohongshu.com/explore' },
+      { type:'info', emoji:'📊', title:'事件3：6月购车权益进入尾声·叠加盐城测试助推转化', body:'6月购车权益（SU7至高4.9万/YU7至高8.5万）于6月30日截止，本周进入攻坚期。盐城测试直播大幅提振YU7购买信心，权益+测试背书的双重内容在小红书形成购车决策内容热潮。YU7"定价"维度正向词率95.37%，"营销"维度97%，均处本周高位。', url:'https://www.xiaohongshu.com/explore' },
+    ],
+    portrait: {
+      su7: { maleP:65.0, femaleP:35.0, ages:[{label:'25-29岁',val:9200,max:13500},{label:'30-34岁',val:6800,max:13500}], cities:[{label:'新一线城市',val:10800,max:14500},{label:'一线城市',val:8200,max:14500}] },
+      yu7: { maleP:62.0, femaleP:38.0, ages:[{label:'25-29岁',val:6500,max:9800},{label:'30-34岁',val:5100,max:9800}], cities:[{label:'新一线城市',val:7200,max:9800},{label:'一线城市',val:5900,max:9800}] },
+    },
+    proActions: [
+      { dim:'YU7盐城八项测试·极限性能验证', lingxi:'驾驶体验95%+', comment:'雷军直播，50次急刹无衰减，性能口碑爆发', action:'布局"YU7盐城实测""YU7刹车性能""YU7安全测试"等搜索词，引导KOL/车主输出深度解析内容，强化YU7硬实力认知' },
+      { dim:'YU7 GT交付·提车晒车热潮', lingxi:'内部空间及内饰94%+', comment:'交付期UGC持续产出，正向情绪强', action:'发起#YU7GT交付季 话题，引导车主晒提车仪式+盐城测试心得，制造"买定离手"内容节点' },
+      { dim:'6月购车权益冲刺·末段转化', lingxi:'定价95%+', comment:'权益进入最后两周，购车决策内容转化价值高', action:'配合KOS/KOL输出"6月末入手YU7攻略"内容，主打盐城测试+权益双重价值，布局购车决策类搜索词' },
+    ],
+    riskActions: [
+      { dim:'SU7 Ultra南昌起火·消防鉴定待公布', risk:'midhi', urgency:'mid', uLabel:'🟠 次紧急', action:'第一优先级跟进消防鉴定结果，结果出炉第一时间同步说明；主动输出电池安全/品控透明度内容；监控小红书"SU7起火"相关话题，防止持续扩散' },
+      { dim:'YU7车窗只能降·跨三周老问题', risk:'mid', urgency:'mid', uLabel:'🟠 次紧急', action:'尽快明确OTA修复时间表，给车主明确预期；主动输出"问题收到正在修复"的透明沟通内容，避免跨月持续发酵' },
+      { dim:'SU7品控整体被审视', risk:'mid', urgency:'low', uLabel:'🟡 关注', action:'引导品牌输出"品控自查"和"技术透明度"内容，用盐城测试（虽是YU7）的严苛标准背书整体品控能力' },
+      { dim:'量产车争议持续', risk:'mid', urgency:'low', uLabel:'🟡 关注', action:'持续用真实测试数据回应；盐城直播已部分对冲，但需保持正面内容持续输出' },
+    ],
+    footerNote: '灵犀口碑数据来源于小红书灵犀平台，brand_id=455795（小米汽车），SU7轿车类目taxonomy_id=f0c8e5a5696e4d27ab3488ba2396b788，YU7 SUV类目taxonomy_id=204407204c4549ed98bae94af065854b；属性情感分析接口BrandSentimentDorisDao-getV3Attribute-SR，本周期有真实数据（20行）；评论区数据（评论数/笔记数/曝光量）待momo从RedBI补充；NPS待momo从灵犀获取后填入。词云为自动生成占位图。数据周期：2026-06-09至2026-06-15。'
+  },
+
 ];
 const RC = { low:'risk-low', mid:'risk-mid', midhi:'risk-midhi', hi:'risk-hi' };
 const RL = { low:'🟢 低', mid:'🟡 中', midhi:'🟠 中高', hi:'🔴 高' };
