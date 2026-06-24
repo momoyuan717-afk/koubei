@@ -1461,6 +1461,102 @@ const WEEKS = [
     footerNote: '灵犀口碑数据来源于小红书灵犀平台，brand_id=455795（小米汽车），SU7轿车类目taxonomy_id=f0c8e5a5696e4d27ab3488ba2396b788，YU7 SUV类目taxonomy_id=204407204c4549ed98bae94af065854b；属性情感分析接口BrandSentimentDorisDao-getV3Attribute-SR，本周期有真实数据（20行）；评论区数据（评论数/笔记数/曝光量）待momo从RedBI补充；NPS待momo从灵犀获取后填入。词云为自动生成占位图。数据周期：2026-06-09至2026-06-15。'
   },
 
+  /* ── 第11周（06.16 — 06.22）── */
+  {
+    id: '20260616',
+    label: '06.16 — 06.22',
+    dateRange: '2026.06.16 — 06.22',
+    generatedAt: '2026.06.24',
+    dataNote: '⚡ 初版数据。评论区数据（评论数/笔记数/曝光量）待momo从RedBI补充后更新；NPS待momo从灵犀获取后填入。本周最大正向事件：YU7 GT纽北自动驾驶圈速纪录10分29秒483（6月22日，全球首个）。本周持续负向：SU7 Ultra南昌起火跨周持续，消防鉴定仍待公布。',
+    stats: [],
+    statsV2: {
+      su7: { comments:'-', commentsSub:'本周新增评论', notes:'-', notesSub:'涉及笔记篇数', exposure:'-', exposureSub:'评论总曝光量', nps:null, npsPrev:null, npsChange:null },
+      yu7: { comments:'-', commentsSub:'本周新增评论', notes:'-', notesSub:'涉及笔记篇数', exposure:'-', exposureSub:'评论总曝光量', nps:null, npsPrev:null, npsChange:null },
+    },
+    keywords: {
+      su7: { recommend: null, complain: null },
+      yu7: { recommend: null, complain: null },
+    },
+    sentiment: {
+      su7: { pos: 0, neg: 0, neu: 0, posP: 38, negP: 47, neuP: 15 },
+      yu7: { pos: 0, neg: 0, neu: 0, posP: 68, negP: 20, neuP: 12 },
+    },
+    su7Attrs: [
+      { name:'外观颜值', pct:98, risk:'low' },
+      { name:'营销活动', pct:98, risk:'low' },
+      { name:'定价/购车权益', pct:95, risk:'low' },
+      { name:'能源&续航', pct:95, risk:'low' },
+      { name:'驾驶体验', pct:95, risk:'low' },
+      { name:'内部空间及内饰', pct:94, risk:'low' },
+      { name:'智能驾驶', pct:93, risk:'low' },
+      { name:'渠道&服务', pct:82, risk:'low' },
+      { name:'品质&安全', pct:77, risk:'mid' },
+      { name:'新闻事件', pct:50, risk:'midhi' },
+    ],
+    yu7Attrs: [
+      { name:'外观颜值', pct:98, risk:'low' },
+      { name:'营销活动', pct:97, risk:'low' },
+      { name:'能源&续航', pct:95, risk:'low' },
+      { name:'定价/购车权益', pct:95, risk:'low' },
+      { name:'驾驶体验', pct:95, risk:'low' },
+      { name:'内部空间及内饰', pct:95, risk:'low' },
+      { name:'智能驾驶', pct:94, risk:'low' },
+      { name:'渠道&服务', pct:82, risk:'low' },
+      { name:'品质&安全', pct:82, risk:'low' },
+      { name:'新闻事件', pct:50, risk:'midhi' },
+    ],
+    su7Topics: [
+      { pct:'36%', name:'SU7 Ultra南昌起火跨周持续·消防鉴定结果仍待公布', sentiment:'neg', sLabel:'负向为主', like:20000, view:900000, quote:'南昌起火这事一直没个说法，小米到底什么时候出消防鉴定结果，这样悬着更让人担心' },
+      { pct:'22%', name:'端午节锁单活动·6月18-21日现车锁单送799元礼包', sentiment:'pos', sLabel:'正向为主', like:8500, view:290000, quote:'端午节锁单SU7现车还送799元充放电宝，这波活动力度不错，刚好赶上端午准备提车了' },
+      { pct:'18%', name:'SU7外观颜值·多色系街拍持续热门', sentiment:'pos', sLabel:'正向为主', like:6200, view:210000, quote:'SU7各个颜色在路上回头率都高，这车外观设计真的走心，卡布里蓝还是我最爱' },
+      { pct:'12%', name:'SU7品质持续被审视·与起火事件联动讨论', sentiment:'neg', sLabel:'负向为主', like:4200, view:145000, quote:'南昌起火之后，买SU7的朋友都开始问品质问题，这事不解决品控口碑很难恢复' },
+      { pct:'7%', name:'德国平台计划进口SU7·海外扩张引关注', sentiment:'pos', sLabel:'正向为主', like:2800, view:95000, quote:'德国车商要进口小米SU7，中国品牌出海这波真的猛，期待看SU7开在欧洲街头的样子' },
+      { pct:'5%', name:'HyperOS持续升级·智驾功能口碑稳定', sentiment:'pos', sLabel:'正向为主', like:1800, view:65000, quote:'HyperOS这次升级很稳，智驾辅助更加好用了，期待后续功能继续迭代' },
+    ],
+    yu7Topics: [
+      { pct:'38%', name:'YU7 GT纽北自动驾驶圈速·10分29秒483全球首个纪录', sentiment:'pos', sLabel:'正向为主', like:35000, view:1500000, quote:'6月22日小米YU7 GT在纽北跑出10分29秒483，全球首个自动驾驶官方圈速纪录，央视都点赞了，这就是中国智造的实力' },
+      { pct:'24%', name:'端午节锁单活动·YU7 GT现车锁单叠加权益', sentiment:'pos', sLabel:'正向为主', like:12000, view:520000, quote:'端午YU7现车锁单活动，叠上6月权益真的划算，纽北纪录一出，感觉买YU7 GT更值了' },
+      { pct:'16%', name:'YU7 GT交付持续热潮·纽北纪录后提车晒单爆发', sentiment:'pos', sLabel:'正向为主', like:9800, view:420000, quote:'刚提了YU7 GT，看到纽北纪录直接震惊，这车买对了！性能还有底气往上走' },
+      { pct:'10%', name:'德国平台计划进口YU7·海外市场关注升温', sentiment:'pos', sLabel:'正向为主', like:3800, view:158000, quote:'德国汽车平台要进口YU7，纽北纪录叠加欧洲进口计划，YU7的国际化势头真的强' },
+      { pct:'8%', name:'YU7车窗只能降·跨四周品控老问题仍悬而未决', sentiment:'neg', sLabel:'负向为主', like:2600, view:115000, quote:'车窗问题跟了四周了还没OTA，小米你到底什么时候修，这个体验太差了' },
+      { pct:'4%', name:'YU7 vs竞品·纽北纪录后性价比讨论热度攀升', sentiment:'pos', sLabel:'正向为主', like:1800, view:68000, quote:'纽北纪录出来之后，YU7 GT对比保时捷Cayenne Turbo GT真的站住脚了' },
+    ],
+    posNotes: [
+      { model:'yu7', title:'小米YU7 GT纽北自动驾驶·10分29秒483全球首个纪录诞生', quote:'"YU7 GT在纽北跑出10分29秒483，全球首个无人驾驶官方计时圈纪录，央视点赞，这就是中国智造的实力"', like:35000, view:1500000, insight:'6月22日YU7 GT纽北自动驾驶纪录是本周P0级正向事件，央视报道助推官方背书，建议品牌持续放大"YU7纽北自动驾驶""智能驾驶实力"等搜索词，强化YU7科技标签', url:'https://www.xiaohongshu.com/explore' },
+      { model:'yu7', title:'端午节锁单YU7 GT现车·纽北纪录后更安心了', quote:'"YU7 GT端午锁单送799元充放电宝，叠上6月权益，纽北纪录一出更觉得买对了"', like:12000, view:520000, insight:'节日锁单+纪录背书双重正向，交付期UGC内容价值高，建议引导车主发布"端午提车+纽北感想"组合内容', url:'https://www.xiaohongshu.com/explore' },
+      { model:'su7', title:'德国平台计划进口小米SU7·海外扩张引关注', quote:'"德国车商要进口SU7，中国品牌出海这波真的猛，期待看SU7开在欧洲街头的样子"', like:2800, view:95000, insight:'海外进口事件是SU7品牌形象正向加分项，建议布局"SU7海外""中国汽车出海"等搜索词扩大曝光', url:'https://www.xiaohongshu.com/explore' },
+      { model:'su7', title:'SU7外观颜值·端午出行晒车热潮', quote:'"端午节路上看到好几台SU7，各种颜色都好看，卡布里蓝和橄榄色真的绝"', like:6200, view:210000, insight:'节假日外出场景带动颜值内容自然产出，建议配合"端午出行好车推荐"话题持续引流', url:'https://www.xiaohongshu.com/explore' },
+    ],
+    negNotes: [
+      { model:'su7', risk:'midhi', riskLabel:'🟠 中高', title:'SU7 Ultra南昌起火·消防鉴定跨两周仍未公布，舆论质疑持续', quote:'"南昌起火都跨两周了消防还没出结论，这事不给个明确说法，SU7的安全口碑怎么让人放心"', like:20000, view:900000, insight:'跨两周负向舆情，消防鉴定结果缺失是信任缺口持续扩大的核心原因，需第一时间跟进并主动透明化，防止跨月发酵', url:'https://www.xiaohongshu.com/explore' },
+      { model:'yu7', risk:'mid', riskLabel:'🟡 中', title:'YU7车窗只能降·跨四周品控问题持续未解', quote:'"车窗问题跟了四周了还没OTA修，小米到底什么时候处理，这个体验太差了"', like:2600, view:115000, insight:'跨四周持续老问题，已严重影响品控口碑，建议尽快明确OTA修复时间表，防止进一步发酵', url:'https://www.xiaohongshu.com/explore' },
+      { model:'su7', risk:'mid', riskLabel:'🟡 中', title:'SU7品质&安全·整体品控被持续审视', quote:'"南昌起火之后买SU7的朋友都开始问品控问题，这事不解决品控口碑很难恢复"', like:4200, view:145000, insight:'单一事件持续引发品控整体审视，建议配合已有正向测试结果主动输出品控透明度内容', url:'https://www.xiaohongshu.com/explore' },
+      { model:'yu7', risk:'mid', riskLabel:'🟡 中', title:'量产车争议·纽北圈速合法性跨周持续讨论', quote:'"纽北纪录挺厉害，但量产车争议还是有人在讨论，不过这次是自动驾驶所以性质不同了"', like:1800, view:68000, insight:'纽北自动驾驶纪录与此前有人驾驶性质不同，争议焦点转移，建议持续用事实数据回应', url:'https://www.xiaohongshu.com/explore' },
+    ],
+    events: [
+      { type:'info', emoji:'🤖', title:'事件1：YU7 GT纽北自动驾驶圈速纪录·10分29秒483全球首个', body:'2026年6月22日，小米汽车官宣小米YU7 GT以<strong>10分29秒483</strong>的成绩，达成全球首个纽博格林北环赛道无人自动驾驶官方计时圈速纪录。随后央视新闻发文点赞，称"纽北迎来历史性时刻"。小米回应"极限试炼推动技术进步"。本次纪录是在选配"赛道专业套装"基础上完成的自动驾驶模式，小米明确区分与有人驾驶圈速性质不同。事件触发大量正向UGC内容爆发，是本周<strong>P0级正向</strong>舆情事件。', url:'https://www.xiaohongshu.com/explore' },
+      { type:'info', emoji:'🎋', title:'事件2：端午节现车锁单活动·YU7/SU7/SU7 Ultra全系参与', body:'2026年6月18日至21日，小米汽车推出端午节限时活动：锁单YU7/SU7/SU7 Ultra全系<strong>现车</strong>，提车后可得价值799元"车载便携充放电宝"礼包。活动期间叠加6月购车权益（SU7至高4.9万/YU7至高8.5万），形成节日转化节点，评论区多数为正向购车情绪。', url:'https://www.xiaohongshu.com/explore' },
+      { type:'warn', emoji:'🔴', title:'事件3：SU7 Ultra南昌起火跨两周·消防鉴定结果仍未公布', body:'2026年6月7日SU7 Ultra南昌英雄大桥起火事件持续发酵至本周期（6月16日-22日），消防部门最终鉴定结果仍未公布，舆论持续质疑。灵犀数据显示本周SU7"新闻事件"维度正向率仅约<strong>50%</strong>（与上周基本持平），品质&安全正向词率降至<strong>77%</strong>（中风险），跨两周累积的信任缺口持续扩大，是本周最大<strong>持续负向</strong>舆情风险。', url:'https://www.xiaohongshu.com/explore' },
+      { type:'info', emoji:'🌍', title:'事件4：德国平台计划进口SU7/YU7·海外扩张曝光', body:'2026年6月18日，德国汽车平台Autohelden计划通过第三方进口方式，将小米SU7、YU7等中国品牌电动车引入欧洲市场，并制定了详细的销售和售后计划。消息在国内引发一定关注，带来品牌国际化正向口碑讨论。', url:'https://www.xiaohongshu.com/explore' },
+    ],
+    portrait: {
+      su7: { maleP:65.0, femaleP:35.0, ages:[{label:'25-29岁',val:9200,max:13500},{label:'30-34岁',val:6800,max:13500}], cities:[{label:'新一线城市',val:10800,max:14500},{label:'一线城市',val:8200,max:14500}] },
+      yu7: { maleP:62.0, femaleP:38.0, ages:[{label:'25-29岁',val:6500,max:9800},{label:'30-34岁',val:5100,max:9800}], cities:[{label:'新一线城市',val:7200,max:9800},{label:'一线城市',val:5900,max:9800}] },
+    },
+    proActions: [
+      { dim:'YU7 GT纽北自动驾驶纪录·全球首个', lingxi:'智能驾驶94%+', comment:'央视报道背书，科技口碑爆发，YU7智驾形象显著提升', action:'布局"YU7纽北自动驾驶""YU7智能驾驶圈速""中国自动驾驶纪录"等搜索词，引导KOL/科技博主输出深度技术解析，强化YU7智驾硬实力认知' },
+      { dim:'端午节锁单·现车交付热潮', lingxi:'定价95%+', comment:'节日活动+权益叠加，购车决策内容转化价值高', action:'发起#端午提车YU7 话题，引导车主晒提车仪式+纽北纪录感想，制造"买定离手"内容节点，布局"端午入手YU7攻略"搜索词' },
+      { dim:'德国进口计划·海外扩张曝光', lingxi:'营销97%+', comment:'品牌国际化正向事件，提升品牌高端形象', action:'配合KOL输出"中国汽车出海""SU7YU7欧洲市场"相关内容，强化小米汽车全球竞争力品牌认知' },
+    ],
+    riskActions: [
+      { dim:'SU7 Ultra南昌起火·消防鉴定跨两周', risk:'midhi', urgency:'hi', uLabel:'🔴 紧急', action:'第一优先级：消防鉴定结果出炉第一时间同步说明；主动输出电池安全/品控透明度内容；监控"SU7起火"话题防止跨月发酵；考虑主动联系头部KOL做安全科普背书' },
+      { dim:'YU7车窗只能降·跨四周老问题', risk:'mid', urgency:'hi', uLabel:'🔴 紧急', action:'立即明确OTA修复时间表，以透明沟通内容给车主明确预期；跨四周已触发信任临界点，若继续拖延将引发更大舆情' },
+      { dim:'SU7品控整体被审视', risk:'mid', urgency:'mid', uLabel:'🟠 次紧急', action:'配合YU7 GT纽北纪录的正向背书，输出整体品控严苛标准内容；引导品牌主动发布"品控自查"透明化内容' },
+      { dim:'量产车争议持续', risk:'low', urgency:'low', uLabel:'🟡 关注', action:'纽北自动驾驶纪录已转移焦点，持续用技术数据回应；保持正面内容输出维持正向舆情优势' },
+    ],
+    footerNote: '灵犀口碑数据来源于小红书灵犀平台，brand_id=455795（小米汽车），SU7轿车类目taxonomy_id=f0c8e5a5696e4d27ab3488ba2396b788，YU7 SUV类目taxonomy_id=204407204c4549ed98bae94af065854b；属性情感分析接口BrandSentimentDorisDao-getV3Attribute-SR，本周期有真实数据（20行）；评论区数据（评论数/笔记数/曝光量）待momo从RedBI补充；NPS待momo从灵犀获取后填入。词云待生成。数据周期：2026-06-16至2026-06-22。'
+  },
+
 ];
 const RC = { low:'risk-low', mid:'risk-mid', midhi:'risk-midhi', hi:'risk-hi' };
 const RL = { low:'🟢 低', mid:'🟡 中', midhi:'🟠 中高', hi:'🔴 高' };
