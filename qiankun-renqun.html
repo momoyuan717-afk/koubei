@@ -1,0 +1,1198 @@
+<!DOCTYPE html>
+<!-- saved from url=(0094)https://cowork.xiaohongshu.com/g/query_dashboard/?dashboardId=3A7C8A49D78CDCF97E16336CF2E77198 -->
+<html lang="zh-CN"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<script id="xhs-inline-editor" src="./人群画像洞察报告 - 19559748_files/104101l0321jbnu5h7k06b2jtu1qg00000000009gnm4ss"></script>
+<script id="beta-mode-layer" src="./人群画像洞察报告 - 19559748_files/104101l0321575g8ink06b2jtu1qg00000000008d1sj62"></script>
+  <link rel="icon" href="https://picasso-static.xiaohongshu.com/fe-platform/49d0aa573e1b645939ee59afef61f774d4a25652.png">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>人群画像洞察报告 - 19559748</title>
+<link href="./人群画像洞察报告 - 19559748_files/css2" rel="stylesheet">
+<script src="./人群画像洞察报告 - 19559748_files/chart.umd.min.js"></script>
+<script src="./人群画像洞察报告 - 19559748_files/html2canvas.min.js"></script>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: 'PingFang SC', -apple-system, 'Helvetica Neue', sans-serif;
+  background: #F8F9FA;
+  color: #333;
+  line-height: 1.6;
+}
+.container { max-width: 900px; margin: 0 auto; padding: 32px 20px; }
+.header {
+  background: linear-gradient(135deg, #FF2442 0%, #FF6B81 100%);
+  border-radius: 24px;
+  padding: 48px 40px;
+  color: #fff;
+  margin-bottom: 32px;
+  position: relative;
+  overflow: hidden;
+}
+.header::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  right: -20%;
+  width: 300px;
+  height: 300px;
+  background: rgba(255,255,255,0.08);
+  border-radius: 50%;
+}
+.header h1 { font-size: 28px; font-weight: 700; margin-bottom: 8px; position: relative; z-index: 1; }
+.header .sub { font-size: 14px; opacity: 0.85; position: relative; z-index: 1; }
+.header .group-id { font-family: 'Inter', monospace; font-size: 13px; opacity: 0.7; margin-top: 6px; position: relative; z-index: 1; }
+.card {
+  background: #fff;
+  border-radius: 20px;
+  padding: 28px 32px;
+  margin-bottom: 24px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+}
+.card-title {
+  font-size: 18px;
+  font-weight: 700;
+  color: #333;
+  margin-bottom: 20px;
+  padding-left: 14px;
+  border-left: 4px solid #FF2442;
+  line-height: 1.4;
+}
+.card-subtitle { font-size: 15px; font-weight: 600; color: #555; margin: 20px 0 12px; }
+.summary-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 24px; }
+.summary-item { background: #F8F9FA; border-radius: 16px; padding: 20px 24px; }
+.summary-item .label { font-size: 13px; color: #999; margin-bottom: 6px; }
+.summary-item .value { font-size: 15px; color: #333; font-weight: 500; line-height: 1.6; }
+.summary-item .value strong { color: #FF2442; font-family: 'Inter', sans-serif; }
+.chart-wrap { position: relative; margin: 16px 0; }
+.chart-wrap canvas { width: 100% !important; }
+.donut-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+.donut-item { text-align: center; }
+.tag-cloud { display: flex; flex-wrap: wrap; gap: 10px; margin: 12px 0; }
+.tag { display: inline-flex; align-items: center; gap: 6px; padding: 6px 14px; border-radius: 20px; font-size: 13px; font-weight: 500; }
+.tag-red { background: #FFF0F2; color: #FF2442; }
+.tag-blue { background: #F0F4FF; color: #3366FF; }
+.tag-green { background: #F0FFF4; color: #00B365; }
+.tag-orange { background: #FFF8F0; color: #FF8800; }
+.tag-purple { background: #F5F0FF; color: #7B61FF; }
+.data-table { width: 100%; border-collapse: collapse; font-size: 13px; margin: 12px 0; }
+.data-table th { background: #F8F9FA; padding: 10px 12px; text-align: left; font-weight: 600; color: #666; border-bottom: 2px solid #eee; }
+.data-table td { padding: 10px 12px; border-bottom: 1px solid #f2f2f2; color: #444; }
+.data-table tr:hover td { background: #FAFAFA; }
+.tgi-high { color: #FF2442; font-weight: 700; font-family: 'Inter', sans-serif; }
+.tgi-mid { color: #FF8800; font-weight: 600; font-family: 'Inter', sans-serif; }
+.tgi-low { color: #999; font-family: 'Inter', sans-serif; }
+.strategy-block {
+  background: #FFFFFF; border-left: 4px solid #FF2442; border-radius: 0 12px 12px 0;
+  padding: 20px 24px; margin: 16px 0; line-height: 1.85; color: #333; font-size: 14px;
+}
+.strategy-block h4 { color: #FF2442; font-size: 15px; margin-bottom: 10px; }
+.strategy-block ul { padding-left: 20px; margin: 8px 0; }
+.strategy-block li { margin-bottom: 8px; }
+.insight-note {
+  background: #F8F9FA; border-radius: 12px; padding: 16px 20px; color: #555;
+  font-size: 13px; line-height: 1.75; margin: 12px 0;
+}
+.kpi-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin: 16px 0; }
+.kpi-item { text-align: center; padding: 16px 8px; background: #F8F9FA; border-radius: 12px; }
+.kpi-item .num { font-family: 'Inter', sans-serif; font-size: 24px; font-weight: 700; color: #FF2442; }
+.kpi-item .desc { font-size: 12px; color: #999; margin-top: 4px; }
+.tgi-bar-wrap { display: flex; align-items: center; gap: 8px; }
+.tgi-bar { height: 8px; border-radius: 4px; background: #FF2442; }
+.download-btn {
+  position: fixed; bottom: 24px; right: 24px; background: #FF2442; color: #fff;
+  border: none; border-radius: 50px; padding: 14px 28px; font-size: 14px; font-weight: 700;
+  cursor: pointer; box-shadow: 0 8px 24px rgba(255,36,66,0.4); z-index: 1000;
+}
+.download-btn:hover { transform: translateY(-2px); }
+.footer { text-align: center; padding: 32px 0; color: #ccc; font-size: 12px; }
+</style>
+<script src="./人群画像洞察报告 - 19559748_files/uba-script.js"></script><style id="__xhs_editor_style__">
+    #__xhs_editor_toolbar__ {
+      position: fixed;
+      top: 24px;
+      right: 24px;
+      z-index: 99998;
+      display: none;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 8px;
+    }
+    /* 按钮行容器：保持原横向排列 */
+    #__xhs_editor_btnrow__ {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    /* 无痕建议提示条：按钮正上方淡色字 + 关闭按钮，常驻显示，可关闭 */
+    #__xhs_ext_hint__ {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      max-width: 360px;
+      padding: 6px 12px;
+      border-radius: 14px;
+      background: rgba(255,255,255,0.9);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+      font-size: 12px;
+      line-height: 1.4;
+      color: #9a9a9a;
+      font-family: -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif;
+    }
+    #__xhs_ext_hint_close__ {
+      flex: none;
+      cursor: pointer;
+      color: #bbb;
+      font-size: 14px;
+      line-height: 1;
+      padding: 0 2px;
+      user-select: none;
+    }
+    #__xhs_ext_hint_close__:hover { color: #666; }
+    .xhs-editor-btn {
+      height: 36px;
+      padding: 0 16px;
+      border-radius: 18px;
+      border: none;
+      cursor: pointer;
+      font-size: 13px;
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: opacity 0.15s;
+      white-space: nowrap;
+      font-family: -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif;
+    }
+    .xhs-editor-btn:hover { opacity: 0.85; }
+    .xhs-editor-btn:disabled { opacity: 0.6; cursor: not-allowed; }
+    #__xhs_editor_save__ {
+      background: #ff2442;
+      color: #fff;
+      box-shadow: 0 4px 12px rgba(255,36,66,0.4);
+    }
+    #__xhs_editor_cancel__ {
+      background: #fff;
+      color: #555;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+    }
+    /* toast：紧贴右上工具栏下方、CSS 调试面板上方那条窄带
+       工具栏 top:24 + height:36 ≈ 60；CSS 面板 top:130 → toast 放在 72~118 之间最合适 */
+    #__xhs_editor_status__ {
+      position: fixed !important;
+      top: 80px !important;
+      left: 50% !important;
+      transform: translateX(-50%) !important;
+      max-width: min(520px, calc(100vw - 48px)) !important;
+      z-index: 99999 !important;
+      padding: 8px 14px !important;
+      border-radius: 8px !important;
+      font-size: 13px !important;
+      font-family: -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif !important;
+      pointer-events: none !important;
+      opacity: 0;
+      transition: opacity 0.2s !important;
+      line-height: 1.5 !important;
+      word-break: break-all !important;
+      white-space: pre-wrap !important;
+      text-align: center !important;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.25) !important;
+    }
+    #__xhs_editor_status__.ok {
+      background: rgba(22,163,74,0.92) !important;
+      color: #fff !important;
+    }
+    #__xhs_editor_status__.warn {
+      background: rgba(217,119,6,0.92) !important;
+      color: #fff !important;
+    }
+    #__xhs_editor_status__.err {
+      background: rgba(220,38,38,0.92) !important;
+      color: #fff !important;
+    }
+    #__xhs_editor_status__.info {
+      background: rgba(30,30,30,0.88) !important;
+      color: #fff !important;
+    }
+    /* 编辑模式高亮 */
+    body.xhs-edit-mode [contenteditable="true"] {
+      outline: 1.5px dashed rgba(255,36,66,0.45) !important;
+      border-radius: 3px;
+      cursor: text;
+    }
+    body.xhs-edit-mode [contenteditable="true"]:focus {
+      outline: 2px solid #ff2442 !important;
+      background: rgba(255,36,66,0.04) !important;
+    }
+    /* ── 模式切换按钮 ── */
+    #__xhs_editor_mode__ {
+      background: #fff;
+      color: #333;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+    }
+    /* ── CSS 调试面板 ── */
+    /* 面板布局：固定在右侧、占主要窗口高度、内部 flex column，textarea 撑满剩余空间 */
+    /* top 从 72 下移到 130，让出"切换按钮下方"那条 58px 空白给 toast */
+    #__xhs_css_panel__ {
+      position: fixed !important;
+      top: 130px !important;
+      right: 24px !important;
+      bottom: 24px !important;             /* 撑到接近底部 */
+      height: calc(100vh - 154px) !important;
+      max-height: calc(100vh - 154px) !important;
+      z-index: 99997 !important;
+      width: 380px !important;
+      max-width: calc(100vw - 48px) !important;
+      display: none;                       /* JS 切换为 flex */
+      flex-direction: column !important;
+      background: rgba(20,20,28,0.97) !important;
+      border: 1px solid rgba(255,255,255,0.12) !important;
+      border-radius: 14px !important;
+      padding: 16px !important;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.45) !important;
+      color: #e8e8f0 !important;
+      font-family: -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif !important;
+      font-size: 13px !important;
+      box-sizing: border-box !important;
+      overflow: hidden !important;         /* 内部 flex 控滚动，避免双滚动条 */
+      padding: 12px 14px !important;       /* 覆盖前面 16px，紧凑 */
+    }
+    #__xhs_css_panel__ * {
+      box-sizing: border-box !important;
+      font-family: inherit !important;     /* 阻止外部样式渗透 */
+    }
+    #__xhs_css_panel__ h4 {
+      margin: 0 0 6px 0 !important;        /* 紧凑：原 10 → 6 */
+      font-size: 12px !important;
+      font-weight: 600 !important;
+      letter-spacing: 0.05em !important;
+      color: #aaa !important;
+      text-transform: uppercase !important;
+      background: transparent !important;
+      padding: 0 !important;
+      border: 0 !important;
+    }
+    #__xhs_css_panel__ .xhs-css-section-label {
+      font-size: 12px !important;
+      color: #9aa !important;
+      margin: 8px 0 4px !important;        /* 紧凑：原 12/6 → 8/4 */
+      font-weight: 600 !important;
+    }
+    #__xhs_style_select__ {
+      width: 100% !important;
+      padding: 7px 10px !important;
+      border-radius: 8px !important;
+      border: 1px solid rgba(255,255,255,0.18) !important;
+      background: rgba(255,255,255,0.06) !important;
+      color: #e8e8f0 !important;
+      font-size: 13px !important;
+      outline: none !important;
+      appearance: auto !important;
+      height: auto !important;
+    }
+    #__xhs_style_select__ option { background: #1a1a24 !important; color: #e8e8f0 !important; }
+    /* textarea 占据剩余空间（flex column 子项） */
+    #__xhs_custom_css_input__ {
+      width: 100% !important;
+      flex: 1 1 0 !important;              /* 关键：basis=0 让所有剩余空间归 textarea */
+      min-height: 0 !important;            /* 解除浏览器默认 min-content 高度限制 */
+      margin-top: 4px !important;
+      padding: 10px !important;
+      border-radius: 8px !important;
+      border: 1px solid rgba(255,255,255,0.18) !important;
+      background: rgba(255,255,255,0.06) !important;
+      color: #d8f0d8 !important;
+      font-family: "SF Mono", Menlo, Consolas, monospace !important;
+      font-size: 12px !important;
+      line-height: 1.5 !important;
+      resize: none !important;             /* 由 flex 控高，不再手动 resize */
+      outline: none !important;
+      box-sizing: border-box !important;
+      overflow-y: auto !important;
+      height: auto !important;             /* 避免外部样式锁死 height */
+    }
+    #__xhs_custom_css_input__:focus { border-color: #ff2442 !important; }
+    /* 应用预览按钮行：自动 checkbox + 应用按钮 横向排列 */
+    #__xhs_css_auto_label__ {
+      display: inline-flex !important;
+      align-items: center !important;
+      gap: 4px !important;
+      flex-shrink: 0 !important;
+      font-size: 11px !important;
+      color: #c7d2fe !important;
+      cursor: pointer !important;
+      user-select: none !important;
+      white-space: nowrap !important;
+    }
+    #__xhs_css_auto__ {
+      width: 13px !important;
+      height: 13px !important;
+      margin: 0 !important;
+      cursor: pointer !important;
+      accent-color: #6366f1 !important;
+    }
+    #__xhs_css_apply__ {
+      display: block !important;
+      width: 100% !important;              /* 按钮独占一行 */
+      margin-top: 8px !important;
+      padding: 7px 0 !important;
+      background: rgba(99,102,241,0.3) !important;
+      border: 1px solid rgba(99,102,241,0.5) !important;
+      border-radius: 8px !important;
+      color: #c7d2fe !important;
+      font-size: 12px !important;
+      font-weight: 600 !important;
+      text-align: center !important;
+      cursor: pointer !important;
+      flex-shrink: 0 !important;
+      height: auto !important;
+    }
+    #__xhs_css_apply__:hover { background: rgba(99,102,241,0.5) !important; }
+    /* hint 行：自动 checkbox + 说明文字 横向居中同行 */
+    #__xhs_css_panel__ .xhs-css-hint {
+      display: flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      gap: 8px !important;
+      margin-top: 6px !important;          /* 紧凑：原 8 → 6 */
+      font-size: 11px !important;
+      color: #888 !important;
+      line-height: 1.45 !important;
+      flex-shrink: 0 !important;
+    }
+    /* ── 自绘确认弹层 ── */
+    #__xhs_confirm_mask__ {
+      position: fixed;
+      inset: 0;
+      z-index: 100000;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      background: rgba(0,0,0,0.45);
+    }
+    #__xhs_confirm_box__ {
+      background: #fff;
+      border-radius: 16px;
+      padding: 24px 28px;
+      max-width: 380px;
+      width: 86%;
+      box-shadow: 0 12px 48px rgba(0,0,0,0.3);
+      font-family: -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif;
+    }
+    #__xhs_confirm_box__ .xhs-confirm-title {
+      font-size: 16px;
+      font-weight: 600;
+      color: #1a1a1a;
+      margin-bottom: 10px;
+    }
+    #__xhs_confirm_box__ .xhs-confirm-msg {
+      font-size: 13px;
+      color: #666;
+      line-height: 1.6;
+      margin-bottom: 20px;
+    }
+    #__xhs_confirm_box__ .xhs-confirm-btns {
+      display: flex;
+      gap: 12px;
+      justify-content: flex-end;
+    }
+    #__xhs_confirm_box__ button {
+      height: 38px;
+      padding: 0 20px;
+      border-radius: 10px;
+      border: none;
+      cursor: pointer;
+      font-size: 13px;
+      font-weight: 500;
+    }
+    #__xhs_confirm_cancel__ { background: #f0f0f0; color: #555; }
+    #__xhs_confirm_ok__ { background: #ff2442; color: #fff; }
+    /* ── 🛡️ 编辑器 UI 隔离层：阻断外部 CSS（含 CSS 调试预览）渗透 ── */
+    /* 关键：CSS 调试预览注入的 <style id="__xhs_css_debug__"> 是给业务 HTML 设计的，
+       常含 body / * / html 通配选择器，会污染编辑器自身 UI。这里用 !important 锁死
+       编辑器关键样式，确保切预设/写自定义 CSS 时编辑器面板/按钮/toast/确认框不变样。 */
+    #__xhs_editor_toolbar__,
+    #__xhs_editor_toolbar__ *,
+    #__xhs_editor_status__,
+    #__xhs_editor_mode__,
+    #__xhs_css_panel__,
+    #__xhs_css_panel__ *,
+    #__xhs_confirm_mask__,
+    #__xhs_confirm_box__,
+    #__xhs_confirm_box__ * {
+      box-sizing: border-box !important;
+      text-shadow: none !important;
+      letter-spacing: normal !important;
+      text-transform: none !important;
+      transform: none !important;       /* 阻止外部 transform 把编辑器拉歪 */
+      animation: none !important;       /* 阻止外部 animation */
+      filter: none !important;
+    }
+    /* status toast 需要 translateX(-50%) 水平居中，必须从上面 transform:none 中豁免。
+       放在隔离段之后用同等 !important 覆盖回来（否则 toast 偏右压住右上角按钮）。 */
+    #__xhs_editor_status__ { transform: translateX(-50%) !important; }
+    /* toolbar/按钮的关键背景与颜色锁定（覆盖任何外部样式）*/
+    #__xhs_editor_toolbar__ { background: transparent !important; }
+    #__xhs_editor_save__ { background: #ff2442 !important; color: #fff !important; }
+    #__xhs_editor_cancel__ { background: rgba(255,255,255,0.95) !important; color: #333 !important; }
+    #__xhs_editor_mode__ { background: rgba(255,255,255,0.95) !important; color: #333 !important; }
+    #__xhs_confirm_box__ { background: #fff !important; color: #222 !important; }
+    #__xhs_confirm_cancel__ { background: #f0f0f0 !important; color: #555 !important; }
+    #__xhs_confirm_ok__ { background: #ff2442 !important; color: #fff !important; }
+  </style></head>
+<body>
+<div class="container" id="main-content">
+
+<div class="header">
+  <h1>🚗 人群画像洞察报告</h1>
+  <div class="sub">华为乾崑智能汽车解决方案 · 深度人群分析与营销策略</div>
+  <div class="group-id">GroupID: 19559748 &nbsp;|&nbsp; 生成时间: 2026-07-28 22:53</div>
+</div>
+
+<div class="card">
+  <div class="card-title">📊 人群画像概览</div>
+  <div class="summary-grid">
+    <div class="summary-item">
+      <div class="label">👤 基础属性</div>
+      <div class="value">女性占 <strong>61.5%</strong>，<strong>26-35岁</strong> 为核心群体（占 <strong>47.0%</strong>），一线+新一线城市占 <strong>45.4%</strong>，高度集中在北上广深成杭</div>
+    </div>
+    <div class="summary-item">
+      <div class="label">💰 消费特征</div>
+      <div class="value">高消费人群占 <strong>28.5%</strong>（TGI <strong>126.5</strong>），<strong>65.9%</strong> 有房有车（TGI <strong>190.6</strong>），8000+元手机占 <strong>29.5%</strong>，苹果用户 <strong>48.6%</strong></div>
+    </div>
+    <div class="summary-item">
+      <div class="label">📱 内容偏好</div>
+      <div class="value"><strong>汽车</strong>内容 TGI 高达 <strong>434</strong>（绝对核心），"新能源汽车""SUV""车展"关键词 TGI 均超 <strong>1300</strong>，兼好体育运动、影视内容</div>
+    </div>
+    <div class="summary-item">
+      <div class="label">🌟 生活方式</div>
+      <div class="value"><strong>野趣探索家</strong>（TGI <strong>910</strong>）和<strong>质感男士</strong>（TGI <strong>844</strong>）为最强特征，<strong>自由畅行</strong>覆盖 <strong>83.1%</strong>，<strong>自在户外</strong>覆盖 <strong>59.2%</strong></div>
+    </div>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-title">👤 基础属性分析</div>
+  <div class="donut-grid">
+    <div class="donut-item">
+      <div class="card-subtitle">性别分布</div>
+      <div class="chart-wrap" style="height:220px"><canvas id="genderChart" width="772" height="440" style="display: block; box-sizing: border-box; height: 220px; width: 386px;"></canvas></div>
+    </div>
+    <div class="donut-item">
+      <div class="card-subtitle">婚恋状态</div>
+      <div class="chart-wrap" style="height:220px"><canvas id="marriageChart" width="772" height="440" style="display: block; box-sizing: border-box; height: 220px; width: 386px;"></canvas></div>
+    </div>
+  </div>
+  <div class="card-subtitle">年龄分布</div>
+  <div class="chart-wrap" style="height:240px"><canvas id="ageChart" width="1592" height="480" style="display: block; box-sizing: border-box; height: 240px; width: 796px;"></canvas></div>
+  <div class="card-subtitle">城市等级分布</div>
+  <div class="chart-wrap" style="height:220px"><canvas id="cityChart" width="1592" height="440" style="display: block; box-sizing: border-box; height: 220px; width: 796px;"></canvas></div>
+  <div class="card-subtitle">地域 Top10（按 TGI）</div>
+  <div class="chart-wrap" style="height:300px"><canvas id="regionChart" width="1592" height="600" style="display: block; box-sizing: border-box; height: 300px; width: 796px;"></canvas></div>
+  <div class="insight-note">
+    <strong>💡 核心洞察：</strong>人群以 <strong>26-35岁</strong> 一二线城市女性为主体，但男性 TGI 达 <strong>111.1</strong>（高于大盘），说明男性在该人群中的浓度显著高于小红书平均水平。已婚人群 TGI <strong>113.4</strong>，结合"有房有车"占 <strong>65.9%</strong>（TGI 190.6），画像指向 <strong>有家庭、有资产的中产购车决策者</strong>。北京（TGI 161.6）、杭州（TGI 144.9）、成都（TGI 145.0）偏好度最为突出。
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-title">💰 消费特征分析</div>
+  <div class="kpi-row">
+    <div class="kpi-item"><div class="num">28.5%</div><div class="desc">高消费占比</div></div>
+    <div class="kpi-item"><div class="num">65.9%</div><div class="desc">有房有车</div></div>
+    <div class="kpi-item"><div class="num">48.6%</div><div class="desc">苹果手机</div></div>
+    <div class="kpi-item"><div class="num">29.5%</div><div class="desc">8000+手机</div></div>
+  </div>
+  <div class="card-subtitle">消费水平</div>
+  <div class="chart-wrap" style="height:180px"><canvas id="consumeChart" width="1592" height="360" style="display: block; box-sizing: border-box; height: 180px; width: 796px;"></canvas></div>
+  <div class="card-subtitle">消费金额分布（占比 + TGI）</div>
+  <div class="chart-wrap" style="height:240px"><canvas id="amountChart" width="1592" height="480" style="display: block; box-sizing: border-box; height: 240px; width: 796px;"></canvas></div>
+  <div class="card-subtitle">品牌偏好 Top15（按 TGI 排序）</div>
+  <table class="data-table">
+    <thead><tr><th>品牌</th><th>占比</th><th>TGI</th><th>偏好强度</th></tr></thead>
+    <tbody>
+      <tr>
+        <td><strong>问界</strong></td>
+        <td>15.53%</td>
+        <td class="tgi-high">1165.61</td>
+        <td><div class="tgi-bar-wrap"><div class="tgi-bar" style="width:97.13416666666666%;background:#FF2442"></div></div></td>
+      </tr>
+      <tr>
+        <td><strong>极氪</strong></td>
+        <td>10.27%</td>
+        <td class="tgi-high">1001.79</td>
+        <td><div class="tgi-bar-wrap"><div class="tgi-bar" style="width:83.4825%;background:#FF2442"></div></div></td>
+      </tr>
+      <tr>
+        <td><strong>理想</strong></td>
+        <td>9.54%</td>
+        <td class="tgi-high">885.07</td>
+        <td><div class="tgi-bar-wrap"><div class="tgi-bar" style="width:73.75583333333334%;background:#FF2442"></div></div></td>
+      </tr>
+      <tr>
+        <td><strong>小鹏</strong></td>
+        <td>12.91%</td>
+        <td class="tgi-high">865.61</td>
+        <td><div class="tgi-bar-wrap"><div class="tgi-bar" style="width:72.13416666666667%;background:#FF2442"></div></div></td>
+      </tr>
+      <tr>
+        <td><strong>蔚来</strong></td>
+        <td>15.77%</td>
+        <td class="tgi-high">864.54</td>
+        <td><div class="tgi-bar-wrap"><div class="tgi-bar" style="width:72.045%;background:#FF2442"></div></div></td>
+      </tr>
+      <tr>
+        <td><strong>领克</strong></td>
+        <td>9.39%</td>
+        <td class="tgi-high">840.89</td>
+        <td><div class="tgi-bar-wrap"><div class="tgi-bar" style="width:70.07416666666667%;background:#FF2442"></div></div></td>
+      </tr>
+      <tr>
+        <td><strong>零跑</strong></td>
+        <td>13.20%</td>
+        <td class="tgi-high">801.05</td>
+        <td><div class="tgi-bar-wrap"><div class="tgi-bar" style="width:66.75416666666666%;background:#FF2442"></div></div></td>
+      </tr>
+      <tr>
+        <td><strong>比亚迪</strong></td>
+        <td>16.95%</td>
+        <td class="tgi-high">771.19</td>
+        <td><div class="tgi-bar-wrap"><div class="tgi-bar" style="width:64.26583333333333%;background:#FF2442"></div></div></td>
+      </tr>
+      <tr>
+        <td><strong>奥迪</strong></td>
+        <td>18.54%</td>
+        <td class="tgi-high">768.73</td>
+        <td><div class="tgi-bar-wrap"><div class="tgi-bar" style="width:64.06083333333333%;background:#FF2442"></div></div></td>
+      </tr>
+      <tr>
+        <td><strong>大众</strong></td>
+        <td>13.64%</td>
+        <td class="tgi-high">641.24</td>
+        <td><div class="tgi-bar-wrap"><div class="tgi-bar" style="width:53.43666666666667%;background:#FF2442"></div></div></td>
+      </tr>
+      <tr>
+        <td><strong>Porsche</strong></td>
+        <td>21.47%</td>
+        <td class="tgi-high">613.81</td>
+        <td><div class="tgi-bar-wrap"><div class="tgi-bar" style="width:51.15083333333333%;background:#FF2442"></div></div></td>
+      </tr>
+      <tr>
+        <td><strong>特斯拉</strong></td>
+        <td>27.47%</td>
+        <td class="tgi-high">605.20</td>
+        <td><div class="tgi-bar-wrap"><div class="tgi-bar" style="width:50.43333333333334%;background:#FF2442"></div></div></td>
+      </tr>
+      <tr>
+        <td><strong>宝马</strong></td>
+        <td>21.80%</td>
+        <td class="tgi-high">593.49</td>
+        <td><div class="tgi-bar-wrap"><div class="tgi-bar" style="width:49.4575%;background:#FF2442"></div></div></td>
+      </tr>
+      <tr>
+        <td><strong>本田</strong></td>
+        <td>9.77%</td>
+        <td class="tgi-high">553.46</td>
+        <td><div class="tgi-bar-wrap"><div class="tgi-bar" style="width:46.12166666666667%;background:#FF2442"></div></div></td>
+      </tr>
+      <tr>
+        <td><strong>梅赛德斯-奔驰</strong></td>
+        <td>20.02%</td>
+        <td class="tgi-high">553.36</td>
+        <td><div class="tgi-bar-wrap"><div class="tgi-bar" style="width:46.11333333333334%;background:#FF2442"></div></div></td>
+      </tr></tbody>
+  </table>
+  <div class="card-subtitle">手机品牌分布</div>
+  <div class="chart-wrap" style="height:260px"><canvas id="phoneBrandChart" width="1592" height="520" style="display: block; box-sizing: border-box; height: 260px; width: 796px;"></canvas></div>
+  <div class="insight-note">
+    <strong>💡 核心洞察：</strong>品牌偏好高度集中在 <strong>新能源/智能汽车品牌</strong>——问界（TGI 1165.6）、极氪（TGI 1001.8）、理想（TGI 885.1）、小鹏（TGI 865.6）、蔚来（TGI 864.5）均为超强偏好。传统豪华品牌（奥迪/保时捷/宝马/奔驰）TGI 也在 553~769 区间，说明这是一群<strong>既关注新势力也认可传统豪华</strong>的高净值购车人群。消费金额分布中，3000元以上消费 TGI 均超 170，5000+元 TGI 达 <strong>197.5</strong>，显示极强的高客单价消费意愿。
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-title">📱 内容偏好分析</div>
+  <div class="card-subtitle">内容兴趣类目（二级 Top12，按 TGI）</div>
+  <div class="chart-wrap" style="height:380px"><canvas id="interestChart" width="1592" height="760" style="display: block; box-sizing: border-box; height: 380px; width: 796px;"></canvas></div>
+  <div class="card-subtitle">内容关键词偏好 Top12</div>
+  <table class="data-table">
+    <thead><tr><th>关键词</th><th>占比</th><th>TGI</th><th>偏好强度</th></tr></thead>
+    <tbody>
+      <tr>
+        <td><strong>suv</strong></td>
+        <td>6.99%</td>
+        <td class="tgi-high">1411.76</td>
+        <td><div class="tgi-bar-wrap"><div class="tgi-bar" style="width:94.11733333333333%;background:#FF2442"></div></div></td>
+      </tr>
+      <tr>
+        <td><strong>车展</strong></td>
+        <td>4.19%</td>
+        <td class="tgi-high">1392.86</td>
+        <td><div class="tgi-bar-wrap"><div class="tgi-bar" style="width:92.85733333333333%;background:#FF2442"></div></div></td>
+      </tr>
+      <tr>
+        <td><strong>新能源汽车</strong></td>
+        <td>10.71%</td>
+        <td class="tgi-high">1355.50</td>
+        <td><div class="tgi-bar-wrap"><div class="tgi-bar" style="width:90.36666666666666%;background:#FF2442"></div></div></td>
+      </tr>
+      <tr>
+        <td><strong>新能源</strong></td>
+        <td>6.01%</td>
+        <td class="tgi-high">1280.06</td>
+        <td><div class="tgi-bar-wrap"><div class="tgi-bar" style="width:85.33733333333333%;background:#FF2442"></div></div></td>
+      </tr>
+      <tr>
+        <td><strong>提车</strong></td>
+        <td>6.65%</td>
+        <td class="tgi-high">1087.41</td>
+        <td><div class="tgi-bar-wrap"><div class="tgi-bar" style="width:72.494%;background:#FF2442"></div></div></td>
+      </tr>
+      <tr>
+        <td><strong>比亚迪</strong></td>
+        <td>4.99%</td>
+        <td class="tgi-high">933.11</td>
+        <td><div class="tgi-bar-wrap"><div class="tgi-bar" style="width:62.20733333333333%;background:#FF2442"></div></div></td>
+      </tr>
+      <tr>
+        <td><strong>鸿蒙</strong></td>
+        <td>4.69%</td>
+        <td class="tgi-high">918.93</td>
+        <td><div class="tgi-bar-wrap"><div class="tgi-bar" style="width:61.26199999999999%;background:#FF2442"></div></div></td>
+      </tr>
+      <tr>
+        <td><strong>二手车</strong></td>
+        <td>4.11%</td>
+        <td class="tgi-high">692.93</td>
+        <td><div class="tgi-bar-wrap"><div class="tgi-bar" style="width:46.19533333333333%;background:#FF2442"></div></div></td>
+      </tr>
+      <tr>
+        <td><strong>汽车</strong></td>
+        <td>40.06%</td>
+        <td class="tgi-high">561.47</td>
+        <td><div class="tgi-bar-wrap"><div class="tgi-bar" style="width:37.431333333333335%;background:#FF2442"></div></div></td>
+      </tr>
+      <tr>
+        <td><strong>机车</strong></td>
+        <td>4.25%</td>
+        <td class="tgi-high">557.29</td>
+        <td><div class="tgi-bar-wrap"><div class="tgi-bar" style="width:37.15266666666666%;background:#FF2442"></div></div></td>
+      </tr>
+      <tr>
+        <td><strong>摩托车</strong></td>
+        <td>4.35%</td>
+        <td class="tgi-mid">422.69</td>
+        <td><div class="tgi-bar-wrap"><div class="tgi-bar" style="width:28.179333333333332%;background:#FF8800"></div></div></td>
+      </tr>
+      <tr>
+        <td><strong>足球</strong></td>
+        <td>6.31%</td>
+        <td class="tgi-mid">376.98</td>
+        <td><div class="tgi-bar-wrap"><div class="tgi-bar" style="width:25.132%;background:#FF8800"></div></div></td>
+      </tr></tbody>
+  </table>
+  <div class="card-subtitle">搜索词偏好 Top12</div>
+  <table class="data-table">
+    <thead><tr><th>搜索词</th><th>占比</th><th>TGI</th><th>偏好强度</th></tr></thead>
+    <tbody>
+      <tr>
+        <td><strong>华境s</strong></td>
+        <td>0.60%</td>
+        <td class="tgi-high">2256.26</td>
+        <td><div class="tgi-bar-wrap"><div class="tgi-bar" style="width:98.09826086956522%;background:#FF2442"></div></div></td>
+      </tr>
+      <tr>
+        <td><strong>阿维塔</strong></td>
+        <td>0.77%</td>
+        <td class="tgi-high">1838.48</td>
+        <td><div class="tgi-bar-wrap"><div class="tgi-bar" style="width:79.93391304347826%;background:#FF2442"></div></div></td>
+      </tr>
+      <tr>
+        <td><strong>问界m6</strong></td>
+        <td>0.62%</td>
+        <td class="tgi-high">1774.44</td>
+        <td><div class="tgi-bar-wrap"><div class="tgi-bar" style="width:77.14956521739131%;background:#FF2442"></div></div></td>
+      </tr>
+      <tr>
+        <td><strong>尚界z7</strong></td>
+        <td>0.53%</td>
+        <td class="tgi-high">1761.67</td>
+        <td><div class="tgi-bar-wrap"><div class="tgi-bar" style="width:76.59434782608696%;background:#FF2442"></div></div></td>
+      </tr>
+      <tr>
+        <td><strong>小鹏gx</strong></td>
+        <td>0.59%</td>
+        <td class="tgi-high">1495.30</td>
+        <td><div class="tgi-bar-wrap"><div class="tgi-bar" style="width:65.01304347826087%;background:#FF2442"></div></div></td>
+      </tr>
+      <tr>
+        <td><strong>乐道l80</strong></td>
+        <td>0.52%</td>
+        <td class="tgi-high">1453.00</td>
+        <td><div class="tgi-bar-wrap"><div class="tgi-bar" style="width:63.17391304347826%;background:#FF2442"></div></div></td>
+      </tr>
+      <tr>
+        <td><strong>问界m7</strong></td>
+        <td>0.63%</td>
+        <td class="tgi-high">1199.77</td>
+        <td><div class="tgi-bar-wrap"><div class="tgi-bar" style="width:52.16391304347826%;background:#FF2442"></div></div></td>
+      </tr>
+      <tr>
+        <td><strong>方程豹</strong></td>
+        <td>0.58%</td>
+        <td class="tgi-high">1083.65</td>
+        <td><div class="tgi-bar-wrap"><div class="tgi-bar" style="width:47.11521739130435%;background:#FF2442"></div></div></td>
+      </tr>
+      <tr>
+        <td><strong>理想i6</strong></td>
+        <td>1.13%</td>
+        <td class="tgi-high">1056.33</td>
+        <td><div class="tgi-bar-wrap"><div class="tgi-bar" style="width:45.92739130434782%;background:#FF2442"></div></div></td>
+      </tr>
+      <tr>
+        <td><strong>极氪</strong></td>
+        <td>0.51%</td>
+        <td class="tgi-high">927.04</td>
+        <td><div class="tgi-bar-wrap"><div class="tgi-bar" style="width:40.30608695652174%;background:#FF2442"></div></div></td>
+      </tr>
+      <tr>
+        <td><strong>小米yu7</strong></td>
+        <td>0.68%</td>
+        <td class="tgi-high">902.57</td>
+        <td><div class="tgi-bar-wrap"><div class="tgi-bar" style="width:39.24217391304348%;background:#FF2442"></div></div></td>
+      </tr>
+      <tr>
+        <td><strong>小鹏m03</strong></td>
+        <td>0.64%</td>
+        <td class="tgi-high">806.49</td>
+        <td><div class="tgi-bar-wrap"><div class="tgi-bar" style="width:35.06478260869565%;background:#FF2442"></div></div></td>
+      </tr></tbody>
+  </table>
+  <div class="card-subtitle">KOL 标签偏好</div>
+  <div class="tag-cloud"><span class="tag tag-red">生活记录 <strong>55.45%</strong> TGI:142.52</span><span class="tag tag-blue">美食 <strong>54.48%</strong> TGI:115.53</span><span class="tag tag-green">时尚 <strong>50.66%</strong> TGI:132.59</span><span class="tag tag-orange">娱乐 <strong>39.88%</strong> TGI:131.98</span><span class="tag tag-purple">家居家装 <strong>30.38%</strong> TGI:124.04</span><span class="tag tag-red">美妆 <strong>29.30%</strong> TGI:107.46</span><span class="tag tag-blue">汽车 <strong>28.57%</strong> TGI:302.92</span><span class="tag tag-green">旅游 <strong>25.96%</strong> TGI:127.65</span><span class="tag tag-orange">情感 <strong>25.15%</strong> TGI:129.84</span><span class="tag tag-purple">宠物 <strong>23.72%</strong> TGI:159.47</span></div>
+  <div class="card-subtitle">KOL 偏好明细 Top12</div>
+  <table class="data-table">
+    <thead><tr><th>博主名</th><th>粉丝量</th><th>TGI</th><th>标签</th></tr></thead>
+    <tbody>
+      <tr>
+        <td><strong>周小闹</strong></td>
+        <td>494.7万</td>
+        <td class="tgi-mid">250.42</td>
+        <td>搞笑</td>
+      </tr>
+      <tr>
+        <td><strong>开心每一刻</strong></td>
+        <td>2.3万</td>
+        <td class="tgi-mid">368.55</td>
+        <td>影视综资讯</td>
+      </tr>
+      <tr>
+        <td><strong>粤语（精髓）</strong></td>
+        <td>9.2万</td>
+        <td class="tgi-mid">406.87</td>
+        <td>影视综资讯</td>
+      </tr>
+      <tr>
+        <td><strong>刘雨鑫JASON</strong></td>
+        <td>203.7万</td>
+        <td class="tgi-mid">387.81</td>
+        <td>美食</td>
+      </tr>
+      <tr>
+        <td><strong>大墨镜侃影</strong></td>
+        <td>27.0万</td>
+        <td class="tgi-high">565.69</td>
+        <td>影视综资讯</td>
+      </tr>
+      <tr>
+        <td><strong>是陈陈呀</strong></td>
+        <td>42.0万</td>
+        <td class="tgi-low">198.43</td>
+        <td>搞笑</td>
+      </tr>
+      <tr>
+        <td><strong>沐言开心酱</strong></td>
+        <td>271.1万</td>
+        <td class="tgi-mid">205.97</td>
+        <td>生活记录/母婴</td>
+      </tr>
+      <tr>
+        <td><strong>七颗猩猩</strong></td>
+        <td>937.2万</td>
+        <td class="tgi-low">145.30</td>
+        <td>搞笑</td>
+      </tr>
+      <tr>
+        <td><strong>papi酱</strong></td>
+        <td>671.0万</td>
+        <td class="tgi-mid">342.40</td>
+        <td>护肤</td>
+      </tr>
+      <tr>
+        <td><strong>帮帮妈妈</strong></td>
+        <td>62.6万</td>
+        <td class="tgi-mid">286.54</td>
+        <td>宠物</td>
+      </tr>
+      <tr>
+        <td><strong>陈翔六点半</strong></td>
+        <td>144.8万</td>
+        <td class="tgi-mid">277.60</td>
+        <td>影视综资讯</td>
+      </tr>
+      <tr>
+        <td><strong>老爸评测</strong></td>
+        <td>869.2万</td>
+        <td class="tgi-mid">280.79</td>
+        <td>家居家装</td>
+      </tr></tbody>
+  </table>
+  <div class="insight-note">
+    <strong>💡 核心洞察：</strong>内容偏好极度集中在<strong>汽车垂类</strong>：新能源智能（TGI 985.7）、看车选买（TGI 838.1）占据绝对主导。关键词中"SUV"（TGI 1411.8）、"车展"（TGI 1392.9）、"新能源汽车"（TGI 1355.5）、"鸿蒙"（TGI 918.9）均为超强偏好。搜索词全面覆盖竞品车型（华境S/阿维塔/问界/小鹏GX/理想i6等），是<strong>正在积极比较选车的高意向购车人群</strong>。体育运动（篮球TGI 363/足球TGI 301）和影视推荐（TGI 263.4）是第二、第三大兴趣领域，可作为跨圈种草切入点。
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-title">🌟 生活方式标签</div>
+  <div class="chart-wrap" style="height:420px"><canvas id="lifestyleChart" width="1592" height="840" style="display: block; box-sizing: border-box; height: 420px; width: 796px;"></canvas></div>
+  <div class="card-subtitle">行业品类偏好 Top10</div>
+  <table class="data-table">
+    <thead><tr><th>品类</th><th>占比</th><th>TGI</th></tr></thead>
+    <tbody>
+      <tr>
+        <td><strong>suv</strong></td>
+        <td>9.78%</td>
+        <td class="tgi-high">497.69</td>
+      </tr>
+      <tr>
+        <td><strong>乘用车</strong></td>
+        <td>16.23%</td>
+        <td class="tgi-high">448.20</td>
+      </tr>
+      <tr>
+        <td><strong>轿车</strong></td>
+        <td>7.85%</td>
+        <td class="tgi-high">397.68</td>
+      </tr>
+      <tr>
+        <td><strong>汽车出行</strong></td>
+        <td>16.26%</td>
+        <td class="tgi-high">344.89</td>
+      </tr>
+      <tr>
+        <td><strong>智能机器人</strong></td>
+        <td>1.22%</td>
+        <td class="tgi-mid">175.26</td>
+      </tr>
+      <tr>
+        <td><strong>篮球赛事</strong></td>
+        <td>1.76%</td>
+        <td class="tgi-mid">163.85</td>
+      </tr>
+      <tr>
+        <td><strong>演出/体育赛事</strong></td>
+        <td>4.78%</td>
+        <td class="tgi-mid">162.72</td>
+      </tr>
+      <tr>
+        <td><strong>证券</strong></td>
+        <td>1.70%</td>
+        <td class="tgi-mid">148.40</td>
+      </tr>
+      <tr>
+        <td><strong>足球赛事</strong></td>
+        <td>3.02%</td>
+        <td class="tgi-mid">147.47</td>
+      </tr>
+      <tr>
+        <td><strong>文体</strong></td>
+        <td>4.84%</td>
+        <td class="tgi-mid">134.73</td>
+      </tr></tbody>
+  </table>
+  <div class="insight-note">
+    <strong>💡 核心洞察：</strong>生活方式标签揭示了极为清晰的人群画像：<strong>野趣探索家</strong>（TGI 910）说明这是一群热爱户外探索、自驾旅行的人；<strong>质感男士</strong>（TGI 844）印证了男性浓度高于大盘；<strong>自由畅行</strong>覆盖 83.1%（TGI 425）说明出行/通勤是刚需场景；<strong>优奢享法</strong>（TGI 384.8）和<strong>气场精英</strong>（TGI 382.6）体现了追求品质感的消费倾向。行业品类偏好直指<strong>SUV</strong>（TGI 497.7）和<strong>乘用车</strong>（TGI 448.2），进一步锁定"正在看车/准备换车"的核心需求。
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-title">🎯 种草营销策略方案</div>
+  
+  <div class="strategy-block">
+    <h4>7.1 核心人群洞察摘要</h4>
+    <p>这是一群<strong>26-35岁、一二线城市、有房有车的中高端购车决策者</strong>。他们正在积极比较新能源智能汽车（搜索词覆盖华境S/阿维塔/问界/小鹏/理想/极氪等10+车型），对"鸿蒙"关键词TGI达918.9，与华为乾崑品牌有天然亲近度。男性浓度显著高于小红书大盘（TGI 111.1），苹果手机用户占48.6%（TGI 129.0），消费意愿强（高消费TGI 126.5，5000+元消费TGI 197.5），是典型的<strong>"高知、高收入、高品质追求"三高人群</strong>。他们热爱户外探索（野趣探索家TGI 910）和自驾旅行（自由畅行覆盖83.1%），日常还关注篮球/足球赛事、影视推荐、理财投资等内容。</p>
+  </div>
+  
+  <div class="strategy-block">
+    <h4>7.2 内容方向建议</h4>
+    <ul>
+      <li><strong>🚗 智驾实测 + 选车对比</strong>（优先级最高）<br>"看车选买"TGI 838.1、"选车评测"TGI 936.8，搜索词全面覆盖竞品车型。建议产出<strong>乾崑智驾 vs 竞品智驾横评</strong>（如乾崑ADS vs 小鹏NGP vs 理想AD Max），用真实路测数据+体验差异打动正在比较的购车用户。</li>
+      <li><strong>🏔️ 自驾旅行场景种草</strong><br>"野趣探索家"TGI 910、"自由畅行"覆盖83.1%。产出<strong>"带着鸿蒙座舱去XX"</strong>系列自驾内容，突出语音交互、导航精准度、座舱舒适度等场景化体验，与当前"丽江慢生活"IP形成系列化矩阵。</li>
+      <li><strong>⚽ 体育赛事跨圈内容</strong><br>篮球TGI 363.0、足球TGI 301.0，可借势赛事IP（如CBA/中超/欧冠）做"球迷自驾看球"、"赛事日座舱大屏体验"等破圈内容。</li>
+      <li><strong>💰 理财/生活品质关联</strong><br>"投资""理财""股票"关键词TGI均超300，"买房"TGI 320.5。可产出"人生第一套房+第一辆智能车"等生活阶段共鸣类内容。</li>
+      <li><strong>🎬 影视/综艺植入软内容</strong><br>"影视推荐"TGI 263.4，可以"观影推荐+座舱大屏体验"切入，如"周末不出门，在车里看完了XX"。</li>
+    </ul>
+  </div>
+  
+  <div class="strategy-block">
+    <h4>7.3 达人选择方向</h4>
+    <ul>
+      <li><strong>核心层：汽车垂类达人</strong>（TGI 302.9，占比28.6%）<br>优先选择新能源/智驾方向的腰部达人（10-100万粉丝），如"老高你好二手车"（TGI 1446.3）、"雷诺数码小屋"（TGI 1155.7）、"小虎户外冲冲冲"（TGI 263.2）等高TGI垂类博主。头腰比建议 <strong>2:5:3</strong>（头部带声量/腰部出效果/素人铺口碑）。</li>
+      <li><strong>破圈层：宠物+生活记录达人</strong><br>"宠物"标签TGI 159.5（占比23.7%），"生活记录"TGI 142.5（占比55.5%）。可合作宠物博主做"带毛孩子自驾"、生活博主做"新能源车主的一天"等泛生活内容，扩大人群触达面。</li>
+      <li><strong>辅助层：体育/影视达人</strong><br>借体育赛事和影视热点做短期话题合作，不必长期投入，以"事件驱动"模式做破圈触达。</li>
+    </ul>
+  </div>
+  
+  <div class="strategy-block">
+    <h4>7.4 投放场景与时机建议</h4>
+    <ul>
+      <li><strong>场景一：周末自驾/出行决策时段</strong><br>83.1%人群标签为"自由畅行"，周末自驾是核心场景。建议<strong>周四晚至周六上午</strong>加大投放，匹配"周末去哪玩"→"选什么车"的决策链路。</li>
+      <li><strong>场景二：车展/新车发布节点</strong><br>"车展"关键词TGI 1392.9，车展前后1-2周是流量高峰。建议<strong>提前布局车展预告内容</strong>，车展期间密集投放实拍+评测内容。</li>
+      <li><strong>场景三：赛事日/热点事件</strong><br>篮球/足球赛事日做定向追投，如"欧冠决赛日，带鸿蒙大屏去看球"，利用实时热点提升内容传播效率。</li>
+      <li><strong>场景四：购房/人生大事节点</strong><br>"买房"TGI 320.5，购房后换车是常见消费决策链。可在房产类内容周边做"乔迁→换车"的关联种草。</li>
+    </ul>
+  </div>
+  
+  <div class="strategy-block">
+    <h4>7.5 品牌/产品切入点</h4>
+    <ul>
+      <li><strong>切入点一：鸿蒙生态闭环</strong><br>"鸿蒙"关键词TGI 918.9，苹果手机占48.6%但华为手机也有19.0%（TGI 110.4）。<strong>打"手机→座舱→智驾"全场景互联</strong>差异化卖点，对华为手机用户做精准追投，对苹果用户主打"比CarPlay更智能"对比体验。</li>
+      <li><strong>切入点二：SUV品类心智抢占</strong><br>"SUV"关键词TGI 1411.8（最高），行业品类偏好中SUV TGI 497.7。当前搭载乾崑的主力车型中<strong>奕境X9（大六座SUV）是最匹配的产品</strong>，建议将奕境X9作为内容主推车型，主打"智驾大SUV"心智。</li>
+      <li><strong>切入点三：问界品牌光环借力</strong><br>"问界"品牌偏好TGI高达1165.6（第一名），搜索词中"问界M6""问界M7"TGI超1199。说明用户已高度认知"华为+汽车"组合，可借问界口碑做<strong>"华为乾崑技术背书"</strong>——"问界的智驾，底层就是乾崑"这类认知建立内容。</li>
+      <li><strong>切入点四：二手车置换场景</strong><br>"二手车"内容兴趣TGI 447.3，关键词TGI 692.9。瞄准有换车需求的存量用户，产出"旧车置换+乾崑新车体验"对比内容。</li>
+    </ul>
+  </div>
+</div>
+
+<div class="footer">
+  小红书灵犀 · 人群画像洞察报告 · GroupID: 19559748 · 2026-07-28 22:53
+</div>
+</div>
+
+<button class="download-btn" onclick="downloadImage()">⬇️ 下载高清长图</button>
+<script>
+// Gender Donut
+new Chart(document.getElementById('genderChart'), {
+  type: 'doughnut',
+  data: {
+    labels: ['女性 61.5%', '男性 38.5%'],
+    datasets: [{ data: [61.48, 38.53], backgroundColor: ['#FF6B81','#3366FF'], borderWidth: 0 }]
+  },
+  options: { responsive:true, maintainAspectRatio:false, cutout:'65%',
+    plugins: { legend: { position:'bottom', labels:{ font:{ size:12 }, padding:16 } } }
+  }
+});
+
+// Marriage Donut
+new Chart(document.getElementById('marriageChart'), {
+  type: 'doughnut',
+  data: {
+    labels: ['未婚 56.4%', '已婚 43.6%'],
+    datasets: [{ data: [56.40, 43.61], backgroundColor: ['#FF8800','#7B61FF'], borderWidth: 0 }]
+  },
+  options: { responsive:true, maintainAspectRatio:false, cutout:'65%',
+    plugins: { legend: { position:'bottom', labels:{ font:{ size:12 }, padding:16 } } }
+  }
+});
+
+// Age Bar
+new Chart(document.getElementById('ageChart'), {
+  type: 'bar',
+  data: {
+    labels: ["19-22", "23-25", "26-30", "31-35", "36-40", "41\u4ee5\u4e0a"],
+    datasets: [{
+      label: '占比(%)',
+      data: [9.89, 14.87, 27.1, 19.87, 13.47, 14.82],
+      backgroundColor: ["#FFB3BD", "#FFB3BD", "#FF2442", "#FF6B81", "#FFB3BD", "#FFB3BD"],
+      borderRadius: 8, barThickness: 36,
+    }]
+  },
+  options: {
+    responsive:true, maintainAspectRatio:false,
+    plugins: { legend:{ display:false },
+      tooltip: { callbacks: { label: function(ctx) { return ctx.raw + '%'; } } }
+    },
+    scales: {
+      y: { grid:{ display:false }, ticks:{ callback: function(v){ return v+'%'; } } },
+      x: { grid:{ display:false } }
+    }
+  }
+});
+
+// City Level Bar
+new Chart(document.getElementById('cityChart'), {
+  type: 'bar',
+  data: {
+    labels: ["\u4e00\u7ebf", "\u65b0\u4e00\u7ebf", "\u4e8c\u7ebf", "\u4e09\u7ebf", "\u56db\u7ebf", "\u4e94\u7ebf"],
+    datasets: [{
+      label: '占比(%)',
+      data: [18.42, 26.97, 20.07, 14.69, 10.73, 5.84],
+      backgroundColor: '#FF6B81', borderRadius: 8, barThickness: 30,
+    }]
+  },
+  options: {
+    responsive:true, maintainAspectRatio:false,
+    plugins: { legend:{ display:false } },
+    scales: {
+      y: { grid:{ display:false }, ticks:{ callback: function(v){ return v+'%'; } } },
+      x: { grid:{ display:false } }
+    }
+  }
+});
+
+// Region Horizontal Bar (TGI)
+new Chart(document.getElementById('regionChart'), {
+  type: 'bar',
+  data: {
+    labels: ["\u5317\u4eac", "\u4e0a\u6d77", "\u6210\u90fd", "\u6df1\u5733", "\u5e7f\u5dde", "\u676d\u5dde", "\u91cd\u5e86", "\u6b66\u6c49", "\u82cf\u5dde", "\u5357\u4eac"],
+    datasets: [{
+      label: 'TGI',
+      data: [161.59, 151.62, 144.96, 132.48, 117.01, 144.86, 106.13, 138.46, 127.82, 140.1],
+      backgroundColor: '#FF2442', borderRadius: 6, barThickness: 18,
+    }]
+  },
+  options: {
+    indexAxis: 'y',
+    responsive:true, maintainAspectRatio:false,
+    plugins: { legend:{ display:false } },
+    scales: {
+      x: { grid:{ display:false } },
+      y: { grid:{ display:false } }
+    }
+  }
+});
+
+// Consumption Bar
+new Chart(document.getElementById('consumeChart'), {
+  type: 'bar',
+  data: {
+    labels: ["\u4e2d\u6d88\u8d39", "\u9ad8\u6d88\u8d39", "\u4f4e\u6d88\u8d39"],
+    datasets: [{
+      label: '占比(%)',
+      data: [67.86, 28.53, 3.63],
+      backgroundColor: ['#00B365','#FF8800','#FF2442'],
+      borderRadius: 8, barThickness: 40,
+    }]
+  },
+  options: {
+    responsive:true, maintainAspectRatio:false,
+    plugins: { legend:{ display:false } },
+    scales: {
+      y: { grid:{ display:false }, ticks:{ callback: function(v){ return v+'%'; } } },
+      x: { grid:{ display:false } }
+    }
+  }
+});
+
+// Consume Amount Bar + TGI Line
+new Chart(document.getElementById('amountChart'), {
+  type: 'bar',
+  data: {
+    labels: ["0-300", "300-500", "500-1000", "1000-3000", "3000-5000", "5000\u4ee5\u4e0a"],
+    datasets: [
+      {
+        label: '占比(%)',
+        data: [59.6, 9.28, 11.1, 11.97, 3.23, 4.85],
+        backgroundColor: '#FF6B81', borderRadius: 6, barThickness: 24, yAxisID: 'y',
+      },
+      {
+        label: 'TGI',
+        data: [81.17, 122.25, 141.6, 170.25, 192.49, 197.51],
+        type: 'line', borderColor: '#3366FF', pointBackgroundColor: '#3366FF',
+        pointRadius: 5, tension: 0.3, yAxisID: 'y1',
+      }
+    ]
+  },
+  options: {
+    responsive:true, maintainAspectRatio:false,
+    plugins: { legend:{ position:'bottom', labels:{ font:{ size:11 } } } },
+    scales: {
+      y: { position:'left', grid:{ display:false }, ticks:{ callback: function(v){ return v+'%'; } } },
+      y1: { position:'right', grid:{ drawOnChartArea:false }, title:{ display:true, text:'TGI' } },
+      x: { grid:{ display:false } }
+    }
+  }
+});
+
+// Phone Brand Horizontal Bar
+new Chart(document.getElementById('phoneBrandChart'), {
+  type: 'bar',
+  data: {
+    labels: ["\u82f9\u679c", "\u534e\u4e3a", "\u5c0f\u7c73", "VIVO", "\u8363\u8000", "OPPO", "\u4e00\u52a0", "\u4e09\u661f", "\u771f\u6211", "\u79fb\u52a8"],
+    datasets: [{
+      label: '占比(%)',
+      data: [48.59, 18.98, 10.0, 7.27, 5.81, 5.77, 1.56, 1.46, 0.57, 0.03],
+      backgroundColor: ["#FF2442", "#FF2442", "#FF8800", "#FFB3BD", "#FFB3BD", "#FFB3BD", "#FFB3BD", "#FFB3BD", "#FFB3BD", "#FFB3BD"],
+      borderRadius: 8, barThickness: 28,
+    }]
+  },
+  options: {
+    indexAxis: 'y',
+    responsive:true, maintainAspectRatio:false,
+    plugins: { legend:{ display:false } },
+    scales: {
+      x: { grid:{ display:false }, ticks:{ callback: function(v){ return v+'%'; } } },
+      y: { grid:{ display:false } }
+    }
+  }
+});
+
+// Interest L2 Horizontal Bar (TGI)
+new Chart(document.getElementById('interestChart'), {
+  type: 'bar',
+  data: {
+    labels: ["\u65b0\u80fd\u6e90\u667a\u80fd", "\u770b\u8f66\u9009\u4e70", "\u6c7d\u8f66\u6587\u5316", "\u4e8c\u624b\u8f66", "\u7bee\u7403", "\u6c7d\u8f66\u5176\u4ed6", "\u6c11\u751f\u65b0\u95fb", "\u8db3\u7403", "\u6c7d\u8f66\u77e5\u8bc6", "\u5f71\u89c6\u63a8\u8350\uff08\u89c6\u9891\uff09", "\u7efc\u5408\u4f53\u80b2", "\u9a91\u884c"],
+    datasets: [{
+      label: 'TGI',
+      data: [985.67, 838.07, 451.28, 447.29, 362.96, 352.38, 333.68, 301.0, 271.57, 263.43, 257.11, 221.77],
+      backgroundColor: ["#FF2442", "#FF2442", "#FF8800", "#FF8800", "#FF8800", "#FF8800", "#FF8800", "#FF8800", "#FF8800", "#FF8800", "#FF8800", "#FF8800"],
+      borderRadius: 6, barThickness: 20,
+    }]
+  },
+  options: {
+    indexAxis: 'y',
+    responsive:true, maintainAspectRatio:false,
+    plugins: { legend:{ display:false } },
+    scales: {
+      x: { grid:{ display:false } },
+      y: { grid:{ display:false }, ticks:{ font:{ size:11 } } }
+    }
+  }
+});
+
+// Lifestyle Horizontal Bar (TGI)
+new Chart(document.getElementById('lifestyleChart'), {
+  type: 'bar',
+  data: {
+    labels: ["\u91ce\u8da3\u63a2\u7d22\u5bb6", "\u8d28\u611f\u7537\u58eb", "\u672a\u6765\u539f\u4f4f\u6c11", "\u81ea\u6211\u8d85\u8d8a\u8005", "\u9ad8\u6d88\u8017\u4e2d\u5e74", "\u6237\u5916\u6b22\u805a\u56e2", "\u81ea\u5728\u6237\u5916", "\u677e\u9a70\u7238\u5988", "\u81ea\u7531\u7545\u884c", "\u53cb\u4f34\u5f0f\u7236\u6bcd", "\u5fc3\u7075\u8fdc\u884c\u5ba2", "\u7f8e\u517b\u4f73\u4eba", "\u4f18\u5962\u4eab\u6cd5", "\u6c14\u573a\u7cbe\u82f1", "\u5fc3\u7075\u5947\u65c5"],
+    datasets: [{
+      label: 'TGI',
+      data: [910.02, 844.45, 680.74, 636.29, 611.35, 474.95, 435.02, 426.73, 425.16, 414.64, 394.09, 385.24, 384.8, 382.58, 371.24],
+      backgroundColor: ["#FF2442", "#FF2442", "#FF2442", "#FF2442", "#FF2442", "#FF8800", "#FF8800", "#FF8800", "#FF8800", "#FF8800", "#FFB3BD", "#FFB3BD", "#FFB3BD", "#FFB3BD", "#FFB3BD"],
+      borderRadius: 6, barThickness: 18,
+    }]
+  },
+  options: {
+    indexAxis: 'y',
+    responsive:true, maintainAspectRatio:false,
+    plugins: { legend:{ display:false } },
+    scales: {
+      x: { grid:{ display:false } },
+      y: { grid:{ display:false }, ticks:{ font:{ size:11 } } }
+    }
+  }
+});
+
+// Download
+function downloadImage() {
+  var el = document.getElementById('main-content');
+  html2canvas(el, { scale: 2.5, useCORS: true, allowTaint: true, backgroundColor: '#F8F9FA' }).then(function(canvas) {
+    var link = document.createElement('a');
+    link.download = 'insight-19559748-' + Date.now() + '.png';
+    link.href = canvas.toDataURL('image/png');
+    link.click();
+  });
+}
+</script>
+<script id="watermark-layer" src="./人群画像洞察报告 - 19559748_files/104101l0321575g2hnu06b2jtu1qg0000000000don4pjc"></script>
+
+<div id="__xhs_editor_toolbar__"><div id="__xhs_ext_hint__"><span>💡 使用无痕模式可避免浏览器插件干扰</span><span id="__xhs_ext_hint_close__" title="关闭提示">✕</span></div><div id="__xhs_editor_btnrow__"><button id="__xhs_editor_cancel__" class="xhs-editor-btn">✕ 退出</button><button id="__xhs_editor_mode__" class="xhs-editor-btn">🎨 切换样式</button><button id="__xhs_editor_save__" class="xhs-editor-btn">💾 保存</button></div></div><div id="__xhs_editor_status__"></div><div id="__xhs_css_panel__"><h4>🎨 样式调试</h4><div class="xhs-css-section-label">① 选择预设风格</div><select id="__xhs_style_select__"><option value="">— 不套用预设 —</option><option value="cyberpunk">赛博科技风</option><option value="minimal">极简优雅风</option><option value="apple">Apple 质感风</option><option value="cowork">Cowork轻科技风</option><option value="newspaper">报纸杂志风</option><option value="bloomberg">Bloomberg 终端风</option><option value="ink">水墨卷轴风</option><option value="steampunk">蒸汽朋克风</option><option value="xhs">小红书简洁</option><option value="xhs-fun">小红书丰富</option><option value="palace">故宫风</option><option value="morandi">莫兰迪高级灰风</option><option value="fresh">清新自然绿风</option><option value="earthy">大地原木风</option><option value="glass">玻璃拟态风</option><option value="dreamy">优雅紫梦幻风</option><option value="macaron">马卡龙粉彩风</option><option value="carbon">暗色极简风</option><option value="vivid">活力渐变风</option></select><div class="xhs-css-section-label">② 自定义 CSS（可选，覆盖预设）</div><textarea id="__xhs_custom_css_input__" placeholder="/* 在此写 CSS，实时预览，例如：*/
+body { background:#faf7f2; }
+h1 { color:#ff2442; }"></textarea><div id="__xhs_css_apply__">⚡ 应用预览（仅本地）</div><div class="xhs-css-hint"><label id="__xhs_css_auto_label__" title="勾选后修改样式立即预览；取消则需手动点应用"><input type="checkbox" id="__xhs_css_auto__" checked=""> 自动</label><span>预览仅本地，点保存才发布</span></div></div><div id="__xhs_confirm_mask__"><div id="__xhs_confirm_box__">  <div class="xhs-confirm-title" id="__xhs_confirm_title__">确认保存？</div>  <div class="xhs-confirm-msg" id="__xhs_confirm_msg__"></div>  <div class="xhs-confirm-btns">    <button id="__xhs_confirm_cancel__">取消</button>    <button id="__xhs_confirm_ok__">确认保存</button>  </div></div></div><div id="__xhs_watermark_layer__" style="position: fixed; top: 0px; left: 0px; width: 100%; height: 100%; z-index: 9999; pointer-events: none; background-image: url(&quot;data:image/png;base64,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&quot;); background-repeat: repeat; background-size: 250px 200px;"></div></body></html>
