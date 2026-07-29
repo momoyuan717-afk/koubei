@@ -1,0 +1,1110 @@
+<!DOCTYPE html>
+<!-- saved from url=(0094)https://cowork.xiaohongshu.com/g/query_dashboard/?dashboardId=3A7C8A49D78CDCF93CF6BB9EDFBADA98 -->
+<html lang="zh-CN"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<script id="xhs-inline-editor" src="./华为乾崑智驾系统 · 买点洞察报告_files/104101l0321jbnu5h7k06b2jtu1qg00000000009gnm4ss"></script>
+<script id="beta-mode-layer" src="./华为乾崑智驾系统 · 买点洞察报告_files/104101l0321575g8ink06b2jtu1qg00000000008d1sj62"></script>
+  <link rel="icon" href="https://picasso-static.xiaohongshu.com/fe-platform/49d0aa573e1b645939ee59afef61f774d4a25652.png">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>华为乾崑智驾系统 · 买点洞察报告</title>
+    <script src="./华为乾崑智驾系统 · 买点洞察报告_files/echarts.min.js"></script>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
+            background: linear-gradient(135deg, #0a0e1a 0%, #0d132b 50%, #0a0e1a 100%);
+            color: #e0e6f0;
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+        .container { max-width: 1400px; margin: 0 auto; padding: 20px; }
+        
+        /* Header */
+        .header {
+            text-align: center;
+            padding: 40px 0 30px;
+            border-bottom: 1px solid rgba(0, 168, 255, 0.2);
+            margin-bottom: 30px;
+        }
+        .header h1 {
+            font-size: 2.2rem;
+            background: linear-gradient(90deg, #00a8ff, #00d4aa, #00a8ff);
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 10px;
+            animation: shimmer 3s linear infinite;
+        }
+        @keyframes shimmer { to { background-position: 200% center; } }
+        .header .subtitle { color: #7a8bb0; font-size: 0.95rem; }
+        .header .meta { color: #5a6a8a; font-size: 0.85rem; margin-top: 8px; }
+        
+        /* Cards */
+        .card {
+            background: linear-gradient(145deg, rgba(20, 28, 58, 0.9), rgba(15, 22, 45, 0.95));
+            border: 1px solid rgba(0, 168, 255, 0.15);
+            border-radius: 16px;
+            padding: 24px;
+            margin-bottom: 24px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .card:hover { transform: translateY(-2px); box-shadow: 0 12px 40px rgba(0, 168, 255, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.08); }
+        .card-title {
+            font-size: 1.2rem;
+            color: #00a8ff;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .card-title::before {
+            content: '';
+            display: inline-block;
+            width: 4px;
+            height: 20px;
+            background: linear-gradient(180deg, #00a8ff, #00d4aa);
+            border-radius: 2px;
+        }
+        
+        /* Charts */
+        .chart-container { width: 100%; height: 400px; }
+        .chart-row { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+        @media (max-width: 900px) { .chart-row { grid-template-columns: 1fr; } }
+        
+        /* Summary */
+        .summary-box {
+            background: linear-gradient(135deg, rgba(0, 168, 255, 0.08), rgba(0, 212, 170, 0.05));
+            border: 1px solid rgba(0, 168, 255, 0.2);
+            border-radius: 12px;
+            padding: 20px 24px;
+            margin-bottom: 24px;
+        }
+        .summary-box p { color: #b0c4e0; font-size: 0.95rem; line-height: 1.8; }
+        .summary-box strong { color: #00d4aa; }
+        
+        /* Buy Point Cards */
+        .bp-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 16px; }
+        .bp-card {
+            background: linear-gradient(145deg, rgba(25, 35, 65, 0.9), rgba(18, 26, 50, 0.95));
+            border: 1px solid rgba(0, 168, 255, 0.12);
+            border-radius: 12px;
+            padding: 20px;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+        .bp-card:hover { border-color: rgba(0, 168, 255, 0.3); transform: translateY(-3px); }
+        .bp-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 3px;
+            border-radius: 3px 3px 0 0;
+        }
+        .bp-card.s::before { background: linear-gradient(90deg, #ff6b6b, #ff8e53); }
+        .bp-card.a::before { background: linear-gradient(90deg, #00a8ff, #00d4aa); }
+        .bp-card.b::before { background: linear-gradient(90deg, #a0a0a0, #c0c0c0); }
+        .bp-badge {
+            display: inline-block;
+            padding: 2px 10px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+        .bp-badge.s { background: rgba(255, 107, 107, 0.15); color: #ff6b6b; border: 1px solid rgba(255, 107, 107, 0.3); }
+        .bp-badge.a { background: rgba(0, 168, 255, 0.15); color: #00a8ff; border: 1px solid rgba(0, 168, 255, 0.3); }
+        .bp-badge.b { background: rgba(160, 160, 160, 0.15); color: #a0a0a0; border: 1px solid rgba(160, 160, 160, 0.3); }
+        .bp-title { font-size: 1rem; font-weight: 600; color: #e0e6f0; margin-bottom: 8px; }
+        .bp-desc { font-size: 0.85rem; color: #8a9bb8; line-height: 1.6; }
+        .bp-metrics { display: flex; gap: 16px; margin-top: 12px; padding-top: 12px; border-top: 1px solid rgba(255, 255, 255, 0.05); }
+        .bp-metric { text-align: center; }
+        .bp-metric-value { font-size: 1.1rem; font-weight: 700; color: #00d4aa; }
+        .bp-metric-label { font-size: 0.7rem; color: #5a6a8a; margin-top: 2px; }
+        
+        /* Tables */
+        .data-table { width: 100%; border-collapse: collapse; font-size: 0.85rem; }
+        .data-table th {
+            background: rgba(0, 168, 255, 0.1);
+            color: #00a8ff;
+            padding: 10px 12px;
+            text-align: left;
+            font-weight: 600;
+            border-bottom: 1px solid rgba(0, 168, 255, 0.2);
+        }
+        .data-table td {
+            padding: 10px 12px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            color: #b0c4e0;
+        }
+        .data-table tr:hover td { background: rgba(0, 168, 255, 0.03); }
+        .data-table .s-row { border-left: 3px solid #ff6b6b; }
+        .data-table .a-row { border-left: 3px solid #00a8ff; }
+        
+        /* Footer */
+        .footer { text-align: center; padding: 30px; color: #5a6a8a; font-size: 0.8rem; }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header h1 { font-size: 1.5rem; }
+            .bp-grid { grid-template-columns: 1fr; }
+            .chart-container { height: 300px; }
+        }
+    </style>
+<script src="./华为乾崑智驾系统 · 买点洞察报告_files/uba-script.js"></script><style id="__xhs_editor_style__">
+    #__xhs_editor_toolbar__ {
+      position: fixed;
+      top: 24px;
+      right: 24px;
+      z-index: 99998;
+      display: none;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 8px;
+    }
+    /* 按钮行容器：保持原横向排列 */
+    #__xhs_editor_btnrow__ {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    /* 无痕建议提示条：按钮正上方淡色字 + 关闭按钮，常驻显示，可关闭 */
+    #__xhs_ext_hint__ {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      max-width: 360px;
+      padding: 6px 12px;
+      border-radius: 14px;
+      background: rgba(255,255,255,0.9);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+      font-size: 12px;
+      line-height: 1.4;
+      color: #9a9a9a;
+      font-family: -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif;
+    }
+    #__xhs_ext_hint_close__ {
+      flex: none;
+      cursor: pointer;
+      color: #bbb;
+      font-size: 14px;
+      line-height: 1;
+      padding: 0 2px;
+      user-select: none;
+    }
+    #__xhs_ext_hint_close__:hover { color: #666; }
+    .xhs-editor-btn {
+      height: 36px;
+      padding: 0 16px;
+      border-radius: 18px;
+      border: none;
+      cursor: pointer;
+      font-size: 13px;
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: opacity 0.15s;
+      white-space: nowrap;
+      font-family: -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif;
+    }
+    .xhs-editor-btn:hover { opacity: 0.85; }
+    .xhs-editor-btn:disabled { opacity: 0.6; cursor: not-allowed; }
+    #__xhs_editor_save__ {
+      background: #ff2442;
+      color: #fff;
+      box-shadow: 0 4px 12px rgba(255,36,66,0.4);
+    }
+    #__xhs_editor_cancel__ {
+      background: #fff;
+      color: #555;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+    }
+    /* toast：紧贴右上工具栏下方、CSS 调试面板上方那条窄带
+       工具栏 top:24 + height:36 ≈ 60；CSS 面板 top:130 → toast 放在 72~118 之间最合适 */
+    #__xhs_editor_status__ {
+      position: fixed !important;
+      top: 80px !important;
+      left: 50% !important;
+      transform: translateX(-50%) !important;
+      max-width: min(520px, calc(100vw - 48px)) !important;
+      z-index: 99999 !important;
+      padding: 8px 14px !important;
+      border-radius: 8px !important;
+      font-size: 13px !important;
+      font-family: -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif !important;
+      pointer-events: none !important;
+      opacity: 0;
+      transition: opacity 0.2s !important;
+      line-height: 1.5 !important;
+      word-break: break-all !important;
+      white-space: pre-wrap !important;
+      text-align: center !important;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.25) !important;
+    }
+    #__xhs_editor_status__.ok {
+      background: rgba(22,163,74,0.92) !important;
+      color: #fff !important;
+    }
+    #__xhs_editor_status__.warn {
+      background: rgba(217,119,6,0.92) !important;
+      color: #fff !important;
+    }
+    #__xhs_editor_status__.err {
+      background: rgba(220,38,38,0.92) !important;
+      color: #fff !important;
+    }
+    #__xhs_editor_status__.info {
+      background: rgba(30,30,30,0.88) !important;
+      color: #fff !important;
+    }
+    /* 编辑模式高亮 */
+    body.xhs-edit-mode [contenteditable="true"] {
+      outline: 1.5px dashed rgba(255,36,66,0.45) !important;
+      border-radius: 3px;
+      cursor: text;
+    }
+    body.xhs-edit-mode [contenteditable="true"]:focus {
+      outline: 2px solid #ff2442 !important;
+      background: rgba(255,36,66,0.04) !important;
+    }
+    /* ── 模式切换按钮 ── */
+    #__xhs_editor_mode__ {
+      background: #fff;
+      color: #333;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+    }
+    /* ── CSS 调试面板 ── */
+    /* 面板布局：固定在右侧、占主要窗口高度、内部 flex column，textarea 撑满剩余空间 */
+    /* top 从 72 下移到 130，让出"切换按钮下方"那条 58px 空白给 toast */
+    #__xhs_css_panel__ {
+      position: fixed !important;
+      top: 130px !important;
+      right: 24px !important;
+      bottom: 24px !important;             /* 撑到接近底部 */
+      height: calc(100vh - 154px) !important;
+      max-height: calc(100vh - 154px) !important;
+      z-index: 99997 !important;
+      width: 380px !important;
+      max-width: calc(100vw - 48px) !important;
+      display: none;                       /* JS 切换为 flex */
+      flex-direction: column !important;
+      background: rgba(20,20,28,0.97) !important;
+      border: 1px solid rgba(255,255,255,0.12) !important;
+      border-radius: 14px !important;
+      padding: 16px !important;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.45) !important;
+      color: #e8e8f0 !important;
+      font-family: -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif !important;
+      font-size: 13px !important;
+      box-sizing: border-box !important;
+      overflow: hidden !important;         /* 内部 flex 控滚动，避免双滚动条 */
+      padding: 12px 14px !important;       /* 覆盖前面 16px，紧凑 */
+    }
+    #__xhs_css_panel__ * {
+      box-sizing: border-box !important;
+      font-family: inherit !important;     /* 阻止外部样式渗透 */
+    }
+    #__xhs_css_panel__ h4 {
+      margin: 0 0 6px 0 !important;        /* 紧凑：原 10 → 6 */
+      font-size: 12px !important;
+      font-weight: 600 !important;
+      letter-spacing: 0.05em !important;
+      color: #aaa !important;
+      text-transform: uppercase !important;
+      background: transparent !important;
+      padding: 0 !important;
+      border: 0 !important;
+    }
+    #__xhs_css_panel__ .xhs-css-section-label {
+      font-size: 12px !important;
+      color: #9aa !important;
+      margin: 8px 0 4px !important;        /* 紧凑：原 12/6 → 8/4 */
+      font-weight: 600 !important;
+    }
+    #__xhs_style_select__ {
+      width: 100% !important;
+      padding: 7px 10px !important;
+      border-radius: 8px !important;
+      border: 1px solid rgba(255,255,255,0.18) !important;
+      background: rgba(255,255,255,0.06) !important;
+      color: #e8e8f0 !important;
+      font-size: 13px !important;
+      outline: none !important;
+      appearance: auto !important;
+      height: auto !important;
+    }
+    #__xhs_style_select__ option { background: #1a1a24 !important; color: #e8e8f0 !important; }
+    /* textarea 占据剩余空间（flex column 子项） */
+    #__xhs_custom_css_input__ {
+      width: 100% !important;
+      flex: 1 1 0 !important;              /* 关键：basis=0 让所有剩余空间归 textarea */
+      min-height: 0 !important;            /* 解除浏览器默认 min-content 高度限制 */
+      margin-top: 4px !important;
+      padding: 10px !important;
+      border-radius: 8px !important;
+      border: 1px solid rgba(255,255,255,0.18) !important;
+      background: rgba(255,255,255,0.06) !important;
+      color: #d8f0d8 !important;
+      font-family: "SF Mono", Menlo, Consolas, monospace !important;
+      font-size: 12px !important;
+      line-height: 1.5 !important;
+      resize: none !important;             /* 由 flex 控高，不再手动 resize */
+      outline: none !important;
+      box-sizing: border-box !important;
+      overflow-y: auto !important;
+      height: auto !important;             /* 避免外部样式锁死 height */
+    }
+    #__xhs_custom_css_input__:focus { border-color: #ff2442 !important; }
+    /* 应用预览按钮行：自动 checkbox + 应用按钮 横向排列 */
+    #__xhs_css_auto_label__ {
+      display: inline-flex !important;
+      align-items: center !important;
+      gap: 4px !important;
+      flex-shrink: 0 !important;
+      font-size: 11px !important;
+      color: #c7d2fe !important;
+      cursor: pointer !important;
+      user-select: none !important;
+      white-space: nowrap !important;
+    }
+    #__xhs_css_auto__ {
+      width: 13px !important;
+      height: 13px !important;
+      margin: 0 !important;
+      cursor: pointer !important;
+      accent-color: #6366f1 !important;
+    }
+    #__xhs_css_apply__ {
+      display: block !important;
+      width: 100% !important;              /* 按钮独占一行 */
+      margin-top: 8px !important;
+      padding: 7px 0 !important;
+      background: rgba(99,102,241,0.3) !important;
+      border: 1px solid rgba(99,102,241,0.5) !important;
+      border-radius: 8px !important;
+      color: #c7d2fe !important;
+      font-size: 12px !important;
+      font-weight: 600 !important;
+      text-align: center !important;
+      cursor: pointer !important;
+      flex-shrink: 0 !important;
+      height: auto !important;
+    }
+    #__xhs_css_apply__:hover { background: rgba(99,102,241,0.5) !important; }
+    /* hint 行：自动 checkbox + 说明文字 横向居中同行 */
+    #__xhs_css_panel__ .xhs-css-hint {
+      display: flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      gap: 8px !important;
+      margin-top: 6px !important;          /* 紧凑：原 8 → 6 */
+      font-size: 11px !important;
+      color: #888 !important;
+      line-height: 1.45 !important;
+      flex-shrink: 0 !important;
+    }
+    /* ── 自绘确认弹层 ── */
+    #__xhs_confirm_mask__ {
+      position: fixed;
+      inset: 0;
+      z-index: 100000;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      background: rgba(0,0,0,0.45);
+    }
+    #__xhs_confirm_box__ {
+      background: #fff;
+      border-radius: 16px;
+      padding: 24px 28px;
+      max-width: 380px;
+      width: 86%;
+      box-shadow: 0 12px 48px rgba(0,0,0,0.3);
+      font-family: -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif;
+    }
+    #__xhs_confirm_box__ .xhs-confirm-title {
+      font-size: 16px;
+      font-weight: 600;
+      color: #1a1a1a;
+      margin-bottom: 10px;
+    }
+    #__xhs_confirm_box__ .xhs-confirm-msg {
+      font-size: 13px;
+      color: #666;
+      line-height: 1.6;
+      margin-bottom: 20px;
+    }
+    #__xhs_confirm_box__ .xhs-confirm-btns {
+      display: flex;
+      gap: 12px;
+      justify-content: flex-end;
+    }
+    #__xhs_confirm_box__ button {
+      height: 38px;
+      padding: 0 20px;
+      border-radius: 10px;
+      border: none;
+      cursor: pointer;
+      font-size: 13px;
+      font-weight: 500;
+    }
+    #__xhs_confirm_cancel__ { background: #f0f0f0; color: #555; }
+    #__xhs_confirm_ok__ { background: #ff2442; color: #fff; }
+    /* ── 🛡️ 编辑器 UI 隔离层：阻断外部 CSS（含 CSS 调试预览）渗透 ── */
+    /* 关键：CSS 调试预览注入的 <style id="__xhs_css_debug__"> 是给业务 HTML 设计的，
+       常含 body / * / html 通配选择器，会污染编辑器自身 UI。这里用 !important 锁死
+       编辑器关键样式，确保切预设/写自定义 CSS 时编辑器面板/按钮/toast/确认框不变样。 */
+    #__xhs_editor_toolbar__,
+    #__xhs_editor_toolbar__ *,
+    #__xhs_editor_status__,
+    #__xhs_editor_mode__,
+    #__xhs_css_panel__,
+    #__xhs_css_panel__ *,
+    #__xhs_confirm_mask__,
+    #__xhs_confirm_box__,
+    #__xhs_confirm_box__ * {
+      box-sizing: border-box !important;
+      text-shadow: none !important;
+      letter-spacing: normal !important;
+      text-transform: none !important;
+      transform: none !important;       /* 阻止外部 transform 把编辑器拉歪 */
+      animation: none !important;       /* 阻止外部 animation */
+      filter: none !important;
+    }
+    /* status toast 需要 translateX(-50%) 水平居中，必须从上面 transform:none 中豁免。
+       放在隔离段之后用同等 !important 覆盖回来（否则 toast 偏右压住右上角按钮）。 */
+    #__xhs_editor_status__ { transform: translateX(-50%) !important; }
+    /* toolbar/按钮的关键背景与颜色锁定（覆盖任何外部样式）*/
+    #__xhs_editor_toolbar__ { background: transparent !important; }
+    #__xhs_editor_save__ { background: #ff2442 !important; color: #fff !important; }
+    #__xhs_editor_cancel__ { background: rgba(255,255,255,0.95) !important; color: #333 !important; }
+    #__xhs_editor_mode__ { background: rgba(255,255,255,0.95) !important; color: #333 !important; }
+    #__xhs_confirm_box__ { background: #fff !important; color: #222 !important; }
+    #__xhs_confirm_cancel__ { background: #f0f0f0 !important; color: #555 !important; }
+    #__xhs_confirm_ok__ { background: #ff2442 !important; color: #fff !important; }
+  </style></head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>华为乾崑智驾系统 · 买点洞察报告</h1>
+            <div class="subtitle">基于灵犀平台数据的消费者决策因素与营销机会分析</div>
+            <div class="meta">分析周期：2026-04-28 至 2026-07-26 | 品牌：华为乾崑智驾系统（brandId: 751966）</div>
+        </div>
+
+        <!-- 核心发现 -->
+        <div class="summary-box">
+            <p>📌 <strong>核心发现</strong>：华为乾崑智驾系统在小红书平台存在 <strong>11 个潜力买点</strong>，核心差异化方向为「智驾技术心智空白 + 品牌架构认知混乱 + 场景化内容蓝海」的三重机会窗口。其中，<strong>智驾/辅助驾驶</strong>在搜索端完全空白但内容端爆发增长（+55.5%），<strong>乾崑 vs 鸿蒙品牌辨析</strong>搜索环比暴涨 +43,800%，<strong>ADS 技术版本对比</strong>存在严重供给断层——三者共同构成当前最高优先级的营销机会。</p>
+        </div>
+
+        <!-- 买点评级矩阵气泡图 -->
+        <div class="card">
+            <div class="card-title">买点评级矩阵（搜索热度 × 互动效率 × 供给缺口）</div>
+            <div id="bubbleChart" class="chart-container" _echarts_instance_="ec_1785319052325" style="user-select: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); position: relative;"><div style="position: relative; width: 1310px; height: 400px; padding: 0px; margin: 0px; border-width: 0px; cursor: default;"><canvas data-zr-dom-id="zr_0" width="2620" height="800" style="position: absolute; left: 0px; top: 0px; width: 1310px; height: 400px; user-select: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); padding: 0px; margin: 0px; border-width: 0px;"></canvas></div><div class=""></div></div>
+        </div>
+
+        <!-- 图表行1 -->
+        <div class="chart-row">
+            <div class="card">
+                <div class="card-title">行业搜索词主题分布</div>
+                <div id="pieChart" class="chart-container" _echarts_instance_="ec_1785319052326" style="user-select: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); position: relative;"><div style="position: relative; width: 618px; height: 400px; padding: 0px; margin: 0px; border-width: 0px;"><canvas data-zr-dom-id="zr_0" width="1236" height="800" style="position: absolute; left: 0px; top: 0px; width: 618px; height: 400px; user-select: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); padding: 0px; margin: 0px; border-width: 0px;"></canvas></div><div class=""></div></div>
+            </div>
+            <div class="card">
+                <div class="card-title">本品搜索词方向分布</div>
+                <div id="barChart" class="chart-container" _echarts_instance_="ec_1785319052327" style="user-select: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); position: relative;"><div style="position: relative; width: 618px; height: 400px; padding: 0px; margin: 0px; border-width: 0px;"><canvas data-zr-dom-id="zr_0" width="1236" height="800" style="position: absolute; left: 0px; top: 0px; width: 618px; height: 400px; user-select: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); padding: 0px; margin: 0px; border-width: 0px;"></canvas></div><div class=""></div></div>
+            </div>
+        </div>
+
+        <!-- 图表行2 -->
+        <div class="chart-row">
+            <div class="card">
+                <div class="card-title">场景型 vs 配置型互动率对比</div>
+                <div id="compareChart" class="chart-container" _echarts_instance_="ec_1785319052328" style="user-select: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); position: relative;"><div style="position: relative; width: 618px; height: 400px; padding: 0px; margin: 0px; border-width: 0px;"><canvas data-zr-dom-id="zr_0" width="1236" height="800" style="position: absolute; left: 0px; top: 0px; width: 618px; height: 400px; user-select: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); padding: 0px; margin: 0px; border-width: 0px;"></canvas></div><div class=""></div></div>
+            </div>
+            <div class="card">
+                <div class="card-title">人群画像雷达图</div>
+                <div id="radarChart" class="chart-container" _echarts_instance_="ec_1785319052329" style="user-select: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); position: relative;"><div style="position: relative; width: 618px; height: 400px; padding: 0px; margin: 0px; border-width: 0px;"><canvas data-zr-dom-id="zr_0" width="1236" height="800" style="position: absolute; left: 0px; top: 0px; width: 618px; height: 400px; user-select: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); padding: 0px; margin: 0px; border-width: 0px;"></canvas></div><div class=""></div></div>
+            </div>
+        </div>
+
+        <!-- 买点卡片 -->
+        <div class="card">
+            <div class="card-title">11 个核心买点全景</div>
+            <div class="bp-grid">
+                <div class="bp-card s">
+                    <span class="bp-badge s">S级 · 抢占机会</span>
+                    <div class="bp-title">智驾技术心智空白</div>
+                    <div class="bp-desc">搜索端完全空白，但笔记端智驾阅读量环比 +55.5%，互动率 3.76%。谁先占领搜索词，谁拿心智红利。</div>
+                    <div class="bp-metrics">
+                        <div class="bp-metric"><div class="bp-metric-value">+55.5%</div><div class="bp-metric-label">阅读量环比</div></div>
+                        <div class="bp-metric"><div class="bp-metric-value">3.76%</div><div class="bp-metric-label">互动率</div></div>
+                        <div class="bp-metric"><div class="bp-metric-value">0</div><div class="bp-metric-label">搜索端出现</div></div>
+                    </div>
+                </div>
+                <div class="bp-card s">
+                    <span class="bp-badge s">S级 · 抢占机会</span>
+                    <div class="bp-title">品牌架构认知混乱</div>
+                    <div class="bp-desc">"乾崑 vs 鸿蒙智驾区别"搜索环比 +43,800%，用户因品牌矩阵复杂而困惑，笔记侧无对比型科普。</div>
+                    <div class="bp-metrics">
+                        <div class="bp-metric"><div class="bp-metric-value">+43,800%</div><div class="bp-metric-label">搜索环比</div></div>
+                        <div class="bp-metric"><div class="bp-metric-value">1,608</div><div class="bp-metric-label">搜索量</div></div>
+                        <div class="bp-metric"><div class="bp-metric-value">空白</div><div class="bp-metric-label">笔记供给</div></div>
+                    </div>
+                </div>
+                <div class="bp-card s">
+                    <span class="bp-badge s">S级 · 抢占机会</span>
+                    <div class="bp-title">ADS 版本供给断层</div>
+                    <div class="bp-desc">ADS Pro 搜索环比 +4,800%，用户主动搜索技术版本差异，但笔记侧无版本级对比内容。</div>
+                    <div class="bp-metrics">
+                        <div class="bp-metric"><div class="bp-metric-value">+4,800%</div><div class="bp-metric-label">ADS Pro环比</div></div>
+                        <div class="bp-metric"><div class="bp-metric-value">1,850</div><div class="bp-metric-label">合计搜索量</div></div>
+                        <div class="bp-metric"><div class="bp-metric-value">断层</div><div class="bp-metric-label">笔记供给</div></div>
+                    </div>
+                </div>
+                <div class="bp-card a">
+                    <span class="bp-badge a">A级 · 重点储备</span>
+                    <div class="bp-title">家用场景安全守护</div>
+                    <div class="bp-desc">"家用"互动量 876,731（全场第一），阅读量 2,607 万（全场第一），且仍在增长（+19.5%）。</div>
+                    <div class="bp-metrics">
+                        <div class="bp-metric"><div class="bp-metric-value">876K</div><div class="bp-metric-label">互动量</div></div>
+                        <div class="bp-metric"><div class="bp-metric-value">2,607万</div><div class="bp-metric-label">阅读量</div></div>
+                        <div class="bp-metric"><div class="bp-metric-value">+19.5%</div><div class="bp-metric-label">阅读量环比</div></div>
+                    </div>
+                </div>
+                <div class="bp-card a">
+                    <span class="bp-badge a">A级 · 重点储备</span>
+                    <div class="bp-title">停车场智能泊车</div>
+                    <div class="bp-desc">停车场互动率 6.03%（全场最高），话题粘性极强，与智驾自动泊车功能天然契合。</div>
+                    <div class="bp-metrics">
+                        <div class="bp-metric"><div class="bp-metric-value">6.03%</div><div class="bp-metric-label">互动率</div></div>
+                        <div class="bp-metric"><div class="bp-metric-value">269K</div><div class="bp-metric-label">互动量</div></div>
+                        <div class="bp-metric"><div class="bp-metric-value">446万</div><div class="bp-metric-label">阅读量</div></div>
+                    </div>
+                </div>
+                <div class="bp-card a">
+                    <span class="bp-badge a">A级 · 重点储备</span>
+                    <div class="bp-title">女性/新手破圈</div>
+                    <div class="bp-desc">"女生"单篇互动 225.9（全场最高），但搜索侧几乎空白——典型的内容引领型破圈机会。</div>
+                    <div class="bp-metrics">
+                        <div class="bp-metric"><div class="bp-metric-value">225.9</div><div class="bp-metric-label">单篇互动</div></div>
+                        <div class="bp-metric"><div class="bp-metric-value">1,334万</div><div class="bp-metric-label">阅读量</div></div>
+                        <div class="bp-metric"><div class="bp-metric-value">空白</div><div class="bp-metric-label">搜索覆盖</div></div>
+                    </div>
+                </div>
+                <div class="bp-card a">
+                    <span class="bp-badge a">A级 · 重点储备</span>
+                    <div class="bp-title">通勤智驾体验</div>
+                    <div class="bp-desc">通勤互动率 4.20%，与城区 NOA 功能天然契合——通勤路线固定，智驾学习效果最好。</div>
+                    <div class="bp-metrics">
+                        <div class="bp-metric"><div class="bp-metric-value">4.20%</div><div class="bp-metric-label">互动率</div></div>
+                        <div class="bp-metric"><div class="bp-metric-value">310K</div><div class="bp-metric-label">互动量</div></div>
+                        <div class="bp-metric"><div class="bp-metric-value">737万</div><div class="bp-metric-label">阅读量</div></div>
+                    </div>
+                </div>
+                <div class="bp-card a">
+                    <span class="bp-badge a">A级 · 重点储备</span>
+                    <div class="bp-title">鸿蒙座舱日常体验</div>
+                    <div class="bp-desc">鸿蒙座舱互动率 5.38%（全品类最高之一），但搜索量环比下滑，需从新品热度转向日常体验。</div>
+                    <div class="bp-metrics">
+                        <div class="bp-metric"><div class="bp-metric-value">5.38%</div><div class="bp-metric-label">互动率</div></div>
+                        <div class="bp-metric"><div class="bp-metric-value">-40%~-76%</div><div class="bp-metric-label">搜索环比</div></div>
+                        <div class="bp-metric"><div class="bp-metric-value">688篇</div><div class="bp-metric-label">供给稀缺</div></div>
+                    </div>
+                </div>
+                <div class="bp-card a">
+                    <span class="bp-badge a">A级 · 重点储备</span>
+                    <div class="bp-title">露营/户外长途智驾</div>
+                    <div class="bp-desc">露营互动率 5.04%（全场第二），与新能源车"外放电""车载冰箱"等功能关联。</div>
+                    <div class="bp-metrics">
+                        <div class="bp-metric"><div class="bp-metric-value">5.04%</div><div class="bp-metric-label">互动率</div></div>
+                        <div class="bp-metric"><div class="bp-metric-value">355K</div><div class="bp-metric-label">互动量</div></div>
+                        <div class="bp-metric"><div class="bp-metric-value">706万</div><div class="bp-metric-label">阅读量</div></div>
+                    </div>
+                </div>
+                <div class="bp-card a">
+                    <span class="bp-badge a">A级 · 重点储备</span>
+                    <div class="bp-title">性价比价值叙事</div>
+                    <div class="bp-desc">"便宜"阅读量环比 +34.2%，价格敏感度上升，需将智驾从"高端配置"重新定义为"必备配置"。</div>
+                    <div class="bp-metrics">
+                        <div class="bp-metric"><div class="bp-metric-value">+34.2%</div><div class="bp-metric-label">便宜环比</div></div>
+                        <div class="bp-metric"><div class="bp-metric-value">911万</div><div class="bp-metric-label">阅读量</div></div>
+                        <div class="bp-metric"><div class="bp-metric-value">+5.25%</div><div class="bp-metric-label">性价比环比</div></div>
+                    </div>
+                </div>
+                <div class="bp-card a">
+                    <span class="bp-badge a">A级 · 重点储备</span>
+                    <div class="bp-title">试驾活动线上转化</div>
+                    <div class="bp-desc">试驾/活动类搜索合计 2,607，但笔记侧完全空白——用户已产生体验意愿，但线上内容未跟上。</div>
+                    <div class="bp-metrics">
+                        <div class="bp-metric"><div class="bp-metric-value">2,607</div><div class="bp-metric-label">搜索量</div></div>
+                        <div class="bp-metric"><div class="bp-metric-value">+14,200%</div><div class="bp-metric-label">用户日环比</div></div>
+                        <div class="bp-metric"><div class="bp-metric-value">空白</div><div class="bp-metric-label">笔记供给</div></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 买点优先级矩阵表格 -->
+        <div class="card">
+            <div class="card-title">买点优先级决策矩阵</div>
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>评级</th>
+                        <th>买点名称</th>
+                        <th>搜索热度</th>
+                        <th>互动效率</th>
+                        <th>供给缺口</th>
+                        <th>增长势能</th>
+                        <th>战略契合度</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="s-row">
+                        <td><span class="bp-badge s">S</span></td>
+                        <td>智驾技术心智空白</td>
+                        <td>⬜ 空白</td>
+                        <td>🟢 高（3.76%）</td>
+                        <td>🔴 蓝海</td>
+                        <td>🟢 爆发（+55.5%）</td>
+                        <td>🟢 直接相关</td>
+                    </tr>
+                    <tr class="s-row">
+                        <td><span class="bp-badge s">S</span></td>
+                        <td>品牌架构认知混乱</td>
+                        <td>🟢 高（1,608）</td>
+                        <td>⬜ 无对应</td>
+                        <td>🔴 空白</td>
+                        <td>🟢 爆发（+43,800%）</td>
+                        <td>🟢 直接相关</td>
+                    </tr>
+                    <tr class="s-row">
+                        <td><span class="bp-badge s">S</span></td>
+                        <td>ADS 版本供给断层</td>
+                        <td>🟢 高（1,850）</td>
+                        <td>🟡 偏低（27.9）</td>
+                        <td>🔴 断层</td>
+                        <td>🟢 爆发（+4,800%）</td>
+                        <td>🟢 直接相关</td>
+                    </tr>
+                    <tr class="a-row">
+                        <td><span class="bp-badge a">A</span></td>
+                        <td>家用场景安全守护</td>
+                        <td>⬜ 空白</td>
+                        <td>🟢 极高（2,607万）</td>
+                        <td>🟢 供给充足</td>
+                        <td>🟢 增长（+19.5%）</td>
+                        <td>🟢 直接相关</td>
+                    </tr>
+                    <tr class="a-row">
+                        <td><span class="bp-badge a">A</span></td>
+                        <td>停车场智能泊车</td>
+                        <td>⬜ 空白</td>
+                        <td>🟢 极高（6.03%）</td>
+                        <td>🟡 中等</td>
+                        <td>🟡 稳定</td>
+                        <td> 直接相关</td>
+                    </tr>
+                    <tr class="a-row">
+                        <td><span class="bp-badge a">A</span></td>
+                        <td>女性/新手破圈</td>
+                        <td>⬜ 空白</td>
+                        <td>🟢 高（单篇 225.9）</td>
+                        <td>🟡 中等</td>
+                        <td>🟡 稳定</td>
+                        <td>🟢 直接相关</td>
+                    </tr>
+                    <tr class="a-row">
+                        <td><span class="bp-badge a">A</span></td>
+                        <td>通勤智驾体验</td>
+                        <td>⬜ 空白</td>
+                        <td>🟢 高（4.20%）</td>
+                        <td>🟡 中等</td>
+                        <td>🟡 稳定</td>
+                        <td>🟢 直接相关</td>
+                    </tr>
+                    <tr class="a-row">
+                        <td><span class="bp-badge a">A</span></td>
+                        <td>鸿蒙座舱日常体验</td>
+                        <td>🟡 下滑</td>
+                        <td> 极高（5.38%）</td>
+                        <td>🟢 蓝海</td>
+                        <td> 下滑</td>
+                        <td> 直接相关</td>
+                    </tr>
+                    <tr class="a-row">
+                        <td><span class="bp-badge a">A</span></td>
+                        <td>露营/户外长途智驾</td>
+                        <td>⬜ 空白</td>
+                        <td>🟢 高（5.04%）</td>
+                        <td>🟡 中等</td>
+                        <td>🟡 稳定</td>
+                        <td> 直接相关</td>
+                    </tr>
+                    <tr class="a-row">
+                        <td><span class="bp-badge a">A</span></td>
+                        <td>性价比价值叙事</td>
+                        <td>🟡 弱</td>
+                        <td>🟢 高（+34.2%）</td>
+                        <td>🟡 中等</td>
+                        <td>🟢 增长</td>
+                        <td>🟡 间接相关</td>
+                    </tr>
+                    <tr class="a-row">
+                        <td><span class="bp-badge a">A</span></td>
+                        <td>试驾活动线上转化</td>
+                        <td> 高（2,607）</td>
+                        <td>⬜ 无对应</td>
+                        <td> 空白</td>
+                        <td>🟢 爆发（+14,200%）</td>
+                        <td> 直接相关</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- 行动建议 -->
+        <div class="card">
+            <div class="card-title">行动建议总结</div>
+            <table class="data-table">
+                <thead>
+                    <tr><th>优先级</th><th>买点</th><th>核心动作</th><th>预期效果</th><th>负责角色</th></tr>
+                </thead>
+                <tbody>
+                    <tr class="s-row">
+                        <td> P0</td>
+                        <td>智驾技术心智空白</td>
+                        <td>搜索词抢占 + 内容加投（智驾实测类）</td>
+                        <td>占领搜索心智，建立品牌 = 品类认知</td>
+                        <td>搜索投放 + 内容运营</td>
+                    </tr>
+                    <tr class="s-row">
+                        <td>🥈 P0</td>
+                        <td>品牌架构认知混乱</td>
+                        <td>产出"一图看懂华为汽车生态"科普 + SEO 承接</td>
+                        <td>消除认知门槛，降低品牌流失率</td>
+                        <td>品牌公关 + 内容运营</td>
+                    </tr>
+                    <tr class="s-row">
+                        <td> P0</td>
+                        <td>ADS 版本供给断层</td>
+                        <td>紧急产出 ADS 版本横评 + KOL 合作</td>
+                        <td>承接技术选型搜索流量，缩短决策链路</td>
+                        <td>内容运营 + KOL 合作</td>
+                    </tr>
+                    <tr class="a-row">
+                        <td>P1</td>
+                        <td>家用场景安全守护</td>
+                        <td>家庭场景化内容（接送孩子、带父母出游）</td>
+                        <td>切入最大流量入口，绑定安全心智</td>
+                        <td>内容运营</td>
+                    </tr>
+                    <tr class="a-row">
+                        <td>P1</td>
+                        <td>停车场智能泊车</td>
+                        <td>实拍自动泊车表现 + 互动型内容</td>
+                        <td>利用最高互动率场景，打造爆款</td>
+                        <td>内容运营 + KOL</td>
+                    </tr>
+                    <tr class="a-row">
+                        <td>P1</td>
+                        <td>女性/新手破圈</td>
+                        <td>女性视角智驾体验内容 + 搜索词植入</td>
+                        <td>触达高互动人群，推动内容→搜索转化</td>
+                        <td>内容运营 + KOL</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="footer">
+            <p>数据来源：灵犀平台 · 行业热搜词/热笔记词 + SPU热门搜索词/热门笔记词（2026-04-28 至 2026-07-26）</p>
+            <p style="margin-top:8px;">华为乾崑智驾系统（brandId: 751966）| 分析周期：2026-04-28 至 2026-07-26</p>
+        </div>
+    </div>
+
+    <script>
+        // 统一配色
+        const colors = {
+            primary: '#00a8ff',
+            secondary: '#00d4aa',
+            accent: '#ff6b6b',
+            warning: '#ff8e53',
+            text: '#e0e6f0',
+            textDim: '#8a9bb8',
+            grid: 'rgba(255,255,255,0.05)',
+            bg: 'transparent'
+        };
+
+        // 1. 买点评级矩阵气泡图
+        const bubbleChart = echarts.init(document.getElementById('bubbleChart'));
+        bubbleChart.setOption({
+            backgroundColor: colors.bg,
+            tooltip: {
+                trigger: 'item',
+                formatter: function(params) {
+                    return '<b>' + params.data[3] + '</b><br/>搜索热度: ' + params.data[0] + '<br/>互动效率: ' + params.data[1] + '%<br/>战略契合度: ' + params.data[2];
+                },
+                backgroundColor: 'rgba(10, 14, 26, 0.95)',
+                borderColor: 'rgba(0, 168, 255, 0.3)',
+                textStyle: { color: colors.text }
+            },
+            grid: { left: '8%', right: '15%', top: '12%', bottom: '12%' },
+            xAxis: {
+                name: '搜索热度（对数刻度）',
+                nameTextStyle: { color: colors.textDim, fontSize: 12 },
+                type: 'log',
+                min: 50,
+                max: 30000,
+                axisLine: { lineStyle: { color: colors.grid } },
+                axisLabel: { color: colors.textDim, fontSize: 11 },
+                splitLine: { lineStyle: { color: colors.grid } }
+            },
+            yAxis: {
+                name: '互动效率（%）',
+                nameTextStyle: { color: colors.textDim, fontSize: 12 },
+                type: 'value',
+                min: 0,
+                max: 7,
+                axisLine: { lineStyle: { color: colors.grid } },
+                axisLabel: { color: colors.textDim, fontSize: 11 },
+                splitLine: { lineStyle: { color: colors.grid } }
+            },
+            series: [{
+                type: 'scatter',
+                symbolSize: function(data) { return Math.sqrt(data[2]) * 8; },
+                data: [
+                    [100, 3.76, 95, '智驾技术心智空白', '#ff6b6b'],
+                    [1608, 0, 95, '品牌架构认知混乱', '#ff6b6b'],
+                    [1850, 2.79, 95, 'ADS版本供给断层', '#ff6b6b'],
+                    [0, 3.36, 80, '家用场景安全守护', '#00a8ff'],
+                    [0, 6.03, 80, '停车场智能泊车', '#00a8ff'],
+                    [0, 4.58, 70, '女性/新手破圈', '#00a8ff'],
+                    [0, 4.20, 70, '通勤智驾体验', '#00a8ff'],
+                    [1029, 5.38, 75, '鸿蒙座舱日常体验', '#00a8ff'],
+                    [0, 5.04, 70, '露营/户外长途智驾', '#00a8ff'],
+                    [0, 3.21, 50, '性价比价值叙事', '#00a8ff'],
+                    [2607, 0, 80, '试驾活动线上转化', '#00a8ff']
+                ],
+                itemStyle: {
+                    color: function(params) { return params.data[4]; },
+                    shadowBlur: 10,
+                    shadowColor: function(params) { return params.data[4] + '66'; }
+                },
+                label: {
+                    show: true,
+                    formatter: function(params) { return params.data[3]; },
+                    position: 'right',
+                    fontSize: 10,
+                    color: colors.textDim
+                }
+            }]
+        });
+
+        // 2. 行业搜索词主题分布饼图
+        const pieChart = echarts.init(document.getElementById('pieChart'));
+        pieChart.setOption({
+            backgroundColor: colors.bg,
+            tooltip: {
+                trigger: 'item',
+                backgroundColor: 'rgba(10, 14, 26, 0.95)',
+                borderColor: 'rgba(0, 168, 255, 0.3)',
+                textStyle: { color: colors.text }
+            },
+            legend: {
+                orient: 'vertical',
+                right: '5%',
+                top: 'center',
+                textStyle: { color: colors.textDim, fontSize: 11 }
+            },
+            series: [{
+                type: 'pie',
+                radius: ['40%', '70%'],
+                center: ['40%', '50%'],
+                avoidLabelOverlap: true,
+                itemStyle: {
+                    borderRadius: 8,
+                    borderColor: '#0a0e1a',
+                    borderWidth: 2
+                },
+                label: {
+                    show: true,
+                    formatter: '{b}\n{d}%',
+                    color: colors.textDim,
+                    fontSize: 10
+                },
+                data: [
+                    { value: 42.8, name: '充电桩故障排查', itemStyle: { color: '#ff6b6b' } },
+                    { value: 25.2, name: '充电桩安装与使用', itemStyle: { color: '#ff8e53' } },
+                    { value: 11.7, name: '充电桩选购与价格', itemStyle: { color: '#ffd93d' } },
+                    { value: 11.4, name: '鸿蒙座舱外观配色', itemStyle: { color: '#00d4aa' } },
+                    { value: 9.0, name: '其他', itemStyle: { color: '#5a6a8a' } }
+                ]
+            }]
+        });
+
+        // 3. 本品搜索词方向分布柱状图
+        const barChart = echarts.init(document.getElementById('barChart'));
+        barChart.setOption({
+            backgroundColor: colors.bg,
+            tooltip: {
+                trigger: 'axis',
+                backgroundColor: 'rgba(10, 14, 26, 0.95)',
+                borderColor: 'rgba(0, 168, 255, 0.3)',
+                textStyle: { color: colors.text }
+            },
+            grid: { left: '15%', right: '5%', top: '10%', bottom: '15%' },
+            xAxis: {
+                type: 'value',
+                axisLine: { lineStyle: { color: colors.grid } },
+                axisLabel: { color: colors.textDim, fontSize: 11 },
+                splitLine: { lineStyle: { color: colors.grid } }
+            },
+            yAxis: {
+                type: 'category',
+                data: ['负面/争议', '功能体验', 'APP/服务', '合作车型', '品牌辨析', '产品技术(ADS)', '试驾/活动', '品牌认知'],
+                axisLine: { lineStyle: { color: colors.grid } },
+                axisLabel: { color: colors.textDim, fontSize: 11 }
+            },
+            series: [{
+                type: 'bar',
+                data: [
+                    { value: 538, itemStyle: { color: '#5a6a8a', borderRadius: [0, 4, 4, 0] } },
+                    { value: 1188, itemStyle: { color: '#00d4aa', borderRadius: [0, 4, 4, 0] } },
+                    { value: 1239, itemStyle: { color: '#00d4aa', borderRadius: [0, 4, 4, 0] } },
+                    { value: 1476, itemStyle: { color: '#00a8ff', borderRadius: [0, 4, 4, 0] } },
+                    { value: 1608, itemStyle: { color: '#ff6b6b', borderRadius: [0, 4, 4, 0] } },
+                    { value: 1850, itemStyle: { color: '#ff6b6b', borderRadius: [0, 4, 4, 0] } },
+                    { value: 2607, itemStyle: { color: '#ff8e53', borderRadius: [0, 4, 4, 0] } },
+                    { value: 25405, itemStyle: { color: '#00a8ff', borderRadius: [0, 4, 4, 0] } }
+                ],
+                barWidth: '60%',
+                label: {
+                    show: true,
+                    position: 'right',
+                    color: colors.textDim,
+                    fontSize: 10,
+                    formatter: '{c}'
+                }
+            }]
+        });
+
+        // 4. 场景型 vs 配置型互动率对比
+        const compareChart = echarts.init(document.getElementById('compareChart'));
+        compareChart.setOption({
+            backgroundColor: colors.bg,
+            tooltip: {
+                trigger: 'axis',
+                backgroundColor: 'rgba(10, 14, 26, 0.95)',
+                borderColor: 'rgba(0, 168, 255, 0.3)',
+                textStyle: { color: colors.text }
+            },
+            legend: {
+                data: ['场景型', '配置型'],
+                textStyle: { color: colors.textDim, fontSize: 11 },
+                top: '5%'
+            },
+            grid: { left: '10%', right: '5%', top: '18%', bottom: '12%' },
+            xAxis: {
+                type: 'category',
+                data: ['停车场', '露营', '鸿蒙座舱', '通勤', '女生', '辅助驾驶', '智驾', '底盘', '电池', '充电桩'],
+                axisLine: { lineStyle: { color: colors.grid } },
+                axisLabel: { color: colors.textDim, fontSize: 10, rotate: 30 }
+            },
+            yAxis: {
+                type: 'value',
+                name: '互动率（%）',
+                nameTextStyle: { color: colors.textDim, fontSize: 11 },
+                axisLine: { lineStyle: { color: colors.grid } },
+                axisLabel: { color: colors.textDim, fontSize: 11 },
+                splitLine: { lineStyle: { color: colors.grid } }
+            },
+            series: [
+                {
+                    name: '场景型',
+                    type: 'bar',
+                    data: [
+                        { value: 6.03, itemStyle: { color: '#00d4aa', borderRadius: [4, 4, 0, 0] } },
+                        { value: 5.04, itemStyle: { color: '#00d4aa', borderRadius: [4, 4, 0, 0] } },
+                        { value: 5.38, itemStyle: { color: '#00d4aa', borderRadius: [4, 4, 0, 0] } },
+                        { value: 4.20, itemStyle: { color: '#00d4aa', borderRadius: [4, 4, 0, 0] } },
+                        { value: 4.58, itemStyle: { color: '#00d4aa', borderRadius: [4, 4, 0, 0] } },
+                        0, 0, 0, 0, 0
+                    ],
+                    barWidth: '40%'
+                },
+                {
+                    name: '配置型',
+                    type: 'bar',
+                    data: [
+                        0, 0, 0, 0, 0,
+                        { value: 3.89, itemStyle: { color: '#00a8ff', borderRadius: [4, 4, 0, 0] } },
+                        { value: 2.92, itemStyle: { color: '#00a8ff', borderRadius: [4, 4, 0, 0] } },
+                        { value: 3.84, itemStyle: { color: '#00a8ff', borderRadius: [4, 4, 0, 0] } },
+                        { value: 2.65, itemStyle: { color: '#00a8ff', borderRadius: [4, 4, 0, 0] } },
+                        { value: 2.16, itemStyle: { color: '#00a8ff', borderRadius: [4, 4, 0, 0] } }
+                    ],
+                    barWidth: '40%'
+                }
+            ]
+        });
+
+        // 5. 人群画像雷达图
+        const radarChart = echarts.init(document.getElementById('radarChart'));
+        radarChart.setOption({
+            backgroundColor: colors.bg,
+            tooltip: {
+                backgroundColor: 'rgba(10, 14, 26, 0.95)',
+                borderColor: 'rgba(0, 168, 255, 0.3)',
+                textStyle: { color: colors.text }
+            },
+            legend: {
+                data: ['技术决策型', '品牌辨识型', '合作车型意向', '场景体验型', '女性/新手', '活动参与型'],
+                textStyle: { color: colors.textDim, fontSize: 10 },
+                bottom: '5%'
+            },
+            radar: {
+                indicator: [
+                    { name: '搜索活跃度', max: 100 },
+                    { name: '互动深度', max: 100 },
+                    { name: '内容缺口', max: 100 },
+                    { name: '增长势能', max: 100 },
+                    { name: '品牌契合', max: 100 },
+                    { name: '转化潜力', max: 100 }
+                ],
+                shape: 'polygon',
+                splitNumber: 4,
+                axisName: { color: colors.textDim, fontSize: 10 },
+                splitLine: { lineStyle: { color: colors.grid } },
+                splitArea: { show: true, areaStyle: { color: ['rgba(0,168,255,0.02)', 'rgba(0,168,255,0.05)'] } },
+                axisLine: { lineStyle: { color: colors.grid } }
+            },
+            series: [{
+                type: 'radar',
+                data: [
+                    { value: [90, 70, 95, 85, 95, 80], name: '技术决策型', lineStyle: { color: '#00a8ff' }, areaStyle: { color: 'rgba(0,168,255,0.1)' }, itemStyle: { color: '#00a8ff' } },
+                    { value: [95, 30, 90, 98, 90, 60], name: '品牌辨识型', lineStyle: { color: '#ff6b6b' }, areaStyle: { color: 'rgba(255,107,107,0.1)' }, itemStyle: { color: '#ff6b6b' } },
+                    { value: [60, 65, 70, 75, 85, 90], name: '合作车型意向', lineStyle: { color: '#00d4aa' }, areaStyle: { color: 'rgba(0,212,170,0.1)' }, itemStyle: { color: '#00d4aa' } },
+                    { value: [50, 80, 85, 70, 90, 75], name: '场景体验型', lineStyle: { color: '#ff8e53' }, areaStyle: { color: 'rgba(255,142,83,0.1)' }, itemStyle: { color: '#ff8e53' } },
+                    { value: [30, 95, 80, 65, 85, 70], name: '女性/新手', lineStyle: { color: '#e056fd' }, areaStyle: { color: 'rgba(224,86,253,0.1)' }, itemStyle: { color: '#e056fd' } },
+                    { value: [70, 40, 95, 90, 70, 65], name: '活动参与型', lineStyle: { color: '#ffd93d' }, areaStyle: { color: 'rgba(255,217,61,0.1)' }, itemStyle: { color: '#ffd93d' } }
+                ]
+            }]
+        });
+
+        // 响应式
+        window.addEventListener('resize', function() {
+            bubbleChart.resize();
+            pieChart.resize();
+            barChart.resize();
+            compareChart.resize();
+            radarChart.resize();
+        });
+    </script>
+
+
+<div id="__xhs_editor_toolbar__"><div id="__xhs_ext_hint__"><span>💡 使用无痕模式可避免浏览器插件干扰</span><span id="__xhs_ext_hint_close__" title="关闭提示">✕</span></div><div id="__xhs_editor_btnrow__"><button id="__xhs_editor_cancel__" class="xhs-editor-btn">✕ 退出</button><button id="__xhs_editor_mode__" class="xhs-editor-btn">🎨 切换样式</button><button id="__xhs_editor_save__" class="xhs-editor-btn">💾 保存</button></div></div><div id="__xhs_editor_status__"></div><div id="__xhs_css_panel__"><h4>🎨 样式调试</h4><div class="xhs-css-section-label">① 选择预设风格</div><select id="__xhs_style_select__"><option value="">— 不套用预设 —</option><option value="cyberpunk">赛博科技风</option><option value="minimal">极简优雅风</option><option value="apple">Apple 质感风</option><option value="cowork">Cowork轻科技风</option><option value="newspaper">报纸杂志风</option><option value="bloomberg">Bloomberg 终端风</option><option value="ink">水墨卷轴风</option><option value="steampunk">蒸汽朋克风</option><option value="xhs">小红书简洁</option><option value="xhs-fun">小红书丰富</option><option value="palace">故宫风</option><option value="morandi">莫兰迪高级灰风</option><option value="fresh">清新自然绿风</option><option value="earthy">大地原木风</option><option value="glass">玻璃拟态风</option><option value="dreamy">优雅紫梦幻风</option><option value="macaron">马卡龙粉彩风</option><option value="carbon">暗色极简风</option><option value="vivid">活力渐变风</option></select><div class="xhs-css-section-label">② 自定义 CSS（可选，覆盖预设）</div><textarea id="__xhs_custom_css_input__" placeholder="/* 在此写 CSS，实时预览，例如：*/
+body { background:#faf7f2; }
+h1 { color:#ff2442; }"></textarea><div id="__xhs_css_apply__">⚡ 应用预览（仅本地）</div><div class="xhs-css-hint"><label id="__xhs_css_auto_label__" title="勾选后修改样式立即预览；取消则需手动点应用"><input type="checkbox" id="__xhs_css_auto__" checked=""> 自动</label><span>预览仅本地，点保存才发布</span></div></div><div id="__xhs_confirm_mask__"><div id="__xhs_confirm_box__">  <div class="xhs-confirm-title" id="__xhs_confirm_title__">确认保存？</div>  <div class="xhs-confirm-msg" id="__xhs_confirm_msg__"></div>  <div class="xhs-confirm-btns">    <button id="__xhs_confirm_cancel__">取消</button>    <button id="__xhs_confirm_ok__">确认保存</button>  </div></div></div></body></html>
