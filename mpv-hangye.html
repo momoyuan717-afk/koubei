@@ -1,0 +1,430 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/><title>30-50w MPV兴趣人群 · 汽车赛道搜索与阅读深度分析</title><script src="https://cdn.jsdelivr.net/npm/echarts@5.4.3/dist/echarts.min.js" onerror="window.__echartsFailed=true"></script><script>
+if (window.__echartsFailed || typeof echarts === 'undefined') {
+  var _ef = document.createElement('script');
+  _ef.src = 'https://unpkg.com/echarts@5.4.3/dist/echarts.min.js';
+  document.head.appendChild(_ef);
+}
+</script><style>
+:root{
+  --theme-gold-deep:#8B6914; --theme-gold-primary:#B8860B; --theme-gold-medium:#C4943A;
+  --theme-gold-light:#D4A84B; --theme-gold-soft:#E8C97D; --theme-gold-pale:#F5E6C4;
+  --theme-bg:#FDF8EF; --theme-card:#FAF0DE; --theme-surface:#FFFFFF;
+  --theme-text-primary:#5C4100; --theme-text-muted:#9A8354;
+  --theme-border:rgba(180,140,60,0.15); --theme-shadow:0 4px 24px rgba(180,140,60,0.10);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:"PingFang SC",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  background:#F5F1EA;color:var(--theme-text-primary);font-size:14px;line-height:1.65;}
+.report-wrapper{max-width:1200px;margin:0 auto;background:var(--theme-bg);box-shadow:var(--theme-shadow);}
+/* Header */
+.hd{position:relative;padding:56px 48px 44px;overflow:hidden;
+  background:linear-gradient(135deg,#FDF8EF 0%,#F5E6C4 30%,#E8D4A8 60%,#FDF8EF 100%);}
+.hd::after{content:"";position:absolute;top:-120px;right:-80px;width:360px;height:360px;
+  background:radial-gradient(circle,rgba(212,168,75,0.25) 0%,transparent 70%);}
+.hd .logo{height:26px;margin-bottom:22px;}
+.hd h1{font-size:30px;font-weight:800;color:var(--theme-gold-deep);letter-spacing:.5px;position:relative;z-index:2;}
+.hd .sub{margin-top:12px;font-size:14px;color:var(--theme-gold-medium);position:relative;z-index:2;}
+.hd .meta{margin-top:20px;display:flex;gap:12px;flex-wrap:wrap;position:relative;z-index:2;}
+.hd .meta span{background:rgba(255,255,255,.55);border:1px solid var(--theme-border);
+  padding:6px 14px;border-radius:20px;font-size:12.5px;color:var(--theme-gold-deep);font-weight:600;}
+/* KPI */
+.kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;padding:28px 48px;}
+.kpi{background:var(--theme-card);border:1px solid var(--theme-border);border-radius:14px;padding:20px 18px;text-align:center;}
+.kpi .v{font-size:26px;font-weight:800;color:var(--theme-gold-deep);}
+.kpi .l{margin-top:6px;font-size:12.5px;color:var(--theme-text-muted);}
+/* Section */
+.sec{padding:34px 48px 8px;}
+.sec-h{display:flex;align-items:center;gap:12px;margin-bottom:6px;}
+.sec-h .no{background:linear-gradient(135deg,#D4A84B,#8B6914);color:#fff;width:34px;height:34px;
+  border-radius:9px;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:16px;}
+.sec-h h2{font-size:21px;font-weight:800;color:var(--theme-gold-deep);}
+.sec-desc{font-size:12.5px;color:var(--theme-text-muted);margin-bottom:18px;padding-left:46px;}
+/* summary card */
+.sb{background:var(--theme-gold-pale);border-left:4px solid var(--theme-gold-primary);
+  border-radius:0 12px 12px 0;padding:16px 20px;margin:16px 0;font-size:13.5px;line-height:1.8;color:var(--theme-text-primary);}
+.sb b{color:var(--theme-gold-deep);}
+.sb .hl{color:#A8600B;font-weight:700;}
+/* chart */
+.cc{background:var(--theme-surface);border:1px solid var(--theme-border);border-radius:14px;
+  padding:18px 18px 8px;margin:16px 0;box-shadow:var(--theme-shadow);}
+.cc .ct{font-size:14.5px;font-weight:700;color:var(--theme-gold-deep);margin-bottom:4px;}
+.cc .cs{font-size:12px;color:var(--theme-text-muted);margin-bottom:10px;}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+@media(max-width:820px){.row2{grid-template-columns:1fr;}.kpis{grid-template-columns:repeat(2,1fr);}}
+/* table */
+.dt{width:100%;border-collapse:collapse;font-size:12.5px;}
+.dt th{background:var(--theme-gold-pale);color:var(--theme-gold-deep);font-weight:700;
+  padding:9px 10px;text-align:left;border-bottom:2px solid var(--theme-gold-soft);}
+.dt td{padding:8px 10px;border-bottom:1px solid var(--theme-border);}
+.dt tr:hover td{background:#FDF8EF;}
+.dt .n{color:var(--theme-text-muted);width:34px;}
+.dt .tg{font-weight:700;color:#A8600B;}
+.tbl-box{background:var(--theme-surface);border:1px solid var(--theme-border);border-radius:14px;
+  padding:16px;box-shadow:var(--theme-shadow);overflow:hidden;}
+.tbl-box .tt{font-size:14px;font-weight:700;color:var(--theme-gold-deep);margin-bottom:10px;}
+/* attr block */
+.ab{background:var(--theme-surface);border:1px solid var(--theme-border);border-radius:16px;
+  padding:22px 22px 16px;margin:20px 0;box-shadow:var(--theme-shadow);}
+.ab-h{display:flex;align-items:center;gap:10px;margin-bottom:6px;}
+.ab-h .badge{background:linear-gradient(135deg,#E8C97D,#B8860B);color:#fff;padding:4px 14px;
+  border-radius:8px;font-weight:800;font-size:15px;}
+.ab-h .pct{font-size:12.5px;color:var(--theme-text-muted);}
+.fa{margin-top:14px;display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+@media(max-width:820px){.fa{grid-template-columns:1fr;}}
+.fa .box{border-radius:11px;padding:13px 15px;font-size:12.8px;line-height:1.75;}
+.fa .find{background:#FBF3E2;border-left:3px solid var(--theme-gold-medium);}
+.fa .act{background:#F3E8CE;border-left:3px solid var(--theme-gold-deep);}
+.fa .box .k{display:inline-block;font-weight:800;color:var(--theme-gold-deep);margin-bottom:4px;font-size:12.5px;}
+.fa .box .k.a{color:#8B5A00;}
+/* note cards */
+.cc-grp{margin:18px 0;}
+.cc-grp .gh{display:flex;align-items:center;gap:10px;margin-bottom:10px;}
+.cc-grp .gh .gt{font-size:15px;font-weight:800;color:var(--theme-gold-deep);}
+.cc-grp .gh .gp{background:var(--theme-gold-pale);color:var(--theme-gold-deep);padding:2px 10px;border-radius:12px;font-size:12px;font-weight:700;}
+.rf{background:#FBF3E2;border-radius:10px;padding:12px 15px;font-size:12.8px;line-height:1.75;margin-bottom:12px;}
+.rf b{color:var(--theme-gold-deep);}
+.rf .fm{display:block;margin-top:6px;color:#8B5A00;font-weight:600;}
+.cards{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;}
+@media(max-width:820px){.cards{grid-template-columns:1fr;}}
+.card{display:flex;gap:12px;background:var(--theme-surface);border:1px solid var(--theme-border);
+  border-radius:12px;padding:12px;box-shadow:0 2px 10px rgba(180,140,60,.06);}
+.card img{width:74px;height:74px;object-fit:cover;border-radius:9px;flex-shrink:0;background:#eee;}
+.card .ci{flex:1;min-width:0;}
+.card .ci .tt2{font-size:13px;font-weight:700;color:var(--theme-text-primary);line-height:1.4;
+  display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;}
+.card .ci .au{font-size:11.5px;color:var(--theme-text-muted);margin-top:5px;}
+.card .ci .rd{margin-top:4px;font-size:11px;color:#A8600B;font-weight:600;}
+.card a{text-decoration:none;color:inherit;}
+/* footer */
+.ft{margin-top:30px;padding:26px 48px;color:#fff;text-align:center;font-size:12.5px;
+  background-image:linear-gradient(90deg,#F5E6C4 0%,rgba(232,201,125,.6) 51%,#D4A84B 100%);
+  text-shadow:0 0 3px rgba(180,140,60,.5);}
+.ft img{height:22px;margin-bottom:8px;filter:none;}
+.tag{display:inline-block;padding:2px 9px;border-radius:10px;font-size:11px;font-weight:700;}
+.tag.gold{background:var(--theme-gold-pale);color:var(--theme-gold-deep);}
+</style></head><body><div class="report-wrapper"><div class="hd">
+<img class="logo" src="https://fe-platform.xhscdn.com/platform/104101l0322v2t6710206b0874i2000000000010333qr6.png" alt="logo"/>
+<h1>30-50w MPV兴趣人群 · 汽车赛道搜索与阅读深度分析</h1>
+<div class="sub">聚焦 30-50万价位 MPV 兴趣人群，拆解其搜索意图与阅读偏好，锁定种草切入点</div>
+<div class="meta"><span>📅 2026-04-12 ~ 2026-07-11</span><span>🚗 赛道：乘用车</span><span>👥 人群：30-50w MPV兴趣人群</span></div>
+</div><div class="kpis">
+<div class="kpi"><div class="v">911.2%</div><div class="l">平均搜索 TGI（SUV人群仅377%）</div></div>
+<div class="kpi"><div class="v">28</div><div class="l">黄金词数量（高量高偏好）</div></div>
+<div class="kpi"><div class="v">17.4万</div><div class="l">Top1搜索词理想i6搜索量</div></div>
+<div class="kpi"><div class="v">28.9%</div><div class="l">「人群」维度阅读占比·最高</div></div>
+</div><div class="sec"><div class="sec-h"><div class="no">1</div><h2>搜索偏好分析</h2></div><div class="sec-desc">该人群在搜索场表达的车型意图与偏好强度</div><div class="sb">
+<b>「跨品类浏览」是MPV人群的核心搜索特征</b>：搜索Top100中MPV车型仅5个（腾势D9/小鹏X9/传祺M8/理想i8/GL8），但这5词平均TGI高达<span class="hl">1791%</span>——远超SUV词(951%)和轿车词(636%)。搜索量大的轿车/SUV实为跨品类比较行为，<b>TGI才揭示真正偏好</b>。
+<br><br>
+<b>MPV标杆词</b>：小鹏X9(TGI <span class="hl">2048%</span>)、传祺M8(<span class="hl">1852%</span>)、腾势D9(<span class="hl">1744%</span>)、GL8(<span class="hl">1735%</span>)——搜索量虽不如理想i6/小鹏L03，但偏好强度是后者的2-3倍，是转化意向最强的词。
+<br><br>
+<b>SUV跨界竞争</b>：蔚来ES8(TGI 1132%)、小鹏GX(1631%)、理想L6(1056%)等大型SUV的TGI也超1000%，说明在「大空间家用车」赛道上，大型SUV是MPV最大的跨品类竞争对手。
+<br><br>
+<b>投放策略</b>：MPV核心词（腾势D9/小鹏X9/传祺M8等）作为高转化必争词优先投放；理想i6/小鹏L03等高搜索量词用于拦截跨品类流量；平均TGI 911%（SUV人群仅377%），品类忠诚度极高。
+</div><div class="cc"><div class="ct">搜索热词 Top30（按搜索量）</div><div class="cs">水平柱状图，右侧为搜索量最高的词</div><div id="c-s1" style="height:640px"></div></div><div class="cc"><div class="ct">搜索量 × TGI 四象限散点</div><div class="cs">十字线为搜索量中位数与TGI中位数，右上象限=高量高偏好黄金词</div><div id="c-s2" style="height:480px"></div></div><div class="cc"><div class="ct">高 TGI 搜索词 Top20（偏好强度）</div><div class="cs">>1000%深金 · >800%中金 · 其他浅金</div><div id="c-s3" style="height:560px"></div></div><div class="row2">
+<div class="tbl-box"><div class="tt">🏆 黄金词 Top15（高搜索量 × 高TGI）</div>
+<table class="dt"><thead><tr><th></th><th>搜索词</th><th>搜索量</th><th>TGI</th></tr></thead><tbody><tr><td class="n">1</td><td>理想i6</td><td>173,598</td><td class="tg">891.41%</td></tr><tr><td class="n">2</td><td>小鹏gx</td><td>74,809</td><td class="tg">1631.49%</td></tr><tr><td class="n">3</td><td>腾势d9</td><td>58,844</td><td class="tg">1743.68%</td></tr><tr><td class="n">4</td><td>理想i8</td><td>61,815</td><td class="tg">1574.18%</td></tr><tr><td class="n">5</td><td>小鹏x9</td><td>45,758</td><td class="tg">2047.50%</td></tr><tr><td class="n">6</td><td>蔚来es8</td><td>79,047</td><td class="tg">1131.50%</td></tr><tr><td class="n">7</td><td>极氪7x</td><td>81,677</td><td class="tg">1091.37%</td></tr><tr><td class="n">8</td><td>理想l6</td><td>79,320</td><td class="tg">1055.90%</td></tr><tr><td class="n">9</td><td>传祺m8</td><td>38,779</td><td class="tg">1852.32%</td></tr><tr><td class="n">10</td><td>比亚迪大唐</td><td>48,489</td><td class="tg">1288.33%</td></tr><tr><td class="n">11</td><td>理想l8</td><td>56,489</td><td class="tg">1074.31%</td></tr><tr><td class="n">12</td><td>极氪001</td><td>67,602</td><td class="tg">882.55%</td></tr><tr><td class="n">13</td><td>腾势z9gt</td><td>65,130</td><td class="tg">909.81%</td></tr><tr><td class="n">14</td><td>别克gl8</td><td>33,958</td><td class="tg">1735.25%</td></tr><tr><td class="n">15</td><td>蔚来es9</td><td>55,053</td><td class="tg">1015.38%</td></tr></tbody></table></div>
+<div class="tbl-box"><div class="tt">🔎 搜索词明细 Top30（按搜索量）</div>
+<div style="max-height:560px;overflow-y:auto"><table class="dt"><thead><tr><th></th><th>搜索词</th><th>搜索量</th><th>TGI</th></tr></thead><tbody><tr><td class="n">1</td><td>理想i6</td><td>173,598</td><td class="tg">891.41%</td></tr><tr><td class="n">2</td><td>小鹏l03</td><td>146,762</td><td class="tg">705.64%</td></tr><tr><td class="n">3</td><td>极氪7x</td><td>81,677</td><td class="tg">1091.37%</td></tr><tr><td class="n">4</td><td>小鹏m03</td><td>81,645</td><td class="tg">475.84%</td></tr><tr><td class="n">5</td><td>理想l6</td><td>79,320</td><td class="tg">1055.90%</td></tr><tr><td class="n">6</td><td>蔚来es8</td><td>79,047</td><td class="tg">1131.50%</td></tr><tr><td class="n">7</td><td>特斯拉model-y</td><td>78,089</td><td class="tg">617.97%</td></tr><tr><td class="n">8</td><td>零跑a10</td><td>75,624</td><td class="tg">571.20%</td></tr><tr><td class="n">9</td><td>小鹏gx</td><td>74,809</td><td class="tg">1631.49%</td></tr><tr><td class="n">10</td><td>小鹏L03</td><td>74,467</td><td class="tg">773.77%</td></tr><tr><td class="n">11</td><td>问界m6</td><td>68,379</td><td class="tg">791.18%</td></tr><tr><td class="n">12</td><td>极氪001</td><td>67,602</td><td class="tg">882.55%</td></tr><tr><td class="n">13</td><td>腾势z9gt</td><td>65,130</td><td class="tg">909.81%</td></tr><tr><td class="n">14</td><td>特斯拉model-3</td><td>62,847</td><td class="tg">478.47%</td></tr><tr><td class="n">15</td><td>理想i8</td><td>61,815</td><td class="tg">1574.18%</td></tr><tr><td class="n">16</td><td>腾势d9</td><td>58,844</td><td class="tg">1743.68%</td></tr><tr><td class="n">17</td><td>问界m7</td><td>58,704</td><td class="tg">874.51%</td></tr><tr><td class="n">18</td><td>理想l8</td><td>56,489</td><td class="tg">1074.31%</td></tr><tr><td class="n">19</td><td>蔚来es9</td><td>55,053</td><td class="tg">1015.38%</td></tr><tr><td class="n">20</td><td>宝马x5</td><td>53,547</td><td class="tg">663.97%</td></tr><tr><td class="n">21</td><td>零跑c10</td><td>51,939</td><td class="tg">689.53%</td></tr><tr><td class="n">22</td><td>智己ls6</td><td>49,412</td><td class="tg">808.22%</td></tr><tr><td class="n">23</td><td>坦克300</td><td>49,002</td><td class="tg">815.58%</td></tr><tr><td class="n">24</td><td>比亚迪大唐</td><td>48,489</td><td class="tg">1288.33%</td></tr><tr><td class="n">25</td><td>小鹏x9</td><td>45,758</td><td class="tg">2047.50%</td></tr><tr><td class="n">26</td><td>奔驰c260l</td><td>42,605</td><td class="tg">394.57%</td></tr><tr><td class="n">27</td><td>蔚来et5</td><td>39,260</td><td class="tg">598.26%</td></tr><tr><td class="n">28</td><td>乐道l60</td><td>38,951</td><td class="tg">799.46%</td></tr><tr><td class="n">29</td><td>传祺m8</td><td>38,779</td><td class="tg">1852.32%</td></tr><tr><td class="n">30</td><td>奔驰e300</td><td>38,543</td><td class="tg">455.27%</td></tr></tbody></table></div></div>
+</div></div><div class="sec"><div class="sec-h"><div class="no">2</div><h2>阅读偏好全貌</h2></div><div class="sec-desc">该人群在小红书阅读的内容属性分布（按各属性阅读量推算占比）</div><div class="cc"><div class="ct">阅读属性占比分布</div><div class="cs">占比由各属性关键词阅读量汇总推算</div><div id="c-pie1" style="height:420px"></div></div><div class="sb">
+<b>交叉洞察：</b>「<span class="hl">人群</span>」维度以 <b>28.9%</b> 阅读占比断层第一——该群体极度依赖"车主/过来人"视角做决策，人的因素重于产品参数本身；「<span class="hl">场景</span>」(13.3%) 与「<span class="hl">结构</span>」(13.1%) 紧随其后，印证了"家庭出行场景 + 增程超长续航"是 MPV 兴趣人群的两大内容核心。
+相比之下，「购买意向」显性词声量极低（0.07%），说明该人群的决策是<b>隐性、长周期</b>的：他们通过大量阅读车主口碑、场景实测、增程结构来"暗中比价"，而非直接搜"买哪款"。
+<b>启示：</b>种草应重仓"车主证言 × 家庭场景 × 增程结构"三角，用软性内容承接其长决策链路，而非硬推促单信息。
+</div></div><div class="sec"><div class="sec-h"><div class="no">3</div><h2>分属性关键词深度分析</h2></div><div class="sec-desc">12个属性 · 阅读量 × TGI 双维度交叉，结合 MPV 人群 vs SUV 人群差异洞察</div><div class="ab">
+<div class="ab-h"><span class="badge">人群</span><span class="pct">阅读占比 28.93%</span></div>
+<div class="row2">
+<div class="cc" style="margin:6px 0;box-shadow:none;border:1px solid var(--theme-border)"><div class="ct">高阅读 Top15</div><div class="cs">单位：万次阅读</div><div id="c-ar0" style="height:360px"></div></div>
+<div class="cc" style="margin:6px 0;box-shadow:none;border:1px solid var(--theme-border)"><div class="ct">高 TGI Top10</div><div class="cs">标签为真实TGI%，柱长显示上限800%</div><div id="c-at0" style="height:360px"></div></div>
+</div>
+<div class="fa">
+<div class="box find"><span class="k">🔍 Finding</span><br/>「车主」以 394% TGI 稳居阅读 Top1，几乎是 SUV 人群同词偏好（210%）的两倍——MPV 兴趣人群更在意"过来人"的真实用车反馈，决策链条更依赖车主证言。高 TGI 侧「厂长」飙到 754%，「老板」「商务」等词密集出现，暗示这群人相当比例把 MPV 当作商务/接待用途。</div>
+<div class="box act"><span class="k a">🎯 Action</span><br/>内容侧优先启用真实车主 KOC 讲提车/长测，弱化 KOL 硬广；针对商务人设人群，产出"老板通勤""商务接待第二排体验"类专属选题，把商务价值点前置。</div>
+</div>
+</div><div class="ab">
+<div class="ab-h"><span class="badge">场景</span><span class="pct">阅读占比 13.26%</span></div>
+<div class="row2">
+<div class="cc" style="margin:6px 0;box-shadow:none;border:1px solid var(--theme-border)"><div class="ct">高阅读 Top15</div><div class="cs">单位：万次阅读</div><div id="c-ar3" style="height:360px"></div></div>
+<div class="cc" style="margin:6px 0;box-shadow:none;border:1px solid var(--theme-border)"><div class="ct">高 TGI Top10</div><div class="cs">标签为真实TGI%，柱长显示上限800%</div><div id="c-at3" style="height:360px"></div></div>
+</div>
+<div class="fa">
+<div class="box find"><span class="k">🔍 Finding</span><br/>「家用」既是阅读 Top1（占比 100 归一）又有 440% TGI，家庭刚需是绝对基本盘；而高 TGI 侧「后备厢」1138% 是 MPV 场景专属痛点——大空间装载、露营、二胎出行是这群人反复求证的使用场景。</div>
+<div class="box act"><span class="k a">🎯 Action</span><br/>主打"全家出行"场景化叙事：三代同堂、二胎家庭、露营自驾。后备厢空间实测（放几个行李箱/婴儿车）是高转化选题，务必量化呈现。</div>
+</div>
+</div><div class="ab">
+<div class="ab-h"><span class="badge">结构</span><span class="pct">阅读占比 13.05%</span></div>
+<div class="row2">
+<div class="cc" style="margin:6px 0;box-shadow:none;border:1px solid var(--theme-border)"><div class="ct">高阅读 Top15</div><div class="cs">单位：万次阅读</div><div id="c-ar4" style="height:360px"></div></div>
+<div class="cc" style="margin:6px 0;box-shadow:none;border:1px solid var(--theme-border)"><div class="ct">高 TGI Top10</div><div class="cs">标签为真实TGI%，柱长显示上限800%</div><div id="c-at4" style="height:360px"></div></div>
+</div>
+<div class="fa">
+<div class="box find"><span class="k">🔍 Finding</span><br/>「电池」「续航」是阅读基本盘；高 TGI 侧「续航235km综合续航1411km」冲到 1218%，这组数字精准匹配理想增程车型的参数特征——该人群对增程/超长综合续航的关注度极端集中。</div>
+<div class="box act"><span class="k a">🎯 Action</span><br/>把"纯电日常代步 + 增程无里程焦虑"作为核心卖点组合；用"市区纯电、长途增程、综合1400+km"的结构化数字讲清楚补能逻辑，直接对标增程标杆。</div>
+</div>
+</div><div class="ab">
+<div class="ab-h"><span class="badge">价格</span><span class="pct">阅读占比 9.13%</span></div>
+<div class="row2">
+<div class="cc" style="margin:6px 0;box-shadow:none;border:1px solid var(--theme-border)"><div class="ct">高阅读 Top15</div><div class="cs">单位：万次阅读</div><div id="c-ar1" style="height:360px"></div></div>
+<div class="cc" style="margin:6px 0;box-shadow:none;border:1px solid var(--theme-border)"><div class="ct">高 TGI Top10</div><div class="cs">标签为真实TGI%，柱长显示上限800%</div><div id="c-at1" style="height:360px"></div></div>
+</div>
+<div class="fa">
+<div class="box find"><span class="k">🔍 Finding</span><br/>「优惠」「落地价」占据阅读大盘，说明价格敏感是共性；但高 TGI 侧「32.98万起」冲到 838%，这个价位精准命中理想 L6 的定价带，说明该人群的价格锚点集中在 30-35 万区间，而非更低。</div>
+<div class="box act"><span class="k a">🎯 Action</span><br/>投放物料主动给出"32-35万落地对比表"，用具体价格锚点承接高意向搜索；把优惠信息与具体车型价位绑定呈现，而非泛泛打折。</div>
+</div>
+</div><div class="ab">
+<div class="ab-h"><span class="badge">能源</span><span class="pct">阅读占比 7.26%</span></div>
+<div class="row2">
+<div class="cc" style="margin:6px 0;box-shadow:none;border:1px solid var(--theme-border)"><div class="ct">高阅读 Top15</div><div class="cs">单位：万次阅读</div><div id="c-ar5" style="height:360px"></div></div>
+<div class="cc" style="margin:6px 0;box-shadow:none;border:1px solid var(--theme-border)"><div class="ct">高 TGI Top10</div><div class="cs">标签为真实TGI%，柱长显示上限800%</div><div id="c-at5" style="height:360px"></div></div>
+</div>
+<div class="fa">
+<div class="box find"><span class="k">🔍 Finding</span><br/>「新能源」「纯电」是阅读大盘；但高 TGI 侧「插混 自动」高达 1517%，配合结构维度的增程偏好，说明 MPV 兴趣人群在能源方案上明显倾向插混/增程，而非纯电——大车 + 长途 + 家庭出行天然抗拒纯电的补能焦虑。</div>
+<div class="box act"><span class="k a">🎯 Action</span><br/>能源沟通不要 all-in 纯电，重点讲"可油可电"的插混/增程方案；针对里程焦虑人群，把亏电油耗、满油满电综合续航做成硬指标对比。</div>
+</div>
+</div><div class="ab">
+<div class="ab-h"><span class="badge">车系</span><span class="pct">阅读占比 6.57%</span></div>
+<div class="row2">
+<div class="cc" style="margin:6px 0;box-shadow:none;border:1px solid var(--theme-border)"><div class="ct">高阅读 Top15</div><div class="cs">单位：万次阅读</div><div id="c-ar6" style="height:360px"></div></div>
+<div class="cc" style="margin:6px 0;box-shadow:none;border:1px solid var(--theme-border)"><div class="ct">高 TGI Top10</div><div class="cs">标签为真实TGI%，柱长显示上限800%</div><div id="c-at6" style="height:360px"></div></div>
+</div>
+<div class="fa">
+<div class="box find"><span class="k">🔍 Finding</span><br/>「特斯拉Model Y」「理想」等占据阅读；高 TGI 侧「L9 livis」822% 说明理想 L9 是这群人的绝对标杆车型，几乎所有对比、决策都围绕 L9 展开——它既是竞品也是标尺。</div>
+<div class="box act"><span class="k a">🎯 Action</span><br/>凡是 30-50万大车/MPV 内容，必须显性 or 隐性对标理想 L9；产出"XX vs L9"横评是天然高流量选题，用差异化配置切走 L9 的犹豫用户。</div>
+</div>
+</div><div class="ab">
+<div class="ab-h"><span class="badge">颜色</span><span class="pct">阅读占比 5.74%</span></div>
+<div class="row2">
+<div class="cc" style="margin:6px 0;box-shadow:none;border:1px solid var(--theme-border)"><div class="ct">高阅读 Top15</div><div class="cs">单位：万次阅读</div><div id="c-ar8" style="height:360px"></div></div>
+<div class="cc" style="margin:6px 0;box-shadow:none;border:1px solid var(--theme-border)"><div class="ct">高 TGI Top10</div><div class="cs">标签为真实TGI%，柱长显示上限800%</div><div id="c-at8" style="height:360px"></div></div>
+</div>
+<div class="fa">
+<div class="box find"><span class="k">🔍 Finding</span><br/>「黑色」「白色」是阅读主流沉稳色；高 TGI 侧「高亮银」937% 说明该人群偏好沉稳的金属质感色，与商务/豪华人设一致，非年轻化的鲜艳撞色。</div>
+<div class="box act"><span class="k a">🎯 Action</span><br/>主推色卡以黑/银/深灰等沉稳金属色为主力，弱化亮色；商务/豪华质感的配色物料更易引发这群人共鸣。</div>
+</div>
+</div><div class="ab">
+<div class="ab-h"><span class="badge">配置</span><span class="pct">阅读占比 4.98%</span></div>
+<div class="row2">
+<div class="cc" style="margin:6px 0;box-shadow:none;border:1px solid var(--theme-border)"><div class="ct">高阅读 Top15</div><div class="cs">单位：万次阅读</div><div id="c-ar7" style="height:360px"></div></div>
+<div class="cc" style="margin:6px 0;box-shadow:none;border:1px solid var(--theme-border)"><div class="ct">高 TGI Top10</div><div class="cs">标签为真实TGI%，柱长显示上限800%</div><div id="c-at7" style="height:360px"></div></div>
+</div>
+<div class="fa">
+<div class="box find"><span class="k">🔍 Finding</span><br/>「辅助驾驶」是阅读大盘刚需；高 TGI 侧「后排座椅下沉式收纳」1219% 是典型 MPV 专属配置——该人群对"第二三排灵活性、空间魔术"这类 MPV 独有配置的关注远超普通车主。</div>
+<div class="box act"><span class="k a">🎯 Action</span><br/>配置种草聚焦 MPV 专属项：座椅下沉/放平/滑轨、二排小桌板、车载冰箱。把"空间可变性"做成场景化演示（露营、搬家、躺平）。</div>
+</div>
+</div><div class="ab">
+<div class="ab-h"><span class="badge">内饰</span><span class="pct">阅读占比 4.95%</span></div>
+<div class="row2">
+<div class="cc" style="margin:6px 0;box-shadow:none;border:1px solid var(--theme-border)"><div class="ct">高阅读 Top15</div><div class="cs">单位：万次阅读</div><div id="c-ar2" style="height:360px"></div></div>
+<div class="cc" style="margin:6px 0;box-shadow:none;border:1px solid var(--theme-border)"><div class="ct">高 TGI Top10</div><div class="cs">标签为真实TGI%，柱长显示上限800%</div><div id="c-at2" style="height:360px"></div></div>
+</div>
+<div class="fa">
+<div class="box find"><span class="k">🔍 Finding</span><br/>「座椅」以 419% TGI 领跑阅读，远超 SUV 人群，第二排/第三排乘坐是 MPV 的核心决策点；高 TGI 侧「木地板」高达 1152%，这是 MPV 专属的豪华内饰配置，暴露了该人群对"移动头等舱"式豪华感的极高偏好。</div>
+<div class="box act"><span class="k a">🎯 Action</span><br/>内饰内容必须重点拍第二排座椅（通风/加热/按摩/腿托）与豪华材质细节；把"木地板""航空座椅"等专属配置做成种草钩子，直击差异化豪华心智。</div>
+</div>
+</div><div class="ab">
+<div class="ab-h"><span class="badge">配件</span><span class="pct">阅读占比 3.41%</span></div>
+<div class="row2">
+<div class="cc" style="margin:6px 0;box-shadow:none;border:1px solid var(--theme-border)"><div class="ct">高阅读 Top15</div><div class="cs">单位：万次阅读</div><div id="c-ar10" style="height:360px"></div></div>
+<div class="cc" style="margin:6px 0;box-shadow:none;border:1px solid var(--theme-border)"><div class="ct">高 TGI Top10</div><div class="cs">标签为真实TGI%，柱长显示上限800%</div><div id="c-at10" style="height:360px"></div></div>
+</div>
+<div class="fa">
+<div class="box find"><span class="k">🔍 Finding</span><br/>「充电桩」「脚垫」是阅读刚需配件；高 TGI 侧「超混电芯」1331% 与结构、能源维度的增程/插混偏好高度一致——这群人对三电/电芯技术细节的钻研程度明显偏高。</div>
+<div class="box act"><span class="k a">🎯 Action</span><br/>配件内容可延展到三电技术科普（电芯、热管理、补能效率），用技术硬核感建立信任；充电桩安装、家充方案是高实用性选题。</div>
+</div>
+</div><div class="ab">
+<div class="ab-h"><span class="badge">风格</span><span class="pct">阅读占比 2.67%</span></div>
+<div class="row2">
+<div class="cc" style="margin:6px 0;box-shadow:none;border:1px solid var(--theme-border)"><div class="ct">高阅读 Top15</div><div class="cs">单位：万次阅读</div><div id="c-ar9" style="height:360px"></div></div>
+<div class="cc" style="margin:6px 0;box-shadow:none;border:1px solid var(--theme-border)"><div class="ct">高 TGI Top10</div><div class="cs">标签为真实TGI%，柱长显示上限800%</div><div id="c-at9" style="height:360px"></div></div>
+</div>
+<div class="fa">
+<div class="box find"><span class="k">🔍 Finding</span><br/>「豪华」以 453% TGI 一骑绝尘，是该人群的第一风格心智；有意思的是高 TGI 侧「潮酷运动」1207%——在豪华主基调之外，存在一小撮追求差异化运动风的高偏好人群。</div>
+<div class="box act"><span class="k a">🎯 Action</span><br/>主线打"豪华质感"，用料、静谧性、行政感是关键词；同时可切出"运动豪华"细分子选题，收割不满足于传统商务保姆车的差异化人群。</div>
+</div>
+</div><div class="ab">
+<div class="ab-h"><span class="badge">购买意向</span><span class="pct">阅读占比 0.07%</span></div>
+<div class="row2">
+<div class="cc" style="margin:6px 0;box-shadow:none;border:1px solid var(--theme-border)"><div class="ct">高阅读 Top15</div><div class="cs">单位：万次阅读</div><div id="c-ar11" style="height:360px"></div></div>
+<div class="cc" style="margin:6px 0;box-shadow:none;border:1px solid var(--theme-border)"><div class="ct">高 TGI Top10</div><div class="cs">标签为真实TGI%，柱长显示上限800%</div><div id="c-at11" style="height:360px"></div></div>
+</div>
+<div class="fa">
+<div class="box find"><span class="k">🔍 Finding</span><br/>该维度整体阅读体量极小（占比 0.07%），说明明确表达"想买/买哪款"的显性意向词声量不大；但高 TGI 侧「哪款值得买」TGI 极高，说明这群人一旦进入决策期，选择焦虑非常明显——车型多、价位重叠、增程/纯电难抉择。</div>
+<div class="box act"><span class="k a">🎯 Action</span><br/>重点做"闭眼选/避坑指南/XX价位怎么选"的决策收口内容，直接降低用户选择成本；用清晰的推荐结论承接高焦虑的临门一脚人群。</div>
+</div>
+</div></div><div class="sec"><div class="sec-h"><div class="no">4</div><h2>Top阅读笔记 · 内容类型与拆解分析</h2></div><div class="sec-desc">对 Top20 高阅读笔记做内容类型 & 形式拆解，提炼爆款公式</div><div class="row2">
+<div class="cc"><div class="ct">内容类型分布</div><div class="cs">按 Top20 笔记选题归类</div><div id="c-npie1" style="height:340px"></div></div>
+<div class="cc"><div class="ct">内容形式分布</div><div class="cs">视频 vs 图文</div><div id="c-npie2" style="height:340px"></div></div>
+</div><div class="cc-grp">
+<div class="gh"><span class="gt">用车场景/生活方式</span><span class="gp">7篇 · 占 35%</span></div>
+<div class="rf"><b>核心发现：</b>占比最高。MPV 兴趣人群最爱看"真实生活里怎么用这台车"——自驾、床车、带娃、暴雨天通勤，情绪与场景共鸣是流量密码。<span class="fm">🧩 爆款公式：真实生活痛点/名场面 + 车作为解决方案 + 强情绪标题(🆘/惊叹) + 第一人称叙事</span></div>
+<div class="cards"><a href="https://www.xiaohongshu.com/discovery/item/6a06c2d700000000080031ba?xsec_token=YBjKKl8ZGbnMS48EUQB0LJvEiruooXBEH88prr09OcPI0=&amp;xsec_source=pc_idea" target="_blank"><div class="card">
+<img src="http://ci.xiaohongshu.com/1040g2sg3224djjeo7ef05qf63brgg801c7jltl8?imageView2/2/w/1080/format/jpg" alt=""/>
+<div class="ci"><div class="tt2">🆘暴雨天开车简直是灾难现场‼️🙀🙀🙀</div><div class="au">@铿锵有car</div><div class="rd">阅读量 100w-500w</div></div>
+</div></a><a href="https://www.xiaohongshu.com/discovery/item/6a44d326000000001603f7bb?xsec_token=YBY92TooZsKo2gV9l8zS_pT5I06xRsn0zHdFTbQSp5OM8=&amp;xsec_source=pc_idea" target="_blank"><div class="card">
+<img src="http://ci.xiaohongshu.com/spectrum/1040g0k0322ai4bk8n0005q7cdm7dotgi46ef83o?imageView2/2/w/1080/format/jpg" alt=""/>
+<div class="ci"><div class="tt2">下雨天时电子后视镜自然会为我发声</div><div class="au">@我在贵阳卖鸿蒙</div><div class="rd">阅读量 100w-500w</div></div>
+</div></a></div>
+</div><div class="cc-grp">
+<div class="gh"><span class="gt">车型测评/对比</span><span class="gp">5篇 · 占 25%</span></div>
+<div class="rf"><b>核心发现：</b>硬核对比内容承接决策期用户，尤其"国产新能源 vs 传统豪华/合资"的话题冲突性强，评论区易发酵。<span class="fm">🧩 爆款公式：话题性对比(A VS B) + 冲突性结论前置 + 实测数据/掉头/续航 + 站队引战式标题</span></div>
+<div class="cards"><a href="https://www.xiaohongshu.com/discovery/item/6a38a689000000001503c006?xsec_token=YBkbNHxQgZEbBmVTZDdAXbhTMBhwxOPcEF4SRyj8Vp3Yo=&amp;xsec_source=pc_idea" target="_blank"><div class="card">
+<img src="http://ci.xiaohongshu.com/1040g0083221f97oeno005nr7aa0g854h91irajg?imageView2/2/w/1080/format/jpg" alt=""/>
+<div class="ci"><div class="tt2">纯油卡罗拉看过来！</div><div class="au">@销渣</div><div class="rd">阅读量 100w-500w</div></div>
+</div></a><a href="https://www.xiaohongshu.com/discovery/item/6a016458000000003502f85c?xsec_token=YBwMjSylDGFBPV-GVcZ50RRIS31NQe5a5nphWzROcoyrE=&amp;xsec_source=pc_idea" target="_blank"><div class="card">
+<img src="http://ci.xiaohongshu.com/spectrum/1040g34o32011ml72hm105pb5raav1srt3glv9gg?imageView2/2/w/1080/format/jpg" alt=""/>
+<div class="ci"><div class="tt2">丰田霸道VS国产新能源，玩的太过火了。</div><div class="au">@汽车品评</div><div class="rd">阅读量 100w-500w</div></div>
+</div></a></div>
+</div><div class="cc-grp">
+<div class="gh"><span class="gt">汽车知识/技巧</span><span class="gp">4篇 · 占 20%</span></div>
+<div class="rf"><b>核心发现：</b>科普/避坑类满足该人群"钻研技术细节"的特质（电池理赔、电芯、维修），建立专业信任。<span class="fm">🧩 爆款公式：一个反常识知识点 + "记住这一点省X万"利益钩子 + 干货清单 + 权威口吻</span></div>
+<div class="cards"><a href="https://www.xiaohongshu.com/discovery/item/6a316b21000000000f01f539?xsec_token=YBfUfuH8q4MsKojVynYOx9bdw3a3Z5XyrshXzcIxIJHC8=&amp;xsec_source=pc_idea" target="_blank"><div class="card">
+<img src="http://ci.xiaohongshu.com/notes_pre_post/1040g3k8321fui3o3n4005oh43hqod5ht6pkka70?imageView2/2/w/1080/format/jpg" alt=""/>
+<div class="ci"><div class="tt2">零跑3C大换代，一文看懂怎么选？</div><div class="au">@四个轱辘儿</div><div class="rd">阅读量 100w-500w</div></div>
+</div></a><a href="https://www.xiaohongshu.com/discovery/item/687a305600000000110025fc?xsec_token=YBtvukEej_KFFH1luh3b1AXQNKqJ-gjPmINwHs525KlnU=&amp;xsec_source=pc_idea" target="_blank"><div class="card">
+<img src="http://ci.xiaohongshu.com/notes_pre_post/1040g3k031k30kgn848104a0kar7a4c40a7bdm50?imageView2/2/w/1080/format/jpg" alt=""/>
+<div class="ci"><div class="tt2">电门一踩！给车装了个“永动机”</div><div class="au">@橘男儿</div><div class="rd">阅读量 50w-100w</div></div>
+</div></a></div>
+</div><div class="cc-grp">
+<div class="gh"><span class="gt">提车/选车决策</span><span class="gp">3篇 · 占 15%</span></div>
+<div class="rf"><b>核心发现：</b>提车 vlog 与配置锁单帖直击临门一脚，颜色/配置/价位的具体选择过程最能降低同类用户决策焦虑。<span class="fm">🧩 爆款公式：提车喜悦(官宣🥳) + 具体配置颜色锁单 + 纠结→拍板过程 + 价格落地信息</span></div>
+<div class="cards"><a href="https://www.xiaohongshu.com/discovery/item/69f986a50000000038020114?xsec_token=YBcdvQd42tntrwgRZiyhPSjfvIQYKTxWioWSsIAAlq7ng=&amp;xsec_source=pc_idea" target="_blank"><div class="card">
+<img src="http://ci.xiaohongshu.com/notes_uhdr/1040g3qg31vpoi3402a0049olqsgq53qtehdp7jo?imageView2/2/w/1080/format/jpg" alt=""/>
+<div class="ci"><div class="tt2">终于轮到我定车了！🚗</div><div class="au">@小陈摸鱼办</div><div class="rd">阅读量 100w-500w</div></div>
+</div></a><a href="https://www.xiaohongshu.com/discovery/item/69cf6ab300000000230216bd?xsec_token=YBOlX0XEw6aayCAWwOG9Q36QjNyB2ODsslOmmhWMrV50E=&amp;xsec_source=pc_idea" target="_blank"><div class="card">
+<img src="http://ci.xiaohongshu.com/1040g2sg31ug803o61m6g5osk8u0pguhd8umiv6g?imageView2/2/w/1080/format/jpg" alt=""/>
+<div class="ci"><div class="tt2">试驾没约上的宝子们看这里！</div><div class="au">@IM智己｜Tina🎀</div><div class="rd">阅读量 100w-500w</div></div>
+</div></a></div>
+</div><div class="cc-grp">
+<div class="gh"><span class="gt">行业资讯/热点</span><span class="gp">1篇 · 占 5%</span></div>
+<div class="rf"><b>核心发现：</b>借势品牌热点/争议事件(如淋雨测试)蹭话题流量，时效性强但转化偏弱，适合做声量。<span class="fm">🧩 爆款公式：热点事件 + 品牌回应/官方发声 + 悬念标题 + 蹭时效</span></div>
+<div class="cards"><a href="https://www.xiaohongshu.com/discovery/item/6a3226f00000000007024d47?xsec_token=YBHfAzio-r2PQBKsI8jveIw7k7gwXKV32Jd0vq-4P3TSs=&amp;xsec_source=pc_idea" target="_blank"><div class="card">
+<img src="http://ci.xiaohongshu.com/spectrum/1040g34o321glf85970105pqnlnci1f8nnifia8o?imageView2/2/w/1080/format/jpg" alt=""/>
+<div class="ci"><div class="tt2">什么车不能淋雨？尚界汽车回应淋雨测试争议</div><div class="au">@正在新闻</div><div class="rd">阅读量 50w-100w</div></div>
+</div></a></div>
+</div></div><div class="ft"><img src="https://fe-platform.xhscdn.com/platform/104101l0322v2t7987k06b0874i2000000000015hdk0j6.png" alt="logo"/><br/>
+数据来源：小红书灵犀 · 人群搜索与阅读洞察 ｜ 数据周期 2026-04-12 ~ 2026-07-11 ｜ 赛道：乘用车<br/>
+本报告由 AI 自动生成，仅供品牌策略参考</div></div><script>
+function cssVar(name,fb){var v=getComputedStyle(document.documentElement).getPropertyValue(name).trim();return v||(fb||'');}
+function initChart(id,option){
+  var dom=document.getElementById(id);
+  if(!dom){console.error('[白板]容器不存在:',id);return null;}
+  if(typeof echarts==='undefined'){dom.innerHTML='<div style="display:flex;align-items:center;justify-content:center;height:100%;color:#9A8354;font-size:13px;">图表库加载失败，请检查网络后刷新</div>';console.error('[白板]echarts未定义:',id);return null;}
+  if(dom.clientWidth===0||dom.clientHeight===0){if(dom.clientHeight===0)dom.style.height='320px';console.warn('[白板]容器尺寸0已兜底:',id);}
+  try{var ch=echarts.init(dom);ch.setOption(option);return ch;}
+  catch(e){dom.innerHTML='<div style="display:flex;align-items:center;justify-content:center;height:100%;color:#9A8354;font-size:13px;">图表渲染异常</div>';console.error('[白板]渲染失败:',id,e);return null;}
+}
+function whenReady(cb){
+  function run(){var t=0;(function w(){if(typeof echarts!=='undefined'){cb();return;}if(t++>20){console.error('[白板]ECharts始终未加载');cb();return;}setTimeout(w,100);})();}
+  if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',run);}else{run();}
+}
+
+var GD=cssVar('--theme-gold-deep','#8B6914'),GP=cssVar('--theme-gold-primary','#B8860B'),GL=cssVar('--theme-gold-light','#D4A84B'),GS=cssVar('--theme-gold-soft','#E8C97D'),GPL=cssVar('--theme-gold-pale','#F5E6C4'),TX=cssVar('--theme-text-primary','#5C4100'),MU=cssVar('--theme-text-muted','#9A8354');
+var GRAD=new echarts.graphic.LinearGradient(0,0,1,0,[{offset:0,color:'#F5D7A8'},{offset:1,color:'#B8860B'}]);
+var PIE_CLR=['#8B6914','#B8860B','#C4943A','#D4A84B','#E8C97D','#F5D7A8','#F0DEB8','#E5D1A0','#D9C488','#D0B870','#C7AC58'];
+function baseGrid(l){return {left:l||95,right:56,top:16,bottom:24};}
+
+// generic horizontal bar (read)
+function hbar(names,vals,mode){
+  return {
+    grid:baseGrid(mode==='read'?120:110),
+    tooltip:{trigger:'axis',axisPointer:{type:'shadow'}},
+    xAxis:{type:'value',axisLabel:{color:MU,fontSize:10},splitLine:{lineStyle:{color:'rgba(180,140,60,0.12)'}}},
+    yAxis:{type:'category',data:names,axisLabel:{color:TX,fontSize:11},axisLine:{lineStyle:{color:GS}}},
+    series:[{type:'bar',data:vals,barWidth:'62%',
+      itemStyle:{color:GRAD,borderRadius:[0,6,6,0]},
+      label:{show:true,position:'right',color:GD,fontSize:10,fontWeight:600}}]
+  };
+}
+// horizontal bar TGI with real label & conditional color, cap display
+function hbarTgi(names,disp,real){
+  return {
+    grid:baseGrid(110),
+    tooltip:{trigger:'axis',axisPointer:{type:'shadow'},formatter:function(p){var i=p[0].dataIndex;return p[0].name+'<br/>TGI: '+real[i]+'%';}},
+    xAxis:{type:'value',max:820,axisLabel:{color:MU,fontSize:10},splitLine:{lineStyle:{color:'rgba(180,140,60,0.12)'}}},
+    yAxis:{type:'category',data:names,axisLabel:{color:TX,fontSize:11},axisLine:{lineStyle:{color:GS}}},
+    series:[{type:'bar',data:disp,barWidth:'62%',
+      itemStyle:{borderRadius:[0,6,6,0],color:function(pp){var rv=real[pp.dataIndex];return rv>1000?'#8B6914':rv>800?'#B8860B':'#D4A84B';}},
+      label:{show:true,position:'right',color:GD,fontSize:10,fontWeight:700,formatter:function(pp){return real[pp.dataIndex]+'%';}}}]
+  };
+}
+function pieChart(data){
+  return {
+    tooltip:{trigger:'item',formatter:'{b}: {c} ({d}%)'},
+    legend:{type:'scroll',orient:'horizontal',bottom:0,textStyle:{color:MU,fontSize:11}},
+    color:PIE_CLR,
+    series:[{type:'pie',radius:['38%','66%'],center:['50%','46%'],avoidLabelOverlap:true,
+      itemStyle:{borderColor:'#fff',borderWidth:2},
+      label:{color:TX,fontSize:11,formatter:'{b}\n{d}%'},
+      data:data}]
+  };
+}
+
+function renderAllCharts(){
+  // S1 top30 horizontal
+  initChart('c-s1',{
+    grid:{left:110,right:70,top:14,bottom:24},
+    tooltip:{trigger:'axis',axisPointer:{type:'shadow'}},
+    xAxis:{type:'value',axisLabel:{color:MU,fontSize:10},splitLine:{lineStyle:{color:'rgba(180,140,60,0.12)'}}},
+    yAxis:{type:'category',data:["奔驰e300", "传祺m8", "乐道l60", "蔚来et5", "奔驰c260l", "小鹏x9", "比亚迪大唐", "坦克300", "智己ls6", "零跑c10", "宝马x5", "蔚来es9", "理想l8", "问界m7", "腾势d9", "理想i8", "特斯拉model-3", "腾势z9gt", "极氪001", "问界m6", "小鹏L03", "小鹏gx", "零跑a10", "特斯拉model-y", "蔚来es8", "理想l6", "小鹏m03", "极氪7x", "小鹏l03", "理想i6"],axisLabel:{color:TX,fontSize:10.5},axisLine:{lineStyle:{color:GS}}},
+    series:[{type:'bar',data:[38543, 38779, 38951, 39260, 42605, 45758, 48489, 49002, 49412, 51939, 53547, 55053, 56489, 58704, 58844, 61815, 62847, 65130, 67602, 68379, 74467, 74809, 75624, 78089, 79047, 79320, 81645, 81677, 146762, 173598],barWidth:'60%',itemStyle:{color:GRAD,borderRadius:[0,5,5,0]},
+      label:{show:true,position:'right',color:GD,fontSize:9.5,formatter:function(p){return (p.value/10000).toFixed(1)+'w';}}}]
+  });
+  // S2 scatter with median cross lines
+  var SVM=28833,TGM=815.41;
+  initChart('c-s2',{
+    grid:{left:70,right:36,top:26,bottom:50},
+    tooltip:{trigger:'item',formatter:function(p){return p.data[2]+'<br/>搜索量: '+p.data[0].toLocaleString()+'<br/>TGI: '+p.data[1]+'%';}},
+    xAxis:{type:'value',name:'搜索量',nameTextStyle:{color:MU},axisLabel:{color:MU,fontSize:10,formatter:function(v){return (v/10000)+'w';}},splitLine:{lineStyle:{color:'rgba(180,140,60,0.1)'}}},
+    yAxis:{type:'value',name:'TGI(%)',nameTextStyle:{color:MU},axisLabel:{color:MU,fontSize:10},splitLine:{lineStyle:{color:'rgba(180,140,60,0.1)'}}},
+    series:[{type:'scatter',data:[[173598, 891.41, "理想i6"], [146762, 705.64, "小鹏l03"], [81677, 1091.37, "极氪7x"], [81645, 475.84, "小鹏m03"], [79320, 1055.9, "理想l6"], [79047, 1131.5, "蔚来es8"], [78089, 617.97, "特斯拉model-y"], [75624, 571.2, "零跑a10"], [74809, 1631.49, "小鹏gx"], [74467, 773.77, "小鹏L03"], [68379, 791.18, "问界m6"], [67602, 882.55, "极氪001"], [65130, 909.81, "腾势z9gt"], [62847, 478.47, "特斯拉model-3"], [61815, 1574.18, "理想i8"], [58844, 1743.68, "腾势d9"], [58704, 874.51, "问界m7"], [56489, 1074.31, "理想l8"], [55053, 1015.38, "蔚来es9"], [53547, 663.97, "宝马x5"], [51939, 689.53, "零跑c10"], [49412, 808.22, "智己ls6"], [49002, 815.58, "坦克300"], [48489, 1288.33, "比亚迪大唐"], [45758, 2047.5, "小鹏x9"], [42605, 394.57, "奔驰c260l"], [39260, 598.26, "蔚来et5"], [38951, 799.46, "乐道l60"], [38779, 1852.32, "传祺m8"], [38543, 455.27, "奔驰e300"], [37580, 1231.72, "零跑c16"], [35667, 1144.4, "蔚来ES8"], [34027, 758.27, "小鹏p7"], [34027, 946.57, "问界m8"], [33958, 1735.25, "别克gl8"], [33754, 656.85, "全新一代宝马x5发布"], [33752, 1464.5, "小鹏GX"], [33069, 1503.31, "腾势n8l"], [32424, 634.58, "深蓝s05"], [32048, 506.13, "智己l6"], [31974, 1412.92, "理想l9livis"], [31633, 886.79, "蔚来es6"], [31357, 946.74, "理想l9"], [31191, 1201.54, "es8"], [31191, 387.47, "欧拉好猫"], [31156, 537.74, "海豹06gt"], [30778, 876.27, "智界r7"], [29344, 825.21, "欧拉5"], [28960, 457.51, "宝马3系"], [28833, 606.41, "宝马5系"], [28526, 475.51, "比亚迪海豹"], [27704, 440.79, "五菱缤果pro"], [27193, 538.46, "宝马x3"], [27127, 1356.95, "蔚来es8五座版"], [26852, 876.75, "理想L6"], [26712, 1363.49, "es9"], [26336, 815.41, "小鹏g6"], [25928, 2189.5, "丰田塞纳"], [25926, 1684.0, "理想i9"], [25857, 665.14, "零跑c11"], [25307, 1543.47, "智己ls8"], [25100, 614.48, "凯美瑞"], [24489, 806.14, "极氪007"], [24426, 660.46, "元plus"], [24317, 756.45, "小鹏p7+"], [23669, 759.02, "奥迪a6l"], [23156, 671.15, "领克z20"], [22576, 1586.47, "零跑D19"], [22444, 826.38, "奥迪q5l"], [22372, 695.67, "蔚来et5t"], [22338, 961.7, "奥迪e7x"], [22306, 891.1, "理想i6落地价"], [21925, 544.76, "沃尔沃s60"], [21174, 473.9, "奥迪a5l"], [21171, 539.58, "零跑b01"], [21142, 881.74, "尚界h5"], [20801, 336.95, "比亚迪海鸥"], [20695, 668.69, "沃尔沃xc60"], [20563, 1590.2, "乐道l90"], [20417, 323.44, "五菱宏光mini车"], [20216, 599.87, "零跑lafa5"], [20116, 450.83, "领克06"], [20015, 461.43, "长安启源q05"], [19843, 2072.11, "零跑D99"], [19703, 402.6, "比亚迪海豚"], [19295, 1129.87, "es8蔚来"], [19161, 723.59, "亚洲龙"], [19023, 867.43, "理想l7"], [19015, 543.27, "雷克萨斯es200"], [18576, 861.03, "宝马ix3"], [18544, 1351.1, "乐道L90"], [18409, 430.11, "奥迪a6"], [18369, 567.25, "奔驰glc300"], [18200, 894.09, "腾势z"], [18100, 1018.71, "全新坦克300"], [17859, 584.76, "宝马i3"], [17756, 428.09, "领克03"], [17724, 1462.35, "大众id9x"], [17652, 1640.57, "极氪9x五座版"], [17578, 674.38, "坦克400"]],symbolSize:function(d){return Math.max(7,Math.min(26,d[0]/8000));},
+      itemStyle:{color:function(p){return (p.data[0]>SVM&&p.data[1]>TGM)?'#8B6914':(p.data[1]>TGM?'#C4943A':'#E8C97D');},opacity:.8,borderColor:'#fff',borderWidth:.5},
+      markLine:{silent:true,symbol:'none',lineStyle:{type:'dashed',color:'#B8860B',width:1.2},
+        label:{color:GD,fontSize:10},
+        data:[{xAxis:SVM,label:{formatter:'搜索量中位'}},{yAxis:TGM,label:{formatter:'TGI中位'}}]}
+    }],
+    graphic:[
+      {type:'text',right:44,top:34,style:{text:'⭐高量高偏好',fill:'#8B6914',fontSize:11,fontWeight:700}},
+      {type:'text',left:80,top:34,style:{text:'低量高偏好(潜力)',fill:'#C4943A',fontSize:11}}
+    ]
+  });
+  // S3 high tgi top20
+  initChart('c-s3',{
+    grid:{left:110,right:60,top:14,bottom:24},
+    tooltip:{trigger:'axis',axisPointer:{type:'shadow'},formatter:'{b}: {c}%'},
+    xAxis:{type:'value',axisLabel:{color:MU,fontSize:10,formatter:'{value}%'},splitLine:{lineStyle:{color:'rgba(180,140,60,0.12)'}}},
+    yAxis:{type:'category',data:["乐道L90", "蔚来es8五座版", "es9", "理想l9livis", "大众id9x", "小鹏GX", "腾势n8l", "智己ls8", "理想i8", "零跑D19", "乐道l90", "小鹏gx", "极氪9x五座版", "理想i9", "别克gl8", "腾势d9", "传祺m8", "小鹏x9", "零跑D99", "丰田塞纳"],axisLabel:{color:TX,fontSize:10.5},axisLine:{lineStyle:{color:GS}}},
+    series:[{type:'bar',data:[1351.1, 1357.0, 1363.5, 1412.9, 1462.3, 1464.5, 1503.3, 1543.5, 1574.2, 1586.5, 1590.2, 1631.5, 1640.6, 1684.0, 1735.2, 1743.7, 1852.3, 2047.5, 2072.1, 2189.5],barWidth:'62%',
+      itemStyle:{borderRadius:[0,5,5,0],color:function(p){return p.value>1000?'#8B6914':p.value>800?'#B8860B':'#D4A84B';}},
+      label:{show:true,position:'right',color:GD,fontSize:9.5,formatter:'{c}%'}}]
+  });
+  // S2 pie
+  initChart('c-pie1',pieChart([{"name": "人群", "value": 28.93}, {"name": "场景", "value": 13.26}, {"name": "结构", "value": 13.05}, {"name": "价格", "value": 9.13}, {"name": "能源", "value": 7.26}, {"name": "车系", "value": 6.57}, {"name": "颜色", "value": 5.74}, {"name": "配置", "value": 4.98}, {"name": "内饰", "value": 4.95}, {"name": "配件", "value": 3.41}, {"name": "风格", "value": 2.67}, {"name": "购买意向", "value": 0.07}]));
+  // S4 pies
+  initChart('c-npie1',pieChart([{"name": "用车场景/生活方式", "value": 7}, {"name": "车型测评/对比", "value": 5}, {"name": "汽车知识/技巧", "value": 4}, {"name": "提车/选车决策", "value": 3}, {"name": "行业资讯/热点", "value": 1}]));
+  initChart('c-npie2',pieChart([{"name": "视频", "value": 16}, {"name": "图文", "value": 4}]));
+  // attr charts
+  initChart('c-ar0',hbar(["老板", "家人", "网友", "孩子", "观察者", "宝子", "男人", "车友", "用户", "销售", "新手", "年轻人", "朋友", "女生", "车主"],[1872.4, 2019.3, 2032.8, 2106.1, 2201.2, 2231.2, 2382.8, 3679.2, 3738.6, 4326.0, 6473.5, 6611.7, 6747.6, 7978.7, 13171.0],'read'));
+    initChart('c-at0',hbarTgi(["友商", "二胎家庭", "钓鱼佬", "人士", "高转青年", "超哥", "董事", "主任", "迪粉", "厂长"],[589.5, 598.6, 601.4, 606.4, 619.4, 629.3, 654.0, 665.6, 674.2, 754.1],[589.5, 598.6, 601.4, 606.4, 619.4, 629.3, 654.0, 665.6, 674.2, 754.1]));
+    initChart('c-ar1',hbar(["特价", "25万", "低价", "30万", "落地价", "高性价比", "15万", "降价", "划算", "价格", "贵", "便宜", "性价比", "免费", "优惠"],[472.5, 473.4, 476.0, 571.3, 609.0, 631.9, 637.4, 963.7, 1038.1, 1165.6, 1173.3, 2918.1, 3686.1, 3781.1, 3781.4],'read'));
+    initChart('c-at1',hbarTgi(["34.98万", "39.98万元", "48.99万", "26.99万", "40万以上", "32.98万", "不到30", "41.99万", "25-32万", "32.98万起"],[701.3, 703.9, 710.0, 725.3, 729.8, 741.9, 764.1, 771.4, 780.2, 800],[701.3, 703.9, 710.0, 725.3, 729.8, 741.9, 764.1, 771.4, 780.2, 838.0]));
+    initChart('c-ar2',hbar(["黑色", "天幕", "真皮座椅", "后排座椅", "后排娱乐屏", "仪表盘", "安全带", "大屏", "屏幕", "中控屏", "氛围灯", "后视镜", "音响", "空调", "座椅"],[238.3, 254.4, 268.4, 328.6, 338.7, 346.8, 367.4, 394.7, 718.9, 759.9, 936.6, 1216.0, 1432.2, 2019.8, 2802.5],'read'));
+    initChart('c-at2',hbarTgi(["水晶的旋钮", "3K娱乐屏", "观影屏", "二排座椅", "二排小桌板", "后排独立娱乐屏", "后舱电视", "独立娱乐屏", "一体式30吋显示屏", "木地板"],[800, 800, 800, 800, 800, 800, 800, 800, 800, 800],[900.7, 928.9, 929.2, 937.1, 947.5, 967.4, 970.4, 972.9, 976.6, 1151.5]));
+    initChart('c-ar3',hbar(["自驾游", "自驾", "开车", "听歌", "旅游", "出行", "越野", "旅行", "家里", "工作", "户外", "车载", "通勤", "露营", "家用"],[748.5, 801.8, 933.0, 977.5, 1036.1, 1182.7, 1184.7, 1783.5, 1832.2, 1836.5, 2052.2, 2575.3, 3683.4, 4813.6, 10001.9],'read'));
+    initChart('c-at3',hbarTgi(["大平层", "家庭", "亲子出游", "跨境出行", "杂物室", "会客", "看球", "移动会客厅", "跨境包车", "后备厢"],[800, 800, 800, 800, 800, 800, 800, 800, 800, 800],[802.0, 804.0, 807.8, 829.8, 845.9, 896.4, 911.2, 983.6, 1036.0, 1138.1]));
+    initChart('c-ar4',hbar(["车门", "油门", "五座", "六座", "后驱", "芯片", "刹车", "发动机", "轮胎", "后备箱", "四驱", "方向盘", "轮毂", "底盘", "电池"],[916.5, 927.3, 938.3, 1117.4, 1184.1, 1337.4, 1425.2, 1847.0, 2098.9, 2290.8, 2541.0, 2848.8, 3148.3, 3818.5, 4160.2],'read'));
+    initChart('c-at4',hbarTgi(["小窗", "6/7座", "双侧电滑门", "续航800km", "油耗6.5-6.8", "四活塞定钳", "电耗2.3", "前麦弗逊后多连杆", "综合续航1411km", "续航235km综合续航1411km"],[712.0, 747.0, 766.2, 773.8, 779.1, 796.7, 800, 800, 800, 800],[712.0, 747.0, 766.2, 773.8, 779.1, 796.7, 809.0, 1056.5, 1216.7, 1218.2]));
+    initChart('c-ar5',hbar(["油电", "电混", "插电混动", "轻混", "油电混合", "纯油", "柴油", "汽油", "插混", "纯电动", "燃油", "混动", "电动", "纯电", "新能源"],[91.5, 95.6, 130.3, 144.1, 166.6, 207.8, 237.9, 375.7, 565.4, 567.5, 1183.7, 1319.2, 1364.0, 6150.8, 8752.6],'read'));
+    initChart('c-at5',hbarTgi(["电混驱动", "七座", "汽油/电混合动力", "純電動", "燃油发电", "纯电混动模式", "油混系统", "超混电池", "插混phev", "插混 自动"],[800, 800, 800, 800, 800, 800, 800, 800, 800, 800],[1056.6, 1163.4, 1168.1, 1211.1, 1247.4, 1254.1, 1280.5, 1329.7, 1336.1, 1516.7]));
+    initChart('c-ar6',hbar(["奔驰E级", "911", "ES9", "埃安S", "海豹", "GX", "奔驰C级", "L6", "Ultra", "问界M9", "理想L9", "特斯拉Model 3", "蔚来ES7", "i6", "特斯拉Model Y"],[530.3, 540.6, 579.6, 619.2, 633.7, 666.4, 697.1, 708.7, 744.5, 855.1, 1230.1, 1255.6, 1283.5, 1457.3, 1641.9],'read'));
+    initChart('c-at6',hbarTgi(["009", "GX", "曜影", "es9", "L9livis", "唐EV", "小鹏X9", "8x", "D99", "L9 livis"],[708.6, 713.7, 720.3, 727.4, 738.4, 748.5, 765.6, 771.5, 800, 800],[708.6, 713.7, 720.3, 727.4, 738.4, 748.5, 765.6, 771.5, 816.3, 821.9]));
+    initChart('c-ar7',hbar(["OTA", "哨兵模式", "智能驾驶", "智能座舱", "后轮转向", "自动驾驶", "座椅加热", "倒车影像", "钥匙", "导航", "自动泊车", "零重力座椅", "智驾", "激光雷达", "辅助驾驶"],[372.6, 433.5, 434.6, 435.8, 446.1, 473.7, 477.9, 518.2, 527.9, 755.9, 785.6, 1094.1, 1170.1, 1227.8, 1774.6],'read'));
+    initChart('c-at7',hbarTgi(["ADS智驾", "后激光雷达", "侧激光雷达", "对坐模式", "双叉臂式独立悬架", "侧向补盲激光雷达", "多连杆式独立悬架", "前轮四活塞定卡钳", "双124°零重力旋转座椅", "后排座椅下沉式收纳"],[800, 800, 800, 800, 800, 800, 800, 800, 800, 800],[840.2, 843.0, 846.4, 1042.4, 1054.8, 1076.4, 1102.9, 1218.7, 1218.7, 1218.7]));
+    initChart('c-ar8',hbar(["双拼色", "黄色", "珍珠白", "深蓝", "粉色", "灰色", "白", "蓝色", "绿色", "紫色", "黑", "银色", "红色", "白色", "黑色"],[305.0, 321.1, 344.3, 467.6, 505.9, 568.1, 623.1, 630.8, 659.1, 823.2, 921.9, 976.5, 1328.2, 2389.7, 3314.4],'read'));
+    initChart('c-at8',hbarTgi(["丹霞红色", "紫金", "神秘绿", "极地黑", "珠峰白", "林雾紫", "峡湾灰", "大象灰", "远山蓝", "高亮银"],[790.8, 800, 800, 800, 800, 800, 800, 800, 800, 800],[790.8, 801.5, 811.0, 817.2, 820.3, 835.4, 859.1, 870.0, 886.2, 937.2]));
+    initChart('c-ar9',hbar(["奢华", "美式", "北欧", "科技", "时尚", "简约", "可爱", "硬派", "优雅", "高级感", "硬派越野", "复古", "舒适", "运动", "豪华"],[72.1, 74.5, 83.9, 90.2, 90.6, 94.7, 103.5, 106.8, 187.7, 213.7, 395.5, 476.2, 606.9, 844.3, 4097.2],'read'));
+    initChart('c-at9',hbarTgi(["科技范", "粘土风", "都市锋尚", "古典硬朗", "科技务实风", "硬派大气", "郭富城同款", "复古高端奢华", "家庭风", "潮酷运动"],[800, 800, 800, 800, 800, 800, 800, 800, 800, 800],[1026.3, 1042.0, 1072.2, 1099.5, 1131.0, 1137.1, 1142.4, 1159.6, 1176.7, 1206.8]));
+    initChart('c-ar10',hbar(["膜", "尾翼", "玻璃膜", "隐形车衣", "改色膜", "遮阳帘", "头枕", "扬声器", "行车记录仪", "黑武士", "脚垫", "贴膜", "车衣", "冰箱", "充电桩"],[233.3, 252.9, 255.2, 279.0, 299.5, 314.7, 316.0, 356.3, 505.6, 580.2, 710.4, 776.6, 883.6, 1007.7, 1293.6],'read'));
+    initChart('c-at10',hbarTgi(["加热垫", "手机的支架", "阿维塔三激光", "舒适软枕", "魔毯坐垫", "建筑隔热膜", "前备箱挂钩", "侧窗遮阳帘", "不锈钢饰条", "超混电芯"],[771.7, 796.0, 800, 800, 800, 800, 800, 800, 800, 800],[771.7, 796.0, 810.9, 852.5, 860.2, 884.6, 887.1, 900.4, 935.9, 1331.4]));
+    initChart('c-ar11',hbar(["建议", "想要买", "选哪个好", "怎么选", "选哪款", "别买", "不建议买", "想买台", "想入", "打算入手", "选哪个", "推荐", "想入手", "买", "想买"],[2.4, 2.6, 2.6, 3.0, 3.3, 3.4, 3.5, 3.7, 4.3, 6.7, 8.9, 11.8, 15.3, 39.7, 67.1],'read'));
+    initChart('c-at11',hbarTgi(["推荐买Y", "我都想买", "想换台", "颜值党直接冲", "打算三月入手", "适合买", "想要入", "很想入", "想去买", "哪款值得买"],[800, 800, 800, 800, 800, 800, 800, 800, 800, 800],[6130.4, 6130.4, 6687.7, 6687.7, 6896.7, 9195.5, 9195.5, 9195.5, 15325.9, 36782.2]));
+}
+whenReady(renderAllCharts);
+</script></body></html>
