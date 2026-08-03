@@ -285,6 +285,9 @@
   .strategy-content p { font-size: 13px; color: var(--muted); margin-top: 4px; }
 
   /* 说明栏 */
+  .note-bar.part2-method { display:block; line-height:1.8; }
+  .part2-method strong { display:inline; margin-right:8px; }
+
   .note-bar {
     background: #fffbeb; border: 1px solid #fde68a;
     border-radius: 10px; padding: 14px 18px;
@@ -323,6 +326,28 @@
     margin-top: 20px;
   }
 
+
+
+  .keyword-groups { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:14px; }
+  .keyword-block { border:1px solid var(--border); border-radius:10px; background:#fffefa; overflow:hidden; }
+  .keyword-head { display:flex; justify-content:space-between; align-items:center; padding:12px 14px; background:#f3ead1; color:#493c19; font-size:14px; font-weight:700; border-bottom:1px solid var(--border); }
+  .keyword-note-list { padding:6px 12px; }
+  .keyword-note { display:grid; grid-template-columns:28px 1fr auto; gap:8px; align-items:center; padding:11px 0; border-bottom:1px solid #ebe3ce; color:var(--text); text-decoration:none; font-size:13px; line-height:1.45; }
+  .keyword-note:last-child { border-bottom:none; }
+  .keyword-note:hover { color:#8b6e20; }
+  .keyword-rank { color:#b49742; font-weight:800; }
+  .direct-mark { color:#9b8441; font-size:11px; white-space:nowrap; }
+  @media (max-width:900px) { .keyword-groups { grid-template-columns:1fr; } }
+
+
+  .all-definition-grid { grid-template-columns:repeat(3,minmax(0,1fr)); }
+  .search-definition-grid { grid-template-columns:repeat(3,minmax(0,1fr)); }
+  .all-keyword-grid .stage-card { padding:18px 16px; }
+  .all-keyword-grid .bar-item { margin-bottom:9px; }
+  .all-keyword-grid .bar-top { margin-bottom:3px; font-size:12px; }
+  .all-keyword-grid .bar-track { height:6px; }
+  .search-distribution-grid .stage-card { min-width:0; }
+  @media(max-width:900px){ .all-definition-grid,.search-definition-grid { grid-template-columns:1fr; } }
 
   /* 2026-07 视觉重构：象牙白 × 香槟金 × 墨黑 × 少量朱红 */
   :root {
@@ -441,7 +466,11 @@
   strong[style*="#6366f1"], strong[style*="#10b981"] { color:#b13e32 !important; }
 
 </style>
-<script src="./智界V9 一方用户路径分析报告 _ 2026年5-6月_files/uba-script.js"></script></head>
+<script>
+/* Build Time: 2026-07-21 16:26:59 */
+(function(_){typeof define=="function"&&define.amd?define(_):_()})((function(){"use strict";var Yi=Object.defineProperty,Zi=Object.defineProperties;var Qi=Object.getOwnPropertyDescriptors;var gi=Object.getOwnPropertySymbols;var et=Object.prototype.hasOwnProperty,it=Object.prototype.propertyIsEnumerable;var vi=(_,E,x)=>E in _?Yi(_,E,{enumerable:!0,configurable:!0,writable:!0,value:x}):_[E]=x,Ie=(_,E)=>{for(var x in E||(E={}))et.call(E,x)&&vi(_,x,E[x]);if(gi)for(var x of gi(E))it.call(E,x)&&vi(_,x,E[x]);return _},yi=(_,E)=>Zi(_,Qi(E));var se=(_,E,x)=>new Promise((Xe,Ae)=>{var Te=U=>{try{K(x.next(U))}catch(X){Ae(X)}},ce=U=>{try{K(x.throw(U))}catch(X){Ae(X)}},K=U=>U.done?Xe(U.value):Promise.resolve(U.value).then(Te,ce);K((x=x.apply(_,E)).next())});function _(e){var Ce;const{prefix:o,allowedHosts:t,logPrefix:l,loadFlag:w,globalName:u,account:c}=e;function p(g=location.host){return t.includes(g)}let d;const f={url:"",urlObj:null,run(g,R){return se(this,null,function*(){try{R||(R=location.href);const W=new URL(R);this.url=R,this.urlObj=W;const ne=this.getAttributes();g(ne)}catch(W){console.error(`${l} run error:`,W)}})},analysisUrl(){var ae;const{urlObj:g}=this;if(!g)return{pathname:"",host:"",url:"",cowork_type:"",prefix:""};const R=g.pathname,[,W="",ne=""]=(ae=R.match(/^\/([^/]+)(?:\/([^/]+))?/))!=null?ae:[];return{pathname:R,host:g.host,url:g.href,cowork_type:W,cowork_prefix:ne,hash:g.hash,search_params:g.search,user_email:d}},getAttributes(){const g=this.analysisUrl();return Ie({module_key:`${o}_user_app_module`,action_type:"impression"},g)}};let h;function k(){return se(this,null,function*(){try{{const{initUserEmail:ae}=yield Promise.resolve().then(()=>_i);d=yield ae()}const[{createTracker:g},{listenRouteChange:R}]=yield Promise.all([Promise.resolve().then(()=>Wi),Promise.resolve().then(()=>Ji)]),{reportPV:W}=g({prefix:o,account:c}),ne=ae=>{f.run(W,ae)};ne(),h==null||h(),h=R(ne,l)}catch(g){console.error(`${l} bootstrap error:`,g)}})}function fe(){h==null||h(),h=void 0,typeof window!="undefined"&&delete window[w]}function Ke(){return se(this,null,function*(){const g=()=>{k()};if(typeof window.requestIdleCallback=="function"){window.requestIdleCallback(g,{timeout:100});return}setTimeout(g,0)})}if(typeof window!="undefined"){const g=window;if(g[w])console.warn(`${l} script has already been loaded, skip duplicated bootstrap.`);else if(p()){g[w]=!0;const R=(Ce=g[u])!=null?Ce:{};g[u]=yi(Ie({},R),{destroy:fe}),Ke()}}}_({prefix:"cowork",allowedHosts:["local.xiaohongshu.com","local.xiaohongshu.com:5173","cowork.xiaohongshu.com","cowork.sit.xiaohongshu.com","cowork.beta.xiaohongshu.com"],logPrefix:"[CoworkUBAScript]",loadFlag:"__CoworkUBAScriptLoaded__",globalName:"__CoworkUBAScript"});let E=e=>crypto.getRandomValues(new Uint8Array(e)),x=(e,o,t)=>{let l=256-256%e.length;if(l===256){let u=e.length-1;return(c=o)=>{if(!c)return"";let p="";for(;;){let d=t(c),f=c;for(;f--;)if(p+=e[d[f]&u],p.length>=c)return p}}}let w=Math.ceil(1.6*256*o/l);return(u=o)=>{if(!u)return"";let c="";for(;;){let p=t(w),d=w;for(;d--;)if(p[d]<l&&(c+=e[p[d]%e.length],c.length>=u))return c}}};const Te=((e,o=21)=>x(e,o|0,E))("0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz",21),ce=()=>Te(),K="ehr-tracker-uuid",U=()=>JSON.parse(localStorage.getItem("userInfo")||"{}"),X=e=>{if(!e)return{};try{const o=localStorage.getItem(e);if(!o)return{};const t=JSON.parse(o);return{userId:typeof(t==null?void 0:t.userId)=="string"&&t.userId?t.userId:void 0,nickname:typeof(t==null?void 0:t.nickname)=="string"&&t.nickname?t.nickname:void 0}}catch(o){return{}}},ki=e=>{const{userId:o}=X(e);if(o)return o;const t=U(),l=localStorage.getItem(K);let w;return t!=null&&t.userId?w=t==null?void 0:t.userId:l?w=l:(w=`u-${ce()}`,localStorage.setItem(K,w)),w},xi="https://edith.xiaohongshu.com/sso/user_info",Je=()=>se(null,null,function*(){var o,t;const e=U();if(e!=null&&e.email)return e==null?void 0:e.email;try{const w=yield(yield fetch(xi,{method:"POST",headers:{"Content-Type":"application/json"},credentials:"include"})).json();return(t=(o=w==null?void 0:w.data)==null?void 0:o.internalUser)==null?void 0:t.email}catch(l){console.error("getUserEmail error",l)}});let Re;const _i=Object.freeze(Object.defineProperty({__proto__:null,getUserEmail:Je,initUserEmail:()=>se(null,null,function*(){return Re=yield Je(),Re}),get userEmail(){return Re}},Symbol.toStringTag,{value:"Module"}));var Ei="2.0.10",Ye=500,Ze="user-agent",J="",Qe="?",v={FUNCTION:"function",OBJECT:"object",STRING:"string",UNDEFINED:"undefined"},S="browser",B="cpu",M="device",A="engine",I="os",Y="result",n="name",i="type",s="vendor",a="version",O="architecture",le="major",r="model",ge="console",b="mobile",m="tablet",y="smarttv",N="wearable",ve="xr",de="embedded",Oi="fetcher",F="inapp",Ue="brands",z="formFactors",Me="fullVersionList",Z="platform",Ne="platformVersion",ye="bitness",L="sec-ch-ua",Si=L+"-full-version-list",Ci=L+"-arch",Ii=L+"-"+ye,Ai=L+"-form-factors",Ti=L+"-"+b,Ri=L+"-"+r,ei=L+"-"+Z,Ui=ei+"-version",ii=[Ue,Me,b,r,Z,Ne,O,z,ye],ke="Amazon",Q="Apple",ti="ASUS",oi="BlackBerry",$="Google",Pe="Huawei",Be="Lenovo",ri="Honor",xe="LG",Fe="Microsoft",He="Motorola",ni="Nvidia",ai="OnePlus",Le="OPPO",we="Samsung",si="Sharp",ue="Sony",De="Xiaomi",qe="Zebra",ci="Chrome",li="Chromium",D="Chromecast",_e="Edge",be="Firefox",ee="Opera",Ve="Facebook",di="Sogou",ie="Mobile ",j=" Browser",ze="Windows",Mi=typeof window!==v.UNDEFINED,C=Mi&&window.navigator?window.navigator:void 0,G=C&&C.userAgentData?C.userAgentData:void 0,Ni=function(e,o){var t={},l=o;if(!Oe(o)){l={};for(var w in o)for(var u in o[w])l[u]=o[w][u].concat(l[u]?l[u]:[])}for(var c in e)t[c]=l[c]&&l[c].length%2===0?l[c].concat(e[c]):e[c];return t},Ee=function(e){for(var o={},t=0;t<e.length;t++)o[e[t].toUpperCase()]=e[t];return o},$e=function(e,o){if(typeof e===v.OBJECT&&e.length>0){for(var t in e)if(q(o)==q(e[t]))return!0;return!1}return te(e)?q(o)==q(e):!1},Oe=function(e,o){for(var t in e)return/^(browser|cpu|device|engine|os)$/.test(t)||(o?Oe(e[t]):!1)},te=function(e){return typeof e===v.STRING},je=function(e){if(e){for(var o=[],t=oe(e).split(","),l=0;l<t.length;l++)if(t[l].indexOf(";")>-1){var w=he(t[l]).split(";v=");o[l]={brand:w[0],version:w[1]}}else o[l]=he(t[l]);return o}},q=function(e){return te(e)?e.toLowerCase():e},Ge=function(e){return te(e)?pe(/[^\d\.]/g,e).split(".")[0]:void 0},oe=function(e){return te(e)?he(pe(/\\?\"/g,e),Ye):void 0},H=function(e){for(var o in e)if(e.hasOwnProperty(o)){var t=e[o];typeof t==v.OBJECT&&t.length==2?this[t[0]]=t[1]:this[t]=void 0}return this},pe=function(e,o){return te(o)?o.replace(e,J):o},he=function(e,o){return e=pe(/^\s\s*/,String(e)),typeof o===v.UNDEFINED?e:e.substring(0,o)},We=function(e,o){if(!(!e||!o))for(var t=0,l,w,u,c,p,d;t<o.length&&!p;){var f=o[t],h=o[t+1];for(l=w=0;l<f.length&&!p&&f[l];)if(p=f[l++].exec(e),p)for(u=0;u<h.length;u++)d=p[++w],c=h[u],typeof c===v.OBJECT&&c.length>0?c.length===2?typeof c[1]==v.FUNCTION?this[c[0]]=c[1].call(this,d):this[c[0]]=c[1]:c.length>=3&&(typeof c[1]===v.FUNCTION&&!(c[1].exec&&c[1].test)?c.length>3?this[c[0]]=d?c[1].apply(this,c.slice(2)):void 0:this[c[0]]=d?c[1].call(this,d,c[2]):void 0:c.length==3?this[c[0]]=d?d.replace(c[1],c[2]):void 0:c.length==4?this[c[0]]=d?c[3].call(this,d.replace(c[1],c[2])):void 0:c.length>4&&(this[c[0]]=d?c[3].apply(this,[d.replace(c[1],c[2])].concat(c.slice(4))):void 0)):this[c]=d||void 0;t+=2}},Pi=function(e,o){return o.test.test(e)?o.ifTrue:o.ifFalse},T=function(e,o){for(var t in o)if(typeof o[t]===v.OBJECT&&o[t].length>0){for(var l=0;l<o[t].length;l++)if($e(o[t][l],e))return t===Qe?void 0:t}else if($e(o[t],e))return t===Qe?void 0:t;return o.hasOwnProperty("*")?o["*"]:e},wi={ME:"4.90","NT 3.51":"3.51","NT 4.0":"4.0",2e3:["5.0","5.01"],XP:["5.1","5.2"],Vista:"6.0",7:"6.1",8:"6.2","8.1":"6.3",10:["6.4","10.0"],NT:""},ui={embedded:"Automotive",mobile:"Mobile",tablet:["Tablet","EInk"],smarttv:"TV",wearable:"Watch",xr:["VR","XR"],"?":["Desktop","Unknown"],"*":void 0},Bi={Chrome:"Google Chrome",Edge:"Microsoft Edge","Edge WebView2":"Microsoft Edge WebView2","Chrome WebView":"Android WebView","Chrome Headless":"HeadlessChrome","Huawei Browser":"HuaweiBrowser","MIUI Browser":"Miui Browser","Opera Mobi":"OperaMobile",Yandex:"YaBrowser"},Fi={browser:[[/\b(?:crmo|crios)\/([\w\.]+)/i],[a,[n,ie+"Chrome"]],[/webview.+edge\/([\w\.]+)/i],[a,[n,_e+" WebView"],[i,F]],[/edg(?:e|ios|a)?\/([\w\.]+)/i],[a,[n,"Edge"]],[/(opera mini)\/([-\w\.]+)/i,/(opera [mobiletab]{3,6})\b.+version\/([-\w\.]+)/i,/(opera)(?:.+version\/|[\/ ]+)([\w\.]+)/i],[n,a],[/opios[\/ ]+([\w\.]+)/i],[a,[n,ee+" Mini"]],[/\bop(?:rg)?x\/([\w\.]+)/i],[a,[n,ee+" GX"]],[/\bopr\/([\w\.]+)/i],[a,[n,ee]],[/\bb[ai]*d(?:uhd|[ub]*[aekoprswx]{5,6})[\/ ]?([\w\.]+)/i],[a,[n,"Baidu"]],[/\b(?:mxbrowser|mxios|myie2)\/?([-\w\.]*)\b/i],[a,[n,"Maxthon"]],[/(kindle)\/([\w\.]+)/i,/(lunascape|maxthon|netfront|jasmine|blazer|sleipnir)[\/ ]?([\w\.]*)/i,/(avant|iemobile|slim(?:browser|boat|jet))[\/ ]?([\d\.]*)/i,/(?:ms|\()(ie) ([\w\.]+)/i,/(atlas|flock|rockmelt|midori|epiphany|silk|skyfire|bolt|iron|vivaldi|iridium|phantomjs|bowser|qupzilla|falkon|rekonq|puffin|whale(?!.+naver)|qqbrowserlite|duckduckgo|klar|helio|(?=comodo_)?dragon|otter|dooble|(?:hi|lg |ovi|qute)browser|palemoon)\/v?([-\w\.]+)/i,/(brave)(?: chrome)?\/([\d\.]+)/i,/(aloha|heytap|ovi|115|surf|qwant)browser\/([\d\.]+)/i,/(qwant)(?:ios|mobile)\/([\d\.]+)/i,/(ecosia|weibo)(?:__| \w+@)([\d\.]+)/i],[n,a],[/quark(?:pc)?\/([-\w\.]+)/i],[a,[n,"Quark"]],[/\bddg\/([\w\.]+)/i],[a,[n,"DuckDuckGo"]],[/(?:\buc? ?browser|(?:juc.+)ucweb| ucpc)[\/ ]?([\w\.]+)/i],[a,[n,"UCBrowser"]],[/microm.+\bqbcore\/([\w\.]+)/i,/\bqbcore\/([\w\.]+).+microm/i,/micromessenger\/([\w\.]+)/i],[a,[n,"WeChat"]],[/konqueror\/([\w\.]+)/i],[a,[n,"Konqueror"]],[/trident.+rv[: ]([\w\.]{1,9})\b.+like gecko/i],[a,[n,"IE"]],[/ya(?:search)?browser\/([\w\.]+)/i],[a,[n,"Yandex"]],[/slbrowser\/([\w\.]+)/i],[a,[n,"Smart "+Be+j]],[/(av(?:ast|g|ira))\/([\w\.]+)/i],[[n,/(.+)/,"$1 Secure"+j],a],[/norton\/([\w\.]+)/i],[a,[n,"Norton Private"+j]],[/\bfocus\/([\w\.]+)/i],[a,[n,be+" Focus"]],[/ mms\/([\w\.]+)$/i],[a,[n,ee+" Neon"]],[/ opt\/([\w\.]+)$/i],[a,[n,ee+" Touch"]],[/coc_coc\w+\/([\w\.]+)/i],[a,[n,"Coc Coc"]],[/dolfin\/([\w\.]+)/i],[a,[n,"Dolphin"]],[/coast\/([\w\.]+)/i],[a,[n,ee+" Coast"]],[/miuibrowser\/([\w\.]+)/i],[a,[n,"MIUI"+j]],[/fxios\/([\w\.-]+)/i],[a,[n,ie+be]],[/\bqihoobrowser\/?([\w\.]*)/i],[a,[n,"360"]],[/\b(qq)\/([\w\.]+)/i],[[n,/(.+)/,"$1Browser"],a],[/(oculus|sailfish|huawei|vivo|pico)browser\/([\w\.]+)/i],[[n,/(.+)/,"$1"+j],a],[/ HBPC\/([\w\.]+)/],[a,[n,Pe+j]],[/samsungbrowser\/([\w\.]+)/i],[a,[n,we+" Internet"]],[/metasr[\/ ]?([\d\.]+)/i],[a,[n,di+" Explorer"]],[/(sogou)mo\w+\/([\d\.]+)/i],[[n,di+" Mobile"],a],[/(electron)\/([\w\.]+) safari/i,/(tesla)(?: qtcarbrowser|\/(20\d\d\.[-\w\.]+))/i,/m?(qqbrowser|2345(?=browser|chrome|explorer))\w*[\/ ]?v?([\w\.]+)/i],[n,a],[/(lbbrowser|luakit|rekonq|steam(?= (clie|tenf|gameo)))/i],[n],[/ome\/([\w\.]+).+(iron(?= saf)|360(?=[es]e$))/i],[a,n],[/((?:fban\/fbios|fb_iab\/fb4a)(?!.+fbav)|;fbav\/([\w\.]+);)/i],[[n,Ve],a,[i,F]],[/(kakao(?:talk|story))[\/ ]([\w\.]+)/i,/(naver)\(.*?(\d+\.[\w\.]+).*\)/i,/(daum)apps[\/ ]([\w\.]+)/i,/safari (line)\/([\w\.]+)/i,/\b(line)\/([\w\.]+)\/iab/i,/(alipay)client\/([\w\.]+)/i,/(twitter)(?:and| f.+e\/([\w\.]+))/i,/(bing)(?:web|sapphire)\/([\w\.]+)/i,/(instagram|snapchat|klarna)[\/ ]([-\w\.]+)/i],[n,a,[i,F]],[/\bgsa\/([\w\.]+) .*safari\//i],[a,[n,"GSA"],[i,F]],[/(?:musical_ly|trill)(?:.+app_?version\/|_)([\w\.]+)/i],[a,[n,"TikTok"],[i,F]],[/\[(linkedin)app\]/i],[n,[i,F]],[/(zalo(?:app)?)[\/\sa-z]*([\w\.-]+)/i],[[n,/(.+)/,"Zalo"],a,[i,F]],[/(chromium)[\/ ]([-\w\.]+)/i],[n,a],[/ome-(lighthouse)$/i],[n,[i,Oi]],[/headlesschrome(?:\/([\w\.]+)| )/i],[a,[n,ci+" Headless"]],[/wv\).+chrome\/([\w\.]+).+edgw\//i],[a,[n,_e+" WebView2"],[i,F]],[/; wv\).+(chrome)\/([\w\.]+)/i],[[n,ci+" WebView"],a,[i,F]],[/droid.+ version\/([\w\.]+)\b.+(?:mobile safari|safari)/i],[a,[n,"Android"+j]],[/chrome\/([\w\.]+) mobile/i],[a,[n,ie+"Chrome"]],[/(chrome|omniweb|arora|[tizenoka]{5} ?browser)\/v?([\w\.]+)/i],[n,a],[/version\/([\w\.\,]+) .*mobile(?:\/\w+ | ?)safari/i],[a,[n,ie+"Safari"]],[/iphone .*mobile(?:\/\w+ | ?)safari/i],[[n,ie+"Safari"]],[/version\/([\w\.\,]+) .*(safari)/i],[a,n],[/webkit.+?(mobile ?safari|safari)(\/[\w\.]+)/i],[n,[a,"1"]],[/(webkit|khtml)\/([\w\.]+)/i],[n,a],[/(?:mobile|tablet);.*(firefox)\/([\w\.-]+)/i],[[n,ie+be],a],[/(navigator|netscape\d?)\/([-\w\.]+)/i],[[n,"Netscape"],a],[/(wolvic|librewolf)\/([\w\.]+)/i],[n,a],[/mobile vr; rv:([\w\.]+)\).+firefox/i],[a,[n,be+" Reality"]],[/ekiohf.+(flow)\/([\w\.]+)/i,/(swiftfox)/i,/(icedragon|iceweasel|camino|chimera|fennec|maemo browser|minimo|conkeror)[\/ ]?([\w\.\+]+)/i,/(seamonkey|k-meleon|icecat|iceape|firebird|phoenix|basilisk|waterfox)\/([-\w\.]+)$/i,/(firefox)\/([\w\.]+)/i,/(mozilla)\/([\w\.]+(?= .+rv\:.+gecko\/\d+)|[0-4][\w\.]+(?!.+compatible))/i,/(amaya|dillo|doris|icab|ladybird|lynx|mosaic|netsurf|obigo|polaris|w3m|(?:go|ice|up)[\. ]?browser)[-\/ ]?v?([\w\.]+)/i,/\b(links) \(([\w\.]+)/i],[n,[a,/_/g,"."]],[/(cobalt)\/([\w\.]+)/i],[n,[a,/[^\d\.]+./,J]]],cpu:[[/\b((amd|x|x86[-_]?|wow|win)64)\b/i],[[O,"amd64"]],[/(ia32(?=;))/i,/\b((i[346]|x)86)(pc)?\b/i],[[O,"ia32"]],[/\b(aarch64|arm(v?[89]e?l?|_?64))\b/i],[[O,"arm64"]],[/\b(arm(v[67])?ht?n?[fl]p?)\b/i],[[O,"armhf"]],[/( (ce|mobile); ppc;|\/[\w\.]+arm\b)/i],[[O,"arm"]],[/ sun4\w[;\)]/i],[[O,"sparc"]],[/\b(avr32|ia64(?=;)|68k(?=\))|\barm(?=v([1-7]|[5-7]1)l?|;|eabi)|(irix|mips|sparc)(64)?\b|pa-risc)/i,/((ppc|powerpc)(64)?)( mac|;|\))/i,/(?:osf1|[freopnt]{3,4}bsd) (alpha)/i],[[O,/ower/,J,q]],[/mc680.0/i],[[O,"68k"]],[/winnt.+\[axp/i],[[O,"alpha"]]],device:[[/\b(sch-i[89]0\d|shw-m380s|sm-[ptx]\w{2,4}|gt-[pn]\d{2,4}|sgh-t8[56]9|nexus 10)/i],[r,[s,we],[i,m]],[/\b((?:s[cgp]h|gt|sm)-(?![lr])\w+|sc[g-]?[\d]+a?|galaxy nexus)/i,/samsung[- ]((?!sm-[lr]|browser)[-\w]+)/i,/sec-(sgh\w+)/i],[r,[s,we],[i,b]],[/(?:\/|\()(ip(?:hone|od)[\w, ]*)[\/\);]/i],[r,[s,Q],[i,b]],[/\b(?:ios|apple\w+)\/.+[\(\/](ipad)/i,/\b(ipad)[\d,]*[;\] ].+(mac |i(pad)?)os/i],[r,[s,Q],[i,m]],[/(macintosh);/i],[r,[s,Q]],[/\b(sh-?[altvz]?\d\d[a-ekm]?)/i],[r,[s,si],[i,b]],[/\b((?:brt|eln|hey2?|gdi|jdn)-a?[lnw]09|(?:ag[rm]3?|jdn2|kob2)-a?[lw]0[09]hn)(?: bui|\)|;)/i],[r,[s,ri],[i,m]],[/honor([-\w ]+)[;\)]/i],[r,[s,ri],[i,b]],[/\b((?:ag[rs][2356]?k?|bah[234]?|bg[2o]|bt[kv]|cmr|cpn|db[ry]2?|jdn2|got|kob2?k?|mon|pce|scm|sht?|[tw]gr|vrd)-[ad]?[lw][0125][09]b?|605hw|bg2-u03|(?:gem|fdr|m2|ple|t1)-[7a]0[1-4][lu]|t1-a2[13][lw]|mediapad[\w\. ]*(?= bui|\)))\b(?!.+d\/s)/i],[r,[s,Pe],[i,m]],[/(?:huawei) ?([-\w ]+)[;\)]/i,/\b(nexus 6p|\w{2,4}e?-[atu]?[ln][\dx][\dc][adnt]?)\b(?!.+d\/s)/i],[r,[s,Pe],[i,b]],[/oid[^\)]+; (2[\dbc]{4}(182|283|rp\w{2})[cgl]|m2105k81a?c)(?: bui|\))/i,/\b(?:xiao)?((?:red)?mi[-_ ]?pad[\w- ]*)(?: bui|\))/i],[[r,/_/g," "],[s,De],[i,m]],[/\b; (\w+) build\/hm\1/i,/\b(hm[-_ ]?note?[_ ]?(?:\d\w)?) bui/i,/oid[^\)]+; (redmi[\-_ ]?(?:note|k)?[\w_ ]+|m?[12]\d[01]\d\w{3,6}|poco[\w ]+|(shark )?\w{3}-[ah]0|qin ?[1-3](s\+|ultra| pro)?)( bui|; wv|\))/i,/\b(mi[-_ ]?(?:a\d|one|one[_ ]plus|note|max|cc)?[_ ]?(?:\d{0,2}\w?)[_ ]?(?:plus|se|lite|pro)?( 5g|lte)?)(?: bui|\))/i,/; ([\w ]+) miui\/v?\d/i],[[r,/_/g," "],[s,De],[i,b]],[/droid.+; (cph2[3-6]\d[13579]|((gm|hd)19|(ac|be|in|kb)20|(d[en]|eb|le|mt)21|ne22)[0-2]\d|p[g-l]\w[1m]10)\b/i,/(?:one)?(?:plus)? (a\d0\d\d)(?: b|\))/i],[r,[s,ai],[i,b]],[/; (\w+) bui.+ oppo/i,/\b(cph[12]\d{3}|p(?:af|c[al]|d\w|e[ar])[mt]\d0|x9007|a101op)\b/i],[r,[s,Le],[i,b]],[/\b(opd2(\d{3}a?))(?: bui|\))/i],[r,[s,T,{OnePlus:["203","304","403","404","413","415"],"*":Le}],[i,m]],[/(vivo (5r?|6|8l?|go|one|s|x[il]?[2-4]?)[\w\+ ]*)(?: bui|\))/i],[r,[s,"BLU"],[i,b]],[/; vivo (\w+)(?: bui|\))/i,/\b(v[12]\d{3}\w?[at])(?: bui|;)/i],[r,[s,"Vivo"],[i,b]],[/\b(rmx[1-3]\d{3})(?: bui|;|\))/i],[r,[s,"Realme"],[i,b]],[/(ideatab[-\w ]+|602lv|d-42a|a101lv|a2109a|a3500-hv|s[56]000|pb-6505[my]|tb-?x?\d{3,4}(?:f[cu]|xu|[av])|yt\d?-[jx]?\d+[lfmx])( bui|;|\)|\/)/i,/lenovo ?(b[68]0[08]0-?[hf]?|tab(?:[\w- ]+?)|tb[\w-]{6,7})( bui|;|\)|\/)/i],[r,[s,Be],[i,m]],[/lenovo[-_ ]?([-\w ]+?)(?: bui|\)|\/)/i],[r,[s,Be],[i,b]],[/\b(milestone|droid(?:[2-4x]| (?:bionic|x2|pro|razr))?:?( 4g)?)\b[\w ]+build\//i,/\bmot(?:orola)?[- ]([\w\s]+)(\)| bui)/i,/((?:moto(?! 360)[-\w\(\) ]+|xt\d{3,4}[cgkosw\+]?[-\d]*|nexus 6)(?= bui|\)))/i],[r,[s,He],[i,b]],[/\b(mz60\d|xoom[2 ]{0,2}) build\//i],[r,[s,He],[i,m]],[/\b(?:lg)?([vl]k\-?\d{3}) bui| 3\.[-\w; ]{10}lg?-([06cv9]{3,4})/i],[r,[s,xe],[i,m]],[/(lm(?:-?f100[nv]?|-[\w\.]+)(?= bui|\))|nexus [45])/i,/\blg[-e;\/ ]+(?!.*(?:browser|netcast|android tv|watch|webos))(\w+)/i,/\blg-?([\d\w]+) bui/i],[r,[s,xe],[i,b]],[/(nokia) (t[12][01])/i],[s,r,[i,m]],[/(?:maemo|nokia).*(n900|lumia \d+|rm-\d+)/i,/nokia[-_ ]?(([-\w\. ]*?))( bui|\)|;|\/)/i],[[r,/_/g," "],[i,b],[s,"Nokia"]],[/(pixel (c|tablet))\b/i],[r,[s,$],[i,m]],[/droid.+;(?: google)? (g(01[13]a|020[aem]|025[jn]|1b60|1f8f|2ybb|4s1m|576d|5nz6|8hhn|8vou|a02099|c15s|d1yq|e2ae|ec77|gh2x|kv4x|p4bc|pj41|r83y|tt9q|ur25|wvk6)|pixel[\d ]*a?( pro)?( xl)?( fold)?( \(5g\))?)( bui|\))/i],[r,[s,$],[i,b]],[/(google) (pixelbook( go)?)/i],[s,r],[/droid.+; (a?\d[0-2]{2}so|[c-g]\d{4}|so[-gl]\w+|xq-\w\w\d\d)(?= bui|\).+chrome\/(?![1-6]{0,1}\d\.))/i],[r,[s,ue],[i,b]],[/sony tablet [ps]/i,/\b(?:sony)?sgp\w+(?: bui|\))/i],[[r,"Xperia Tablet"],[s,ue],[i,m]],[/(alexa)webm/i,/(kf[a-z]{2}wi|aeo(?!bc)\w\w)( bui|\))/i,/(kf[a-z]+)( bui|\)).+silk\//i],[r,[s,ke],[i,m]],[/((?:sd|kf)[0349hijorstuw]+)( bui|\)).+silk\//i],[[r,/(.+)/g,"Fire Phone $1"],[s,ke],[i,b]],[/(playbook);[-\w\),; ]+(rim)/i],[r,s,[i,m]],[/\b((?:bb[a-f]|st[hv])100-\d)/i,/(?:blackberry|\(bb10;) (\w+)/i],[r,[s,oi],[i,b]],[/(?:\b|asus_)(transfo[prime ]{4,10} \w+|eeepc|slider \w+|nexus 7|padfone|p00[cj])/i],[r,[s,ti],[i,m]],[/ (z[bes]6[027][012][km][ls]|zenfone \d\w?)\b/i],[r,[s,ti],[i,b]],[/(nexus 9)/i],[r,[s,"HTC"],[i,m]],[/(htc)[-;_ ]{1,2}([\w ]+(?=\)| bui)|\w+)/i,/(zte)[- ]([\w ]+?)(?: bui|\/|\))/i,/(alcatel|geeksphone|nexian|panasonic(?!(?:;|\.))|sony(?!-bra))[-_ ]?([-\w]*)/i],[s,[r,/_/g," "],[i,b]],[/tcl (xess p17aa)/i,/droid [\w\.]+; ((?:8[14]9[16]|9(?:0(?:48|60|8[01])|1(?:3[27]|66)|2(?:6[69]|9[56])|466))[gqswx])(_\w(\w|\w\w))?(\)| bui)/i],[r,[s,"TCL"],[i,m]],[/droid [\w\.]+; (418(?:7d|8v)|5087z|5102l|61(?:02[dh]|25[adfh]|27[ai]|56[dh]|59k|65[ah])|a509dl|t(?:43(?:0w|1[adepqu])|50(?:6d|7[adju])|6(?:09dl|10k|12b|71[efho]|76[hjk])|7(?:66[ahju]|67[hw]|7[045][bh]|71[hk]|73o|76[ho]|79w|81[hks]?|82h|90[bhsy]|99b)|810[hs]))(_\w(\w|\w\w))?(\)| bui)/i],[r,[s,"TCL"],[i,b]],[/(itel) ((\w+))/i],[[s,q],r,[i,T,{tablet:["p10001l","w7001"],"*":"mobile"}]],[/droid.+; ([ab][1-7]-?[0178a]\d\d?)/i],[r,[s,"Acer"],[i,m]],[/droid.+; (m[1-5] note) bui/i,/\bmz-([-\w]{2,})/i],[r,[s,"Meizu"],[i,b]],[/; ((?:power )?armor(?:[\w ]{0,8}))(?: bui|\))/i],[r,[s,"Ulefone"],[i,b]],[/; (energy ?\w+)(?: bui|\))/i,/; energizer ([\w ]+)(?: bui|\))/i],[r,[s,"Energizer"],[i,b]],[/; cat (b35);/i,/; (b15q?|s22 flip|s48c|s62 pro)(?: bui|\))/i],[r,[s,"Cat"],[i,b]],[/((?:new )?andromax[\w- ]+)(?: bui|\))/i],[r,[s,"Smartfren"],[i,b]],[/droid.+; (a(in)?(0(15|59|6[35])|142)p?)/i],[r,[s,"Nothing"],[i,b]],[/; (x67 5g|tikeasy \w+|ac[1789]\d\w+)( b|\))/i,/archos ?(5|gamepad2?|([\w ]*[t1789]|hello) ?\d+[\w ]*)( b|\))/i],[r,[s,"Archos"],[i,m]],[/archos ([\w ]+)( b|\))/i,/; (ac[3-6]\d\w{2,8})( b|\))/i],[r,[s,"Archos"],[i,b]],[/blackview ([-\w ]+)( b|\))/i,/; (bv\d{4}[-\w ]*)( b|\))/i],[r,[s,"Blackview"],[i,b]],[/; (n159v)/i],[r,[s,"HMD"],[i,b]],[/((revvl[ \w\+]+|tm(?:rv|af)\w*[45]g(?:tb)?))( b|\))/i],[r,[i,Pi,{test:/ta?b/i,ifTrue:m,ifFalse:b}],[s,"T-Mobile"]],[/(imo) (tab \w+)/i,/(infinix|tecno) (x1101b?|p904|dp(7c|8d|10a)( pro)?|p70[1-3]a?|p904|t1101)/i],[s,r,[i,m]],[/(blackberry|benq|palm(?=\-)|sonyericsson|acer|asus(?! zenw)|dell|jolla|meizu|motorola|polytron|tecno|micromax|advan)[-_ ]?([-\w]*)/i,/; (blu|coolpad|cubot|hmd|imo|infinix|lava|oneplus|tcl|wiko)[_ ]([-\w\+ ]+?)(?: bui|\)|; r)/i,/(hp) ([\w ]+\w)/i,/(microsoft); (lumia[\w ]+)/i,/(oppo) ?([\w ]+) bui/i,/(hisense) ([ehv][\w ]+)\)/i,/droid[^;]+; (philips)[_ ]([sv-x][\d]{3,4}[xz]?)/i],[s,r,[i,b]],[/(kobo)\s(ereader|touch)/i,/(hp).+(touchpad(?!.+tablet)|tablet)/i,/(kindle)\/([\w\.]+)/i],[s,r,[i,m]],[/(surface duo)/i],[r,[s,Fe],[i,m]],[/droid [\d\.]+; (fp\du?)(?: b|\))/i],[r,[s,"Fairphone"],[i,b]],[/((?:tegranote|shield t(?!.+d tv))[\w- ]*?)(?: b|\))/i],[r,[s,ni],[i,m]],[/(sprint) (\w+)/i],[s,r,[i,b]],[/(kin\.[onetw]{3})/i],[[r,/\./g," "],[s,Fe],[i,b]],[/droid.+; ([c6]+|et5[16]|mc[239][23]x?|vc8[03]x?)\)/i],[r,[s,qe],[i,m]],[/droid.+; (ec30|ps20|tc[2-8]\d[kx])\)/i],[r,[s,qe],[i,b]],[/(philips)[\w ]+tv/i,/smart-tv.+(samsung)/i],[s,[i,y]],[/hbbtv.+maple;(\d+)/i],[[r,/^/,"SmartTV"],[s,we],[i,y]],[/(vizio)(?: |.+model\/)(\w+-\w+)/i,/tcast.+(lg)e?. ([-\w]+)/i],[s,r,[i,y]],[/(nux; netcast.+smarttv|lg (netcast\.tv-201\d|android tv))/i],[[s,xe],[i,y]],[/(apple) ?tv/i],[s,[r,Q+" TV"],[i,y]],[/crkey.*devicetype\/chromecast/i],[[r,D+" Third Generation"],[s,$],[i,y]],[/crkey.*devicetype\/([^/]*)/i],[[r,/^/,"Chromecast "],[s,$],[i,y]],[/fuchsia.*crkey/i],[[r,D+" Nest Hub"],[s,$],[i,y]],[/crkey/i],[[r,D],[s,$],[i,y]],[/(portaltv)/i],[r,[s,Ve],[i,y]],[/droid.+aft(\w+)( bui|\))/i],[r,[s,ke],[i,y]],[/(shield \w+ tv)/i],[r,[s,ni],[i,y]],[/\(dtv[\);].+(aquos)/i,/(aquos-tv[\w ]+)\)/i],[r,[s,si],[i,y]],[/(bravia[\w ]+)( bui|\))/i],[r,[s,ue],[i,y]],[/(mi(tv|box)-?\w+) bui/i],[r,[s,De],[i,y]],[/Hbbtv.*(technisat) (.*);/i],[s,r,[i,y]],[/\b(roku)[\dx]*[\)\/]((?:dvp-)?[\d\.]*)/i,/hbbtv\/\d+\.\d+\.\d+ +\([\w\+ ]*; *([\w\d][^;]*);([^;]*)/i],[[s,/.+\/(\w+)/,"$1",T,{LG:"lge"}],[r,he],[i,y]],[/(playstation \w+)/i],[r,[s,ue],[i,ge]],[/\b(xbox(?: one)?(?!; xbox))[\); ]/i],[r,[s,Fe],[i,ge]],[/(ouya)/i,/(nintendo) (\w+)/i,/(retroid) (pocket ([^\)]+))/i,/(valve).+(steam deck)/i,/droid.+; ((shield|rgcube|gr0006))( bui|\))/i],[[s,T,{Nvidia:"Shield",Anbernic:"RGCUBE",Logitech:"GR0006"}],r,[i,ge]],[/\b(sm-[lr]\d\d[0156][fnuw]?s?|gear live)\b/i],[r,[s,we],[i,N]],[/((pebble))app/i,/(asus|google|lg|oppo|xiaomi) ((pixel |zen)?watch[\w ]*)( bui|\))/i],[s,r,[i,N]],[/(ow(?:19|20)?we?[1-3]{1,3})/i],[r,[s,Le],[i,N]],[/(watch)(?: ?os[,\/]|\d,\d\/)[\d\.]+/i],[r,[s,Q],[i,N]],[/(opwwe\d{3})/i],[r,[s,ai],[i,N]],[/(moto 360)/i],[r,[s,He],[i,N]],[/(smartwatch 3)/i],[r,[s,ue],[i,N]],[/(g watch r)/i],[r,[s,xe],[i,N]],[/droid.+; (wt63?0{2,3})\)/i],[r,[s,qe],[i,N]],[/droid.+; (glass) \d/i],[r,[s,$],[i,ve]],[/(pico) ([\w ]+) os\d/i],[s,r,[i,ve]],[/(quest( \d| pro)?s?).+vr/i],[r,[s,Ve],[i,ve]],[/mobile vr; rv.+firefox/i],[[i,ve]],[/(tesla)(?: qtcarbrowser|\/[-\w\.]+)/i],[s,[i,de]],[/(aeobc)\b/i],[r,[s,ke],[i,de]],[/(homepod).+mac os/i],[r,[s,Q],[i,de]],[/windows iot/i],[[i,de]],[/droid.+; ([\w- ]+) (4k|android|smart|google)[- ]?tv/i],[r,[i,y]],[/\b((4k|android|smart|opera)[- ]?tv|tv; rv:|large screen[\w ]+safari)\b/i],[[i,y]],[/droid .+?; ([^;]+?)(?: bui|; wv\)|\) applew|; hmsc).+?(mobile|vr|\d) safari/i],[r,[i,T,{mobile:"Mobile",xr:"VR","*":m}]],[/\b((tablet|tab)[;\/]|focus\/\d(?!.+mobile))/i],[[i,m]],[/(phone|mobile(?:[;\/]| [ \w\/\.]*safari)|pda(?=.+windows ce))/i],[[i,b]],[/droid .+?; ([\w\. -]+)( bui|\))/i],[r,[s,"Generic"]]],engine:[[/windows.+ edge\/([\w\.]+)/i],[a,[n,_e+"HTML"]],[/(arkweb)\/([\w\.]+)/i],[n,a],[/webkit\/537\.36.+chrome\/(?!27)([\w\.]+)/i],[a,[n,"Blink"]],[/(presto)\/([\w\.]+)/i,/(webkit|trident|netfront|netsurf|amaya|lynx|w3m|goanna|servo)\/([\w\.]+)/i,/ekioh(flow)\/([\w\.]+)/i,/(khtml|tasman|links|dillo)[\/ ]\(?([\w\.]+)/i,/(icab)[\/ ]([23]\.[\d\.]+)/i,/\b(libweb)/i],[n,a],[/ladybird\//i],[[n,"LibWeb"]],[/rv\:([\w\.]{1,9})\b.+(gecko)/i],[a,n]],os:[[/(windows nt) (6\.[23]); arm/i],[[n,/N/,"R"],[a,T,wi]],[/(windows (?:phone|mobile|iot))(?: os)?[\/ ]?([\d\.]*( se)?)/i,/(windows)[\/ ](1[01]|2000|3\.1|7|8(\.1)?|9[58]|me|server 20\d\d( r2)?|vista|xp)/i],[n,a],[/windows nt ?([\d\.\)]*)(?!.+xbox)/i,/\bwin(?=3| ?9|n)(?:nt| 9x )?([\d\.;]*)/i],[[a,/(;|\))/g,"",T,wi],[n,ze]],[/(windows ce)\/?([\d\.]*)/i],[n,a],[/[adehimnop]{4,7}\b(?:.*os ([\w]+) like mac|; opera)/i,/(?:ios;fbsv|ios(?=.+ip(?:ad|hone)|.+apple ?tv)|ip(?:ad|hone)(?: |.+i(?:pad)?)os|apple ?tv.+ios)[\/ ]([\w\.]+)/i,/\btvos ?([\w\.]+)/i,/cfnetwork\/.+darwin/i],[[a,/_/g,"."],[n,"iOS"]],[/(mac os x) ?([\w\. ]*)/i,/(macintosh|mac_powerpc\b)(?!.+(haiku|morphos))/i],[[n,"macOS"],[a,/_/g,"."]],[/android ([\d\.]+).*crkey/i],[a,[n,D+" Android"]],[/fuchsia.*crkey\/([\d\.]+)/i],[a,[n,D+" Fuchsia"]],[/crkey\/([\d\.]+).*devicetype\/smartspeaker/i],[a,[n,D+" SmartSpeaker"]],[/linux.*crkey\/([\d\.]+)/i],[a,[n,D+" Linux"]],[/crkey\/([\d\.]+)/i],[a,[n,D]],[/droid ([\w\.]+)\b.+(android[- ]x86)/i],[a,n],[/(ubuntu) ([\w\.]+) like android/i],[[n,/(.+)/,"$1 Touch"],a],[/(harmonyos)[\/ ]?([\d\.]*)/i,/(android|bada|blackberry|kaios|maemo|meego|openharmony|qnx|rim tablet os|sailfish|series40|symbian|tizen)\w*[-\/\.; ]?([\d\.]*)/i],[n,a],[/\(bb(10);/i],[a,[n,oi]],[/(?:symbian ?os|symbos|s60(?=;)|series ?60)[-\/ ]?([\w\.]*)/i],[a,[n,"Symbian"]],[/mozilla\/[\d\.]+ \((?:mobile[;\w ]*|tablet|tv|[^\)]*(?:viera|lg(?:l25|-d300)|alcatel ?o.+|y300-f1)); rv:([\w\.]+)\).+gecko\//i],[a,[n,be+" OS"]],[/\b(?:hp)?wos(?:browser)?\/([\w\.]+)/i,/webos(?:[ \/]?|\.tv-20(?=2[2-9]))(\d[\d\.]*)/i],[a,[n,"webOS"]],[/web0s;.+?(?:chr[o0]me|safari)\/(\d+)/i],[[a,T,{25:"120",24:"108",23:"94",22:"87",6:"79",5:"68",4:"53",3:"38",2:"538",1:"537","*":"TV"}],[n,"webOS"]],[/watch(?: ?os[,\/ ]|\d,\d\/)([\d\.]+)/i],[a,[n,"watchOS"]],[/cros [\w]+(?:\)| ([\w\.]+)\b)/i],[a,[n,"Chrome OS"]],[/kepler ([\w\.]+); (aft|aeo)/i],[a,[n,"Vega OS"]],[/(netrange)mmh/i,/(nettv)\/(\d+\.[\w\.]+)/i,/(nintendo|playstation) (\w+)/i,/(xbox); +xbox ([^\);]+)/i,/(pico) .+os([\w\.]+)/i,/\b(joli|palm)\b ?(?:os)?\/?([\w\.]*)/i,/linux.+(mint)[\/\(\) ]?([\w\.]*)/i,/(mageia|vectorlinux|fuchsia|arcaos|arch(?= ?linux))[;l ]([\d\.]*)/i,/([kxln]?ubuntu|debian|suse|opensuse|gentoo|slackware|fedora|mandriva|centos|pclinuxos|red ?hat|zenwalk|linpus|raspbian|plan 9|minix|risc os|contiki|deepin|manjaro|elementary os|sabayon|linspire|knoppix)(?: gnu[\/ ]linux)?(?: enterprise)?(?:[- ]linux)?(?:-gnu)?[-\/ ]?(?!chrom|package)([-\w\.]*)/i,/((?:open)?solaris)[-\/ ]?([\w\.]*)/i,/\b(aix)[; ]([1-9\.]{0,4})/i,/(hurd|linux|morphos)(?: (?:arm|x86|ppc)\w*| ?)([\w\.]*)/i,/(gnu) ?([\w\.]*)/i,/\b([-frentopcghs]{0,5}bsd|dragonfly)[\/ ]?(?!amd|[ix346]{1,2}86)([\w\.]*)/i,/(haiku) ?(r\d)?/i],[n,a],[/(sunos) ?([\d\.]*)/i],[[n,"Solaris"],a],[/\b(beos|os\/2|amigaos|openvms|hp-ux|serenityos)/i,/(unix) ?([\w\.]*)/i],[n,a]]},Se=(function(){var e={init:{},isIgnore:{},isIgnoreRgx:{},toString:{}};return H.call(e.init,[[S,[n,a,le,i]],[B,[O]],[M,[i,r,s]],[A,[n,a]],[I,[n,a]]]),H.call(e.isIgnore,[[S,[a,le]],[A,[a]],[I,[a]]]),H.call(e.isIgnoreRgx,[[S,/ ?browser$/i],[I,/ ?os$/i]]),H.call(e.toString,[[S,[n,a]],[B,[O]],[M,[s,r]],[A,[n,a]],[I,[n,a]]]),e})(),Hi=function(e,o){var t=Se.init[o],l=Se.isIgnore[o]||0,w=Se.isIgnoreRgx[o]||0,u=Se.toString[o]||0;function c(){H.call(this,t)}return c.prototype.getItem=function(){return e},c.prototype.withClientHints=function(){return G?G.getHighEntropyValues(ii).then(function(p){return e.setCH(new bi(p,!1)).parseCH().get()}):e.parseCH().get()},c.prototype.withFeatureCheck=function(){return e.detectFeature().get()},o!=Y&&(c.prototype.is=function(p){var d=!1;for(var f in this)if(this.hasOwnProperty(f)&&!$e(l,f)&&q(w?pe(w,this[f]):this[f])==q(w?pe(w,p):p)){if(d=!0,p!=v.UNDEFINED)break}else if(p==v.UNDEFINED&&d){d=!d;break}return d},c.prototype.toString=function(){var p=J;for(var d in u)typeof this[u[d]]!==v.UNDEFINED&&(p+=(p?" ":J)+this[u[d]]);return p||v.UNDEFINED}),c.prototype.then=function(p){var d=this,f=function(){for(var k in d)d.hasOwnProperty(k)&&(this[k]=d[k])};f.prototype={is:c.prototype.is,toString:c.prototype.toString,withClientHints:c.prototype.withClientHints,withFeatureCheck:c.prototype.withFeatureCheck};var h=new f;return p(h),h},new c};function bi(e,o){if(e=e||{},H.call(this,ii),o)H.call(this,[[Ue,je(e[L])],[Me,je(e[Si])],[b,/\?1/.test(e[Ti])],[r,oe(e[Ri])],[Z,oe(e[ei])],[Ne,oe(e[Ui])],[O,oe(e[Ci])],[z,je(e[Ai])],[ye,oe(e[Ii])]]);else for(var t in e)this.hasOwnProperty(t)&&typeof e[t]!==v.UNDEFINED&&(this[t]=e[t])}function V(e,o,t,l){return H.call(this,[["itemType",e],["ua",o],["uaCH",l],["rgxMap",t],["data",Hi(this,e)]]),this}V.prototype.get=function(e){return e?this.data.hasOwnProperty(e)?this.data[e]:void 0:this.data},V.prototype.set=function(e,o){return this.data[e]=o,this},V.prototype.setCH=function(e){return this.uaCH=e,this},V.prototype.detectFeature=function(){if(C&&C.userAgent==this.ua)switch(this.itemType){case S:C.brave&&typeof C.brave.isBrave==v.FUNCTION&&this.set(n,"Brave");break;case M:!this.get(i)&&G&&G[b]&&this.set(i,b),this.get(r)=="Macintosh"&&C&&typeof C.standalone!==v.UNDEFINED&&C.maxTouchPoints&&C.maxTouchPoints>2&&this.set(r,"iPad").set(i,m);break;case I:!this.get(n)&&G&&G[Z]&&this.set(n,G[Z]);break;case Y:var e=this.data,o=function(t){return e[t].getItem().detectFeature().get()};this.set(S,o(S)).set(B,o(B)).set(M,o(M)).set(A,o(A)).set(I,o(I))}return this},V.prototype.parseUA=function(){switch(this.itemType!=Y&&We.call(this.data,this.ua,this.rgxMap),this.itemType){case S:this.set(le,Ge(this.get(a)));break;case I:if(this.get(n)=="iOS"&&this.get(a)&&/^1[89][^\d]/.exec(this.get(a))){var e=/\) Version\/((\d+)[\d\.]*)/.exec(this.ua);e&&parseInt(e[2],10)>=26&&this.set(a,e[1])}break}return this},V.prototype.parseCH=function(){var e=this.uaCH,o=this.rgxMap;switch(this.itemType){case S:case A:var t=e[Me]||e[Ue],l;if(t)for(var w=0;w<t.length;w++){var u=t[w].brand||t[w],c=t[w].version;this.itemType==S&&!/not.a.brand/i.test(u)&&(!l||/Chrom/.test(l)&&u!=li||l==_e&&/WebView2/.test(u))&&(u=T(u,Bi),l=this.get(n),l&&!/Chrom/.test(l)&&/Chrom/.test(u)||this.set(n,u).set(a,c).set(le,Ge(c)),l=u),this.itemType==A&&u==li&&this.set(a,c)}break;case B:var p=e[O];p&&(p&&e[ye]=="64"&&(p+="64"),We.call(this.data,p+";",o));break;case M:if(e[b]&&this.set(i,b),e[r]&&(this.set(r,e[r]),!this.get(i)||!this.get(s))){var d={};We.call(d,"droid 9; "+e[r]+")",o),!this.get(i)&&d.type&&this.set(i,d.type),!this.get(s)&&d.vendor&&this.set(s,d.vendor)}if(e[z]){var f;if(typeof e[z]!="string")for(var h=0;!f&&h<e[z].length;)f=T(e[z][h++],ui);else f=T(e[z],ui);this.set(i,f)}break;case I:var k=e[Z];if(k){var fe=e[Ne];k==ze&&(fe=parseInt(Ge(fe),10)>=13?"11":"10"),this.set(n,k).set(a,fe)}this.get(n)==ze&&e[r]=="Xbox"&&this.set(n,"Xbox").set(a,void 0);break;case Y:var Ke=this.data,me=function(Ce){return Ke[Ce].getItem().setCH(e).parseCH().get()};this.set(S,me(S)).set(B,me(B)).set(M,me(M)).set(A,me(A)).set(I,me(I))}return this};function P(e,o,t){if(typeof e===v.OBJECT?(Oe(e,!0)?(typeof o===v.OBJECT&&(t=o),o=e):(t=e,o=void 0),e=void 0):typeof e===v.STRING&&!Oe(o,!0)&&(t=o,o=void 0),t)if(typeof t.append===v.FUNCTION){var l={};t.forEach(function(h,k){l[String(k).toLowerCase()]=h}),t=l}else{var w={};for(var u in t)t.hasOwnProperty(u)&&(w[String(u).toLowerCase()]=t[u]);t=w}if(!(this instanceof P))return new P(e,o,t).getResult();var c=typeof e===v.STRING?e:t&&t[Ze]?t[Ze]:C&&C.userAgent?C.userAgent:J,p=new bi(t,!0),d=Fi,f=function(h){return h==Y?function(){return new V(h,c,d,p).set("ua",c).set(S,this.getBrowser()).set(B,this.getCPU()).set(M,this.getDevice()).set(A,this.getEngine()).set(I,this.getOS()).get()}:function(){return new V(h,c,d[h],p).parseUA().get()}};return H.call(this,[["getBrowser",f(S)],["getCPU",f(B)],["getDevice",f(M)],["getEngine",f(A)],["getOS",f(I)],["getResult",f(Y)],["getUA",function(){return c}],["setUA",function(h){return te(h)&&(c=he(h,Ye)),this}],["useExtension",function(h){return h&&(d=Ni(d,h)),this}]]).setUA(c).useExtension(o),this}P.VERSION=Ei,P.BROWSER=Ee([n,a,le,i]),P.CPU=Ee([O]),P.DEVICE=Ee([r,s,i,ge,b,y,m,N,de]),P.ENGINE=P.OS=Ee([n,a]);var pi=(e=>(e.production="production",e.test="test",e))(pi||{});const Li={test:"1663676682",production:"1663676682"},Di={test:"https://spider-tracker.xiaohongshu.com/api/data",production:"https://spider-tracker.xiaohongshu.com/api/data"},hi=e=>{const o="prod".toLowerCase()==="prod"?"production":"test";return fetch(Di[o],{method:"POST",headers:{accept:"application/json, text/plain, */*","accept-language":"zh-CN,zh;q=0.9,en;q=0.8,ja;q=0.7,fr;q=0.6","cache-control":"no-cache","content-type":"text/plain","Biz-Type":Li[o]},body:JSON.stringify(e)})},re="unknown",qi=224,Vi=()=>{var o;const e={};try{const t=JSON.parse(localStorage.getItem("userInfo")||"{}");e.employ_type=`${(o=t.employmentType)!=null?o:""}`,e.user_name=t.userName;const l=window.devicePixelRatio;e.dpr=`${Math.round(l*1e3)/1e3}`;const w=window.screen;e.dp_size=`${Math.round(w.width*l)}x${Math.round(w.height*l)}`,e.dip_size=`${Math.round(w.width)}x${Math.round(w.height)}`;const u=new P,c=u.getBrowser();e.browser_name=c.name||re,e.browser_version=c.version||re;const p=u.getOS();e.os_name=p.name||re,e.os_version=p.version||re;const d=u.getDevice();e.device=d.model||re,e.referer=(document==null?void 0:document.referrer)||re}catch(t){}return e},zi=()=>{var e;try{const t=(e=new P().getOS().name)==null?void 0:e.toLocaleLowerCase();if(t==="ios")return"iOSBrowser";if(t==="android")return"AndroidBrowser";if(t!=null&&t.includes("mac"))return"Mac";if(t!=null&&t.includes("windows"))return"Windows"}catch(o){}return"others"},$i=(e,o)=>{const t=navigator.userAgent,l=Vi(),w=zi();return{app_id:qi,session_id:ce(),platform:w,user_agent:t,container_artifact_name:e,container_artifact_version:"1.0.0",user_id:ki(o==null?void 0:o.storageKey),attributes:l}};let ji=1;const fi=({pageKey:e,moduleKey:o,actionType:t,containerArtifactName:l,attributes:w={},account:u})=>{const c=$i(l,u),p=Ie({},w);if(u){const{nickname:f}=X(u.storageKey);f&&(p[u.nicknameField]=f)}return{context:c,event_info:{module_key:o,action:t,page_key:e,event_seq:ji++,event_time:Date.now(),event_id:ce(),route_matched_path:window.location.pathname,url:window.location.href,attributes:p}}};function Gi({prefix:e,account:o}){const t=`${e}_user_app_page`,l=`${e}_user_app_module`,w=`${e}_user_app`,u=(d={})=>{try{const f=fi({pageKey:t,moduleKey:l,containerArtifactName:w,actionType:"IMPRESSION",attributes:d,account:o});hi(f)}catch(f){console.error("trackerImpression error:",f)}};return{reportPV:(d={})=>{u(d)},trackerClick:(d={})=>{try{const f=fi({pageKey:t,moduleKey:l,containerArtifactName:w,actionType:"CLICK",attributes:d,account:o});hi(f)}catch(f){}}}}const Wi=Object.freeze(Object.defineProperty({__proto__:null,ApiEnv:pi,createTracker:Gi},Symbol.toStringTag,{value:"Module"})),Ki="[CoworkUBAScript]";function mi(e){const{pathname:o,search:t}=new URL(e);return`${o}${t}`}function Xi(e,o=Ki){let t;try{t=mi(location.href)}catch(h){console.error(`${o} init lastRouteKey error:`,h),t=location.href}let l=!0;const w=()=>{if(l)try{const h=location.href,k=mi(h);if(k===t)return;t=k,e(h)}catch(h){console.error(`${o} route change error:`,h)}},u=()=>{setTimeout(w,0)},c=history.pushState,p=history.replaceState;function d(...h){const k=c.apply(this,h);return u(),k}function f(...h){const k=p.apply(this,h);return u(),k}try{history.pushState=d,history.replaceState=f,window.addEventListener("popstate",u)}catch(h){console.error(`${o} listenRouteChange error:`,h)}return()=>{if(l){l=!1;try{history.pushState===d&&(history.pushState=c),history.replaceState===f&&(history.replaceState=p),window.removeEventListener("popstate",u)}catch(h){console.error(`${o} destroy route listener error:`,h)}}}}const Ji=Object.freeze(Object.defineProperty({__proto__:null,listenRouteChange:Xi},Symbol.toStringTag,{value:"Module"}))}));
+
+</script></head>
 <body>
 
 <!-- Hero -->
@@ -462,7 +491,7 @@
   ══════════════════════════════════════════ -->
   <div class="section">
     <div class="section-title">
-      <div class="num">01</div>
+      <div class="num">01A</div>
       购车决策全链路 · 内容关键词分布占比
     </div>
 
@@ -471,14 +500,9 @@
       同一篇笔记可命中多个类别，因此展示项不一定合计为100%；这是内容关键词结构，不是用户占比。
     </div>
 
-    <div class="definition-grid">
-      <div class="definition-item"><strong>结构/配置：</strong>车身结构、空间布局、动力形式及整车基础配置。</div>
-      <div class="definition-item"><strong>智驾/配置：</strong>ADS、智能座舱及其他智能化功能配置。</div>
-      <div class="definition-item"><strong>人群种草：</strong>围绕“这辆车适合谁”展开，突出亲子家庭、多代同乘、商务用户等特定人群的需求与利益点。</div>
-      <div class="definition-item"><strong>场景种草：</strong>围绕“这辆车在什么情况下好用”展开，包括家庭出行、日常通勤、长途自驾、露营户外、商务接待及接送等场景。</div>
-      <div class="definition-item"><strong>价格/权益：</strong>预售价、落地价、优惠、赠品及订购政策。</div>
-      <div class="definition-item"><strong>车系对比：</strong>V9与梦想家、沃尔沃等车型的横向选择比较。</div>
-    </div>
+    <div class="definition-grid all-definition-grid">
+<div class="definition-item"><strong>结构：</strong>车身形式、座椅及空间布局、尺寸结构等产品基础形态。</div><div class="definition-item"><strong>人群：</strong>内容明确面向的用户群体，如亲子家庭、多代同乘、商务用户或车友。</div><div class="definition-item"><strong>配置：</strong>车辆软硬件功能配置，包括智驾、座舱、舒适、安全及便利功能。</div><div class="definition-item"><strong>车系：</strong>围绕具体车系或车型展开的介绍、横向比较与选择。</div><div class="definition-item"><strong>价格：</strong>预售价、落地价、优惠、赠品、权益及订购政策。</div><div class="definition-item"><strong>场景：</strong>家庭出行、通勤、长途自驾、露营、商务接待、接送等使用情境。</div><div class="definition-item"><strong>能源：</strong>纯电、增程、插混、续航、能耗及补能方式。</div><div class="definition-item"><strong>颜色：</strong>车身颜色、内饰配色及视觉偏好。</div><div class="definition-item"><strong>内饰：</strong>座舱设计、材质、空间氛围及乘坐体验。</div><div class="definition-item"><strong>配件：</strong>轮毂、选装件、改装件、随车用品及附加装备。</div><div class="definition-item"><strong>风格：</strong>豪华、科技、运动、商务、家用等整体设计与调性。</div><div class="definition-item"><strong>购买意向：</strong>订车、下定、购买计划、提车及明确购车倾向。</div>
+</div>
 
     <!-- 漏斗链路 -->
     <div class="funnel">
@@ -511,108 +535,50 @@
       </div>
     </div>
 
-    <!-- 三阶段内容关键词分布 -->
-    <div class="note-type-grid">
-
-      <!-- 首阅-留资 -->
-      <div class="stage-card s1">
-        <div class="stage-header">
-          <div class="stage-name">📖 首阅 → 留资</div>
-          
-        </div>
-        <div class="bar-item">
-          <div class="bar-top"><span class="bar-name">🔧 结构/配置</span><span class="bar-pct">17%</span></div>
-          <div class="bar-track"><div class="bar-fill fill-1" style="width:85%"></div></div>
-        </div>
-        <div class="bar-item">
-          <div class="bar-top"><span class="bar-name">👥 人群种草</span><span class="bar-pct">15%</span></div>
-          <div class="bar-track"><div class="bar-fill fill-2" style="width:75%"></div></div>
-        </div>
-        <div class="bar-item">
-          <div class="bar-top"><span class="bar-name">⚙️ 智驾/配置</span><span class="bar-pct">14%</span></div>
-          <div class="bar-track"><div class="bar-fill fill-3" style="width:72%"></div></div>
-        </div>
-        <div class="bar-item">
-          <div class="bar-top"><span class="bar-name">🚗 车系对比</span><span class="bar-pct">14%</span></div>
-          <div class="bar-track"><div class="bar-fill fill-4" style="width:70%"></div></div>
-        </div>
-        <div class="bar-item">
-          <div class="bar-top"><span class="bar-name">💰 价格/权益</span><span class="bar-pct">13%</span></div>
-          <div class="bar-track"><div class="bar-fill fill-5" style="width:65%"></div></div>
-        </div>
-        <div class="bar-item">
-          <div class="bar-top"><span class="bar-name">🌟 场景种草</span><span class="bar-pct">10%</span></div>
-          <div class="bar-track"><div class="bar-fill fill-6" style="width:50%"></div></div>
-        </div>
-        <div class="note-bar">💡 配置与结构类内容主导认知期，家庭场景、品类比较同步发力</div>
-      </div>
-
-      <!-- 留资-试驾 -->
-      <div class="stage-card s2">
-        <div class="stage-header">
-          <div class="stage-name">📝 留资 → 试驾</div>
-          
-        </div>
-        <div class="bar-item">
-          <div class="bar-top"><span class="bar-name">💰 价格/权益</span><span class="bar-pct">26%</span></div>
-          <div class="bar-track"><div class="bar-fill fill-5" style="width:100%"></div></div>
-        </div>
-        <div class="bar-item">
-          <div class="bar-top"><span class="bar-name">👥 人群种草</span><span class="bar-pct">19%</span></div>
-          <div class="bar-track"><div class="bar-fill fill-2" style="width:73%"></div></div>
-        </div>
-        <div class="bar-item">
-          <div class="bar-top"><span class="bar-name">🌟 场景种草</span><span class="bar-pct">14%</span></div>
-          <div class="bar-track"><div class="bar-fill fill-6" style="width:54%"></div></div>
-        </div>
-        <div class="bar-item">
-          <div class="bar-top"><span class="bar-name">🚗 车系对比</span><span class="bar-pct">14%</span></div>
-          <div class="bar-track"><div class="bar-fill fill-4" style="width:54%"></div></div>
-        </div>
-        <div class="bar-item">
-          <div class="bar-top"><span class="bar-name">⚙️ 智驾/配置</span><span class="bar-pct">10%</span></div>
-          <div class="bar-track"><div class="bar-fill fill-3" style="width:38%"></div></div>
-        </div>
-        <div class="bar-item">
-          <div class="bar-top"><span class="bar-name">🔧 结构/配置</span><span class="bar-pct">6%</span></div>
-          <div class="bar-track"><div class="bar-fill fill-1" style="width:23%"></div></div>
-        </div>
-        <div class="note-bar">💡 价格权益在此环节跃升至首位，是促成用户进入试驾的核心杠杆</div>
-      </div>
-
-      <!-- 试驾-大定 -->
-      <div class="stage-card s3">
-        <div class="stage-header">
-          <div class="stage-name">🚗 试驾 → 大定</div>
-          
-        </div>
-        <div class="bar-item">
-          <div class="bar-top"><span class="bar-name">💰 价格/权益</span><span class="bar-pct">29%</span></div>
-          <div class="bar-track"><div class="bar-fill fill-5" style="width:100%"></div></div>
-        </div>
-        <div class="bar-item">
-          <div class="bar-top"><span class="bar-name">👥 人群种草</span><span class="bar-pct">20%</span></div>
-          <div class="bar-track"><div class="bar-fill fill-2" style="width:70%"></div></div>
-        </div>
-        <div class="bar-item">
-          <div class="bar-top"><span class="bar-name">🌟 场景种草</span><span class="bar-pct">17%</span></div>
-          <div class="bar-track"><div class="bar-fill fill-6" style="width:60%"></div></div>
-        </div>
-        <div class="bar-item">
-          <div class="bar-top"><span class="bar-name">🚗 车系对比</span><span class="bar-pct">11%</span></div>
-          <div class="bar-track"><div class="bar-fill fill-4" style="width:38%"></div></div>
-        </div>
-        <div class="bar-item">
-          <div class="bar-top"><span class="bar-name">⚙️ 智驾/配置</span><span class="bar-pct">7%</span></div>
-          <div class="bar-track"><div class="bar-fill fill-3" style="width:24%"></div></div>
-        </div>
-        <div class="bar-item">
-          <div class="bar-top"><span class="bar-name">🎨 颜色/颜值</span><span class="bar-pct">4%</span></div>
-          <div class="bar-track"><div class="bar-fill fill-1" style="width:15%"></div></div>
-        </div>
-        <div class="note-bar">💡 价格优惠贯穿并持续强化，人群+场景种草协同推动最终成交</div>
-      </div>
-    </div>
+    <!-- 三阶段全量内容关键词分布 -->
+    <div class="note-type-grid all-keyword-grid">
+<div class="stage-card s1"><div class="stage-header"><div class="stage-name">首阅 → 留资</div></div>
+<div class="bar-item"><div class="bar-top"><span class="bar-name">🔧 结构</span><span class="bar-pct">17.01%</span></div><div class="bar-track"><div class="bar-fill fill-1" style="width:100.0%"></div></div></div>
+<div class="bar-item"><div class="bar-top"><span class="bar-name">👥 人群</span><span class="bar-pct">15.16%</span></div><div class="bar-track"><div class="bar-fill fill-2" style="width:89.1%"></div></div></div>
+<div class="bar-item"><div class="bar-top"><span class="bar-name">⚙️ 配置</span><span class="bar-pct">14.43%</span></div><div class="bar-track"><div class="bar-fill fill-3" style="width:84.8%"></div></div></div>
+<div class="bar-item"><div class="bar-top"><span class="bar-name">🚗 车系</span><span class="bar-pct">13.73%</span></div><div class="bar-track"><div class="bar-fill fill-4" style="width:80.7%"></div></div></div>
+<div class="bar-item"><div class="bar-top"><span class="bar-name">💰 价格</span><span class="bar-pct">12.84%</span></div><div class="bar-track"><div class="bar-fill fill-5" style="width:75.5%"></div></div></div>
+<div class="bar-item"><div class="bar-top"><span class="bar-name">🌟 场景</span><span class="bar-pct">9.85%</span></div><div class="bar-track"><div class="bar-fill fill-6" style="width:57.9%"></div></div></div>
+<div class="bar-item"><div class="bar-top"><span class="bar-name">⚡ 能源</span><span class="bar-pct">5.16%</span></div><div class="bar-track"><div class="bar-fill fill-1" style="width:30.3%"></div></div></div>
+<div class="bar-item"><div class="bar-top"><span class="bar-name">🎨 颜色</span><span class="bar-pct">4.98%</span></div><div class="bar-track"><div class="bar-fill fill-2" style="width:29.3%"></div></div></div>
+<div class="bar-item"><div class="bar-top"><span class="bar-name">🛋️ 内饰</span><span class="bar-pct">2.68%</span></div><div class="bar-track"><div class="bar-fill fill-3" style="width:15.8%"></div></div></div>
+<div class="bar-item"><div class="bar-top"><span class="bar-name">🧰 配件</span><span class="bar-pct">2.26%</span></div><div class="bar-track"><div class="bar-fill fill-4" style="width:13.3%"></div></div></div>
+<div class="bar-item"><div class="bar-top"><span class="bar-name">✨ 风格</span><span class="bar-pct">1.86%</span></div><div class="bar-track"><div class="bar-fill fill-5" style="width:10.9%"></div></div></div>
+<div class="bar-item"><div class="bar-top"><span class="bar-name">🛒 购买意向</span><span class="bar-pct">0.05%</span></div><div class="bar-track"><div class="bar-fill fill-6" style="width:2.0%"></div></div></div>
+<div class="note-bar">💡 配置、结构、人群与车系共同主导认知建立。</div></div>
+<div class="stage-card s2"><div class="stage-header"><div class="stage-name">留资 → 试驾</div></div>
+<div class="bar-item"><div class="bar-top"><span class="bar-name">💰 价格</span><span class="bar-pct">25.81%</span></div><div class="bar-track"><div class="bar-fill fill-1" style="width:100.0%"></div></div></div>
+<div class="bar-item"><div class="bar-top"><span class="bar-name">👥 人群</span><span class="bar-pct">18.82%</span></div><div class="bar-track"><div class="bar-fill fill-2" style="width:72.9%"></div></div></div>
+<div class="bar-item"><div class="bar-top"><span class="bar-name">🌟 场景</span><span class="bar-pct">14.16%</span></div><div class="bar-track"><div class="bar-fill fill-3" style="width:54.9%"></div></div></div>
+<div class="bar-item"><div class="bar-top"><span class="bar-name">🚗 车系</span><span class="bar-pct">13.73%</span></div><div class="bar-track"><div class="bar-fill fill-4" style="width:53.2%"></div></div></div>
+<div class="bar-item"><div class="bar-top"><span class="bar-name">⚙️ 配置</span><span class="bar-pct">10.12%</span></div><div class="bar-track"><div class="bar-fill fill-5" style="width:39.2%"></div></div></div>
+<div class="bar-item"><div class="bar-top"><span class="bar-name">🔧 结构</span><span class="bar-pct">5.73%</span></div><div class="bar-track"><div class="bar-fill fill-6" style="width:22.2%"></div></div></div>
+<div class="bar-item"><div class="bar-top"><span class="bar-name">🎨 颜色</span><span class="bar-pct">3.22%</span></div><div class="bar-track"><div class="bar-fill fill-1" style="width:12.5%"></div></div></div>
+<div class="bar-item"><div class="bar-top"><span class="bar-name">🛋️ 内饰</span><span class="bar-pct">2.85%</span></div><div class="bar-track"><div class="bar-fill fill-2" style="width:11.0%"></div></div></div>
+<div class="bar-item"><div class="bar-top"><span class="bar-name">✨ 风格</span><span class="bar-pct">1.96%</span></div><div class="bar-track"><div class="bar-fill fill-3" style="width:7.6%"></div></div></div>
+<div class="bar-item"><div class="bar-top"><span class="bar-name">🧰 配件</span><span class="bar-pct">1.86%</span></div><div class="bar-track"><div class="bar-fill fill-4" style="width:7.2%"></div></div></div>
+<div class="bar-item"><div class="bar-top"><span class="bar-name">⚡ 能源</span><span class="bar-pct">1.72%</span></div><div class="bar-track"><div class="bar-fill fill-5" style="width:6.7%"></div></div></div>
+<div class="bar-item"><div class="bar-top"><span class="bar-name">🛒 购买意向</span><span class="bar-pct">0.02%</span></div><div class="bar-track"><div class="bar-fill fill-6" style="width:2.0%"></div></div></div>
+<div class="note-bar">💡 价格升至首位，人群与场景内容共同推动体验验证。</div></div>
+<div class="stage-card s3"><div class="stage-header"><div class="stage-name">试驾 → 大定</div></div>
+<div class="bar-item"><div class="bar-top"><span class="bar-name">💰 价格</span><span class="bar-pct">29.27%</span></div><div class="bar-track"><div class="bar-fill fill-1" style="width:100.0%"></div></div></div>
+<div class="bar-item"><div class="bar-top"><span class="bar-name">👥 人群</span><span class="bar-pct">20.15%</span></div><div class="bar-track"><div class="bar-fill fill-2" style="width:68.8%"></div></div></div>
+<div class="bar-item"><div class="bar-top"><span class="bar-name">🌟 场景</span><span class="bar-pct">17.43%</span></div><div class="bar-track"><div class="bar-fill fill-3" style="width:59.5%"></div></div></div>
+<div class="bar-item"><div class="bar-top"><span class="bar-name">🚗 车系</span><span class="bar-pct">10.94%</span></div><div class="bar-track"><div class="bar-fill fill-4" style="width:37.4%"></div></div></div>
+<div class="bar-item"><div class="bar-top"><span class="bar-name">⚙️ 配置</span><span class="bar-pct">6.74%</span></div><div class="bar-track"><div class="bar-fill fill-5" style="width:23.0%"></div></div></div>
+<div class="bar-item"><div class="bar-top"><span class="bar-name">🎨 颜色</span><span class="bar-pct">4.17%</span></div><div class="bar-track"><div class="bar-fill fill-6" style="width:14.2%"></div></div></div>
+<div class="bar-item"><div class="bar-top"><span class="bar-name">🧰 配件</span><span class="bar-pct">3.25%</span></div><div class="bar-track"><div class="bar-fill fill-1" style="width:11.1%"></div></div></div>
+<div class="bar-item"><div class="bar-top"><span class="bar-name">🛋️ 内饰</span><span class="bar-pct">3.21%</span></div><div class="bar-track"><div class="bar-fill fill-2" style="width:11.0%"></div></div></div>
+<div class="bar-item"><div class="bar-top"><span class="bar-name">🔧 结构</span><span class="bar-pct">2.57%</span></div><div class="bar-track"><div class="bar-fill fill-3" style="width:8.8%"></div></div></div>
+<div class="bar-item"><div class="bar-top"><span class="bar-name">✨ 风格</span><span class="bar-pct">1.27%</span></div><div class="bar-track"><div class="bar-fill fill-4" style="width:4.3%"></div></div></div>
+<div class="bar-item"><div class="bar-top"><span class="bar-name">⚡ 能源</span><span class="bar-pct">0.99%</span></div><div class="bar-track"><div class="bar-fill fill-5" style="width:3.4%"></div></div></div>
+<div class="note-bar">💡 价格、人群与场景进一步集中，购买条件确认成为主轴。</div></div>
+</div>
 
     <!-- 链路对比洞察 -->
     <div class="card">
@@ -685,139 +651,133 @@
   </div>
 
   <!-- ══════════════════════════════════════════
-       第二章：各链路环节热门笔记内容
+       第二章：TOP3关键词下高阅读笔记
   ══════════════════════════════════════════ -->
   <div class="section">
-    <div class="section-title">
-      <div class="num">02</div>
-      各链路高阅读笔记 · 内容主题观察
-    </div>
+    <div class="section-title"><div class="num">02A</div>TOP3内容关键词下高阅读笔记</div>
+    <div class="note-bar part2-method" style="margin:0 0 20px"><strong>分析逻辑：</strong>Part01的TOP3内容关键词可在灵犀中逐项筛选，Part02对应展示每个关键词下阅读排名前2的笔记。由于同一篇笔记可同时命中多个内容关键词，因此可能在不同类别中重复出现。</div>
+<div class="card"><div class="card-title">首阅→留资｜TOP3关键词对应高阅读笔记</div><div class="keyword-groups">
+<div class="keyword-block"><div class="keyword-head"><span>结构/配置</span><strong>17.01%</strong></div><div class="keyword-note-list">
+<a class="keyword-note" href="https://www.xiaohongshu.com/explore/69ea06c6000000002202755c?xsec_token=ZBshA1dYZBUuz1o8SnA6P6QqHcSzDgkhci7USWaofKOXQ=&amp;xsec_source=pc_idea" target="_blank" rel="noopener noreferrer"><span class="keyword-rank">#1</span><span>智界V9预售：岚图梦想家真正的对手？</span><span class="direct-mark">直达 ↗</span></a>
+<a class="keyword-note" href="https://www.xiaohongshu.com/explore/698af382000000001600ba87?xsec_token=ZBDMp27EcNd_-OB_DkwaWcxFl0dTlQQ7kPU-SOTq1QCQo=&amp;xsec_source=pc_idea" target="_blank" rel="noopener noreferrer"><span class="keyword-rank">#2</span><span>同为华为智驾MPV，怎么选？</span><span class="direct-mark">直达 ↗</span></a>
+</div></div>
+<div class="keyword-block"><div class="keyword-head"><span>人群种草</span><strong>15.16%</strong></div><div class="keyword-note-list">
+<a class="keyword-note" href="https://www.xiaohongshu.com/explore/698af382000000001600ba87?xsec_token=ZBDMp27EcNd_-OB_DkwaWcxFl0dTlQQ7kPU-SOTq1QCQo=&amp;xsec_source=pc_idea" target="_blank" rel="noopener noreferrer"><span class="keyword-rank">#1</span><span>同为华为智驾MPV，怎么选？</span><span class="direct-mark">直达 ↗</span></a>
+<a class="keyword-note" href="https://www.xiaohongshu.com/explore/69ec2e660000000036031143?xsec_token=ZBj22TYOlhv_IHKOwn4lOFzP1v00a-6vrgn1EXsUCqWqA=&amp;xsec_source=pc_idea" target="_blank" rel="noopener noreferrer"><span class="keyword-rank">#2</span><span>智界V9的定价陷阱，90%的人没看懂</span><span class="direct-mark">直达 ↗</span></a>
+</div></div>
+<div class="keyword-block"><div class="keyword-head"><span>智驾/配置</span><strong>14.43%</strong></div><div class="keyword-note-list">
+<a class="keyword-note" href="https://www.xiaohongshu.com/explore/69ea06c6000000002202755c?xsec_token=ZBshA1dYZBUuz1o8SnA6P6QqHcSzDgkhci7USWaofKOXQ=&amp;xsec_source=pc_idea" target="_blank" rel="noopener noreferrer"><span class="keyword-rank">#1</span><span>智界V9预售：岚图梦想家真正的对手？</span><span class="direct-mark">直达 ↗</span></a>
+<a class="keyword-note" href="https://www.xiaohongshu.com/explore/69ea06ad0000000020000802?xsec_token=ZBshA1dYZBUuz1o8SnA6P6QmFR82sTHPIuWTqvDpcPRlM=&amp;xsec_source=pc_idea" target="_blank" rel="noopener noreferrer"><span class="keyword-rank">#2</span><span>🔥极限二选一：谁才是华系MPV门面担当？</span><span class="direct-mark">直达 ↗</span></a>
+</div></div>
+</div></div>
+<div class="card"><div class="card-title">留资→试驾｜TOP3关键词对应高阅读笔记</div><div class="keyword-groups">
+<div class="keyword-block"><div class="keyword-head"><span>价格/权益</span><strong>25.81%</strong></div><div class="keyword-note-list">
+<a class="keyword-note" href="https://www.xiaohongshu.com/explore/6a069213000000003503afde?xsec_token=ZBVE9UL71F8H8-2oTY06jDC53c8yoNUorrHS2nt7SICPA=&amp;xsec_source=pc_idea" target="_blank" rel="noopener noreferrer"><span class="keyword-rank">#1</span><span>智界V9小定别乱付！这4样硬货才是重头戏</span><span class="direct-mark">直达 ↗</span></a>
+<a class="keyword-note" href="https://www.xiaohongshu.com/explore/6a0b06a50000000006030f6c?xsec_token=ZB2zyMa6akC5KjffmvluZFEfR3eRKib2gkI4LSzWv-W04=&amp;xsec_source=pc_idea" target="_blank" rel="noopener noreferrer"><span class="keyword-rank">#2</span><span>华系“嫡庶”之争，谁才是40万级MPV最优选？</span><span class="direct-mark">直达 ↗</span></a>
+</div></div>
+<div class="keyword-block"><div class="keyword-head"><span>人群种草</span><strong>18.82%</strong></div><div class="keyword-note-list">
+<a class="keyword-note" href="https://www.xiaohongshu.com/explore/69f55cc0000000003501e867?xsec_token=ZBXO92ZXhgIYEbYAFVLiJ6HABa2lu2U8yM5Li9uvPdzlU=&amp;xsec_source=pc_idea" target="_blank" rel="noopener noreferrer"><span class="keyword-rank">#1</span><span>二胎家庭换车别乱选！智界V9才是移动头等舱</span><span class="direct-mark">直达 ↗</span></a>
+<a class="keyword-note" href="https://www.xiaohongshu.com/explore/69ec2e660000000036031143?xsec_token=ZBj22TYOlhv_IHKOwn4lOFzP1v00a-6vrgn1EXsUCqWqA=&amp;xsec_source=pc_idea" target="_blank" rel="noopener noreferrer"><span class="keyword-rank">#2</span><span>智界V9的定价陷阱，90%的人没看懂</span><span class="direct-mark">直达 ↗</span></a>
+</div></div>
+<div class="keyword-block"><div class="keyword-head"><span>场景种草</span><strong>14.16%</strong></div><div class="keyword-note-list">
+<a class="keyword-note" href="https://www.xiaohongshu.com/explore/6a069213000000003503afde?xsec_token=ZBVE9UL71F8H8-2oTY06jDC53c8yoNUorrHS2nt7SICPA=&amp;xsec_source=pc_idea" target="_blank" rel="noopener noreferrer"><span class="keyword-rank">#1</span><span>智界V9小定别乱付！这4样硬货才是重头戏</span><span class="direct-mark">直达 ↗</span></a>
+<a class="keyword-note" href="https://www.xiaohongshu.com/explore/69ec2e660000000036031143?xsec_token=ZBj22TYOlhv_IHKOwn4lOFzP1v00a-6vrgn1EXsUCqWqA=&amp;xsec_source=pc_idea" target="_blank" rel="noopener noreferrer"><span class="keyword-rank">#2</span><span>智界V9的定价陷阱，90%的人没看懂</span><span class="direct-mark">直达 ↗</span></a>
+</div></div>
+</div></div>
+<div class="card"><div class="card-title">试驾→大定｜TOP3关键词对应高阅读笔记</div><div class="keyword-groups">
+<div class="keyword-block"><div class="keyword-head"><span>价格/权益</span><strong>29.27%</strong></div><div class="keyword-note-list">
+<a class="keyword-note" href="https://www.xiaohongshu.com/explore/6a223b8b0000000022021565?xsec_token=ZBunecajKRJg_hn4z2JwbBH29b9O2aDuN-bcIQKweJ2Uo=&amp;xsec_source=pc_idea" target="_blank" rel="noopener noreferrer"><span class="keyword-rank">#1</span><span>别乱订！智界V9内部消息：这些赠品一定要谈</span><span class="direct-mark">直达 ↗</span></a>
+<a class="keyword-note" href="https://www.xiaohongshu.com/explore/6a069213000000003503afde?xsec_token=ZBVE9UL71F8H8-2oTY06jDC53c8yoNUorrHS2nt7SICPA=&amp;xsec_source=pc_idea" target="_blank" rel="noopener noreferrer"><span class="keyword-rank">#2</span><span>智界V9小定别乱付！这4样硬货才是重头戏</span><span class="direct-mark">直达 ↗</span></a>
+</div></div>
+<div class="keyword-block"><div class="keyword-head"><span>人群种草</span><strong>20.15%</strong></div><div class="keyword-note-list">
+<a class="keyword-note" href="https://www.xiaohongshu.com/explore/69ec2e660000000036031143?xsec_token=ZBj22TYOlhv_IHKOwn4lOFzP1v00a-6vrgn1EXsUCqWqA=&amp;xsec_source=pc_idea" target="_blank" rel="noopener noreferrer"><span class="keyword-rank">#1</span><span>智界V9的定价陷阱，90%的人没看懂</span><span class="direct-mark">直达 ↗</span></a>
+<a class="keyword-note" href="https://www.xiaohongshu.com/explore/6a198b440000000007012993?xsec_token=ZBpUHwIHPlCDsRaQSCwMxIGmfcTPRBOCrHPJY7jtGGGOQ=&amp;xsec_source=pc_idea" target="_blank" rel="noopener noreferrer"><span class="keyword-rank">#2</span><span>华为9系，三大旗舰各守其位</span><span class="direct-mark">直达 ↗</span></a>
+</div></div>
+<div class="keyword-block"><div class="keyword-head"><span>场景种草</span><strong>17.43%</strong></div><div class="keyword-note-list">
+<a class="keyword-note" href="https://www.xiaohongshu.com/explore/69ec2e660000000036031143?xsec_token=ZBj22TYOlhv_IHKOwn4lOFzP1v00a-6vrgn1EXsUCqWqA=&amp;xsec_source=pc_idea" target="_blank" rel="noopener noreferrer"><span class="keyword-rank">#1</span><span>智界V9的定价陷阱，90%的人没看懂</span><span class="direct-mark">直达 ↗</span></a>
+<a class="keyword-note" href="https://www.xiaohongshu.com/explore/6a069213000000003503afde?xsec_token=ZBVE9UL71F8H8-2oTY06jDC53c8yoNUorrHS2nt7SICPA=&amp;xsec_source=pc_idea" target="_blank" rel="noopener noreferrer"><span class="keyword-rank">#2</span><span>智界V9小定别乱付！这4样硬货才是重头戏</span><span class="direct-mark">直达 ↗</span></a>
+</div></div>
+</div></div>
+</div>
 
-    <div class="note-bar" style="margin:0 0 20px">
-      <strong>分析逻辑：</strong>Part01呈现各链路整体内容需求结构，Part02进一步观察灵犀“高阅读笔记”榜中哪些具体内容更受关注。<br>
-      “高阅读笔记”由灵犀按当前链路和关键词筛选条件下的阅读次数排名展示，本章以阅读排名为判断依据。
-    </div>
 
-    <!-- 首阅-留资：结构配置 + 人群种草 -->
-    <div class="card">
-      <div class="card-title">首阅→留资｜高阅读内容主题：竞品对比 · 配置价格 · 品类选择</div>
-      <p style="font-size:13px;color:var(--muted);margin-bottom:16px">高阅读笔记集中回答“V9和其他MPV怎么选、配置与价格差异在哪里”，主要承担认知建立和初步筛选作用。</p>
-      <div class="note-gallery">
-        <a class="note-card" href="https://www.xiaohongshu.com/explore/6a0b06a50000000006030f6c" target="_blank">
-          <div class="note-card-tag tag-1">🚗 车系对比</div>
-          <div class="note-card-title">岚图梦想家🆚智界V9：同为华系MPV该如何抉择</div>
-          <div class="note-card-meta">图文 · 20260210 · 车系横向对比，帮用户明确V9家庭优势</div>
-          <div class="note-card-stats"><span>❤️ 曝光1w-5w</span><span>📝 图文</span></div>
-        </a>
-        <a class="note-card" href="https://www.xiaohongshu.com/explore/69ecb607000000001f0050e9" target="_blank">
-          <div class="note-card-tag tag-1">🔥 车系对比</div>
-          <div class="note-card-title">华系"嫡庶"之争！智界V9对比梦想家怎么选</div>
-          <div class="note-card-meta">图文 · 20260425 · 直面「V9贵在哪」决策焦虑</div>
-          <div class="note-card-stats"><span>❤️ 互动表现参考</span><span>📝 图文</span></div>
-        </a>
-        <a class="note-card" href="https://www.xiaohongshu.com/explore/6a0b06a50000000006030f6c" target="_blank">
-          <div class="note-card-tag tag-1">⚖️ 车系对比</div>
-          <div class="note-card-title">华系"嫡庶"之争，谁才是40万级MPV最优选？</div>
-          <div class="note-card-meta">图文 · 20260518 · 为30-50万预算用户提供决策参考</div>
-          <div class="note-card-stats"><span>❤️ 互动表现参考</span><span>📝 图文</span></div>
-        </a>
-        <a class="note-card" href="https://www.xiaohongshu.com/explore/1040g0k031v932uej1u005okga6a8c134hv81cm8" target="_blank">
-          <div class="note-card-tag tag-2">💰 配置解析</div>
-          <div class="note-card-title">智界V9开启预售，39.98万-52.98万！</div>
-          <div class="note-card-meta">图文 · 20260422 · 价格区间首次披露，关注度爆发</div>
-          <div class="note-card-stats"><span>❤️ 曝光1w+</span><span>📝 图文</span></div>
-        </a>
-        <a class="note-card" href="https://www.xiaohongshu.com/explore/1040g3k831rv6dhv0imdg5oglh39k0ukqfie17vg" target="_blank">
-          <div class="note-card-tag tag-3">🏁 车系对比</div>
-          <div class="note-card-title">🚗国产MPV大PK！哪款才是你的Dream car？</div>
-          <div class="note-card-meta">图文 · 20260130 · 品类横评，建立智界V9品类认知</div>
-          <div class="note-card-stats"><span>❤️ 曝光1w+</span><span>📝 图文</span></div>
-        </a>
-        <a class="note-card" href="https://www.xiaohongshu.com/explore/1040g3k831va7i6pc2ie04a7ccags9u74qopkn0o" target="_blank">
-          <div class="note-card-tag tag-3">📋 配置解析</div>
-          <div class="note-card-title">智界V9预售：岚图梦想家真正的对手？</div>
-          <div class="note-card-meta">图文 · 20260423 · 竞品定位对比，帮用户明确选择</div>
-          <div class="note-card-stats"><span>❤️ 曝光1w+</span><span>📝 图文</span></div>
-        </a>
+  <!-- 搜索关键词分析 -->
+  <div class="section search-keyword-section">
+    <div class="section-title"><div class="num">01B</div>购车决策全链路 · 搜索关键词分布占比</div>
+    <div class="note-bar" style="margin:0 0 20px"><strong>计算口径：</strong>某类搜索占比 = 该类搜索量 ÷ 本链路全部搜索量；它反映用户主动搜索意图结构。以下保留灵犀全部搜索类别及原始分类名称。</div>
+    <div class="definition-grid search-definition-grid">
+<div class="definition-item"><strong>本SPU：</strong>直接指向智界V9的搜索，如车型全称、简称及相关写法。</div>
+<div class="definition-item"><strong>其他：</strong>暂未归入标准类别的长尾或复合搜索。</div>
+<div class="definition-item"><strong>品牌：</strong>汽车品牌名称及品牌相关搜索。</div>
+<div class="definition-item"><strong>产品系列：</strong>品牌旗下产品系列、车系或系列名称。</div>
+<div class="definition-item"><strong>品类：</strong>MPV、新能源车、家用车等品类搜索。</div>
+<div class="definition-item"><strong>竞品SPU：</strong>明确指向某一竞品车型的搜索。</div>
+<div class="definition-item"><strong>竞品：</strong>指向竞品品牌或竞品集合的搜索。</div>
+<div class="definition-item"><strong>攻略：</strong>选车、购车、用车及对比攻略。</div>
+<div class="definition-item"><strong>AOI：</strong>平台识别的兴趣主题类搜索，按原分类名称保留。</div>
+<div class="definition-item"><strong>行为：</strong>试驾、订车、提车、改装等行为搜索。</div>
+<div class="definition-item"><strong>时间：</strong>上市、预售、交付及具体时间节点。</div>
+<div class="definition-item"><strong>价格/金额：</strong>售价、落地价、预算、优惠金额等。</div>
+<div class="definition-item"><strong>购买意向：</strong>怎么买、值得买吗、订车等明确意向。</div>
+<div class="definition-item"><strong>产品规格：</strong>尺寸、座椅数、续航、版本等规格参数。</div>
+<div class="definition-item"><strong>颜色：</strong>车身色、内饰色及配色搜索。</div>
+<div class="definition-item"><strong>场景：</strong>家用、通勤、长途、露营、商务等场景。</div>
+<div class="definition-item"><strong>产品特性：</strong>空间、安全、舒适、智能等产品特点。</div>
+<div class="definition-item"><strong>特定人物：</strong>代言人、车主、博主或其他具体人物。</div>
+<div class="definition-item"><strong>营销/活动：</strong>发布会、车展、促销及品牌活动。</div>
+<div class="definition-item"><strong>功能/功效：</strong>具体功能、功能效果及使用体验。</div>
+<div class="definition-item"><strong>IP：</strong>人物IP、内容IP或合作IP相关搜索。</div>
+<div class="definition-item"><strong>人群/宠物：</strong>家庭、儿童、老人、车友、宠物等对象。</div>
+<div class="definition-item"><strong>POI：</strong>门店、商圈、地标等具体地点。</div>
+<div class="definition-item"><strong>场所：</strong>展厅、门店、车展等场所类型。</div>
+<div class="definition-item"><strong>负向效果：</strong>问题、缺点、风险或负面体验。</div>
+<div class="definition-item"><strong>款式/形态：</strong>外观款式、造型及形态。</div>
+<div class="definition-item"><strong>数量：</strong>座位数、配置数量等数量表达。</div>
+</div><div class="note-type-grid all-keyword-grid search-distribution-grid">
+<div class="stage-card s1"><div class="stage-header"><div class="stage-name">首阅 → 留资</div></div><div class="bar-item"><div class="bar-top"><span class="bar-name">本SPU</span><span class="bar-pct">34.65%</span></div><div class="bar-track"><div class="bar-fill fill-1" style="width:100.0%"></div></div></div><div class="bar-item"><div class="bar-top"><span class="bar-name">其他</span><span class="bar-pct">16.79%</span></div><div class="bar-track"><div class="bar-fill fill-2" style="width:48.5%"></div></div></div><div class="bar-item"><div class="bar-top"><span class="bar-name">品牌</span><span class="bar-pct">12.19%</span></div><div class="bar-track"><div class="bar-fill fill-3" style="width:35.2%"></div></div></div><div class="bar-item"><div class="bar-top"><span class="bar-name">产品系列</span><span class="bar-pct">11.39%</span></div><div class="bar-track"><div class="bar-fill fill-4" style="width:32.9%"></div></div></div><div class="bar-item"><div class="bar-top"><span class="bar-name">品类</span><span class="bar-pct">10.45%</span></div><div class="bar-track"><div class="bar-fill fill-5" style="width:30.2%"></div></div></div><div class="bar-item"><div class="bar-top"><span class="bar-name">竞品SPU</span><span class="bar-pct">3.68%</span></div><div class="bar-track"><div class="bar-fill fill-6" style="width:10.6%"></div></div></div><div class="bar-item"><div class="bar-top"><span class="bar-name">竞品</span><span class="bar-pct">2.58%</span></div><div class="bar-track"><div class="bar-fill fill-1" style="width:7.4%"></div></div></div><div class="bar-item"><div class="bar-top"><span class="bar-name">攻略</span><span class="bar-pct">1.35%</span></div><div class="bar-track"><div class="bar-fill fill-2" style="width:3.9%"></div></div></div><div class="bar-item"><div class="bar-top"><span class="bar-name">AOI</span><span class="bar-pct">1.26%</span></div><div class="bar-track"><div class="bar-fill fill-3" style="width:3.6%"></div></div></div><div class="bar-item"><div class="bar-top"><span class="bar-name">行为</span><span class="bar-pct">1.21%</span></div><div class="bar-track"><div class="bar-fill fill-4" style="width:3.5%"></div></div></div><div class="bar-item"><div class="bar-top"><span class="bar-name">时间</span><span class="bar-pct">0.67%</span></div><div class="bar-track"><div class="bar-fill fill-5" style="width:2.0%"></div></div></div><div class="bar-item"><div class="bar-top"><span class="bar-name">价格/金额</span><span class="bar-pct">0.61%</span></div><div class="bar-track"><div class="bar-fill fill-6" style="width:2.0%"></div></div></div><div class="bar-item"><div class="bar-top"><span class="bar-name">购买意向</span><span class="bar-pct">0.57%</span></div><div class="bar-track"><div class="bar-fill fill-1" style="width:2.0%"></div></div></div><div class="bar-item"><div class="bar-top"><span class="bar-name">产品规格</span><span class="bar-pct">0.44%</span></div><div class="bar-track"><div class="bar-fill fill-2" style="width:2.0%"></div></div></div><div class="bar-item"><div class="bar-top"><span class="bar-name">颜色</span><span class="bar-pct">0.36%</span></div><div class="bar-track"><div class="bar-fill fill-3" style="width:2.0%"></div></div></div><div class="bar-item"><div class="bar-top"><span class="bar-name">场景</span><span class="bar-pct">0.28%</span></div><div class="bar-track"><div class="bar-fill fill-4" style="width:2.0%"></div></div></div><div class="bar-item"><div class="bar-top"><span class="bar-name">产品特性</span><span class="bar-pct">0.26%</span></div><div class="bar-track"><div class="bar-fill fill-5" style="width:2.0%"></div></div></div><div class="bar-item"><div class="bar-top"><span class="bar-name">特定人物</span><span class="bar-pct">0.23%</span></div><div class="bar-track"><div class="bar-fill fill-6" style="width:2.0%"></div></div></div><div class="bar-item"><div class="bar-top"><span class="bar-name">营销/活动</span><span class="bar-pct">0.16%</span></div><div class="bar-track"><div class="bar-fill fill-1" style="width:2.0%"></div></div></div><div class="bar-item"><div class="bar-top"><span class="bar-name">功能/功效</span><span class="bar-pct">0.16%</span></div><div class="bar-track"><div class="bar-fill fill-2" style="width:2.0%"></div></div></div><div class="bar-item"><div class="bar-top"><span class="bar-name">IP</span><span class="bar-pct">0.16%</span></div><div class="bar-track"><div class="bar-fill fill-3" style="width:2.0%"></div></div></div><div class="bar-item"><div class="bar-top"><span class="bar-name">人群/宠物</span><span class="bar-pct">0.15%</span></div><div class="bar-track"><div class="bar-fill fill-4" style="width:2.0%"></div></div></div><div class="bar-item"><div class="bar-top"><span class="bar-name">POI</span><span class="bar-pct">0.12%</span></div><div class="bar-track"><div class="bar-fill fill-5" style="width:2.0%"></div></div></div><div class="bar-item"><div class="bar-top"><span class="bar-name">场所</span><span class="bar-pct">0.08%</span></div><div class="bar-track"><div class="bar-fill fill-6" style="width:2.0%"></div></div></div></div>
+<div class="stage-card s2"><div class="stage-header"><div class="stage-name">留资 → 试驾</div></div><div class="bar-item"><div class="bar-top"><span class="bar-name">本SPU</span><span class="bar-pct">29.69%</span></div><div class="bar-track"><div class="bar-fill fill-1" style="width:100.0%"></div></div></div><div class="bar-item"><div class="bar-top"><span class="bar-name">其他</span><span class="bar-pct">25.15%</span></div><div class="bar-track"><div class="bar-fill fill-2" style="width:84.7%"></div></div></div><div class="bar-item"><div class="bar-top"><span class="bar-name">产品系列</span><span class="bar-pct">12.15%</span></div><div class="bar-track"><div class="bar-fill fill-3" style="width:40.9%"></div></div></div><div class="bar-item"><div class="bar-top"><span class="bar-name">品牌</span><span class="bar-pct">12.15%</span></div><div class="bar-track"><div class="bar-fill fill-4" style="width:40.9%"></div></div></div><div class="bar-item"><div class="bar-top"><span class="bar-name">品类</span><span class="bar-pct">7.73%</span></div><div class="bar-track"><div class="bar-fill fill-5" style="width:26.0%"></div></div></div><div class="bar-item"><div class="bar-top"><span class="bar-name">竞品SPU</span><span class="bar-pct">3.19%</span></div><div class="bar-track"><div class="bar-fill fill-6" style="width:10.7%"></div></div></div><div class="bar-item"><div class="bar-top"><span class="bar-name">竞品</span><span class="bar-pct">2.15%</span></div><div class="bar-track"><div class="bar-fill fill-1" style="width:7.2%"></div></div></div><div class="bar-item"><div class="bar-top"><span class="bar-name">攻略</span><span class="bar-pct">1.41%</span></div><div class="bar-track"><div class="bar-fill fill-2" style="width:4.7%"></div></div></div><div class="bar-item"><div class="bar-top"><span class="bar-name">行为</span><span class="bar-pct">1.29%</span></div><div class="bar-track"><div class="bar-fill fill-3" style="width:4.3%"></div></div></div><div class="bar-item"><div class="bar-top"><span class="bar-name">价格/金额</span><span class="bar-pct">0.86%</span></div><div class="bar-track"><div class="bar-fill fill-4" style="width:2.9%"></div></div></div><div class="bar-item"><div class="bar-top"><span class="bar-name">颜色</span><span class="bar-pct">0.86%</span></div><div class="bar-track"><div class="bar-fill fill-5" style="width:2.9%"></div></div></div><div class="bar-item"><div class="bar-top"><span class="bar-name">AOI</span><span class="bar-pct">0.74%</span></div><div class="bar-track"><div class="bar-fill fill-6" style="width:2.5%"></div></div></div><div class="bar-item"><div class="bar-top"><span class="bar-name">购买意向</span><span class="bar-pct">0.61%</span></div><div class="bar-track"><div class="bar-fill fill-1" style="width:2.1%"></div></div></div><div class="bar-item"><div class="bar-top"><span class="bar-name">营销/活动</span><span class="bar-pct">0.43%</span></div><div class="bar-track"><div class="bar-fill fill-2" style="width:2.0%"></div></div></div><div class="bar-item"><div class="bar-top"><span class="bar-name">产品特性</span><span class="bar-pct">0.37%</span></div><div class="bar-track"><div class="bar-fill fill-3" style="width:2.0%"></div></div></div><div class="bar-item"><div class="bar-top"><span class="bar-name">时间</span><span class="bar-pct">0.37%</span></div><div class="bar-track"><div class="bar-fill fill-4" style="width:2.0%"></div></div></div><div class="bar-item"><div class="bar-top"><span class="bar-name">功能/功效</span><span class="bar-pct">0.18%</span></div><div class="bar-track"><div class="bar-fill fill-5" style="width:2.0%"></div></div></div><div class="bar-item"><div class="bar-top"><span class="bar-name">IP</span><span class="bar-pct">0.18%</span></div><div class="bar-track"><div class="bar-fill fill-6" style="width:2.0%"></div></div></div><div class="bar-item"><div class="bar-top"><span class="bar-name">产品规格</span><span class="bar-pct">0.12%</span></div><div class="bar-track"><div class="bar-fill fill-1" style="width:2.0%"></div></div></div><div class="bar-item"><div class="bar-top"><span class="bar-name">负向效果</span><span class="bar-pct">0.12%</span></div><div class="bar-track"><div class="bar-fill fill-2" style="width:2.0%"></div></div></div><div class="bar-item"><div class="bar-top"><span class="bar-name">特定人物</span><span class="bar-pct">0.06%</span></div><div class="bar-track"><div class="bar-fill fill-3" style="width:2.0%"></div></div></div><div class="bar-item"><div class="bar-top"><span class="bar-name">POI</span><span class="bar-pct">0.06%</span></div><div class="bar-track"><div class="bar-fill fill-4" style="width:2.0%"></div></div></div><div class="bar-item"><div class="bar-top"><span class="bar-name">场所</span><span class="bar-pct">0.06%</span></div><div class="bar-track"><div class="bar-fill fill-5" style="width:2.0%"></div></div></div><div class="bar-item"><div class="bar-top"><span class="bar-name">人群/宠物</span><span class="bar-pct">0.06%</span></div><div class="bar-track"><div class="bar-fill fill-6" style="width:2.0%"></div></div></div></div>
+<div class="stage-card s3"><div class="stage-header"><div class="stage-name">试驾 → 大定</div></div><div class="bar-item"><div class="bar-top"><span class="bar-name">其他</span><span class="bar-pct">27.66%</span></div><div class="bar-track"><div class="bar-fill fill-1" style="width:100.0%"></div></div></div><div class="bar-item"><div class="bar-top"><span class="bar-name">本SPU</span><span class="bar-pct">24.49%</span></div><div class="bar-track"><div class="bar-fill fill-2" style="width:88.5%"></div></div></div><div class="bar-item"><div class="bar-top"><span class="bar-name">产品系列</span><span class="bar-pct">15.89%</span></div><div class="bar-track"><div class="bar-fill fill-3" style="width:57.4%"></div></div></div><div class="bar-item"><div class="bar-top"><span class="bar-name">品牌</span><span class="bar-pct">13.27%</span></div><div class="bar-track"><div class="bar-fill fill-4" style="width:48.0%"></div></div></div><div class="bar-item"><div class="bar-top"><span class="bar-name">品类</span><span class="bar-pct">5.98%</span></div><div class="bar-track"><div class="bar-fill fill-5" style="width:21.6%"></div></div></div><div class="bar-item"><div class="bar-top"><span class="bar-name">攻略</span><span class="bar-pct">2.06%</span></div><div class="bar-track"><div class="bar-fill fill-6" style="width:7.4%"></div></div></div><div class="bar-item"><div class="bar-top"><span class="bar-name">行为</span><span class="bar-pct">2.06%</span></div><div class="bar-track"><div class="bar-fill fill-1" style="width:7.4%"></div></div></div><div class="bar-item"><div class="bar-top"><span class="bar-name">营销/活动</span><span class="bar-pct">1.87%</span></div><div class="bar-track"><div class="bar-fill fill-2" style="width:6.8%"></div></div></div><div class="bar-item"><div class="bar-top"><span class="bar-name">颜色</span><span class="bar-pct">1.68%</span></div><div class="bar-track"><div class="bar-fill fill-3" style="width:6.1%"></div></div></div><div class="bar-item"><div class="bar-top"><span class="bar-name">价格/金额</span><span class="bar-pct">1.12%</span></div><div class="bar-track"><div class="bar-fill fill-4" style="width:4.0%"></div></div></div><div class="bar-item"><div class="bar-top"><span class="bar-name">购买意向</span><span class="bar-pct">0.75%</span></div><div class="bar-track"><div class="bar-fill fill-5" style="width:2.7%"></div></div></div><div class="bar-item"><div class="bar-top"><span class="bar-name">竞品</span><span class="bar-pct">0.56%</span></div><div class="bar-track"><div class="bar-fill fill-6" style="width:2.0%"></div></div></div><div class="bar-item"><div class="bar-top"><span class="bar-name">产品特性</span><span class="bar-pct">0.56%</span></div><div class="bar-track"><div class="bar-fill fill-1" style="width:2.0%"></div></div></div><div class="bar-item"><div class="bar-top"><span class="bar-name">AOI</span><span class="bar-pct">0.37%</span></div><div class="bar-track"><div class="bar-fill fill-2" style="width:2.0%"></div></div></div><div class="bar-item"><div class="bar-top"><span class="bar-name">产品规格</span><span class="bar-pct">0.37%</span></div><div class="bar-track"><div class="bar-fill fill-3" style="width:2.0%"></div></div></div><div class="bar-item"><div class="bar-top"><span class="bar-name">功能/功效</span><span class="bar-pct">0.19%</span></div><div class="bar-track"><div class="bar-fill fill-4" style="width:2.0%"></div></div></div><div class="bar-item"><div class="bar-top"><span class="bar-name">款式/形态</span><span class="bar-pct">0.19%</span></div><div class="bar-track"><div class="bar-fill fill-5" style="width:2.0%"></div></div></div><div class="bar-item"><div class="bar-top"><span class="bar-name">IP</span><span class="bar-pct">0.19%</span></div><div class="bar-track"><div class="bar-fill fill-6" style="width:2.0%"></div></div></div><div class="bar-item"><div class="bar-top"><span class="bar-name">场景</span><span class="bar-pct">0.19%</span></div><div class="bar-track"><div class="bar-fill fill-1" style="width:2.0%"></div></div></div><div class="bar-item"><div class="bar-top"><span class="bar-name">人群/宠物</span><span class="bar-pct">0.19%</span></div><div class="bar-track"><div class="bar-fill fill-2" style="width:2.0%"></div></div></div><div class="bar-item"><div class="bar-top"><span class="bar-name">数量</span><span class="bar-pct">0.19%</span></div><div class="bar-track"><div class="bar-fill fill-3" style="width:2.0%"></div></div></div><div class="bar-item"><div class="bar-top"><span class="bar-name">负向效果</span><span class="bar-pct">0.19%</span></div><div class="bar-track"><div class="bar-fill fill-4" style="width:2.0%"></div></div></div></div>
+</div>
+    <div class="card search-insight-card">
+      <div class="card-title">三段链路搜索意图变化总结</div>
+      <p style="font-size:13px;color:var(--muted);margin-bottom:16px">不同链路样本规模不同，以下重点比较各类搜索在本链路中的占比变化，不直接比较搜索量绝对值。</p>
+      <div style="overflow-x:auto">
+        <table class="comparison-table">
+          <thead><tr><th>核心搜索类别</th><th>首阅→留资</th><th>留资→试驾</th><th>试驾→大定</th><th>变化判断</th></tr></thead>
+          <tbody>
+            <tr><td><strong>本SPU</strong></td><td>34.65%</td><td>29.69%</td><td>24.49%</td><td>持续居于前列，目标车型始终是搜索核心</td></tr>
+            <tr><td><strong>其他（长尾/复合）</strong></td><td>16.79%</td><td>25.15%</td><td>27.66%</td><td>占比上升，后链路搜索表达更分散、更具体</td></tr>
+            <tr><td><strong>产品系列</strong></td><td>11.39%</td><td>12.15%</td><td>15.89%</td><td>逐步提升，用户由单一车型延伸至系列与版本确认</td></tr>
+            <tr><td><strong>品类</strong></td><td>10.45%</td><td>7.73%</td><td>5.98%</td><td>持续下降，兴趣由泛MPV品类逐渐收窄至具体候选</td></tr>
+            <tr><td><strong>行为 / 营销活动 / 价格金额</strong></td><td>1.21% / 0.16% / 0.61%</td><td>1.29% / 0.43% / 0.86%</td><td>2.06% / 1.87% / 1.12%</td><td>后期同步升高，行动、活动和成交条件关注增强</td></tr>
+          </tbody>
+        </table>
       </div>
-    </div>
-
-    <!-- 留资-试驾：价格/权益 + 人群种草 -->
-    <div class="card">
-      <div class="card-title">留资→试驾｜高阅读内容主题：价格权益 · 购车避坑 · 发布信息</div>
-      <p style="font-size:13px;color:var(--muted);margin-bottom:16px">高阅读笔记集中解释价格、赠品和预订权益，帮助用户判断是否值得进一步预约试驾。</p>
-      <div class="note-gallery">
-        <a class="note-card" href="https://www.xiaohongshu.com/explore/6a069213000000003503afde" target="_blank">
-          <div class="note-card-tag tag-5">⚠️ 消费预警</div>
-          <div class="note-card-title">智界V9小定别乱付！这4样硬货才是重头戏</div>
-          <div class="note-card-meta">图文 · 20260515 · 聚焦价格敏感心理</div>
-          <div class="note-card-stats"><span>❤️ 曝光1w-5w</span><span>📝 图文</span></div>
-        </a>
-        <a class="note-card" href="https://www.xiaohongshu.com/explore/6a223b8b0000000022021565" target="_blank">
-          <div class="note-card-tag tag-5">💰 赠品攻略</div>
-          <div class="note-card-title">别乱订！智界V9内部消息：这些赠品一定要谈</div>
-          <div class="note-card-meta">图文 · 20260605 · 权益拆解，避免踩坑</div>
-          <div class="note-card-stats"><span>❤️ 曝光1w-5w</span><span>📝 图文</span></div>
-        </a>
-        <a class="note-card" href="https://www.xiaohongshu.com/explore/69ec2e660000000036031143" target="_blank">
-          <div class="note-card-tag tag-4">🎯 价格解析</div>
-          <div class="note-card-title">智界V9的定价陷阱，90%的人没看懂</div>
-          <div class="note-card-meta">视频 · 20260426 · 视频形式解读价格逻辑</div>
-          <div class="note-card-stats"><span>❤️ 曝光1w+</span><span>🎬 视频</span></div>
-        </a>
-        <a class="note-card" href="https://www.xiaohongshu.com/explore/6a0b06a50000000006030f6c" target="_blank">
-          <div class="note-card-tag tag-2">🎁 权益福利</div>
-          <div class="note-card-title">智界V9这波福利真的可以先冲了！</div>
-          <div class="note-card-meta">图文 · 20260514 · 权益清单类，购车助推</div>
-          <div class="note-card-stats"><span>❤️ 互动表现参考</span><span>📝 图文</span></div>
-        </a>
-        <a class="note-card" href="https://www.xiaohongshu.com/explore/1040g0k03206jke5flg005pfafvmh9rr9ks1gm4g" target="_blank">
-          <div class="note-card-tag tag-3">🔍 发布解读</div>
-          <div class="note-card-title">智界V9 听取发布会哇声一片</div>
-          <div class="note-card-meta">图文 · 20260604 · 发布会反应，推动用户试驾热情</div>
-          <div class="note-card-stats"><span>❤️ 互动表现参考</span><span>📝 图文</span></div>
-        </a>
+      <div class="trend-grid">
+        <div class="trend-item"><strong>🔎 搜索对象由“泛品类”收窄到“车型与系列”</strong><p>品类搜索由10.45%降至5.98%，而本SPU始终位列前二、产品系列升至15.89%。说明越接近成交，用户越少问“买什么MPV”，越多确认“智界V9及其系列版本是否适合我”。</p></div>
+        <div class="trend-item"><strong>🧩 后链路长尾问题明显增多</strong><p>“其他”由16.79%升至27.66%，说明标准类别之外的复合、细分问题在试驾后更集中。建议结合搜索词明细持续沉淀价格、版本、权益、交付与风险答疑内容。</p></div>
+        <div class="trend-item"><strong>🎯 成交型搜索虽占比不高，但增势明确</strong><p>行为、营销活动和价格金额在试驾→大定阶段均达到链路最高占比。搜索承接应从前期车型认知与竞品比较，逐步切换到试驾预约、订购权益、版本选择和落地价解释。</p></div>
       </div>
-    </div>
-
-    <!-- 试驾-大定：价格/权益 + 人群 + 场景 -->
-    <div class="card">
-      <div class="card-title">试驾→大定｜高阅读内容主题：成交权益 · 购车避坑 · 车主与场景体验</div>
-      <p style="font-size:13px;color:var(--muted);margin-bottom:16px">高阅读笔记集中解决“现在买是否划算、权益怎么谈、真实体验是否可靠”，承担成交前的疑虑消除作用。</p>
-      <div class="note-gallery">
-        <a class="note-card" href="https://www.xiaohongshu.com/explore/6a0fc678000000003501e791" target="_blank">
-          <div class="note-card-tag tag-5">🎯 成交催化</div>
-          <div class="note-card-title">别乱付智界V9大定！90%的人都亏了礼品福利</div>
-          <div class="note-card-meta">图文 · 20260522 · 最高频被引用，信任背书</div>
-          <div class="note-card-stats"><span>❤️ 点赞37 收藏31</span><span>📝 图文</span></div>
-        </a>
-        <a class="note-card" href="https://www.xiaohongshu.com/explore/6a0c0c730000000006036ca9" target="_blank">
-          <div class="note-card-tag tag-5">⚠️ 购车避坑</div>
-          <div class="note-card-title">智界离职！先别买智界V9，一定要等等！</div>
-          <div class="note-card-meta">图文 · 20260519 · 购车攻略全流程，销售内部视角</div>
-          <div class="note-card-stats"><span>❤️ 点赞37 收藏31</span><span>📝 图文</span></div>
-        </a>
-        <a class="note-card" href="https://www.xiaohongshu.com/explore/6a223b8b0000000022021565" target="_blank">
-          <div class="note-card-tag tag-4">💰 赠品谈判</div>
-          <div class="note-card-title">别乱订！智界V9内部消息：这些赠品一定要谈</div>
-          <div class="note-card-meta">图文 · 20260605 · 赠品清单攻略，促进最终成交</div>
-          <div class="note-card-stats"><span>❤️ 曝光1w-5w</span><span>📝 图文</span></div>
-        </a>
-        <a class="note-card" href="https://www.xiaohongshu.com/explore/6a111ffe00000000350254ca" target="_blank">
-          <div class="note-card-tag tag-2">🚗 提车种草</div>
-          <div class="note-card-title">当我开智后买智界V9，拿到了这4样赠品！</div>
-          <div class="note-card-meta">图文 · 20260523 · 真实提车体验，消除决策焦虑</div>
-          <div class="note-card-stats"><span>❤️ 曝光1w+</span><span>📝 图文</span></div>
-        </a>
-        <a class="note-card" href="https://www.xiaohongshu.com/explore/6a13c8720000000006030282" target="_blank">
-          <div class="note-card-tag tag-3">🎬 场景体验</div>
-          <div class="note-card-title">智界V9后排旋转迎宾座椅太优雅了</div>
-          <div class="note-card-meta">视频 · 20260525 · 场景种草视频，强化购买信心</div>
-          <div class="note-card-stats"><span>❤️ 曝光5w+</span><span>🎬 视频</span></div>
-        </a>
-      </div>
+      <div class="focus-statement" style="margin-top:18px"><strong>搜索运营重点：</strong>首阅期抢占“智界V9＋MPV/竞品对比”，留资后强化“车型系列＋到店试驾”，试驾后集中承接“价格权益＋版本选择＋交付/风险答疑”，让搜索内容直接推动下一步转化。</div>
     </div>
   </div>
+
+  <div class="section search-note-section">
+    <div class="section-title"><div class="num">02B</div>TOP3搜索关键词类别下高阅读笔记</div>
+    <div class="note-bar part2-method" style="margin:0 0 20px"><strong>分析逻辑：</strong>按每条链路搜索量占比TOP3的类别逐项筛选，展示各类别下阅读排名前2的笔记。同一篇笔记可被不同搜索类别命中，因此可能重复出现。</div>
+<div class="card"><div class="card-title">首阅 → 留资｜TOP3搜索类别对应高阅读笔记</div><div class="keyword-groups"><div class="keyword-block"><div class="keyword-head"><span>本SPU</span><strong>34.65%</strong></div><div class="keyword-note-list"><a class="keyword-note" href="https://www.xiaohongshu.com/explore/69eb3766000000001b0208c1?xsec_token=ZBoH5FY7xmNuxmq-YpzIsDi08kpgdT1AfyxZ6CAgM7bEo=&amp;xsec_source=pc_idea" target="_blank" rel="noopener noreferrer"><span class="keyword-rank">#1</span><span>岚图梦想家🆚智界V9：同为华系MPV该如何抉择</span><span class="direct-mark">直达 ↗</span></a><a class="keyword-note" href="https://www.xiaohongshu.com/explore/698af382000000001600ba87?xsec_token=ZBDMp27EcNd_-OB_DkwaWcxFl0dTlQQ7kPU-SOTq1QCQo=&amp;xsec_source=pc_idea" target="_blank" rel="noopener noreferrer"><span class="keyword-rank">#2</span><span>同为华为智驾MPV，怎么选？</span><span class="direct-mark">直达 ↗</span></a></div></div><div class="keyword-block"><div class="keyword-head"><span>其他</span><strong>16.79%</strong></div><div class="keyword-note-list"><a class="keyword-note" href="https://www.xiaohongshu.com/explore/69eb3766000000001b0208c1?xsec_token=ZBoH5FY7xmNuxmq-YpzIsDi08kpgdT1AfyxZ6CAgM7bEo=&amp;xsec_source=pc_idea" target="_blank" rel="noopener noreferrer"><span class="keyword-rank">#1</span><span>岚图梦想家🆚智界V9：同为华系MPV该如何抉择</span><span class="direct-mark">直达 ↗</span></a><a class="keyword-note" href="https://www.xiaohongshu.com/explore/698af382000000001600ba87?xsec_token=ZBDMp27EcNd_-OB_DkwaWcxFl0dTlQQ7kPU-SOTq1QCQo=&amp;xsec_source=pc_idea" target="_blank" rel="noopener noreferrer"><span class="keyword-rank">#2</span><span>同为华为智驾MPV，怎么选？</span><span class="direct-mark">直达 ↗</span></a></div></div><div class="keyword-block"><div class="keyword-head"><span>品牌</span><strong>12.19%</strong></div><div class="keyword-note-list"><a class="keyword-note" href="https://www.xiaohongshu.com/explore/698af382000000001600ba87?xsec_token=ZBDMp27EcNd_-OB_DkwaWcxFl0dTlQQ7kPU-SOTq1QCQo=&amp;xsec_source=pc_idea" target="_blank" rel="noopener noreferrer"><span class="keyword-rank">#1</span><span>同为华为智驾MPV，怎么选？</span><span class="direct-mark">直达 ↗</span></a><a class="keyword-note" href="https://www.xiaohongshu.com/explore/69eb3766000000001b0208c1?xsec_token=ZBoH5FY7xmNuxmq-YpzIsDi08kpgdT1AfyxZ6CAgM7bEo=&amp;xsec_source=pc_idea" target="_blank" rel="noopener noreferrer"><span class="keyword-rank">#2</span><span>岚图梦想家🆚智界V9：同为华系MPV该如何抉择</span><span class="direct-mark">直达 ↗</span></a></div></div></div></div>
+<div class="card"><div class="card-title">留资 → 试驾｜TOP3搜索类别对应高阅读笔记</div><div class="keyword-groups"><div class="keyword-block"><div class="keyword-head"><span>本SPU</span><strong>29.69%</strong></div><div class="keyword-note-list"><a class="keyword-note" href="https://www.xiaohongshu.com/explore/69eb3766000000001b0208c1?xsec_token=ZBoH5FY7xmNuxmq-YpzIsDi08kpgdT1AfyxZ6CAgM7bEo=&amp;xsec_source=pc_idea" target="_blank" rel="noopener noreferrer"><span class="keyword-rank">#1</span><span>岚图梦想家🆚智界V9：同为华系MPV该如何抉择</span><span class="direct-mark">直达 ↗</span></a><a class="keyword-note" href="https://www.xiaohongshu.com/explore/6a0b06a50000000006030f6c?xsec_token=ZB2zyMa6akC5KjffmvluZFEfR3eRKib2gkI4LSzWv-W04=&amp;xsec_source=pc_idea" target="_blank" rel="noopener noreferrer"><span class="keyword-rank">#2</span><span>华系“嫡庶”之争，谁才是40万级MPV最优选？</span><span class="direct-mark">直达 ↗</span></a></div></div><div class="keyword-block"><div class="keyword-head"><span>其他</span><strong>25.15%</strong></div><div class="keyword-note-list"><a class="keyword-note" href="https://www.xiaohongshu.com/explore/6a0803fd00000000070213e0?xsec_token=ZBn_24OsB8JHo_wKKjPczZkMS4obiQu1W6n9TOm3aCMR0=&amp;xsec_source=pc_idea" target="_blank" rel="noopener noreferrer"><span class="keyword-rank">#1</span><span>智界V9到店后都做什么？</span><span class="direct-mark">直达 ↗</span></a><a class="keyword-note" href="https://www.xiaohongshu.com/explore/69eb3766000000001b0208c1?xsec_token=ZBoH5FY7xmNuxmq-YpzIsDi08kpgdT1AfyxZ6CAgM7bEo=&amp;xsec_source=pc_idea" target="_blank" rel="noopener noreferrer"><span class="keyword-rank">#2</span><span>岚图梦想家🆚智界V9：同为华系MPV该如何抉择</span><span class="direct-mark">直达 ↗</span></a></div></div><div class="keyword-block"><div class="keyword-head"><span>产品系列</span><strong>12.15%</strong></div><div class="keyword-note-list"><a class="keyword-note" href="https://www.xiaohongshu.com/explore/69eb3766000000001b0208c1?xsec_token=ZBoH5FY7xmNuxmq-YpzIsDi08kpgdT1AfyxZ6CAgM7bEo=&amp;xsec_source=pc_idea" target="_blank" rel="noopener noreferrer"><span class="keyword-rank">#1</span><span>岚图梦想家🆚智界V9：同为华系MPV该如何抉择</span><span class="direct-mark">直达 ↗</span></a><a class="keyword-note" href="https://www.xiaohongshu.com/explore/6a0803fd00000000070213e0?xsec_token=ZBn_24OsB8JHo_wKKjPczZkMS4obiQu1W6n9TOm3aCMR0=&amp;xsec_source=pc_idea" target="_blank" rel="noopener noreferrer"><span class="keyword-rank">#2</span><span>智界V9到店后都做什么？</span><span class="direct-mark">直达 ↗</span></a></div></div></div></div>
+<div class="card"><div class="card-title">试驾 → 大定｜TOP3搜索类别对应高阅读笔记</div><div class="keyword-groups"><div class="keyword-block"><div class="keyword-head"><span>其他</span><strong>27.66%</strong></div><div class="keyword-note-list"><a class="keyword-note" href="https://www.xiaohongshu.com/explore/6a0c0c730000000006036ca9?xsec_token=ZBUcuCM0UjJ1VJoKSNFhlhv6FvWymbVqfOqma_6HXtC3Y=&amp;xsec_source=pc_idea" target="_blank" rel="noopener noreferrer"><span class="keyword-rank">#1</span><span>智界离职！先别买智界V9，一定要等等！</span><span class="direct-mark">直达 ↗</span></a><a class="keyword-note" href="https://www.xiaohongshu.com/explore/6a22b9510000000022018280?xsec_token=ZBunecajKRJg_hn4z2JwbBH4UCnlba-YJKNW45PxfHL_o=&amp;xsec_source=pc_idea" target="_blank" rel="noopener noreferrer"><span class="keyword-rank">#2</span><span>💜紫色的智界V9真的太好看啦~</span><span class="direct-mark">直达 ↗</span></a></div></div><div class="keyword-block"><div class="keyword-head"><span>本SPU</span><strong>24.49%</strong></div><div class="keyword-note-list"><a class="keyword-note" href="https://www.xiaohongshu.com/explore/6a0c0c730000000006036ca9?xsec_token=ZBUcuCM0UjJ1VJoKSNFhlhv6FvWymbVqfOqma_6HXtC3Y=&amp;xsec_source=pc_idea" target="_blank" rel="noopener noreferrer"><span class="keyword-rank">#1</span><span>智界离职！先别买智界V9，一定要等等！</span><span class="direct-mark">直达 ↗</span></a><a class="keyword-note" href="https://www.xiaohongshu.com/explore/6a22b9510000000022018280?xsec_token=ZBunecajKRJg_hn4z2JwbBH4UCnlba-YJKNW45PxfHL_o=&amp;xsec_source=pc_idea" target="_blank" rel="noopener noreferrer"><span class="keyword-rank">#2</span><span>💜紫色的智界V9真的太好看啦~</span><span class="direct-mark">直达 ↗</span></a></div></div><div class="keyword-block"><div class="keyword-head"><span>产品系列</span><strong>15.89%</strong></div><div class="keyword-note-list"><a class="keyword-note" href="https://www.xiaohongshu.com/explore/6a0c0c730000000006036ca9?xsec_token=ZBUcuCM0UjJ1VJoKSNFhlhv6FvWymbVqfOqma_6HXtC3Y=&amp;xsec_source=pc_idea" target="_blank" rel="noopener noreferrer"><span class="keyword-rank">#1</span><span>智界离职！先别买智界V9，一定要等等！</span><span class="direct-mark">直达 ↗</span></a><a class="keyword-note" href="https://www.xiaohongshu.com/explore/6a22b9510000000022018280?xsec_token=ZBunecajKRJg_hn4z2JwbBH4UCnlba-YJKNW45PxfHL_o=&amp;xsec_source=pc_idea" target="_blank" rel="noopener noreferrer"><span class="keyword-rank">#2</span><span>💜紫色的智界V9真的太好看啦~</span><span class="direct-mark">直达 ↗</span></a></div></div></div></div>
+    <div class="card search-note-insight">
+      <div class="card-title">搜索关联高阅读笔记观察</div>
+      <div class="insight-grid">
+        <div class="insight-card highlight"><div class="insight-icon">①</div><div class="insight-title">首阅与留资阶段：比较型内容反复进入高阅读榜</div><div class="insight-text">“智界V9 vs 岚图梦想家”“同为华为智驾MPV怎么选”等笔记同时出现在本SPU、品牌或产品系列类别，说明搜索用户仍需要清晰的候选差异与选择理由。应强化参数、场景、价格和用户适配度的结构化对比。</div></div>
+        <div class="insight-card"><div class="insight-icon">②</div><div class="insight-title">试驾后：风险确认与个性选择并存</div><div class="insight-text">“先别买、一定要等等”与颜色审美类内容进入多个搜索类别的高阅读位，表明成交前既存在政策、时机和购买风险确认，也存在颜色与个性化选择需求。应同步提供权威权益说明和配置/颜色决策指南。</div></div>
+      </div>
+      <p style="font-size:12px;color:var(--muted);margin-top:12px">注：同一笔记可命中多个搜索类别，重复出现表示其承接了多类搜索意图，不对重复笔记进行阅读量累加。</p>
+    </div>
+
+</div>
 
   <!-- ══════════════════════════════════════════
        第三章：各链路转化阻力与内容解法
@@ -907,7 +867,7 @@
           <span class="compete-label">行业内容</span>
           <div class="compete-bar"><div class="compete-fill c-industry" style="width:6.57%">6.6%</div></div>
         </div>
-        <p style="font-size:12px;color:var(--muted);margin-top:8px">主要竞品：沃尔沃V9 (14.8%)、岚图 (10%)、岚图梦想家</p>
+        <p style="font-size:12px;color:var(--muted);margin-top:8px">主要竞品关注：沃尔沃品牌（14.8%）、岚图品牌（10%），代表车型包括岚图梦想家等</p>
       </div>
 
       <div style="margin-bottom:24px">
@@ -930,23 +890,23 @@
     </div>
 
     <div class="card">
-      <div class="card-title">试驾→大定｜成交前品牌关注集中度</div>
-      <div class="focus-statement">进入试驾→大定阶段后，用户已从广泛比较转向核心候选品牌确认，因此通过TOP品牌阅读榜观察成交前的品牌关注集中度。</div>
+      <div class="card-title">试驾→大定｜成交前关注主体TOP3</div>
+      <div class="focus-statement">进入试驾→大定阶段后，用户从广泛比较转向核心候选确认。为便于与前两阶段理解一致，以下按“目标品牌、竞品品牌、技术生态”归类呈现。</div>
       <div style="margin-bottom:8px">
-        <p style="font-size:14px;color:var(--muted);margin-bottom:16px"><strong style="color:var(--primary)">试驾→大定阶段</strong>（TOP阅读：智界52%、沃尔沃20%）</p>
+        <p style="font-size:14px;color:var(--muted);margin-bottom:16px"><strong style="color:var(--primary)">试驾→大定阶段</strong>（关注主体TOP3）</p>
         <div class="compete-row">
-          <span class="compete-label">智界品牌</span>
+          <span class="compete-label">目标品牌（智界）</span>
           <div class="compete-bar"><div class="compete-fill c-brand" style="width:52%">52%</div></div>
         </div>
         <div class="compete-row">
-          <span class="compete-label">沃尔沃</span>
+          <span class="compete-label">TOP竞品品牌（沃尔沃）</span>
           <div class="compete-bar"><div class="compete-fill c-comp" style="width:20%">20%</div></div>
         </div>
         <div class="compete-row">
-          <span class="compete-label">华为</span>
+          <span class="compete-label">技术生态（华为）</span>
           <div class="compete-bar"><div class="compete-fill c-industry" style="width:7%">7%</div></div>
         </div>
-        <p style="font-size:12px;color:var(--muted);margin-top:8px">智界在该阶段TOP品牌阅读中居首，说明成交前的品牌关注已明显向目标品牌集中。</p>
+        <p style="font-size:12px;color:var(--muted);margin-top:8px">沃尔沃是该阶段TOP3关注主体中唯一被展开的竞品品牌，不代表用户只关注沃尔沃；其余关注主体未在TOP3中单独展开。“华为”代表智驾、鸿蒙等技术生态关注，不作为独立汽车品牌参与比较。</p>
       </div>
     </div>
 
@@ -964,7 +924,7 @@
         <div class="insight-title">首阅期竞品内容机遇</div>
         <div class="insight-text">
           在首阅→留资阶段，用户广泛阅读竞品内容（72%），这是智界最需要「截流」的关键时机。<br><br>
-          建议：布局「V9 vs 岚图梦想家/沃尔沃V9」对比类内容，在用户认知形成期建立技术优势认知。
+          建议：布局「智界V9 vs 岚图梦想家/沃尔沃品牌车型」对比类内容，在用户认知形成期建立技术优势认知。
         </div>
       </div>
     </div>
@@ -994,34 +954,28 @@
           </thead>
           <tbody>
             <tr>
-              <td><strong>归因人数 / 周期有效样本</strong></td>
-              <td>17,012 / 7,176人</td>
-              <td>1,165 / 796人</td>
-              <td>263 / 226人</td>
-            </tr>
-            <tr>
               <td><strong>7天内完成比例</strong></td>
-              <td>1,913 / 7,176 = <strong>26.66%</strong></td>
-              <td>517 / 796 = <strong style="color:#6366f1">64.95%</strong></td>
-              <td>187 / 226 = <strong style="color:#10b981">82.74%</strong></td>
+              <td><strong>26.66%</strong></td>
+              <td><strong style="color:#6366f1">64.95%</strong></td>
+              <td><strong style="color:#10b981">82.74%</strong></td>
             </tr>
             <tr>
               <td><strong>7天后–30天完成比例</strong></td>
-              <td>2,676 / 7,176 = <strong>37.29%</strong></td>
-              <td>233 / 796 = <strong>29.27%</strong></td>
-              <td>34 / 226 = <strong>15.04%</strong></td>
+              <td><strong>37.29%</strong></td>
+              <td><strong>29.27%</strong></td>
+              <td><strong>15.04%</strong></td>
             </tr>
             <tr>
               <td><strong>31–60天完成比例</strong></td>
-              <td>2,090 / 7,176 = <strong>29.12%</strong></td>
-              <td>46 / 796 = <strong>5.78%</strong></td>
-              <td>5 / 226 = <strong>2.21%</strong></td>
+              <td><strong>29.12%</strong></td>
+              <td><strong>5.78%</strong></td>
+              <td><strong>2.21%</strong></td>
             </tr>
             <tr>
               <td><strong>60天以上完成比例</strong></td>
-              <td>497 / 7,176 = <strong>6.93%</strong></td>
-              <td>0 / 796 = <strong>0%</strong></td>
-              <td>0 / 226 = <strong>0%</strong></td>
+              <td><strong>6.93%</strong></td>
+              <td><strong>0%</strong></td>
+              <td><strong>0%</strong></td>
             </tr>
             <tr>
               <td><strong>主要行为线索（解释性）</strong></td>
@@ -1092,7 +1046,7 @@
           <div class="strategy-num">4</div>
           <div class="strategy-content">
             <strong>【全链路】竞品截流：首阅期布局对比内容，留资期强化技术差异化</strong>
-            <p>首阅阶段竞品内容占比72.6%（沃尔沃V9、岚图梦想家为主要竞品），是竞品影响较强的时刻。建议：①布局「智界V9 vs 沃尔沃V9/岚图梦想家」专题对比内容；②针对60天以上长决策用户（首阅→留资阶段占6.93%）建立持续内容运营节奏，在T-60/T-30/T-7天关键节点推送不同阶段内容。</p>
+            <p>首阅阶段竞品内容占比72.6%（沃尔沃品牌、岚图梦想家等为主要竞品关注），是竞品影响较强的时刻。建议：①布局「智界V9 vs 沃尔沃品牌车型/岚图梦想家」专题对比内容；②针对60天以上长决策用户（首阅→留资阶段占6.93%）建立持续内容运营节奏，在T-60/T-30/T-7天关键节点推送不同阶段内容。</p>
           </div>
         </li>
         <li>
