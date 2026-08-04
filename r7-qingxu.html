@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<!-- saved from url=(0117)https://aifin.xiaohongshu.com/rfphecda/aiworkbench/query/query_dashboard?dashboardId=39321BDA79D2DE6D52C76628E0A1655B -->
+<html lang="zh-CN"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>智界R7情绪内容分析报告2026年1-7月</title>
+  <link rel="icon" href="https://aifin.xiaohongshu.com/rfphecda/aiworkbench/query/y">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script src="./智界R7情绪内容分析报告2026年1-7月_files/echarts.min.js"></script>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:#0d1117;color:#e6edf3;font-family:'PingFang SC','Microsoft YaHei',sans-serif;min-height:100vh}
+.header{background:linear-gradient(135deg,#161b22 0%,#1c2333 100%);padding:32px 48px;border-bottom:1px solid #30363d}
+.header h1{font-size:24px;font-weight:700;color:#f0f6fc}
+.header .sub{font-size:13px;color:#8b949e;margin-top:6px}
+.header .badge{display:inline-block;background:#21262d;border:1px solid #30363d;border-radius:12px;padding:2px 12px;font-size:11px;color:#8b949e;margin-top:10px}
+.tabs{display:flex;border-bottom:1px solid #30363d;background:#161b22;padding:0 48px}
+.tab-btn{padding:14px 24px;font-size:14px;color:#8b949e;cursor:pointer;border-bottom:2px solid transparent;transition:all .2s;background:none;border-top:none;border-left:none;border-right:none}
+.tab-btn.active{color:#58a6ff;border-bottom-color:#58a6ff}
+.tab-btn:hover{color:#c9d1d9}
+.content{display:none;padding:40px 48px;max-width:1400px;margin:0 auto}
+.content.active{display:block}
+.metric-row{display:flex;gap:16px;margin-bottom:24px}
+.metric-card{flex:1;background:#161b22;border:1px solid #30363d;border-radius:12px;padding:20px;position:relative;overflow:hidden}
+.metric-card.positive{border-top:3px solid #3fb950}
+.metric-card.negative{border-top:3px solid #f85149}
+.metric-card.neutral{border-top:3px solid #8b949e}
+.metric-card .label{font-size:12px;color:#8b949e;margin-bottom:8px}
+.metric-card .val{font-size:32px;font-weight:700}
+.metric-card.positive .val{color:#3fb950}
+.metric-card.negative .val{color:#f85149}
+.metric-card.neutral .val{color:#8b949e}
+.metric-card .sub-val{font-size:12px;color:#8b949e;margin-top:4px}
+.metric-card .bar-bg{position:absolute;bottom:0;left:0;height:4px;width:100%;background:#21262d}
+.metric-card .bar-fill{height:4px}
+.metric-card.positive .bar-fill{background:#3fb950}
+.metric-card.negative .bar-fill{background:#f85149}
+.metric-card.neutral .bar-fill{background:#8b949e}
+.section-title{font-size:16px;font-weight:600;color:#f0f6fc;margin:28px 0 16px;padding-bottom:10px;border-bottom:1px solid #21262d}
+.chart-row{display:flex;gap:24px;margin-bottom:28px}
+.chart-box{background:#161b22;border:1px solid #30363d;border-radius:12px;padding:20px;flex:1}
+.chart-box h3{font-size:13px;color:#8b949e;margin-bottom:16px}
+.emotion-card{background:#161b22;border:1px solid #30363d;border-radius:12px;padding:24px;margin-bottom:20px}
+.emo-header{display:flex;align-items:center;gap:16px;margin-bottom:16px;flex-wrap:wrap}
+.emo-name{font-size:20px;font-weight:700}
+.emo-name.pos{color:#3fb950}
+.emo-name.neg{color:#f85149}
+.emo-metrics{display:flex;gap:24px;flex-wrap:wrap}
+.emo-metric .mv{font-size:20px;font-weight:700;color:#58a6ff}
+.emo-metric .ml{font-size:11px;color:#8b949e;margin-top:2px}
+.findings .f-item{display:flex;gap:10px;margin-bottom:10px;padding:10px 14px;background:#0d1117;border-radius:8px;border-left:3px solid #58a6ff;font-size:13px;line-height:1.7;color:#c9d1d9}
+.findings .f-item.warn{border-left-color:#f85149}
+.findings .f-item .fi{flex-shrink:0;color:#58a6ff;font-weight:700}
+.findings .f-item.warn .fi{color:#f85149}
+.notes-table{width:100%;border-collapse:collapse;font-size:13px;margin-top:12px}
+.notes-table th{text-align:left;padding:8px 12px;border-bottom:1px solid #30363d;color:#8b949e;font-weight:500}
+.notes-table td{padding:10px 12px;border-bottom:1px solid #21262d;color:#c9d1d9;line-height:1.5}
+.notes-table tr:last-child td{border-bottom:none}
+.reads-badge{background:#21262d;border-radius:6px;padding:2px 8px;font-size:12px;color:#58a6ff;white-space:nowrap}
+.wordcloud-row{display:flex;gap:24px;margin-bottom:28px}
+.wordcloud-wrap{flex:1;background:#161b22;border:1px solid #30363d;border-radius:12px;padding:20px}
+.category-cards{flex:1;display:flex;flex-direction:column;gap:10px}
+.cat-card{background:#161b22;border:1px solid #30363d;border-radius:10px;padding:14px 18px}
+.cat-card .cat-name{font-size:13px;font-weight:600;color:#f0f6fc;margin-bottom:6px}
+.cat-card .cat-metrics{display:flex;gap:20px}
+.cat-card .cat-m{font-size:12px;color:#8b949e}
+.cat-card .cat-m span{color:#c9d1d9;font-weight:600}
+.cat-card .cat-insight{font-size:12px;color:#8b949e;margin-top:6px;line-height:1.5}
+.quadrant-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:28px}
+.quad-card{background:#161b22;border:1px solid #30363d;border-radius:12px;padding:20px}
+.quad-card .q-label{font-size:11px;font-weight:600;letter-spacing:1px;margin-bottom:6px}
+.quad-card .q-title{font-size:15px;font-weight:700;margin-bottom:12px;color:#f0f6fc}
+.quad-card.amplify{border-top:3px solid #3fb950}.quad-card.amplify .q-label{color:#3fb950}
+.quad-card.fill{border-top:3px solid #58a6ff}.quad-card.fill .q-label{color:#58a6ff}
+.quad-card.optimize{border-top:3px solid #f0883e}.quad-card.optimize .q-label{color:#f0883e}
+.quad-card.avoid{border-top:3px solid #f85149}.quad-card.avoid .q-label{color:#f85149}
+.quad-card .q-items{list-style:none}
+.quad-card .q-items li{font-size:13px;color:#c9d1d9;padding:5px 0;border-bottom:1px solid #21262d;line-height:1.5}
+.quad-card .q-items li:last-child{border-bottom:none}
+.quad-card .q-items li::before{content:"→ ";color:#8b949e}
+.priority-list{display:flex;flex-direction:column;gap:12px;margin-bottom:28px}
+.p-item{display:flex;gap:16px;align-items:flex-start;background:#161b22;border:1px solid #30363d;border-radius:10px;padding:16px 20px}
+.p-badge{flex-shrink:0;width:32px;height:32px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700}
+.p-badge.p0{background:#f85149;color:#fff}
+.p-badge.p1{background:#f0883e;color:#fff}
+.p-badge.p2{background:#58a6ff;color:#fff}
+.p-content .p-title{font-size:14px;font-weight:600;color:#f0f6fc;margin-bottom:4px}
+.p-content .p-desc{font-size:13px;color:#8b949e;line-height:1.6}
+.gap-table{width:100%;border-collapse:collapse;font-size:13px;margin-bottom:24px}
+.gap-table th{text-align:left;padding:8px 12px;border-bottom:1px solid #30363d;color:#8b949e;font-size:12px}
+.gap-table td{padding:9px 12px;border-bottom:1px solid #21262d;color:#c9d1d9}
+.gap-pos{color:#3fb950;font-weight:600}
+.gap-neg{color:#f85149;font-weight:600}
+.eff-high{color:#3fb950}
+.eff-low{color:#f85149}
+.data-note{background:#161b22;border:1px solid #30363d;border-radius:10px;padding:16px 20px;font-size:12px;color:#8b949e;line-height:1.8;margin-top:28px}
+.data-note .dn-title{font-weight:600;color:#c9d1d9;margin-bottom:6px}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>🚗 智界R7 · 情绪内容分析报告</h1>
+  <div class="sub">小红书平台 · 2026年1月1日 — 7月31日 · 全量笔记（含商业/自然）</div>
+  <div class="badge">数据来源：red_lab.app_emotion_skill_df · SPU：智界R7 · 有效笔记样本：699篇 · 较上版本+1356%</div>
+</div>
+
+<div class="tabs">
+  <button class="tab-btn" onclick="switchTab(0)">📊 Tab1 情绪全景</button>
+  <button class="tab-btn" onclick="switchTab(1)">✅ Tab2 正向放大</button>
+  <button class="tab-btn" onclick="switchTab(2)">⚠️ Tab3 负向扭转</button>
+  <button class="tab-btn active" onclick="switchTab(3)">🎯 Tab4 策略建议</button>
+</div>
+
+<!-- TAB1 -->
+<div class="content" id="tab0">
+  <div class="metric-row" style="margin-top:28px">
+    <div class="metric-card positive">
+      <div class="label">积极情绪笔记</div>
+      <div class="val">451篇</div>
+      <div class="sub-val">占比 64.5% · 总阅读 5,403,943</div>
+      <div class="bar-bg"><div class="bar-fill" style="width:64.5%"></div></div>
+    </div>
+    <div class="metric-card negative">
+      <div class="label">消极情绪笔记</div>
+      <div class="val">224篇</div>
+      <div class="sub-val">占比 32.0% · 总阅读 3,501,921</div>
+      <div class="bar-bg"><div class="bar-fill" style="width:32%"></div></div>
+    </div>
+    <div class="metric-card neutral">
+      <div class="label">中性情绪笔记</div>
+      <div class="val">40篇</div>
+      <div class="sub-val">占比 5.7% · 总阅读 310,219</div>
+      <div class="bar-bg"><div class="bar-fill" style="width:5.7%"></div></div>
+    </div>
+  </div>
+  <div class="metric-row">
+    <div class="metric-card" style="border-top:3px solid #58a6ff">
+      <div class="label">整体均阅读（全局基准）</div>
+      <div class="val" style="color:#58a6ff">13,164</div>
+      <div class="sub-val">总阅读 9,216,083 / 699篇</div>
+    </div>
+    <div class="metric-card" style="border-top:3px solid #3fb950">
+      <div class="label">积极侧均阅读</div>
+      <div class="val" style="color:#3fb950">11,982</div>
+      <div class="sub-val">效率指数 0.91x</div>
+    </div>
+    <div class="metric-card" style="border-top:3px solid #f85149">
+      <div class="label">消极侧均阅读</div>
+      <div class="val" style="color:#f85149">15,633</div>
+      <div class="sub-val">效率指数 1.19x ⚠️ 高于全局</div>
+    </div>
+  </div>
+
+  <div class="section-title">📈 细分情绪全景（按笔记数 TOP12）</div>
+  <div class="chart-row">
+    <div class="chart-box" style="flex:1.1">
+      <h3>积极情绪 TOP12（笔记数）</h3>
+      <div id="chart-pos-bar" style="height: 340px; user-select: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); position: relative;" _echarts_instance_="ec_1785835989793"><div style="position: relative; width: 658px; height: 340px; padding: 0px; margin: 0px; border-width: 0px;"><canvas data-zr-dom-id="zr_0" width="877" height="453" style="position: absolute; left: 0px; top: 0px; width: 658px; height: 340px; user-select: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); padding: 0px; margin: 0px; border-width: 0px;"></canvas></div><div class=""></div></div>
+    </div>
+    <div class="chart-box" style="flex:0.9">
+      <h3>消极情绪 TOP10（笔记数）</h3>
+      <div id="chart-neg-bar" style="height: 340px; user-select: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); position: relative;" _echarts_instance_="ec_1785835989794"><div style="position: relative; width: 539px; height: 340px; padding: 0px; margin: 0px; border-width: 0px;"><canvas data-zr-dom-id="zr_0" width="718" height="453" style="position: absolute; left: 0px; top: 0px; width: 539px; height: 340px; user-select: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); padding: 0px; margin: 0px; border-width: 0px;"></canvas></div><div class=""></div></div>
+    </div>
+  </div>
+
+  <div class="section-title">🔵 情绪效率散点图（X=笔记数，Y=均阅读，圆大小=总阅读）</div>
+  <div class="chart-box" style="margin-bottom:28px">
+    <h3>⭐明星高效情绪 / 🔴主力痛点 / ⚡高传播舆情 · 重点情绪常驻标注</h3>
+    <div id="chart-scatter" style="height: 440px; user-select: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); position: relative;" _echarts_instance_="ec_1785835989795"><div style="position: relative; width: 1263px; height: 440px; padding: 0px; margin: 0px; border-width: 0px;"><canvas data-zr-dom-id="zr_0" width="1684" height="586" style="position: absolute; left: 0px; top: 0px; width: 1263px; height: 440px; user-select: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); padding: 0px; margin: 0px; border-width: 0px;"></canvas></div><div class=""></div></div>
+  </div>
+
+  <div class="data-note">
+    <div class="dn-title">📋 数据说明</div>
+    数据来源：red_lab.app_emotion_skill_df · SPU：智界R7（spu_id=1614527）· 时间：2026-01-01~2026-07-31 · 分析粒度：笔记维度（DISTINCT note_id）· 有效样本：699篇 · ⚠️ 消极侧均阅读(1.56万)高于积极侧(1.2万)，说明负向内容单篇传播力更强，需重点关注
+  </div>
+</div>
+
+<!-- TAB2 -->
+<div class="content" id="tab1">
+  <div class="section-title" style="margin-top:28px">🌟 积极词云 · 标的词分类卡片</div>
+  <div class="wordcloud-row">
+    <div class="wordcloud-wrap">
+      <h3 style="font-size:13px;color:#8b949e;margin-bottom:12px">积极情绪标的词云（TOP词，按阅读量着色）</h3>
+      <canvas id="wc-pos" width="480" height="300" data-drawn="1"></canvas>
+    </div>
+    <div class="category-cards">
+      <div class="cat-card" style="border-top:3px solid #58a6ff">
+        <div class="cat-name">⚡ 华为技术生态（最高效）</div>
+        <div class="cat-metrics">
+          <div class="cat-m">笔记 <span>约45篇</span></div>
+          <div class="cat-m">代表阅读 <span>335,756 / 156,067</span></div>
+        </div>
+        <div class="cat-insight">乾崑ADS科普、品牌矩阵叙事、智驾技术解析——单篇阅读量远超均值，是R7最强内容弹药，供给严重不足</div>
+      </div>
+      <div class="cat-card" style="border-top:3px solid #3fb950">
+        <div class="cat-name">🎉 品牌事件 &amp; 娱乐跨圈</div>
+        <div class="cat-metrics">
+          <div class="cat-m">笔记 <span>约30篇</span></div>
+          <div class="cat-m">代表阅读 <span>221,955 / 185,966</span></div>
+        </div>
+        <div class="cat-insight">明星代言（王宇文/刘亦菲）、销量排名内容、潮改车活动——娱乐跨圈内容天然高传播，是R7破圈的最佳载体</div>
+      </div>
+      <div class="cat-card" style="border-top:3px solid #f0883e">
+        <div class="cat-name">🚗 车辆使用体验</div>
+        <div class="cat-metrics">
+          <div class="cat-m">笔记 <span>约200篇</span></div>
+          <div class="cat-m">均阅读 <span>约8,000-22,000</span></div>
+        </div>
+        <div class="cat-insight">驾驶体验/空间/智驾/颜值/泊车等真实用车内容——笔记量最大，但均阅读差异大，优质内容与低效内容共存</div>
+      </div>
+      <div class="cat-card" style="border-top:3px solid #8b949e">
+        <div class="cat-name">📅 购车决策 &amp; 交付期待</div>
+        <div class="cat-metrics">
+          <div class="cat-m">笔记 <span>约107篇</span></div>
+          <div class="cat-m">期待感总阅读 <span>1,712,395</span></div>
+        </div>
+        <div class="cat-insight">补贴/OTA/交付类内容体量大但同质化严重，期待感均阅仅1.6万——建议升级为"到车开箱+OTA惊喜实测"提升差异化</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-title">⭐ 明星情绪深度拆解：逗趣感（效率最高）</div>
+  <div class="emotion-card">
+    <div class="emo-header">
+      <div class="emo-name pos">逗趣感</div>
+      <div class="emo-metrics">
+        <div class="emo-metric"><div class="mv">8篇</div><div class="ml">笔记数</div></div>
+        <div class="emo-metric"><div class="mv">401,072</div><div class="ml">总阅读</div></div>
+        <div class="emo-metric"><div class="mv">50,134</div><div class="ml">均阅读</div></div>
+        <div class="emo-metric"><div class="mv" style="color:#3fb950">3.81x</div><div class="ml">效率指数</div></div>
+      </div>
+    </div>
+    <div class="findings">
+      <div class="f-item"><span class="fi">①</span>「鸿蒙智行三大系列」(335,756阅)以二次元对战隐喻华为三大系列，娱乐化内容天然破圈——情绪化叙事远比产品参数传播效率高</div>
+      <div class="f-item"><span class="fi">②</span>「在抽象这个赛道，这姐应该无人能敌了吧？」(156,067阅)借明星王宇文的魔性表情包带出智界R7，娱乐+产品双轨共振</div>
+      <div class="f-item"><span class="fi">③</span>逗趣感内容8篇、均阅50K+——是全场效率之王，但供给严重不足。核心公式：反差感叙事 + 真实用车场景 + 热点借势</div>
+    </div>
+    <table class="notes-table">
+      <tbody><tr><th>#</th><th>笔记标题</th><th>标的词</th><th>阅读量</th></tr>
+      <tr><td>1</td><td>鸿蒙智行三大系列</td><td>一拳男人与吸血鬼的对战场景</td><td><span class="reads-badge">335,756</span></td></tr>
+      <tr><td>2</td><td>在抽象这个赛道，这姐应该无人能敌了吧？</td><td>王宇文的外貌、幽默人格及智界R7</td><td><span class="reads-badge">156,067</span></td></tr>
+      <tr><td>3</td><td>乡间，智界，大片</td><td>在田间和智界R7拍大片</td><td><span class="reads-badge">31,399</span></td></tr>
+    </tbody></table>
+  </div>
+
+  <div class="section-title">🔵 高潜情绪：钦佩感（效率2.57x，规模第二）</div>
+  <div class="emotion-card">
+    <div class="emo-header">
+      <div class="emo-name pos">钦佩感</div>
+      <div class="emo-metrics">
+        <div class="emo-metric"><div class="mv">13篇</div><div class="ml">笔记数</div></div>
+        <div class="emo-metric"><div class="mv">340,189</div><div class="ml">总阅读</div></div>
+        <div class="emo-metric"><div class="mv">26,168</div><div class="ml">均阅读</div></div>
+        <div class="emo-metric"><div class="mv" style="color:#58a6ff">1.99x</div><div class="ml">效率指数</div></div>
+      </div>
+    </div>
+    <div class="findings">
+      <div class="f-item"><span class="fi">①</span>「25万级纯电SUV，三款热门车怎么选？」(82,897阅)——横评对比类内容天然带来高搜索量，R7在理性比较场景中受钦佩</div>
+      <div class="f-item"><span class="fi">②</span>「可能是最全的华为乾崑智驾车型」(31,075阅)——技术全景梳理型内容持续有长尾流量，建议作为常态化选题</div>
+      <div class="f-item"><span class="fi">③</span>钦佩感核心触发点：华为智驾技术深度、底盘性能评测、品牌矩阵格局——品牌高度决定产品溢价感知</div>
+    </div>
+  </div>
+
+  <div class="section-title">📉 提效目标：期待感（笔记量最大但效率最低）</div>
+  <div class="emotion-card">
+    <div class="emo-header">
+      <div class="emo-name pos">期待感</div>
+      <div class="emo-metrics">
+        <div class="emo-metric"><div class="mv">107篇</div><div class="ml">积极侧最多</div></div>
+        <div class="emo-metric"><div class="mv">1,712,395</div><div class="ml">总阅读</div></div>
+        <div class="emo-metric"><div class="mv">16,003</div><div class="ml">均阅读</div></div>
+        <div class="emo-metric"><div class="mv" style="color:#f85149">1.22x</div><div class="ml">效率指数（尚可）</div></div>
+      </div>
+    </div>
+    <div class="findings">
+      <div class="f-item"><span class="fi">①</span>期待感总体效率1.22x，但内部分化严重：「2025年中大型新能源SUV销量排名」(221,955阅)单篇超级爆款 vs 大量"等待交付"低阅内容</div>
+      <div class="f-item"><span class="fi">②</span>高效期待感内容共同点：销量数据+行业趋势+新车预告，而非"订车等待记录"——用行业视角替代个人等待视角</div>
+      <div class="f-item"><span class="fi">③</span>建议将"等待交付"类内容升级为"华为2026年车型矩阵全解析"或"R7年度OTA升级盘点"</div>
+    </div>
+  </div>
+</div>
+
+<!-- TAB3 -->
+<div class="content" id="tab2">
+  <div class="section-title" style="margin-top:28px">🚨 核心警报：消极侧均阅(15,633)高于积极侧(11,982)</div>
+  <div class="emotion-card" style="border-top:3px solid #f85149">
+    <div class="findings">
+      <div class="f-item warn"><span class="fi">!</span>消极情绪笔记单篇均阅读(1.56万)比积极情绪(1.2万)高出30%——负向内容传播效率更强，对品牌的潜在伤害被放大。需要优先压制高传播负向情绪，同时扶持积极内容供给。</div>
+    </div>
+  </div>
+
+  <div class="section-title">🔴 消极词云 · 标的词分类卡片</div>
+  <div class="wordcloud-row">
+    <div class="wordcloud-wrap">
+      <h3 style="font-size:13px;color:#8b949e;margin-bottom:12px">消极情绪标的词云（TOP词，按阅读量着色）</h3>
+      <canvas id="wc-neg" width="480" height="300"></canvas>
+    </div>
+    <div class="category-cards">
+      <div class="cat-card" style="border-top:3px solid #f85149">
+        <div class="cat-name">🤔 选车纠结 · 竞品比较（最大体量）</div>
+        <div class="cat-metrics">
+          <div class="cat-m">笔记 <span>88篇</span></div>
+          <div class="cat-m">总阅读 <span>669,057</span></div>
+          <div class="cat-m">均阅读 <span>7,603</span></div>
+        </div>
+        <div class="cat-insight">竞品涵盖问界M6/M7、理想L7/L6/i6、特斯拉Y、阿维塔07、小米YU7、奥迪E7X——R7处于超激烈的比选场域，是用户决策漏斗最长的环节</div>
+      </div>
+      <div class="cat-card" style="border-top:3px solid #f0883e">
+        <div class="cat-name">😰 担心感（高频 · 广覆盖）</div>
+        <div class="cat-metrics">
+          <div class="cat-m">笔记 <span>42篇</span></div>
+          <div class="cat-m">总阅读 <span>268,471</span></div>
+          <div class="cat-m">均阅读 <span>6,392</span></div>
+        </div>
+        <div class="cat-insight">智驾可靠性、续航、维修成本、品控——担忧范围广，说明用户在购前存在大量信任建立需求，内容策略应主动澄清</div>
+      </div>
+      <div class="cat-card" style="border-top:3px solid #f85149">
+        <div class="cat-name">😱 恐慌（极高传播风险）</div>
+        <div class="cat-metrics">
+          <div class="cat-m">笔记 <span>1篇</span></div>
+          <div class="cat-m">总阅读 <span>1,819,905</span></div>
+          <div class="cat-m">均阅读 <span>1,819,905</span></div>
+        </div>
+        <div class="cat-insight">「小猫被困在车轮轴位置」单篇达180万阅读——宠物安全场景极度共情，是当前最大舆情单点，需监控是否有跟风模仿内容</div>
+      </div>
+      <div class="cat-card" style="border-top:3px solid #8b949e">
+        <div class="cat-name">😞 失望 · 困惑（高阅读风险）</div>
+        <div class="cat-metrics">
+          <div class="cat-m">笔记 <span>18篇</span></div>
+          <div class="cat-m">总阅读 <span>264,240</span></div>
+          <div class="cat-m">均阅读 <span>14,680</span></div>
+        </div>
+        <div class="cat-insight">失望多指向问界M6发布后的产品力对比，困惑多为智驾配置信息理解混乱——M6发布是R7口碑最大外部冲击</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-title">⚡ 极端舆情预警：恐慌感（180万阅读，单篇之最）</div>
+  <div class="emotion-card">
+    <div class="emo-header">
+      <div class="emo-name neg">恐慌</div>
+      <div class="emo-metrics">
+        <div class="emo-metric"><div class="mv">1篇</div><div class="ml">笔记数</div></div>
+        <div class="emo-metric"><div class="mv">1,819,905</div><div class="ml">总阅读</div></div>
+        <div class="emo-metric"><div class="mv" style="color:#f85149">138x</div><div class="ml">效率指数（极端高危）</div></div>
+      </div>
+    </div>
+    <div class="findings">
+      <div class="f-item warn"><span class="fi">①</span>「小猫被困在车轮轴位置」——180万阅读是全样本单篇最高，宠物安全事故类内容极度共情，形成巨大舆情。虽为偶发，但对品牌安全形象有实质影响</div>
+      <div class="f-item warn"><span class="fi">②</span>建议品牌侧主动产出「R7宠物关怀模式」「带宠出行安全指南」等正向内容覆盖，稀释负向搜索结果</div>
+    </div>
+  </div>
+
+  <div class="section-title">🔴 主力痛点：纠结感（88篇，消极侧体量最大）</div>
+  <div class="emotion-card">
+    <div class="emo-header">
+      <div class="emo-name neg">纠结感</div>
+      <div class="emo-metrics">
+        <div class="emo-metric"><div class="mv">88篇</div><div class="ml">笔记数</div></div>
+        <div class="emo-metric"><div class="mv">669,057</div><div class="ml">总阅读</div></div>
+        <div class="emo-metric"><div class="mv">7,603</div><div class="ml">均阅读</div></div>
+        <div class="emo-metric"><div class="mv" style="color:#8b949e">0.58x</div><div class="ml">效率指数</div></div>
+      </div>
+    </div>
+    <div class="findings">
+      <div class="f-item warn"><span class="fi">①</span>「智界R7暗夜紫」(99,136阅)——R7颜值相关内容成为选车纠结场中的高阅读锚点，说明颜值是R7转化决策的重要触发点，应加大颜值内容正向供给</div>
+      <div class="f-item warn"><span class="fi">②</span>竞品格局清晰：问界M6是最高频竞品（M6发布后大量"R7 vs M6"内容涌现），其次是理想i6、特斯拉Y、阿维塔07、小米YU7、奥迪E7X</div>
+      <div class="f-item warn"><span class="fi">③</span>「试驾完问界M6，小红书网友说的都对」(25,121阅)——竞品内容主动导流R7，说明用户在M6和R7之间的比选心智已经固化，R7需要提供清晰的差异化卖点内容打破纠结</div>
+    </div>
+    <table class="notes-table">
+      <tbody><tr><th>#</th><th>笔记标题</th><th>核心标的</th><th>阅读量</th></tr>
+      <tr><td>1</td><td>智界R7暗夜紫💜｜职场代步随手拍都出片</td><td>买车决策</td><td><span class="reads-badge">99,136</span></td></tr>
+      <tr><td>2</td><td>20万级纯电SUV锐评，没想到最拉的是…</td><td>20-30万新能源SUV排名</td><td><span class="reads-badge">52,999</span></td></tr>
+      <tr><td>3</td><td>选车求助</td><td>新能源车选择决策</td><td><span class="reads-badge">44,430</span></td></tr>
+      <tr><td>4</td><td>（R7 vs M6选购帖）</td><td>选择R7或等待问界M6</td><td><span class="reads-badge">27,440</span></td></tr>
+      <tr><td>5</td><td>试驾完问界M6，小红书网友说的都对</td><td>问界M6购车决策</td><td><span class="reads-badge">25,121</span></td></tr>
+    </tbody></table>
+  </div>
+
+  <div class="section-title">😰 高频担忧：担心感（42篇，涵盖范围最广）</div>
+  <div class="emotion-card">
+    <div class="emo-header">
+      <div class="emo-name neg">担心感</div>
+      <div class="emo-metrics">
+        <div class="emo-metric"><div class="mv">42篇</div><div class="ml">笔记数</div></div>
+        <div class="emo-metric"><div class="mv">268,471</div><div class="ml">总阅读</div></div>
+        <div class="emo-metric"><div class="mv">6,392</div><div class="ml">均阅读</div></div>
+      </div>
+    </div>
+    <div class="findings">
+      <div class="f-item warn"><span class="fi">①</span>「脚踢尾门功能设置」(59,459阅)、「开车时手机放置」(33,020阅)——功能使用担忧反而带来高流量，说明功能普及型内容有巨大需求，建议做系列"R7隐藏功能教程"</div>
+      <div class="f-item warn"><span class="fi">②</span>智驾可靠性担忧（城区智驾稳定性/AEB/自动驾驶风险）合计约10篇——是用户最核心的信任建立痛点，建议主动产出"城区NOA实测日记"类内容</div>
+      <div class="f-item warn"><span class="fi">③</span>问界M6发布后"M6上市对R7销量冲击"担忧内容(5,315阅)——说明部分用户担心R7被M6取代，需要内容层面明确R7的不可替代性定位</div>
+    </div>
+  </div>
+</div>
+
+<!-- TAB4 -->
+<div class="content active" id="tab3">
+  <div class="section-title" style="margin-top:28px">🎯 内容策略四象限矩阵</div>
+  <div class="quadrant-grid">
+    <div class="quad-card amplify">
+      <div class="q-label">AMPLIFY · 放大</div>
+      <div class="q-title">高效率 · 可持续放量</div>
+      <ul class="q-items">
+        <li>逗趣感·娱乐化跨圈内容（均阅50K+，效率3.81x）</li>
+        <li>钦佩感·华为技术深度科普（均阅26K，效率1.99x）</li>
+        <li>惊喜感·新功能/新配色/新活动爆点（均阅11K，33篇）</li>
+      </ul>
+    </div>
+    <div class="quad-card fill">
+      <div class="q-label">FILL · 填补蓝海</div>
+      <div class="q-title">高效率 · 供给严重不足</div>
+      <ul class="q-items">
+        <li>骄傲/信念感·华为乾崑ADS技术叙事（仅3-5篇但均阅超高）</li>
+        <li>接纳感·选定后的平和心态内容（8篇，132K均阅高阶表现）</li>
+        <li>知足感·真实用车长测/4万公里体验（效率高，内容稀缺）</li>
+      </ul>
+    </div>
+    <div class="quad-card optimize">
+      <div class="q-label">OPTIMIZE · 提质</div>
+      <div class="q-title">低效率 · 内容同质化严重</div>
+      <ul class="q-items">
+        <li>期待感·等待交付类内容(107篇)→升级为行业视角+OTA实测</li>
+        <li>欣赏感·颜值展示类(72篇)→差异化聚焦暗夜紫/活力橙实拍对比</li>
+        <li>担心感功能类→转化为"功能教程"正向内容，变担忧为科普</li>
+      </ul>
+    </div>
+    <div class="quad-card avoid">
+      <div class="q-label">MONITOR · 舆情监控</div>
+      <div class="q-title">消极高传播 → 预警应对</div>
+      <ul class="q-items">
+        <li>恐慌·宠物安全(180万阅)→ 主动产出宠物关怀模式正向内容</li>
+        <li>纠结感·R7 vs M6竞品内容(88篇)→ 打磨清晰差异化卖点话术</li>
+        <li>失望·M6发布冲击R7口碑→ 强化R7不可替代的场景占位</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="section-title">📋 内容 Gap 分析（核心情绪）</div>
+  <table class="gap-table">
+    <tbody><tr><th>情绪</th><th>效价</th><th>笔记数</th><th>总阅读</th><th>均阅读</th><th>效率指数</th><th>Gap信号</th></tr>
+    <tr><td>逗趣感</td><td>积极</td><td>8</td><td>401,072</td><td>50,134</td><td class="eff-high">3.81x</td><td>🔥 蓝海，极度供不应求</td></tr>
+    <tr><td>钦佩感</td><td>积极</td><td>13</td><td>340,189</td><td>26,168</td><td class="eff-high">1.99x</td><td>🔥 高潜，仍有放量空间</td></tr>
+    <tr><td>惊喜</td><td>积极</td><td>33</td><td>372,803</td><td>11,297</td><td>0.86x</td><td>✅ 均衡，保持节奏</td></tr>
+    <tr><td>期待感</td><td>积极</td><td>107</td><td>1,712,395</td><td>16,003</td><td>1.22x</td><td>⚠️ 体量大但分化，提质优先</td></tr>
+    <tr><td>欣赏感</td><td>积极</td><td>72</td><td>581,484</td><td>8,076</td><td class="eff-low">0.61x</td><td>📉 内容内卷，减量提质</td></tr>
+    <tr><td>恐慌</td><td>消极</td><td>1</td><td>1,819,905</td><td>1,819,905</td><td class="eff-high">138x</td><td>🚨 极端舆情，持续监控</td></tr>
+    <tr><td>纠结感</td><td>消极</td><td>88</td><td>669,057</td><td>7,603</td><td class="eff-low">0.58x</td><td>⚠️ 体量最大，需差异化破局</td></tr>
+    <tr><td>担心感</td><td>消极</td><td>42</td><td>268,471</td><td>6,392</td><td class="eff-low">0.49x</td><td>📌 功能担忧→转化为教程内容</td></tr>
+    <tr><td>无奈</td><td>消极</td><td>16</td><td>181,168</td><td>11,323</td><td class="eff-high">0.86x</td><td>⚠️ 充电/音响/品控需持续跟踪</td></tr>
+  </tbody></table>
+
+  <div class="section-title">🚀 行动优先级清单</div>
+  <div class="priority-list">
+    <div class="p-item">
+      <div class="p-badge p0">P0</div>
+      <div class="p-content">
+        <div class="p-title">立即监控+正向覆盖：宠物安全舆情（180万阅）</div>
+        <div class="p-desc">「小猫被困车轮」单篇180万阅读是全样本之冠，已形成实质舆情风险。立即启动：① 监控是否有跟风/模仿内容持续扩散；② 主动产出「R7宠物关怀模式」「带宠安全出行指南」正向内容覆盖搜索结果；③ 品牌客服准备应急话术。</div>
+      </div>
+    </div>
+    <div class="p-item">
+      <div class="p-badge p1">P1</div>
+      <div class="p-content">
+        <div class="p-title">重点放量：逗趣感/钦佩感内容（效率3.81x/1.99x）</div>
+        <div class="p-desc">逗趣感8篇均阅50K+，是效率最高内容方向，但供给极度稀缺。复制公式：「反差叙事+真实用车+热点借势」，产出「R7车主抽象日记」「华为ADS被低估的细节」等娱乐化内容；钦佩感方向继续深耕华为乾崑技术科普，预计可稳定在2万+均阅。</div>
+      </div>
+    </div>
+    <div class="p-item">
+      <div class="p-badge p2">P2</div>
+      <div class="p-content">
+        <div class="p-title">差异化破局：纠结感内容（88篇，竞品压力最大）</div>
+        <div class="p-desc">M6发布后R7 vs M6的选车纠结内容激增，成为消极侧最大体量情绪。策略：① 产出「R7 vs M6不同场景适合谁」精准场景切割内容；② 强化R7颜值优势（暗夜紫/活力橙实拍内容），颜值是R7纠结感中的最高阅锚点（99K阅）；③ 用「已提车车主一个月真实感受」降低潜客决策摩擦。</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="data-note">
+    <div class="dn-title">📋 数据说明</div>
+    数据来源：red_lab.app_emotion_skill_df · SPU：智界R7(spu_id=1614527) · 时间：2026-01-01~2026-07-31 · 有效笔记：699篇（较5-7月版本+1356%）· TGI基准：乘用车全类目 · 整体均阅读：13,164 · 注意：消极侧均阅(15,633)高于积极侧(11,982)，负向内容传播效率更强，策略上需以"正压负"
+  </div>
+</div>
+
+<script>
+function switchTab(idx){
+  document.querySelectorAll('.content').forEach((el,i)=>el.classList.toggle('active',i===idx));
+  document.querySelectorAll('.tab-btn').forEach((el,i)=>el.classList.toggle('active',i===idx));
+  if(idx===0&&!window._c0){window._c0=true;initCharts();}
+  if(idx===1&&!window._c1){window._c1=true;drawWC('pos');}
+  if(idx===2&&!window._c2){window._c2=true;drawWC('neg');}
+}
+
+function initCharts(){
+  var posData=[
+    ['\u671f\u5f85\u611f',107],['\u6b23\u8d4f\u611f',72],['\u7545\u723d',48],['\u60ca\u559c',33],['\u77e5\u8db3\u611f',30],
+    ['\u542f\u8fea\u611f',20],['\u638c\u63a7\u611f',13],['\u653e\u5fc3\u611f',13],['\u94a6\u4f69\u611f',13],['\u6210\u5c31\u611f',10],
+    ['\u9017\u8da3\u611f',8],['\u63a5\u7eb3\u611f',8]
+  ];
+  var c1=echarts.init(document.getElementById('chart-pos-bar'),null,{backgroundColor:'#161b22'});
+  c1.setOption({
+    tooltip:{trigger:'axis'},
+    grid:{left:75,right:40,top:10,bottom:20},
+    xAxis:{type:'value',axisLabel:{color:'#8b949e'},splitLine:{lineStyle:{color:'#21262d'}}},
+    yAxis:{type:'category',data:posData.map(d=>d[0]).reverse(),axisLabel:{color:'#c9d1d9',fontSize:12}},
+    series:[{type:'bar',data:posData.map(d=>d[1]).reverse(),
+      itemStyle:{color:function(p){return p.dataIndex<=2?'#f0883e':'#3fb950';},borderRadius:[0,4,4,0]},
+      label:{show:true,position:'right',color:'#c9d1d9',fontSize:11}}]
+  });
+
+  var negData=[
+    ['\u7ea0\u7ed3\u611f',88],['\u62c5\u5fc3\u611f',42],['\u65e0\u5948',16],['\u9057\u61be',15],['\u6025\u8feb\u611f',18],
+    ['\u56f0\u60d1\u611f',9],['\u5931\u671b',9],['\u6000\u7591\u611f',6],['\u53cd\u611f',5],['\u632b\u8d25\u611f',4]
+  ];
+  var c2=echarts.init(document.getElementById('chart-neg-bar'),null,{backgroundColor:'#161b22'});
+  c2.setOption({
+    tooltip:{trigger:'axis'},
+    grid:{left:75,right:40,top:10,bottom:20},
+    xAxis:{type:'value',axisLabel:{color:'#8b949e'},splitLine:{lineStyle:{color:'#21262d'}}},
+    yAxis:{type:'category',data:negData.map(d=>d[0]).reverse(),axisLabel:{color:'#c9d1d9',fontSize:12}},
+    series:[{type:'bar',data:negData.map(d=>d[1]).reverse(),
+      itemStyle:{color:'#f85149',borderRadius:[0,4,4,0]},
+      label:{show:true,position:'right',color:'#c9d1d9',fontSize:11}}]
+  });
+
+  // \u6563\u70b9\u56fe
+  var sd=[
+    [8,50134,401072,'\u9017\u8da3\u611f⭐','#f0883e'],[13,26168,340189,'\u94a6\u4f69\u611f⭐','#3fb950'],
+    [107,16003,1712395,'\u671f\u5f85\u611f','#3fb950'],[72,8076,581484,'\u6b23\u8d4f\u611f','#3fb950'],
+    [48,10418,500038,'\u7545\u723d','#3fb950'],[33,11297,372803,'\u60ca\u559c','#3fb950'],
+    [30,8468,254048,'\u77e5\u8db3\u611f','#3fb950'],[13,3856,50123,'\u638c\u63a7\u611f','#3fb950'],
+    [8,50134,401072,'\u9017\u8da3\u611f','#f0883e'],[5,10257,51285,'\u4fe1\u5ff5\u611f','#3fb950'],
+    [88,7603,669057,'\u7ea0\u7ed3\u611f🔴','#f85149'],[42,6392,268471,'\u62c5\u5fc3\u611f','#f85149'],
+    [16,11323,181168,'\u65e0\u5948⚡','#f85149'],[9,13216,118940,'\u56f0\u60d1\u611f','#f85149'],
+    [9,16144,145300,'\u5931\u671b','#f85149'],[1,1819905,1819905,'\u6050\u614c🚨','#ff0000'],
+    [40,7755,310219,'\u4e2d\u6027','#8b949e']
+  ];
+  var labels=['\u9017\u8da3\u611f⭐','\u94a6\u4f69\u611f⭐','\u7ea0\u7ed3\u611f🔴','\u65e0\u5948⚡','\u6050\u614c🚨','\u671f\u5f85\u611f','\u5931\u671b'];
+  var c3=echarts.init(document.getElementById('chart-scatter'),null,{backgroundColor:'#161b22'});
+  c3.setOption({
+    tooltip:{formatter:p=>{var d=p.data;return d[3]+'<br/>\u7b14\u8bb0:'+d[0]+'\u7bc7<br/>\u5747\u9605:'+Math.round(d[1]).toLocaleString()+'<br/>\u603b\u9605:'+d[2].toLocaleString();}},
+    grid:{left:65,right:50,top:20,bottom:40},
+    xAxis:{type:'log',name:'\u7b14\u8bb0\u6570',nameTextStyle:{color:'#8b949e'},axisLabel:{color:'#8b949e'},splitLine:{lineStyle:{color:'#21262d'}}},
+    yAxis:{type:'log',name:'\u5747\u9605\u8bfb',nameTextStyle:{color:'#8b949e'},axisLabel:{color:'#8b949e'},splitLine:{lineStyle:{color:'#21262d'}}},
+    series:[{type:'scatter',data:sd.map(d=>({
+      value:[d[0],d[1],d[2],d[3]],
+      symbolSize:Math.max(10,Math.min(70,Math.sqrt(d[2])/40)),
+      itemStyle:{color:d[4],opacity:0.8},
+      label:{show:labels.includes(d[3]),formatter:'{@[3]}',position:'top',color:'#f0f6fc',fontSize:11}
+    }))}]
+  });
+}
+
+function drawWC(type){
+  var canvas=document.getElementById('wc-'+type);
+  if(!canvas||canvas.dataset.drawn)return;
+  canvas.dataset.drawn='1';
+  var ctx=canvas.getContext('2d');
+  ctx.fillStyle='#0d1117';
+  ctx.fillRect(0,0,canvas.width,canvas.height);
+  var words=type==='pos'?[
+    {t:'\u671f\u5f85\u611f',s:28,c:'#58a6ff'},{t:'\u6b23\u8d4f\u611f',s:24,c:'#3fb950'},{t:'\u7545\u723d',s:20,c:'#3fb950'},
+    {t:'\u60ca\u559c',s:18,c:'#f0883e'},{t:'\u77e5\u8db3\u611f',s:18,c:'#3fb950'},{t:'\u534e\u4e3a\u4e7e\u5d11ADS',s:16,c:'#58a6ff'},
+    {t:'\u9017\u8da3\u611f',s:16,c:'#f0883e'},{t:'\u94a6\u4f69\u611f',s:15,c:'#3fb950'},{t:'\u667a\u754cR7',s:22,c:'#f0f6fc'},
+    {t:'\u989c\u503c',s:14,c:'#f0883e'},{t:'\u5218\u4ea6\u83f2\u8bed\u97f3\u5305',s:13,c:'#3fb950'},{t:'OTA\u5347\u7ea7',s:14,c:'#58a6ff'},
+    {t:'\u6cca\u8f66\u529f\u80fd',s:13,c:'#3fb950'},{t:'\u62c9\u82b1\u8bbe\u8ba1',s:13,c:'#f0883e'},{t:'\u9e3f\u8499\u667a\u884c',s:16,c:'#58a6ff'},
+    {t:'\u638c\u63a7\u611f',s:13,c:'#3fb950'},{t:'\u6210\u5c31\u611f',s:12,c:'#3fb950'}
+  ]:[
+    {t:'\u7ea0\u7ed3\u611f',s:30,c:'#f85149'},{t:'\u95ee\u754cM6',s:26,c:'#f85149'},{t:'\u62c5\u5fc3\u611f',s:22,c:'#f0883e'},
+    {t:'\u9009\u8f66\u51b3\u7b56',s:20,c:'#f85149'},{t:'\u7406\u60f3L6',s:16,c:'#f0883e'},{t:'\u7279\u65af\u62c9Y',s:15,c:'#f0883e'},
+    {t:'\u667a\u9a7e\u53ef\u9760\u6027',s:16,c:'#f85149'},{t:'\u963f\u7ef4\u585407',s:14,c:'#f0883e'},{t:'\u5c0f\u7c73YU7',s:14,c:'#8b949e'},
+    {t:'\u7eed\u822a\u62c5\u5fe7',s:14,c:'#f0883e'},{t:'\u5145\u7535\u5f02\u5e38',s:13,c:'#f85149'},{t:'\u7ef4\u4fee\u6210\u672c',s:13,c:'#8b949e'},
+    {t:'\u5931\u671b',s:16,c:'#f85149'},{t:'\u65e0\u5948',s:15,c:'#f0883e'},{t:'\u5965\u8feaE7X',s:13,c:'#8b949e'}
+  ];
+  var pos=[[240,60],[130,120],[360,100],[100,190],[390,170],[210,200],[310,220],
+    [150,270],[360,260],[80,130],[430,130],[260,150],[180,90],[320,60],[450,200],
+    [240,290],[60,220]];
+  words.forEach((w,i)=>{
+    if(i>=pos.length)return;
+    ctx.font='bold '+w.s+'px PingFang SC,Microsoft YaHei,sans-serif';
+    ctx.fillStyle=w.c;ctx.globalAlpha=0.9;
+    ctx.fillText(w.t,pos[i][0]-ctx.measureText(w.t).width/2,pos[i][1]);
+  });
+  ctx.globalAlpha=1;
+}
+
+window.onload=function(){initCharts();};
+</script>
+
+
+</body></html>
