@@ -1,0 +1,1140 @@
+<!DOCTYPE html><html lang="zh-CN"><head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>澎程 N70 &amp; N90 用户路径分析报告合集</title>
+<style>
+  :root {
+    --primary: #1a1a2e;
+    --accent: #c9a84c;
+    --accent2: #e8c97a;
+    --blue: #2563eb;
+    --blue-light: #dbeafe;
+    --text: #1e293b;
+    --muted: #64748b;
+    --bg: #f8fafc;
+    --card: #ffffff;
+    --border: #e2e8f0;
+    --green: #10b981;
+    --orange: #f59e0b;
+    --red: #ef4444;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: -apple-system, 'PingFang SC', 'Microsoft YaHei', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+  }
+
+  /* 顶部 Hero */
+  .hero {
+    background: linear-gradient(135deg, #0f172a 0%, #1e3a5f 60%, #1a1a2e 100%);
+    color: white;
+    padding: 60px 40px 50px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -50px; right: -50px;
+    width: 300px; height: 300px;
+    background: radial-gradient(circle, rgba(201,168,76,0.15) 0%, transparent 70%);
+    border-radius: 50%;
+  }
+  .hero::after {
+    content: '';
+    position: absolute;
+    bottom: -80px; left: 10%;
+    width: 400px; height: 400px;
+    background: radial-gradient(circle, rgba(37,99,235,0.12) 0%, transparent 70%);
+    border-radius: 50%;
+  }
+  .hero-content { position: relative; z-index: 1; max-width: 1200px; margin: 0 auto; }
+  .hero-badge {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: rgba(201,168,76,0.2);
+    border: 1px solid rgba(201,168,76,0.4);
+    padding: 6px 16px; border-radius: 20px;
+    font-size: 12px; color: var(--accent2);
+    letter-spacing: 1px; margin-bottom: 24px;
+  }
+  .hero h1 {
+    font-size: 42px; font-weight: 700; line-height: 1.2;
+    margin-bottom: 16px;
+    background: linear-gradient(90deg, #fff 0%, var(--accent2) 100%);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  }
+  .hero p { font-size: 16px; color: rgba(255,255,255,0.65); margin-bottom: 8px; }
+  .hero-meta { display: flex; gap: 32px; margin-top: 32px; flex-wrap: wrap; }
+  .hero-stat { text-align: center; }
+  .hero-stat .num { font-size: 28px; font-weight: 700; color: var(--accent2); }
+  .hero-stat .label { font-size: 12px; color: rgba(255,255,255,0.5); margin-top: 4px; }
+
+  /* 主体布局 */
+  .container { max-width: 1200px; margin: 0 auto; padding: 40px 20px; }
+  
+  /* 章节标题 */
+  .section-title {
+    display: flex; align-items: center; gap: 12px;
+    font-size: 22px; font-weight: 700; color: var(--primary);
+    margin-bottom: 24px; padding-bottom: 12px;
+    border-bottom: 2px solid var(--accent);
+  }
+  .section-title .num {
+    background: linear-gradient(135deg, var(--primary), #2563eb);
+    color: white; width: 36px; height: 36px;
+    border-radius: 50%; display: flex; align-items: center; justify-content: center;
+    font-size: 16px; font-weight: 800; flex-shrink: 0;
+  }
+
+  /* 卡片 */
+  .card {
+    background: var(--card);
+    border-radius: 16px;
+    padding: 28px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.06), 0 4px 16px rgba(0,0,0,0.04);
+    border: 1px solid var(--border);
+    margin-bottom: 20px;
+  }
+  .card-title {
+    font-size: 15px; font-weight: 700; color: var(--primary);
+    margin-bottom: 16px;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .card-title::before {
+    content: ''; width: 4px; height: 18px;
+    background: var(--accent); border-radius: 2px;
+  }
+
+  /* 链路漏斗 */
+  .funnel {
+    display: flex; align-items: center; gap: 0; margin-bottom: 32px;
+    overflow-x: auto; padding-bottom: 8px;
+  }
+  .funnel-step {
+    flex: 1; min-width: 140px;
+    text-align: center;
+    position: relative;
+  }
+  .funnel-box {
+    background: linear-gradient(135deg, #0f172a, #1e3a5f);
+    color: white;
+    padding: 20px 16px;
+    border-radius: 12px;
+    margin: 0 4px;
+    position: relative;
+  }
+  .funnel-box.active {
+    background: linear-gradient(135deg, #1e40af, #3b82f6);
+    box-shadow: 0 4px 20px rgba(59,130,246,0.3);
+  }
+  .funnel-label { font-size: 16px; font-weight: 700; margin-bottom: 4px; }
+  .funnel-sub { font-size: 11px; opacity: 0.7; }
+  .funnel-arrow {
+    font-size: 22px; color: var(--accent); 
+    flex-shrink: 0; padding: 0 4px;
+    display: flex; align-items: center; margin-bottom: 4px;
+  }
+
+  /* 笔记类型分布图 */
+  .note-type-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px; margin-bottom: 32px; }
+  @media (max-width: 900px) { .note-type-grid { grid-template-columns: 1fr; } }
+
+  .stage-card {
+    background: var(--card);
+    border-radius: 16px;
+    padding: 24px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.06), 0 4px 16px rgba(0,0,0,0.04);
+    border: 1px solid var(--border);
+  }
+  .stage-card.s1 { border-top: 4px solid #6366f1; }
+  .stage-card.s2 { border-top: 4px solid #3b82f6; }
+  .stage-card.s3 { border-top: 4px solid #10b981; }
+
+  .stage-header {
+    display: flex; justify-content: space-between; align-items: center;
+    margin-bottom: 16px;
+  }
+  .stage-name { font-size: 16px; font-weight: 700; color: var(--primary); }
+  .stage-period { font-size: 12px; color: var(--muted); background: var(--bg); padding: 4px 10px; border-radius: 20px; }
+
+  .bar-item { margin-bottom: 10px; }
+  .bar-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px; }
+  .bar-name { font-size: 13px; color: var(--text); font-weight: 500; }
+  .bar-pct { font-size: 13px; font-weight: 700; color: var(--primary); }
+  .bar-track { height: 8px; background: #f1f5f9; border-radius: 4px; overflow: hidden; }
+  .bar-fill { height: 100%; border-radius: 4px; transition: width 0.8s ease; }
+  .fill-1 { background: linear-gradient(90deg, #6366f1, #818cf8); }
+  .fill-2 { background: linear-gradient(90deg, #3b82f6, #60a5fa); }
+  .fill-3 { background: linear-gradient(90deg, #10b981, #34d399); }
+  .fill-4 { background: linear-gradient(90deg, #f59e0b, #fbbf24); }
+  .fill-5 { background: linear-gradient(90deg, #ef4444, #f87171); }
+  .fill-6 { background: linear-gradient(90deg, #8b5cf6, #a78bfa); }
+
+  /* 链路对比表 */
+  .comparison-table { width: 100%; border-collapse: collapse; font-size: 14px; }
+  .comparison-table th {
+    background: linear-gradient(135deg, #0f172a, #1e3a5f);
+    color: white; padding: 12px 16px; text-align: left; font-weight: 600;
+  }
+  .comparison-table th:first-child { border-radius: 8px 0 0 0; }
+  .comparison-table th:last-child { border-radius: 0 8px 0 0; }
+  .comparison-table td { padding: 12px 16px; border-bottom: 1px solid var(--border); }
+  .comparison-table tr:nth-child(even) td { background: #f8fafc; }
+  .comparison-table tr:hover td { background: #eff6ff; }
+
+  /* 笔记卡片展示 */
+  .note-gallery { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 16px; }
+  .note-card {
+    background: var(--card);
+    border-radius: 12px;
+    padding: 16px;
+    border: 1px solid var(--border);
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    transition: transform 0.2s, box-shadow 0.2s;
+    cursor: pointer;
+    text-decoration: none;
+    display: block;
+    color: inherit;
+  }
+  .note-card:hover { transform: translateY(-2px); box-shadow: 0 4px 20px rgba(0,0,0,0.1); border-color: #93c5fd; }
+  .note-card-stats {
+    display: flex; gap: 10px; margin-top: 8px;
+    font-size: 11px; color: var(--muted);
+  }
+  .note-card-stats span { display: flex; align-items: center; gap: 3px; }
+  .note-card-tag {
+    display: inline-block;
+    padding: 3px 10px; border-radius: 20px;
+    font-size: 11px; font-weight: 600; margin-bottom: 10px;
+  }
+  .tag-1 { background: #ede9fe; color: #7c3aed; }
+  .tag-2 { background: #dbeafe; color: #1d4ed8; }
+  .tag-3 { background: #d1fae5; color: #065f46; }
+  .tag-4 { background: #fef3c7; color: #92400e; }
+  .tag-5 { background: #fee2e2; color: #991b1b; }
+  .note-card-title { font-size: 14px; font-weight: 600; color: var(--text); margin-bottom: 6px; line-height: 1.4; }
+  .note-card-meta { font-size: 12px; color: var(--muted); }
+
+  /* 洞察卡片 */
+  .insight-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  @media (max-width: 700px) { .insight-grid { grid-template-columns: 1fr; } }
+  .conversion-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; margin-top: 18px; }
+  .conversion-box { border: 1px solid var(--border); border-radius: 10px; padding: 16px; background: #fff; }
+  .conversion-box.problem { border-top: 3px solid #ef4444; }
+  .conversion-box.evidence { border-top: 3px solid #6366f1; }
+  .conversion-box.action { border-top: 3px solid #f59e0b; }
+  .conversion-box.goal { border-top: 3px solid #10b981; background: #f0fdf8; }
+  .conversion-label { font-size: 12px; font-weight: 700; color: var(--muted); margin-bottom: 8px; }
+  .conversion-title { font-size: 15px; font-weight: 700; color: var(--primary); margin-bottom: 8px; line-height: 1.45; }
+  .conversion-text { font-size: 13px; color: var(--muted); line-height: 1.65; }
+  .conversion-arrow { color: var(--accent); font-weight: 700; }
+  @media (max-width: 900px) { .conversion-grid { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 600px) { .conversion-grid { grid-template-columns: 1fr; } }
+
+  .insight-card {
+    background: var(--card);
+    border-radius: 12px;
+    padding: 20px;
+    border: 1px solid var(--border);
+  }
+  .insight-card.highlight {
+    background: linear-gradient(135deg, #eff6ff, #dbeafe);
+    border-color: #93c5fd;
+  }
+  .insight-icon { font-size: 28px; margin-bottom: 12px; }
+  .insight-title { font-size: 15px; font-weight: 700; color: var(--primary); margin-bottom: 8px; }
+  .insight-text { font-size: 13px; color: var(--muted); line-height: 1.7; }
+
+  /* 数据标签 */
+  .stat-row { display: flex; gap: 16px; flex-wrap: wrap; margin-bottom: 20px; }
+  .stat-chip {
+    display: flex; align-items: center; gap: 8px;
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: 12px; padding: 12px 20px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    flex: 1; min-width: 150px;
+  }
+  .stat-chip .val { font-size: 24px; font-weight: 800; color: var(--primary); }
+  .stat-chip .info { font-size: 12px; color: var(--muted); }
+  .stat-chip .dot {
+    width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0;
+  }
+
+  /* 策略建议 */
+  .strategy-list { list-style: none; }
+  .strategy-list li {
+    display: flex; gap: 14px; padding: 14px 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .strategy-list li:last-child { border-bottom: none; }
+  .strategy-num {
+    width: 28px; height: 28px; border-radius: 50%;
+    background: linear-gradient(135deg, var(--primary), #2563eb);
+    color: white; font-size: 12px; font-weight: 700;
+    display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+    margin-top: 2px;
+  }
+  .strategy-content { flex: 1; }
+  .strategy-content strong { color: var(--primary); font-size: 14px; }
+  .strategy-content p { font-size: 13px; color: var(--muted); margin-top: 4px; }
+
+  /* 说明栏 */
+  .note-bar.part2-method { display:block; line-height:1.8; }
+  .part2-method strong { display:inline; margin-right:8px; }
+
+  .note-bar {
+    background: #fffbeb; border: 1px solid #fde68a;
+    border-radius: 10px; padding: 14px 18px;
+    font-size: 12px; color: #92400e;
+    margin-top: 16px;
+    display: flex; gap: 8px;
+  }
+
+  .focus-statement { background:linear-gradient(135deg,#eff6ff,#eef2ff); border:1px solid #93c5fd; border-left:5px solid #2563eb; border-radius:10px; padding:14px 16px; color:#1e3a5f; font-weight:700; line-height:1.75; margin-bottom:18px; }
+  .definition-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:12px; margin:18px 0 24px; }
+  .definition-item { background:#fff; border:1px solid var(--border); border-radius:10px; padding:14px 16px; font-size:13px; color:var(--muted); line-height:1.7; }
+  .definition-item strong { color:var(--primary); }
+  .trend-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:12px; margin-top:18px; }
+  .trend-item { background:#f8fafc; border:1px solid var(--border); border-radius:10px; padding:16px; }
+  .trend-item strong { display:block; color:var(--primary); margin-bottom:6px; }
+  .trend-item p { font-size:13px; color:var(--muted); line-height:1.7; }
+  @media (max-width:800px) { .definition-grid,.trend-grid { grid-template-columns:1fr; } }
+
+  /* 分隔 */
+  .section { margin-bottom: 48px; }
+
+  /* 竞争洞察 */
+  .compete-row { display: flex; gap: 16px; align-items: center; margin-bottom: 12px; }
+  .compete-label { font-size: 13px; color: var(--muted); min-width: 80px; }
+  .compete-bar { flex: 1; height: 24px; background: #f1f5f9; border-radius: 6px; overflow: hidden; display: flex; align-items: center; }
+  .compete-fill { height: 100%; border-radius: 6px; display: flex; align-items: center; padding-left: 8px; color: white; font-size: 12px; font-weight: 600; }
+  .c-comp { background: linear-gradient(90deg, #64748b, #94a3b8); }
+  .c-brand { background: linear-gradient(90deg, #1d4ed8, #3b82f6); }
+  .c-industry { background: linear-gradient(90deg, #059669, #10b981); }
+
+  /* 底部 */
+  footer {
+    text-align: center; padding: 40px 20px;
+    font-size: 12px; color: var(--muted);
+    border-top: 1px solid var(--border);
+    margin-top: 20px;
+  }
+
+
+
+  .keyword-groups { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:14px; }
+  .keyword-block { border:1px solid var(--border); border-radius:10px; background:#fffefa; overflow:hidden; }
+  .keyword-head { display:flex; justify-content:space-between; align-items:center; padding:12px 14px; background:#f3ead1; color:#493c19; font-size:14px; font-weight:700; border-bottom:1px solid var(--border); }
+  .keyword-note-list { padding:6px 12px; }
+  .keyword-note { display:grid; grid-template-columns:28px 1fr auto; gap:8px; align-items:center; padding:11px 0; border-bottom:1px solid #ebe3ce; color:var(--text); text-decoration:none; font-size:13px; line-height:1.45; }
+  .keyword-note:last-child { border-bottom:none; }
+  .keyword-note:hover { color:#8b6e20; }
+  .keyword-rank { color:#b49742; font-weight:800; }
+  .direct-mark { color:#9b8441; font-size:11px; white-space:nowrap; }
+  @media (max-width:900px) { .keyword-groups { grid-template-columns:1fr; } }
+
+
+  .all-definition-grid { grid-template-columns:repeat(3,minmax(0,1fr)); }
+  .search-definition-grid { grid-template-columns:repeat(3,minmax(0,1fr)); }
+  .all-keyword-grid .stage-card { padding:18px 16px; }
+  .all-keyword-grid .bar-item { margin-bottom:9px; }
+  .all-keyword-grid .bar-top { margin-bottom:3px; font-size:12px; }
+  .all-keyword-grid .bar-track { height:6px; }
+  .search-distribution-grid .stage-card { min-width:0; }
+  @media(max-width:900px){ .all-definition-grid,.search-definition-grid { grid-template-columns:1fr; } }
+
+  /* 2026-07 视觉重构：象牙白 × 香槟金 × 墨黑 × 少量朱红 */
+  :root {
+    --primary: #171714;
+    --accent: #b49742;
+    --accent2: #c8aa57;
+    --blue: #b49742;
+    --blue-light: #f5eedb;
+    --text: #24231f;
+    --muted: #726d62;
+    --bg: #f7f5ef;
+    --card: #fffefa;
+    --border: #dfd4b5;
+    --green: #9b8441;
+    --orange: #c18b35;
+    --red: #d64b3c;
+  }
+  body {
+    background:
+      radial-gradient(circle at 5% 12%, rgba(180,151,66,.07), transparent 22%),
+      radial-gradient(circle at 96% 88%, rgba(180,151,66,.06), transparent 26%),
+      #f7f5ef;
+    color: var(--text);
+  }
+  .hero {
+    background:
+      linear-gradient(135deg, rgba(180,151,66,.10), transparent 34%),
+      linear-gradient(315deg, rgba(180,151,66,.08), transparent 38%),
+      #fffefa;
+    color: var(--primary);
+    border-top: 4px solid var(--accent);
+    border-bottom: 1px solid #d9c895;
+    padding-top: 54px;
+  }
+  .hero::before {
+    top:-100px; right:-30px; width:420px; height:420px;
+    background: radial-gradient(circle, rgba(180,151,66,.14), transparent 68%);
+  }
+  .hero::after {
+    bottom:-190px; left:-80px; width:520px; height:520px;
+    background: radial-gradient(circle, rgba(180,151,66,.09), transparent 68%);
+  }
+  .hero-badge {
+    background:#fbf6e8; border:1px solid #cdb56f; color:#896f29;
+    border-radius:6px; font-weight:700; letter-spacing:.8px;
+  }
+  .hero h1 {
+    color:#151512; background:none; -webkit-text-fill-color:initial;
+    font-weight:650; letter-spacing:.5px;
+  }
+  .hero p { color:#69645b; }
+  .container { max-width:1240px; padding-top:46px; }
+  .section { margin-bottom:58px; }
+  .section-title {
+    color:#171714; border-bottom:2px solid #b49742;
+    padding-bottom:15px; margin-bottom:26px; font-size:23px;
+  }
+  .section-title .num {
+    background:#b49742; color:white; box-shadow:none;
+    width:38px; height:38px; border:1px solid #a18434;
+  }
+  .card, .stage-card, .note-card, .insight-card, .conversion-box,
+  .definition-item, .trend-item, .stat-chip {
+    background:#fffefa; border-color:#dfd4b5;
+    box-shadow:0 5px 18px rgba(75,62,25,.055);
+  }
+  .card { border-radius:12px; padding:30px; }
+  .card-title { color:#1a1915; font-size:16px; }
+  .card-title::before { background:#b49742; }
+  .funnel-box, .funnel-box.active {
+    color:#29251a; background:linear-gradient(135deg,#fbf5e4,#efe1b6);
+    border:1px solid #cdb56f; box-shadow:none;
+  }
+  .funnel-box.active { background:linear-gradient(135deg,#ead9a4,#cdb56f); }
+  .funnel-arrow { color:#a98527; }
+  .stage-card.s1, .stage-card.s2, .stage-card.s3 { border-top-color:#b49742; }
+  .bar-track, .compete-bar { background:#eeeae0; }
+  .fill-1,.fill-2,.fill-3,.fill-4,.fill-5,.fill-6 {
+    background:linear-gradient(90deg,#a98830,#d2b867);
+  }
+  .comparison-table { border:1px solid #dfd4b5; }
+  .comparison-table th {
+    background:#efe5c9; color:#252218; border-bottom:1px solid #cdb56f;
+  }
+  .comparison-table tr:nth-child(even) td { background:#fbf8ef; }
+  .comparison-table tr:hover td { background:#f5eedb; }
+  .note-card:hover { border-color:#b49742; box-shadow:0 8px 24px rgba(109,87,25,.14); }
+  .tag-1,.tag-2,.tag-3,.tag-4,.tag-5 {
+    background:#f3ead1; color:#755e20; border:1px solid #decc98;
+  }
+  .note-card-title, .insight-title, .conversion-title,
+  .definition-item strong, .trend-item strong, .strategy-content strong { color:#1c1a15; }
+  .note-card-meta, .note-card-stats, .insight-text, .conversion-text,
+  .definition-item, .trend-item p, .strategy-content p { color:#726d62; }
+  .conversion-box.problem,.conversion-box.evidence,.conversion-box.action { border-top-color:#b49742; }
+  .conversion-box.goal { border-top-color:#d64b3c; background:#fff8f4; }
+  .conversion-label { color:#92772e; }
+  .insight-card.highlight, .focus-statement {
+    background:linear-gradient(135deg,#fffaf0,#f5ecd6);
+    border-color:#cdb56f; color:#493c19;
+  }
+  .focus-statement { border-left:5px solid #b49742; }
+  .note-bar {
+    background:#fffaf0; border:1px solid #d8c27e; color:#694f16;
+    border-radius:8px;
+  }
+  .trend-item { background:#fbf8ef; }
+  .strategy-num {
+    background:#b49742; color:#fff; box-shadow:none;
+  }
+  .strategy-list li { border-bottom-color:#e4dbc3; }
+  .c-comp { background:linear-gradient(90deg,#827d72,#aaa398); }
+  .c-brand { background:linear-gradient(90deg,#9b7c28,#c4a64f); }
+  .c-industry { background:linear-gradient(90deg,#b84738,#d66a59); }
+  footer { background:#f0ecdf; border-top-color:#d5c69d; color:#716b5e; }
+  strong[style*="#6366f1"], strong[style*="#10b981"] { color:#b13e32 !important; }
+
+
+.tab-nav{position:sticky;top:0;z-index:100;display:flex;gap:8px;justify-content:center;padding:14px 12px;background:rgba(250,248,245,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--border);flex-wrap:wrap}
+.tab-btn{padding:9px 22px;border-radius:24px;border:1.5px solid var(--border);background:#fff;color:var(--muted);font-size:15px;font-weight:600;cursor:pointer;transition:all .2s;font-family:inherit}
+.tab-btn:hover{border-color:#c79a3e;color:#c79a3e}
+.tab-btn.active{background:#c79a3e;border-color:#c79a3e;color:#fff}
+.tab-panel{display:none}
+.tab-panel.active{display:block}
+</style>
+<script src="https://fe-static.xhscdn.com/data/cowork-uba-script/dist/uba-script.js?random=1787137530143317"></script></head>
+<body>
+<div class="tab-nav">
+  <button class="tab-btn active" onclick="switchTab(&#39;home&#39;,this)">📊 差异对比</button>
+  <button class="tab-btn" onclick="switchTab(&#39;n70&#39;,this)">🚗 澎程 N70</button>
+  <button class="tab-btn" onclick="switchTab(&#39;n90&#39;,this)">🚗 澎程 N90</button>
+</div>
+
+<div class="tab-panel active" id="tab-home">
+  <div class="hero">
+    <div class="hero-content">
+      <h1>澎程 N70 &amp; N90<br/>用户购车决策路径对比报告</h1>
+      <p>分析数据来源：灵犀平台一方用户路径报告</p>
+      <p>覆盖链路：首阅 → 小定 · 分析对象：首阅到小定人群 · 归因周期：全周期</p>
+    </div>
+  </div>
+  <div class="container">
+  <div class="section">
+    <div class="section-title"><div class="num">✦</div>澎程 N70 vs N90 · 核心差异对比</div>
+    <div class="note-bar" style="margin:0 0 20px"><strong>说明：</strong>两份报告均基于灵犀一方用户路径（首阅→小定人群，分析周期 2026-06-05 至 2026-08-05，全周期归因）。下表汇总两车型在决策行为、内容/搜索结构、竞争格局上的关键差异，详情见上方 Tab。</div>
+    <div style="overflow-x:auto">
+      <table class="comparison-table">
+        <thead><tr><th>对比维度</th><th>澎程 N70</th><th>澎程 N90</th><th>差异解读</th></tr></thead>
+        <tbody>
+          <tr><td><strong>⏱️ 决策周期（7天内完成）</strong></td><td>93.55%</td><td><strong style="color:#c79a3e">98.75%</strong></td><td>N90 决策更快，几乎全部 7 天内成交</td></tr>
+          <tr><td><strong>📲 信息流阅读占比</strong></td><td>57.41%</td><td><strong style="color:#c79a3e">62.44%</strong></td><td>N90 更依赖信息流被动种草</td></tr>
+          <tr><td><strong>🔍 搜索流阅读占比</strong></td><td><strong style="color:#c79a3e">29.63%</strong></td><td>19.72%</td><td>N70 用户主动调研更深</td></tr>
+          <tr><td><strong>📖 平均阅读次数</strong></td><td>1.71</td><td><strong style="color:#c79a3e">2.61</strong></td><td>N90 阅读更多，内容消费更重</td></tr>
+          <tr><td><strong>🔎 平均搜索次数</strong></td><td>0.52</td><td>0.46</td><td>接近，N70 略高</td></tr>
+          <tr><td><strong>👥+🏞️ 人群/场景内容占比</strong></td><td>65.9%（34.15+31.71）</td><td>65.2%（33.86+31.38）</td><td>高度一致，均由生活场景驱动</td></tr>
+          <tr><td><strong>🏷️ 品牌搜索占比</strong></td><td><strong style="color:#c79a3e">39.13%</strong></td><td>30.61%</td><td>N70 品牌指向更集中</td></tr>
+          <tr><td><strong>🚗 本SPU搜索占比</strong></td><td>8.70%</td><td>6.12%</td><td>两者本车型直搜均偏弱</td></tr>
+          <tr><td><strong>⚔️ 外部竞品出现</strong></td><td>几乎无（小米体系内）</td><td>理想汽车 2.0%</td><td>N90 有轻微跨品牌关注</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="trend-grid">
+      <div class="trend-item"><strong>🎯 共性：家庭/场景是共同种草底盘</strong><p>两车型人群+场景内容占比都超 65%，代表笔记高度重合（大平层、可变空间、多场景）。澎程系列的核心种草逻辑一致：一台车装下家庭多场景生活。</p></div>
+      <div class="trend-item"><strong>⚡ N90 更「快」更「被动」</strong><p>N90 决策周期更短、信息流占比更高、平均阅读更多——用户被信息流内容直接打动即快速小定，需重点喂足信息流场景大片。</p></div>
+      <div class="trend-item"><strong>🔍 N70 更「主动调研」</strong><p>N70 搜索流占比近 30%、品牌词搜索 39%——用户认品牌后主动检索验证，搜索广告拦截价值更高。</p></div>
+    </div>
+    <div class="insight-card" style="margin-top:20px">
+      <div class="insight-text"><strong>投放启示：</strong>N90 主攻信息流场景种草 + 快速转化承接；N70 在信息流种草基础上加强品牌词/系列词的搜索拦截。两者都要把「系列流量」导向具体车型（本SPU 搜索均不足 9%），并突出各自差异化定位（N90 七座大空间家庭，N70 SkyNomad 可变空间）。</div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title"><div class="num">◎</div>人群画像对比 · N70小定 vs N90小定</div>
+    <div class="note-bar" style="margin:0 0 20px"><strong>数据来源：</strong>灵犀人群画像 · N70小定（ID 20602135）vs N90小定（ID 20602126）。<strong>两群完全互斥（重叠人数为0）</strong>，适合分人群差异化触达。</div>
+    <div class="conversion-grid" style="margin-top:0">
+      <div class="conversion-box problem"><div class="conversion-label">N70 小定人群</div><div class="conversion-title">年轻未婚 · 新势力发烧友</div><div class="conversion-text">26-30岁未婚男性为主力，中消费为主，对新能源品牌（特斯拉/小鹏/理想/极氪）偏好极强，潮流性价比消费（山姆/宜家/麦当劳）。</div></div>
+      <div class="conversion-box goal"><div class="conversion-label">N90 小定人群</div><div class="conversion-title">成熟已婚 · 高消费力家庭用户</div><div class="conversion-text">31-40岁已婚男性为主力，高消费占比高出8pp，对传统豪华+高端新能源（蔚来/问界/腾势/宝马）及奢品（LV/香奈儿）更倾斜。</div></div>
+    </div>
+    <div style="overflow-x:auto;margin-top:24px">
+      <table class="comparison-table">
+        <thead><tr><th>核心维度</th><th>N70 小定</th><th>N90 小定</th><th>差异</th></tr></thead>
+        <tbody>
+          <tr><td><strong>🎂 年龄中心</strong></td><td>26-30岁主力（33.4%）</td><td>31-40岁主力（49.6%）</td><td>★★★★★ N90偏大4-5岁</td></tr>
+          <tr><td><strong>💍 婚恋状态</strong></td><td>未婚为主 55.2%</td><td>已婚为主 57.3%</td><td>★★★★ 差12.5pp</td></tr>
+          <tr><td><strong>💰 消费水平</strong></td><td>中消费主力 69.5%</td><td><strong style="color:#c79a3e">高消费 35.2%</strong></td><td>★★★★ 高消费+8.3pp</td></tr>
+          <tr><td><strong>🏙️ 城市分布</strong></td><td>新一线集中 33.0%</td><td>三四线略广</td><td>★★</td></tr>
+          <tr><td><strong>🚻 性别</strong></td><td>男性 78.9%</td><td>男性 77.5%</td><td>★ 无显著差异</td></tr>
+          <tr><td><strong>🚗 汽车偏好</strong></td><td>新势力发烧（小鹏/理想/极氪）</td><td>豪华+高端新能源（蔚来/问界/腾势/宝马）</td><td>★★★★</td></tr>
+          <tr><td><strong>🛍️ 生活偏好</strong></td><td>潮流/性价比（山姆/宜家）</td><td>高端/品质（APPLE/奢品）</td><td>★★★</td></tr>
+          <tr><td><strong>🎯 本品渗透</strong></td><td><strong style="color:#c79a3e">15.11%</strong>（TGI 60,501）</td><td>12.12%（TGI 48,527）</td><td>★★★ N70是本品核心受众</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div style="overflow-x:auto;margin-top:20px">
+      <table class="comparison-table">
+        <thead><tr><th>汽车品牌偏好（渗透率）</th><th>N70</th><th>N90</th><th>N70领先(pp)</th></tr></thead>
+        <tbody>
+          <tr><td><strong>小米</strong></td><td>42.62%</td><td>35.15%</td><td>+7.5</td></tr>
+          <tr><td><strong>特斯拉</strong></td><td>26.83%</td><td>19.97%</td><td>+6.9</td></tr>
+          <tr><td><strong>小鹏</strong></td><td>25.82%</td><td>17.44%</td><td>+8.4</td></tr>
+          <tr><td><strong>理想</strong></td><td>21.98%</td><td>13.72%</td><td>+8.3</td></tr>
+          <tr><td><strong>极氪</strong></td><td>13.42%</td><td>7.72%</td><td>+5.7</td></tr>
+          <tr><td><strong>方程豹</strong></td><td>10.94%</td><td>5.99%</td><td>+5.0</td></tr>
+          <tr><td><strong>澎程（本品）</strong></td><td><strong style="color:#c79a3e">15.11%</strong></td><td>12.12%</td><td>+3.0</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="trend-grid">
+      <div class="trend-item"><strong>👶 家庭生命周期不同</strong><p>N70 集中在 13-24月/25-36月（新手爸爸阶段），N90 在 0-3月及 4-12岁（孩子偏大或二胎）占比更高——N70结合婴幼儿出行，N90结合学龄家庭周末用车。</p></div>
+      <div class="trend-item"><strong>⚔️ 竞品拦截差异</strong><p>N70核心竞品=小鹏/理想/极氪/零跑，主打科技性能智能化；N90核心竞品=蔚来/问界/腾势/宝马，主打品质服务家庭体验。</p></div>
+      <div class="trend-item"><strong>📣 沟通话术分野</strong><p>N70用「科技感/潮流/驾控乐趣」+强调性价比高价值感；N90用「家庭/品质/从容/豪华感」+可承载更高客单价与升级配置。</p></div>
+    </div>
+    <div class="insight-card" style="margin-top:20px">
+      <div class="insight-text"><strong>差异化营销策略：</strong>N70 走「科技新锐」路线——科技数码/汽车测评KOL，投放科技/数码/游戏兴趣定向，搜索词「智能汽车/自动驾驶/新能源对比」；N90 走「品质家庭」路线——家庭生活/中产生活方式KOL，投放家庭/母婴/高端消费兴趣定向，搜索词「家庭用车/豪华SUV/高品质新能源」。</div>
+    </div>
+  </div>
+</div>
+</div>
+
+<div class="tab-panel" id="tab-n70">
+  <div class="hero">
+    <div class="hero-content">
+      <h1>澎程N70 用户购车决策路径<br/>深度洞察报告</h1>
+      <p>分析数据来源：灵犀平台一方用户路径报告</p>
+      <p>覆盖链路：首阅 → 小定 · 分析对象：首阅到小定人群 · 归因周期：全周期</p>
+    </div>
+  </div>
+  <div class="container">
+
+  <!-- 01A -->
+  <div class="section">
+    <div class="section-title"><div class="num">01A</div>购车决策链路 · 内容关键词分布占比</div>
+    <div class="note-bar" style="margin:0 0 20px"><strong>计算口径：</strong>某类占比 = 该类内容关键词命中量 ÷ 本链路全部内容关键词命中量。同一篇笔记可命中多个类别，展示项不一定合计为100%；这是内容关键词结构，不是用户占比。</div>
+    <div class="definition-grid all-definition-grid">
+<div class="definition-item"><strong>人群（34.15%）：</strong>内容明确面向的用户群体，如亲子家庭、年轻人、摄影师、车友等。</div>
+<div class="definition-item"><strong>场景（31.71%）：</strong>露营、家用、通勤、亲子出行、工作装载等具体使用情境。</div>
+<div class="definition-item"><strong>结构（9.76%）：</strong>车身形式、座椅及空间布局、可变空间等产品基础形态。</div>
+<div class="definition-item"><strong>配置（9.76%）：</strong>智驾、座舱、动力、安全等软硬件功能配置。</div>
+<div class="definition-item"><strong>价格（7.32%）：</strong>预售价、落地价、优惠、赠品、权益及订购政策。</div>
+<div class="definition-item"><strong>配件（4.88%）：</strong>选装件、随车用品、改装件及附加装备。</div>
+<div class="definition-item"><strong>车系（2.44%）：</strong>围绕具体车系或车型展开的介绍、横向比较与选择。</div>
+    </div>
+    <div style="overflow-x:auto;margin-top:24px">
+      <table class="comparison-table">
+        <thead><tr><th>内容关键词类别</th><th>阅读次数占比</th></tr></thead>
+        <tbody>
+          <tr><td><strong>👥 人群</strong></td><td><strong style="color:#c79a3e">34.15%</strong></td></tr>
+          <tr><td><strong>🏞️ 场景</strong></td><td><strong style="color:#c79a3e">31.71%</strong></td></tr>
+          <tr><td><strong>🧱 结构</strong></td><td>9.76%</td></tr>
+          <tr><td><strong>⚙️ 配置</strong></td><td>9.76%</td></tr>
+          <tr><td><strong>💰 价格</strong></td><td>7.32%</td></tr>
+          <tr><td><strong>🎒 配件</strong></td><td>4.88%</td></tr>
+          <tr><td><strong>🚗 车系</strong></td><td>2.44%</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="trend-grid">
+      <div class="trend-item"><strong>👥 人群 + 🏞️ 场景合计超 65%</strong><p>用户阅读高度集中在“谁在用、用在什么场景”。露营、亲子家庭、年轻人、摄影师等标签突出，说明澎程N70的种草主要靠生活方式和场景共鸣切入，而非硬参数。</p></div>
+      <div class="trend-item"><strong>🧱 结构 + ⚙️ 配置合计约 20%</strong><p>产品力相关内容是第二梯队，用户在场景被打动后会进一步看空间结构与配置，是承接兴趣的关键内容。</p></div>
+      <div class="trend-item"><strong>💰 价格关注度尚低（7.32%）</strong><p>首阅到小定阶段价格讨论占比不高，说明用户仍处于“看车、认车”阶段，价格敏感度的释放更靠后。</p></div>
+    </div>
+  </div>
+
+  <!-- 02A -->
+  <div class="section">
+    <div class="section-title"><div class="num">02A</div>内容关键词下高阅读笔记</div>
+    <div class="note-bar" style="margin:0 0 20px"><strong>分析逻辑：</strong>展示内容关键词下阅读排名前列的笔记，同一笔记可能同时命中多个关键词。链接从灵犀笔记详情弹窗直接获取，可直接跳转。</div>
+    <div class="keyword-block">
+      <div class="keyword-head"><span>内容关键词下高阅读笔记</span><strong>TOP5</strong></div>
+      <div class="keyword-note-list">
+<a class="keyword-note" href="https://www.xiaohongshu.com/explore/6a536e84000000002201820f?xsec_token=ZBbc7uy3eJDi-lEPuWN2UAmpOk1tRJpYNy7cuLi7DLRZg=&amp;xsec_source=pc_idea" target="_blank" rel="noopener noreferrer"><span class="keyword-rank">#1</span><span>小米澎程还可以这样？心动💗（图文）</span><span class="direct-mark">直达 ↗</span></a>
+<a class="keyword-note" href="https://www.xiaohongshu.com/explore/6a508a2e000000002003bee6?xsec_token=ZBSpT7cvYSX7LDejiE-vT8pFPGqUpQy1-t1lL9a4L0Oro=&amp;xsec_source=pc_idea" target="_blank" rel="noopener noreferrer"><span class="keyword-rank">#2</span><span>🚗小米澎程开启预约！智能可变大空间SUV（图文）</span><span class="direct-mark">直达 ↗</span></a>
+<a class="keyword-note" href="https://www.xiaohongshu.com/explore/6a4f411f0000000016026228?xsec_token=ZBShr4XKNdQd-YmekIqVEKnA26ldVDuinBF_5Hmts4Ua0=&amp;xsec_source=pc_idea" target="_blank" rel="noopener noreferrer"><span class="keyword-rank">#3</span><span>✨小米澎程座舱首次曝光（图文）</span><span class="direct-mark">直达 ↗</span></a>
+<a class="keyword-note" href="https://www.xiaohongshu.com/explore/6a4ef78a0000000022016e8c?xsec_token=ZBM-MF-qqXC50I_2j_ktbXUcqNUpsiIE3MzqlVVuHM3g8=&amp;xsec_source=pc_idea" target="_blank" rel="noopener noreferrer"><span class="keyword-rank">#4</span><span>我叫SkyNomad 小米澎程｜可变大空间SUV（图文）</span><span class="direct-mark">直达 ↗</span></a>
+<a class="keyword-note" href="https://www.xiaohongshu.com/explore/6a4efd4d000000001702e86a?xsec_token=ZBM-MF-qqXC50I_2j_ktbXUWaXM_K5A-a3Pa2fbjrbtVA=&amp;xsec_source=pc_idea" target="_blank" rel="noopener noreferrer"><span class="keyword-rank">#5</span><span>小米澎程新车型 📣预约通道现已开启‼️（图文）</span><span class="direct-mark">直达 ↗</span></a>
+      </div>
+    </div>
+  </div>
+
+  <!-- 02A-2 各内容关键词类型典型笔记 -->
+  <div class="section">
+    <div class="section-title"><div class="num">02A+</div>各内容关键词类型 · 典型笔记</div>
+    <div class="note-bar" style="margin:0 0 20px"><strong>分析逻辑：</strong>逐个内容关键词类别筛选，展示该类别下阅读排名最靠前的代表性笔记。同一篇笔记可命中多个类别（如「小米澎程还可以这样？心动💗」同时覆盖人群/场景/结构），说明它是跨维度的强种草内容。部分低占比类别本SPU笔记较少，仅展示可得的代表笔记。链接均从灵犀笔记详情弹窗直取，可直接跳转。</div>
+    <div class="keyword-block">
+      <div class="keyword-head"><span>👥 人群</span><strong>34.15%</strong></div>
+      <div class="keyword-note-list">
+<a class="keyword-note" href="https://www.xiaohongshu.com/explore/6a536e84000000002201820f?xsec_token=ZBbc7uy3eJDi-lEPuWN2UAmphGM9xsdzdLmZj-mAAbX8E=&amp;xsec_source=pc_idea" target="_blank" rel="noopener noreferrer"><span class="keyword-rank">#1</span><span>小米澎程还可以这样？心动💗（图文）</span><span class="direct-mark">直达 ↗</span></a>
+<a class="keyword-note" href="https://www.xiaohongshu.com/explore/6a4f1e340000000008002a63?xsec_token=ZBShr4XKNdQd-YmekIqVEKnF-0wYiLimzl_lXr-K-aCvA=&amp;xsec_source=pc_idea" target="_blank" rel="noopener noreferrer"><span class="keyword-rank">#2</span><span>小米澎程，现已开放预约（图文）</span><span class="direct-mark">直达 ↗</span></a>
+      </div>
+    </div>
+    <div class="keyword-block">
+      <div class="keyword-head"><span>🏞️ 场景</span><strong>31.71%</strong></div>
+      <div class="keyword-note-list">
+<a class="keyword-note" href="https://www.xiaohongshu.com/explore/6a536e84000000002201820f?xsec_token=ZBbc7uy3eJDi-lEPuWN2UAmphGM9xsdzdLmZj-mAAbX8E=&amp;xsec_source=pc_idea" target="_blank" rel="noopener noreferrer"><span class="keyword-rank">#1</span><span>小米澎程还可以这样？心动💗（图文）</span><span class="direct-mark">直达 ↗</span></a>
+<a class="keyword-note" href="https://www.xiaohongshu.com/explore/6a4f411f0000000016026228?xsec_token=ZBShr4XKNdQd-YmekIqVEKnNcT1m35cLxkbmHAIaGtTII=&amp;xsec_source=pc_idea" target="_blank" rel="noopener noreferrer"><span class="keyword-rank">#2</span><span>✨小米澎程座舱首次曝光（图文）</span><span class="direct-mark">直达 ↗</span></a>
+      </div>
+    </div>
+    <div class="keyword-block">
+      <div class="keyword-head"><span>🧱 结构</span><strong>9.76%</strong></div>
+      <div class="keyword-note-list">
+<a class="keyword-note" href="https://www.xiaohongshu.com/explore/6a536e84000000002201820f?xsec_token=ZBbc7uy3eJDi-lEPuWN2UAmphGM9xsdzdLmZj-mAAbX8E=&amp;xsec_source=pc_idea" target="_blank" rel="noopener noreferrer"><span class="keyword-rank">#1</span><span>小米澎程还可以这样？心动💗（图文）</span><span class="direct-mark">直达 ↗</span></a>
+      </div>
+    </div>
+    <div class="keyword-block">
+      <div class="keyword-head"><span>⚙️ 配置</span><strong>9.76%</strong></div>
+      <div class="keyword-note-list">
+<a class="keyword-note" href="https://www.xiaohongshu.com/explore/6a508a2e000000002003bee6?xsec_token=ZBSpT7cvYSX7LDejiE-vT8pP_hn3GKRPKIYE3wgshZix4=&amp;xsec_source=pc_idea" target="_blank" rel="noopener noreferrer"><span class="keyword-rank">#1</span><span>🚗小米澎程开启预约！智能可变大空间SUV（图文）</span><span class="direct-mark">直达 ↗</span></a>
+<a class="keyword-note" href="https://www.xiaohongshu.com/explore/6a4efd4d000000001702e86a?xsec_token=ZBM-MF-qqXC50I_2j_ktbXUWbRvvkoxPR5ag11cbs9Ghw=&amp;xsec_source=pc_idea" target="_blank" rel="noopener noreferrer"><span class="keyword-rank">#2</span><span>小米澎程新车型 📣预约通道现已开启‼️（图文）</span><span class="direct-mark">直达 ↗</span></a>
+      </div>
+    </div>
+    <div class="keyword-block">
+      <div class="keyword-head"><span>💰 价格</span><strong>7.32%</strong></div>
+      <div class="keyword-note-list">
+<a class="keyword-note" href="https://www.xiaohongshu.com/explore/6a4ef78a0000000022016e8c?xsec_token=ZBM-MF-qqXC50I_2j_ktbXUXdB8TniqTMnsS5jem671ow=&amp;xsec_source=pc_idea" target="_blank" rel="noopener noreferrer"><span class="keyword-rank">#1</span><span>我叫SkyNomad 小米澎程｜可变大空间SUV（图文）</span><span class="direct-mark">直达 ↗</span></a>
+      </div>
+    </div>
+    <div class="keyword-block">
+      <div class="keyword-head"><span>🎒 配件</span><strong>4.88%</strong></div>
+      <div class="keyword-note-list">
+<a class="keyword-note" href="https://www.xiaohongshu.com/explore/6a508a2e000000002003bee6?xsec_token=ZBSpT7cvYSX7LDejiE-vT8pP_hn3GKRPKIYE3wgshZix4=&amp;xsec_source=pc_idea" target="_blank" rel="noopener noreferrer"><span class="keyword-rank">#1</span><span>🚗小米澎程开启预约！智能可变大空间SUV（图文）</span><span class="direct-mark">直达 ↗</span></a>
+      </div>
+    </div>
+    <div class="keyword-block">
+      <div class="keyword-head"><span>🚗 车系</span><strong>2.44%</strong></div>
+      <div class="keyword-note-list">
+<a class="keyword-note" href="https://www.xiaohongshu.com/explore/6a4ef78a0000000022016e8c?xsec_token=ZBM-MF-qqXC50I_2j_ktbXUXdB8TniqTMnsS5jem671ow=&amp;xsec_source=pc_idea" target="_blank" rel="noopener noreferrer"><span class="keyword-rank">#1</span><span>我叫SkyNomad 小米澎程｜可变大空间SUV（图文）</span><span class="direct-mark">直达 ↗</span></a>
+      </div>
+    </div>
+    <div class="insight-card" style="margin-top:20px">
+      <div class="insight-text"><strong>典型笔记洞察：</strong>人群 / 场景两大高占比类别的代表笔记高度重合（「小米澎程还可以这样？心动💗」贯穿多类），是 N70 首阅阶段最核心的场景种草内容；配置 / 配件类由官方预约类笔记承接，价格 / 车系类则集中在 SkyNomad 品牌定位笔记，说明用户在认车阶段更看重「这台车是什么、能装下什么生活」。</div>
+    </div>
+  </div>
+
+  <!-- 01B -->
+  <div class="section">
+    <div class="section-title"><div class="num">01B</div>购车决策链路 · 搜索关键词分布占比</div>
+    <div class="note-bar" style="margin:0 0 20px"><strong>计算口径：</strong>某类搜索占比 = 该类搜索量 ÷ 本链路全部搜索量。反映用户主动搜索的意图结构。</div>
+    <div class="definition-grid all-definition-grid">
+<div class="definition-item"><strong>品牌（39.13%）：</strong>以“小米澎程”“小米汽车”等品牌名发起的搜索。</div>
+<div class="definition-item"><strong>产品系列（13.04%）：</strong>围绕澎程 N 系列等产品系列的搜索。</div>
+<div class="definition-item"><strong>其他（13.04%）：</strong>未归入上述类别的长尾搜索词。</div>
+<div class="definition-item"><strong>本SPU（8.70%）：</strong>直接搜索本车型（澎程 N70）的关键词。</div>
+<div class="definition-item"><strong>品类（8.70%）：</strong>家用SUV、露营车等品类词搜索。</div>
+<div class="definition-item"><strong>aoi（4.35%）：</strong>地理位置/兴趣区域相关搜索。</div>
+<div class="definition-item"><strong>竞品（4.35%）：</strong>涉及其他品牌或车型的对比搜索。</div>
+<div class="definition-item"><strong>场所（4.35%）：</strong>门店、体验店、城市等场所相关搜索。</div>
+<div class="definition-item"><strong>购买意向（4.35%）：</strong>预约试驾、订车、上市时间等购买倾向明确的搜索。</div>
+    </div>
+    <div style="overflow-x:auto;margin-top:24px">
+      <table class="comparison-table">
+        <thead><tr><th>搜索关键词类别</th><th>搜索量占比</th></tr></thead>
+        <tbody>
+          <tr><td><strong>🏷️ 品牌</strong></td><td><strong style="color:#c79a3e">39.13%</strong></td></tr>
+          <tr><td><strong>📦 产品系列</strong></td><td>13.04%</td></tr>
+          <tr><td><strong>➕ 其他</strong></td><td>13.04%</td></tr>
+          <tr><td><strong>🚗 本SPU</strong></td><td>8.70%</td></tr>
+          <tr><td><strong>📂 品类</strong></td><td>8.70%</td></tr>
+          <tr><td><strong>📍 aoi</strong></td><td>4.35%</td></tr>
+          <tr><td><strong>⚔️ 竞品</strong></td><td>4.35%</td></tr>
+          <tr><td><strong>🏬 场所</strong></td><td>4.35%</td></tr>
+          <tr><td><strong>🛒 购买意向</strong></td><td>4.35%</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="insight-card" style="margin-top:20px">
+      <div class="insight-text"><strong>搜索意图洞察：</strong>品牌词搜索占比最高（39.13%），叠加产品系列与本SPU，说明用户已建立“小米澎程”品牌认知，主动检索多带明确目标；品类、竞品、场所等探索型搜索占比低，横向比价行为不明显。</div>
+    </div>
+  </div>
+
+  <!-- 02B -->
+  <div class="section">
+    <div class="section-title"><div class="num">02B</div>搜索关键词下高阅读笔记</div>
+    <div class="note-bar" style="margin:0 0 20px"><strong>分析逻辑：</strong>按搜索量占比TOP类别展示对应高阅读笔记，同一笔记可能被不同搜索类别命中。</div>
+    <div class="keyword-block">
+      <div class="keyword-head"><span>搜索关键词下高阅读笔记</span><strong>TOP8</strong></div>
+      <div class="keyword-note-list">
+<a class="keyword-note" href="https://www.xiaohongshu.com/explore/6a4f3e780000000008025234?xsec_token=ZBShr4XKNdQd-YmekIqVEKnASXu2V_OGzAkXDzjjsUWmo=&amp;xsec_source=pc_idea" target="_blank" rel="noopener noreferrer"><span class="keyword-rank">#1</span><span>小米汽车最新系列|澎程、百变大空间（图文）</span><span class="direct-mark">直达 ↗</span></a>
+<a class="keyword-note" href="https://www.xiaohongshu.com/explore/6a6b0def00000000220166c5?xsec_token=ZBiI4IHN0DC7QNzUthXoUPMjcKRzflITytXnL6c8nFPeg=&amp;xsec_source=pc_idea" target="_blank" rel="noopener noreferrer"><span class="keyword-rank">#2</span><span>抢先实拍小米新车，这车不到20万？（视频）</span><span class="direct-mark">直达 ↗</span></a>
+<a class="keyword-note" href="https://www.xiaohongshu.com/explore/6a5324d20000000022015ccd?xsec_token=ZBbc7uy3eJDi-lEPuWN2UAmjlexDg-IUz2iGSWbYMHr00=&amp;xsec_source=pc_idea" target="_blank" rel="noopener noreferrer"><span class="keyword-rank">#3</span><span>官方新号！一组武汉的宣传海报（图文）</span><span class="direct-mark">直达 ↗</span></a>
+<a class="keyword-note" href="https://www.xiaohongshu.com/explore/6a54a569000000000f01c63c?xsec_token=ZBnBIWnN9JmTVn4V_eCLJ5elJ1KtsgE_Q4hPVCdqBTKZE=&amp;xsec_source=pc_idea" target="_blank" rel="noopener noreferrer"><span class="keyword-rank">#4</span><span>成都小米车主线下活动氛围感满满✨（图文）</span><span class="direct-mark">直达 ↗</span></a>
+<a class="keyword-note" href="https://www.xiaohongshu.com/explore/6a536e84000000002201820f?xsec_token=ZBbc7uy3eJDi-lEPuWN2UAmpOk1tRJpYNy7cuLi7DLRZg=&amp;xsec_source=pc_idea" target="_blank" rel="noopener noreferrer"><span class="keyword-rank">#5</span><span>小米澎程还可以这样？心动💗（图文）</span><span class="direct-mark">直达 ↗</span></a>
+<a class="keyword-note" href="https://www.xiaohongshu.com/explore/6a4f1e340000000008002a63?xsec_token=ZBShr4XKNdQd-YmekIqVEKnHxmytxAyTNXGXEdEi8D6zI=&amp;xsec_source=pc_idea" target="_blank" rel="noopener noreferrer"><span class="keyword-rank">#6</span><span>小米澎程，现已开放预约（图文）</span><span class="direct-mark">直达 ↗</span></a>
+<a class="keyword-note" href="https://www.xiaohongshu.com/explore/6a4a13d00000000021022532?xsec_token=ZBw1cjzGRiQ2BdTKPSIc0pHLOzgXmmRRPmM3KVx3O33dw=&amp;xsec_source=pc_idea" target="_blank" rel="noopener noreferrer"><span class="keyword-rank">#7</span><span>哪个男生会拒绝速度和弯道呢🚗（视频）</span><span class="direct-mark">直达 ↗</span></a>
+<a class="keyword-note" href="https://www.xiaohongshu.com/explore/6a4f00de000000001702fa9e?xsec_token=ZBShr4XKNdQd-YmekIqVEKnA0ZwvMp8ubp8U-KNVBbJ1E=&amp;xsec_source=pc_idea" target="_blank" rel="noopener noreferrer"><span class="keyword-rank">#8</span><span>小米又有新车型‼️赶紧预约📣👋🏻（图文）</span><span class="direct-mark">直达 ↗</span></a>
+      </div>
+    </div>
+  </div>
+
+  <!-- 03 转化阻力与内容解法 -->
+  <div class="section">
+    <div class="section-title"><div class="num">03</div>各阶段转化阻力与内容解法</div>
+    <div class="note-bar" style="margin:0 0 20px"><strong>说明：</strong>本报告覆盖首阅→小定完整漏斗，按决策时序分为三阶段，分别回答“用户卡在哪里、用什么内容推动到下一步”。</div>
+    <div class="funnel">
+      <div class="funnel-step"><div class="funnel-box"><div class="funnel-label">需求触发期</div><div class="funnel-sub">T-90</div></div></div>
+      <div class="funnel-arrow">→</div>
+      <div class="funnel-step"><div class="funnel-box"><div class="funnel-label">深度研究期</div><div class="funnel-sub">T-60 ~ T-30</div></div></div>
+      <div class="funnel-arrow">→</div>
+      <div class="funnel-step"><div class="funnel-box"><div class="funnel-label">决策验证期</div><div class="funnel-sub">T-15 ~ T-7</div></div></div>
+    </div>
+
+    <div class="conversion-grid" style="margin-top:24px">
+      <div class="conversion-box problem"><div class="conversion-label">阶段一 · 需求触发期</div><div class="conversion-title">用户被场景触发，但需求尚未落到具体车型</div><div class="conversion-text"><strong>数据证据：</strong>场景关键词占31.71%，户外生活型需求占40%、家庭出行型35%、专业需求型25%。<br/><strong>内容解法：</strong>多场景用车解决方案——露营空间、亲子出行、摄影师装备装载。<br/><strong>转化目标：</strong>把“我需要一辆车”变成“我可能需要澎程N70”。</div></div>
+      <div class="conversion-box evidence"><div class="conversion-label">阶段二 · 深度研究期</div><div class="conversion-title">开始研究参数配置，但产品力信息仍有缺口</div><div class="conversion-text"><strong>数据证据：</strong>结构+配置合计19.52%；搜索出现“n70百公里加速”“n70内饰”等参数词。<br/><strong>内容解法：</strong>深度参数解析、配置对比、内饰/空间实拍、价格区间内容。<br/><strong>转化目标：</strong>建立产品力信任，推动进入小定留资。</div></div>
+      <div class="conversion-box goal"><div class="conversion-label">阶段三 · 决策验证期</div><div class="conversion-title">已有倾向，需真实反馈与服务保障降低风险</div><div class="conversion-text"><strong>数据证据：</strong>临门一脚内容中实证验证型45%、服务保障型35%、价格透明型20%。<br/><strong>内容解法：</strong>真实评测、长期使用报告、售后政策、预约试驾引导、限时权益。<br/><strong>转化目标：</strong>抓住决策窗口，完成小定转化。</div></div>
+    </div>
+
+    <div class="focus-statement" style="margin-top:20px"><strong>全链路结论：</strong>首阅阶段解决“这车适合我什么场景”→ 研究阶段解决“产品力够不够强”→ 验证阶段解决“现在下定安不安全、值不值”。内容投放应随阶段从场景种草过渡到参数科普，再到真实证言与权益促成。</div>
+  </div>
+
+  <!-- 04 竞品 -->
+  <div class="section">
+    <div class="section-title"><div class="num">04</div>竞品内容影响力</div>
+    <div class="note-bar" style="margin:0 0 20px"><strong>口径说明：</strong>本链路为“本品决策路径”，灵犀未输出跨品牌阅读占比。用户阅读高度集中于澎程N70及小米汽车相关内容。</div>
+    <div style="overflow-x:auto">
+      <table class="comparison-table">
+        <thead><tr><th>用户阅读集中的 TOP SPU / 品牌</th><th>提及占比</th></tr></thead>
+        <tbody>
+          <tr><td><strong>澎程N70</strong></td><td><strong style="color:#c79a3e">50%</strong></td></tr>
+          <tr><td><strong>澎程N90</strong></td><td>41.7%</td></tr>
+          <tr><td><strong>小米YU7 GT</strong></td><td>33.3%</td></tr>
+          <tr><td><strong>品牌 · 澎程</strong></td><td>50%</td></tr>
+          <tr><td><strong>品牌 · 小米汽车</strong></td><td>50%</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="insight-card" style="margin-top:20px">
+      <div class="insight-text"><strong>竞争含义：</strong>用户在小红书决策路径中暂未表现出明显的跨品牌对比行为，主要在小米体系内做车型间比较（N70 / N90 / YU7 GT）。外部竞品拦截空间较小，但也意味着若用户流失，更可能被小米体系内其他车型或线下渠道分流，而非被外部竞品截走。</div>
+    </div>
+  </div>
+
+  <!-- 05 行为全景 -->
+  <div class="section">
+    <div class="section-title"><div class="num">05</div>用户行为数据全景</div>
+    <div class="note-bar" style="margin:0 0 20px"><strong>计算口径：</strong>决策周期占比 = 该档决策人数 ÷ 有完整决策路径的人数。</div>
+    <div style="overflow-x:auto">
+      <table class="comparison-table">
+        <thead><tr><th>决策周期</th><th>完成比例</th></tr></thead>
+        <tbody>
+          <tr><td><strong>7天内完成</strong></td><td><strong style="color:#c79a3e">93.55%</strong></td></tr>
+          <tr><td><strong>8-14天完成</strong></td><td>6.45%</td></tr>
+          <tr><td>15-30天完成</td><td>0%</td></tr>
+          <tr><td>31-60天完成</td><td>0%</td></tr>
+          <tr><td>60天以上完成</td><td>0%</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div style="overflow-x:auto;margin-top:20px">
+      <table class="comparison-table">
+        <thead><tr><th>阅读场域</th><th>阅读量占比</th><th>首次阅读占比</th><th>末次阅读占比</th></tr></thead>
+        <tbody>
+          <tr><td><strong>信息流</strong></td><td><strong style="color:#c79a3e">57.41%</strong></td><td>50.00%</td><td>46.88%</td></tr>
+          <tr><td><strong>搜索流</strong></td><td>29.63%</td><td>37.50%</td><td>40.62%</td></tr>
+          <tr><td>视频内流</td><td>12.96%</td><td>12.50%</td><td>12.50%</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div style="overflow-x:auto;margin-top:20px">
+      <table class="comparison-table">
+        <thead><tr><th>行为频次</th><th>均值</th></tr></thead>
+        <tbody>
+          <tr><td>平均阅读次数</td><td>1.71</td></tr>
+          <tr><td>平均搜索次数</td><td>0.52</td></tr>
+          <tr><td>平均互动次数</td><td>0.03</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="insight-card" style="margin-top:20px">
+      <div class="insight-text"><strong>行为洞察：</strong>决策周期极短，绝大多数用户在7天内完成首阅到小定。信息流是主要触达场域，但搜索流在首次和末次阅读中占比均接近或超过信息流，说明用户被种草后会主动搜索验证，搜索是临门一脚的关键入口。</div>
+    </div>
+  </div>
+
+  <!-- 06 建议 -->
+  <div class="section">
+    <div class="section-title"><div class="num">06</div>营销战略建议</div>
+    <div class="strategy-list">
+      <div class="card"><div class="card-title"><span class="strategy-num">1</span>按决策时序搭建内容矩阵</div><div class="strategy-content">前期以露营、家用、摄影师装备等场景内容触达泛需求人群；中期投放内饰、加速、空间、价格等参数内容承接兴趣；后期用真实车主评测、售后政策、限时权益推动小定。</div></div>
+      <div class="card"><div class="card-title"><span class="strategy-num">2</span>搜索广告重点拦截品牌词与产品系列词</div><div class="strategy-content">用户搜索以“小米澎程”“N70”“n70内饰”“n70百公里加速”等品牌/产品词为主，建议优先布局这些高意图词，同时在竞品词上保持观察。</div></div>
+      <div class="card"><div class="card-title"><span class="strategy-num">3</span>信息流种草 + 搜索验证闭环</div><div class="strategy-content">信息流贡献主要阅读量，搜索流承接首末次验证。投放策略上，信息流负责场景破圈与首次触达，搜索负责拦截已种草用户并引导预约/小定。</div></div>
+    </div>
+  </div>
+
+  <div style="text-align:center;color:var(--muted);font-size:12px;margin-top:40px;padding:20px;border-top:1px solid var(--border)">
+    澎程N70 · 分析周期 2026-06-05 至 2026-08-05 · 数据来源：小红书灵犀 · 报告由 OpenClaw 自动生成
+  </div>
+</div>
+</div>
+
+<div class="tab-panel" id="tab-n90">
+  <div class="hero">
+    <div class="hero-content">
+      <h1>澎程N90 用户购车决策路径<br/>深度洞察报告</h1>
+      <p>分析数据来源：灵犀平台一方用户路径报告</p>
+      <p>覆盖链路：首阅 → 小定 · 分析对象：首阅到小定人群 · 归因周期：全周期</p>
+    </div>
+  </div>
+  <div class="container">
+
+  <!-- 01A -->
+  <div class="section">
+    <div class="section-title"><div class="num">01A</div>购车决策链路 · 内容关键词分布占比</div>
+    <div class="note-bar" style="margin:0 0 20px"><strong>计算口径：</strong>某类占比 = 该类内容关键词命中量 ÷ 本链路全部内容关键词命中量。同一篇笔记可命中多个类别，展示项不一定合计为100%；这是内容关键词结构，不是用户占比。</div>
+    <div class="definition-grid all-definition-grid">
+<div class="definition-item"><strong>人群（33.86%）：</strong>内容明确面向的用户群体，如亲子家庭、年轻人、摄影师、车友等。</div>
+<div class="definition-item"><strong>场景（31.38%）：</strong>露营、家用、通勤、亲子出行、工作、追剧等具体使用情境。</div>
+<div class="definition-item"><strong>结构（10.38%）：</strong>车身形式、座椅及空间布局、可变空间、七座/后排床等产品基础形态。</div>
+<div class="definition-item"><strong>价格（6.55%）：</strong>预售价、落地价、优惠、赠品、权益及订购政策。</div>
+<div class="definition-item"><strong>内饰（5.42%）：</strong>座舱设计、材质、空间氛围及乘坐体验。</div>
+<div class="definition-item"><strong>能源（4.29%）：</strong>纯电、增程、插混、续航、能耗及补能方式。</div>
+<div class="definition-item"><strong>车系（3.61%）：</strong>围绕具体车系或车型展开的介绍、横向比较与选择。</div>
+<div class="definition-item"><strong>颜色（3.16%）：</strong>车身颜色、内饰配色及视觉偏好。</div>
+<div class="definition-item"><strong>配置（1.35%）：</strong>车辆软硬件功能配置，包括智驾、座舱、舒适及便利功能。</div>
+    </div>
+    <div style="overflow-x:auto;margin-top:24px">
+      <table class="comparison-table">
+        <thead><tr><th>内容关键词类别</th><th>阅读次数占比</th></tr></thead>
+        <tbody>
+          <tr><td><strong>👥 人群</strong></td><td><strong style="color:#c79a3e">33.86%</strong></td></tr>
+          <tr><td><strong>🏞️ 场景</strong></td><td><strong style="color:#c79a3e">31.38%</strong></td></tr>
+          <tr><td><strong>🧱 结构</strong></td><td>10.38%</td></tr>
+          <tr><td><strong>💰 价格</strong></td><td>6.55%</td></tr>
+          <tr><td><strong>🛋️ 内饰</strong></td><td>5.42%</td></tr>
+          <tr><td><strong>🔋 能源</strong></td><td>4.29%</td></tr>
+          <tr><td><strong>🚗 车系</strong></td><td>3.61%</td></tr>
+          <tr><td><strong>🎨 颜色</strong></td><td>3.16%</td></tr>
+          <tr><td><strong>⚙️ 配置</strong></td><td>1.35%</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="trend-grid">
+      <div class="trend-item"><strong>👥 人群 + 🏞️ 场景合计超 65%</strong><p>亲子家庭、家用、露营、工作等标签突出，N90 用户同样被生活方式和场景共鸣驱动，七座/大空间的家庭属性是核心种草点。</p></div>
+      <div class="trend-item"><strong>🧱 结构关注度高于价格与配置</strong><p>结构占比 10.38%，高于价格（6.55%）和配置（1.35%）。用户更关心「空间能不能满足家庭/露营/办公」，而不是单一参数。</p></div>
+      <div class="trend-item"><strong>💰 价格敏感度低、临门更看功能验证</strong><p>价格仅占 6.55%，说明首阅到小定阶段用户尚未进入比价模式；内容应优先讲清空间场景，而非急于放价。</p></div>
+    </div>
+  </div>
+
+  <!-- 02A -->
+  <div class="section">
+    <div class="section-title"><div class="num">02A</div>内容关键词下高阅读笔记</div>
+    <div class="note-bar" style="margin:0 0 20px"><strong>分析逻辑：</strong>展示内容关键词下阅读排名前列的笔记，同一笔记可能同时命中多个关键词。链接从灵犀笔记详情弹窗直接获取，可直接跳转。</div>
+    <div class="keyword-block">
+      <div class="keyword-head"><span>内容关键词下高阅读笔记</span><strong>TOP5</strong></div>
+      <div class="keyword-note-list">
+<a class="keyword-note" href="https://www.xiaohongshu.com/explore/6a618a13000000000f03d109?xsec_token=ZBJtbNWBlgwjiV5tpICYM3UD9-Vtpkq7JZxioOhh0LePU=&amp;xsec_source=pc_idea" target="_blank" rel="noopener noreferrer"><span class="keyword-rank">#1</span><span>原来SUV座舱可以有这么多种打开方式！（图文）</span><span class="direct-mark">直达 ↗</span></a>
+<a class="keyword-note" href="https://www.xiaohongshu.com/explore/6a536e84000000002201820f?xsec_token=ZBbc7uy3eJDi-lEPuWN2UAmphGM9xsdzdLmZj-mAAbX8E=&amp;xsec_source=pc_idea" target="_blank" rel="noopener noreferrer"><span class="keyword-rank">#2</span><span>小米澎程还可以这样？心动💗（图文）</span><span class="direct-mark">直达 ↗</span></a>
+<a class="keyword-note" href="https://www.xiaohongshu.com/explore/6a6ac96c000000001f01c3a6?xsec_token=ZBTWgxO7V3PuQjEXm_cbQ2fvPOFIK0pNQebge1ZXmAPLc=&amp;xsec_source=pc_idea" target="_blank" rel="noopener noreferrer"><span class="keyword-rank">#3</span><span>沉浸式体验小米澎程N90！把SUV做成了大平层！（视频）</span><span class="direct-mark">直达 ↗</span></a>
+<a class="keyword-note" href="https://www.xiaohongshu.com/explore/6a618a15000000000e03514c?xsec_token=ZBJtbNWBlgwjiV5tpICYM3UC9BxYGctvvEbvoxZ3Clx3I=&amp;xsec_source=pc_idea" target="_blank" rel="noopener noreferrer"><span class="keyword-rank">#4</span><span>这台将上市的大空间SUV让我彻底改观！（图文）</span><span class="direct-mark">直达 ↗</span></a>
+<a class="keyword-note" href="https://www.xiaohongshu.com/explore/6a6afcaf0000000004029e61?xsec_token=ZBTWgxO7V3PuQjEXm_cbQ2fu--tRtRC00vkzzp2pnUmXw=&amp;xsec_source=pc_idea" target="_blank" rel="noopener noreferrer"><span class="keyword-rank">#5</span><span>揽胜：我没惹你们任何人！（图文）</span><span class="direct-mark">直达 ↗</span></a>
+      </div>
+    </div>
+  </div>
+
+  <!-- 02A-2 各内容关键词类型典型笔记 -->
+  <div class="section">
+    <div class="section-title"><div class="num">02A+</div>各内容关键词类型 · 典型笔记</div>
+    <div class="note-bar" style="margin:0 0 20px"><strong>分析逻辑：</strong>逐个内容关键词类别筛选，展示该类别下阅读排名最靠前的代表性笔记（每类 TOP2）。同一篇笔记可能同时命中多个类别（如「原来SUV座舱可以有这么多种打开方式！」贯穿场景/结构/内饰/能源/配置多类），说明它是跨维度的强种草内容。链接均从灵犀笔记详情弹窗直取，可直接跳转。</div>
+    <div class="keyword-block">
+      <div class="keyword-head"><span>👥 人群</span><strong>33.86%</strong></div>
+      <div class="keyword-note-list">
+<a class="keyword-note" href="https://www.xiaohongshu.com/explore/6a6ac96c000000001f01c3a6?xsec_token=ZBTWgxO7V3PuQjEXm_cbQ2fvPOFIK0pNQebge1ZXmAPLc=&amp;xsec_source=pc_idea" target="_blank" rel="noopener noreferrer"><span class="keyword-rank">#1</span><span>沉浸式体验小米澎程N90！把SUV做成了大平层！（视频）</span><span class="direct-mark">直达 ↗</span></a>
+<a class="keyword-note" href="https://www.xiaohongshu.com/explore/6a536e84000000002201820f?xsec_token=ZBbc7uy3eJDi-lEPuWN2UAmphGM9xsdzdLmZj-mAAbX8E=&amp;xsec_source=pc_idea" target="_blank" rel="noopener noreferrer"><span class="keyword-rank">#2</span><span>小米澎程还可以这样？心动💗（图文）</span><span class="direct-mark">直达 ↗</span></a>
+      </div>
+    </div>
+    <div class="keyword-block">
+      <div class="keyword-head"><span>🏞️ 场景</span><strong>31.38%</strong></div>
+      <div class="keyword-note-list">
+<a class="keyword-note" href="https://www.xiaohongshu.com/explore/6a618a13000000000f03d109?xsec_token=ZBJtbNWBlgwjiV5tpICYM3UD9-Vtpkq7JZxioOhh0LePU=&amp;xsec_source=pc_idea" target="_blank" rel="noopener noreferrer"><span class="keyword-rank">#1</span><span>原来SUV座舱可以有这么多种打开方式！（图文）</span><span class="direct-mark">直达 ↗</span></a>
+<a class="keyword-note" href="https://www.xiaohongshu.com/explore/6a6ac96c000000001f01c3a6?xsec_token=ZBTWgxO7V3PuQjEXm_cbQ2fvPOFIK0pNQebge1ZXmAPLc=&amp;xsec_source=pc_idea" target="_blank" rel="noopener noreferrer"><span class="keyword-rank">#2</span><span>沉浸式体验小米澎程N90！把SUV做成了大平层！（视频）</span><span class="direct-mark">直达 ↗</span></a>
+      </div>
+    </div>
+    <div class="keyword-block">
+      <div class="keyword-head"><span>🧱 结构</span><strong>10.38%</strong></div>
+      <div class="keyword-note-list">
+<a class="keyword-note" href="https://www.xiaohongshu.com/explore/6a618a13000000000f03d109?xsec_token=ZBJtbNWBlgwjiV5tpICYM3UD9-Vtpkq7JZxioOhh0LePU=&amp;xsec_source=pc_idea" target="_blank" rel="noopener noreferrer"><span class="keyword-rank">#1</span><span>原来SUV座舱可以有这么多种打开方式！（图文）</span><span class="direct-mark">直达 ↗</span></a>
+<a class="keyword-note" href="https://www.xiaohongshu.com/explore/6a536e84000000002201820f?xsec_token=ZBbc7uy3eJDi-lEPuWN2UAmphGM9xsdzdLmZj-mAAbX8E=&amp;xsec_source=pc_idea" target="_blank" rel="noopener noreferrer"><span class="keyword-rank">#2</span><span>小米澎程还可以这样？心动💗（图文）</span><span class="direct-mark">直达 ↗</span></a>
+      </div>
+    </div>
+    <div class="keyword-block">
+      <div class="keyword-head"><span>💰 价格</span><strong>6.55%</strong></div>
+      <div class="keyword-note-list">
+<a class="keyword-note" href="https://www.xiaohongshu.com/explore/6a6afcaf0000000004029e61?xsec_token=ZBTWgxO7V3PuQjEXm_cbQ2fu--tRtRC00vkzzp2pnUmXw=&amp;xsec_source=pc_idea" target="_blank" rel="noopener noreferrer"><span class="keyword-rank">#1</span><span>揽胜：我没惹你们任何人！（图文）</span><span class="direct-mark">直达 ↗</span></a>
+<a class="keyword-note" href="https://www.xiaohongshu.com/explore/6a4ef78a0000000022016e8c?xsec_token=ZBM-MF-qqXC50I_2j_ktbXUXdB8TniqTMnsS5jem671ow=&amp;xsec_source=pc_idea" target="_blank" rel="noopener noreferrer"><span class="keyword-rank">#2</span><span>我叫SkyNomad 小米澎程｜可变大空间SUV（图文）</span><span class="direct-mark">直达 ↗</span></a>
+      </div>
+    </div>
+    <div class="keyword-block">
+      <div class="keyword-head"><span>🛋️ 内饰</span><strong>5.42%</strong></div>
+      <div class="keyword-note-list">
+<a class="keyword-note" href="https://www.xiaohongshu.com/explore/6a618a13000000000f03d109?xsec_token=ZBJtbNWBlgwjiV5tpICYM3UD9-Vtpkq7JZxioOhh0LePU=&amp;xsec_source=pc_idea" target="_blank" rel="noopener noreferrer"><span class="keyword-rank">#1</span><span>原来SUV座舱可以有这么多种打开方式！（图文）</span><span class="direct-mark">直达 ↗</span></a>
+<a class="keyword-note" href="https://www.xiaohongshu.com/explore/6a6abd8d000000000301db0d?xsec_token=ZBTWgxO7V3PuQjEXm_cbQ2fpz03hAPOG3c5ma-8sO4Chw=&amp;xsec_source=pc_idea" target="_blank" rel="noopener noreferrer"><span class="keyword-rank">#2</span><span>增程+对座+76度大电池！小米澎程N90来了（图文）</span><span class="direct-mark">直达 ↗</span></a>
+      </div>
+    </div>
+    <div class="keyword-block">
+      <div class="keyword-head"><span>🔋 能源</span><strong>4.29%</strong></div>
+      <div class="keyword-note-list">
+<a class="keyword-note" href="https://www.xiaohongshu.com/explore/6a618a13000000000f03d109?xsec_token=ZBJtbNWBlgwjiV5tpICYM3UD9-Vtpkq7JZxioOhh0LePU=&amp;xsec_source=pc_idea" target="_blank" rel="noopener noreferrer"><span class="keyword-rank">#1</span><span>原来SUV座舱可以有这么多种打开方式！（图文）</span><span class="direct-mark">直达 ↗</span></a>
+<a class="keyword-note" href="https://www.xiaohongshu.com/explore/6a618a15000000000e03514c?xsec_token=ZBJtbNWBlgwjiV5tpICYM3UC9BxYGctvvEbvoxZ3Clx3I=&amp;xsec_source=pc_idea" target="_blank" rel="noopener noreferrer"><span class="keyword-rank">#2</span><span>这台将上市的大空间SUV让我彻底改观！（图文）</span><span class="direct-mark">直达 ↗</span></a>
+      </div>
+    </div>
+    <div class="keyword-block">
+      <div class="keyword-head"><span>🚗 车系</span><strong>3.61%</strong></div>
+      <div class="keyword-note-list">
+<a class="keyword-note" href="https://www.xiaohongshu.com/explore/6a618a15000000000e03514c?xsec_token=ZBJtbNWBlgwjiV5tpICYM3UC9BxYGctvvEbvoxZ3Clx3I=&amp;xsec_source=pc_idea" target="_blank" rel="noopener noreferrer"><span class="keyword-rank">#1</span><span>这台将上市的大空间SUV让我彻底改观！（图文）</span><span class="direct-mark">直达 ↗</span></a>
+<a class="keyword-note" href="https://www.xiaohongshu.com/explore/6a6b2807000000002c0040c0?xsec_token=ZBiI4IHN0DC7QNzUthXoUPMqH-kP-IPH_zum93hXYWU10=&amp;xsec_source=pc_idea" target="_blank" rel="noopener noreferrer"><span class="keyword-rank">#2</span><span>终于看到小米澎程N90实车了（图文）</span><span class="direct-mark">直达 ↗</span></a>
+      </div>
+    </div>
+    <div class="keyword-block">
+      <div class="keyword-head"><span>🎨 颜色</span><strong>3.16%</strong></div>
+      <div class="keyword-note-list">
+<a class="keyword-note" href="https://www.xiaohongshu.com/explore/6a6b2807000000002c0040c0?xsec_token=ZBiI4IHN0DC7QNzUthXoUPMqH-kP-IPH_zum93hXYWU10=&amp;xsec_source=pc_idea" target="_blank" rel="noopener noreferrer"><span class="keyword-rank">#1</span><span>终于看到小米澎程N90实车了（图文）</span><span class="direct-mark">直达 ↗</span></a>
+<a class="keyword-note" href="https://www.xiaohongshu.com/explore/6a60b382000000001003d09c?xsec_token=ZB1ZMVZTKZstyPgEi_G0nmgcZbr8N0cD-fL-KPG_sgJ30=&amp;xsec_source=pc_idea" target="_blank" rel="noopener noreferrer"><span class="keyword-rank">#2</span><span>偶遇小米新车，一辆帅到路过的车🚗（图文）</span><span class="direct-mark">直达 ↗</span></a>
+      </div>
+    </div>
+    <div class="keyword-block">
+      <div class="keyword-head"><span>⚙️ 配置</span><strong>1.35%</strong></div>
+      <div class="keyword-note-list">
+<a class="keyword-note" href="https://www.xiaohongshu.com/explore/6a618a13000000000f03d109?xsec_token=ZBJtbNWBlgwjiV5tpICYM3UD9-Vtpkq7JZxioOhh0LePU=&amp;xsec_source=pc_idea" target="_blank" rel="noopener noreferrer"><span class="keyword-rank">#1</span><span>原来SUV座舱可以有这么多种打开方式！（图文）</span><span class="direct-mark">直达 ↗</span></a>
+<a class="keyword-note" href="https://www.xiaohongshu.com/explore/6a6abd8d000000000301db0d?xsec_token=ZBTWgxO7V3PuQjEXm_cbQ2fpz03hAPOG3c5ma-8sO4Chw=&amp;xsec_source=pc_idea" target="_blank" rel="noopener noreferrer"><span class="keyword-rank">#2</span><span>增程+对座+76度大电池！小米澎程N90来了（图文）</span><span class="direct-mark">直达 ↗</span></a>
+      </div>
+    </div>
+    <div class="insight-card" style="margin-top:20px">
+      <div class="insight-text"><strong>典型笔记洞察：</strong>人群 / 场景两大高占比类别的代表笔记高度重合（大平层、可变空间、多场景打开方式），说明 N90 的核心种草逻辑是「一台车装下家庭多场景生活」；价格类笔记则偏向预售套路解读与理性对比，需在后链路补充透明价格与权益内容。</div>
+    </div>
+  </div>
+
+  <!-- 01B -->
+  <div class="section">
+    <div class="section-title"><div class="num">01B</div>购车决策链路 · 搜索关键词分布占比</div>
+    <div class="note-bar" style="margin:0 0 20px"><strong>计算口径：</strong>某类搜索占比 = 该类搜索量 ÷ 本链路全部搜索量。反映用户主动搜索的意图结构。</div>
+    <div class="definition-grid all-definition-grid">
+<div class="definition-item"><strong>品牌（30.61%）：</strong>以「小米澎程」「小米汽车」等品牌名发起的搜索。</div>
+<div class="definition-item"><strong>其他（24.49%）：</strong>未归入上述类别的长尾搜索词。</div>
+<div class="definition-item"><strong>产品系列（18.37%）：</strong>围绕澎程 N 系列等产品系列的搜索。</div>
+<div class="definition-item"><strong>品类（10.20%）：</strong>家用SUV、七座车、新能源车等品类词搜索。</div>
+<div class="definition-item"><strong>本SPU（6.12%）：</strong>直接搜索本车型（澎程 N90）的关键词。</div>
+<div class="definition-item"><strong>竞品SPU（4.08%）：</strong>涉及其他品牌具体车型的对比搜索。</div>
+<div class="definition-item"><strong>竞品（2.04%）：</strong>品牌级竞品对比搜索。</div>
+<div class="definition-item"><strong>poi（2.04%）：</strong>线下门店、体验店、城市等地点相关搜索。</div>
+<div class="definition-item"><strong>颜色（2.04%）：</strong>车身/内饰颜色相关搜索。</div>
+    </div>
+    <div style="overflow-x:auto;margin-top:24px">
+      <table class="comparison-table">
+        <thead><tr><th>搜索关键词类别</th><th>搜索量占比</th></tr></thead>
+        <tbody>
+          <tr><td><strong>🏷️ 品牌</strong></td><td><strong style="color:#c79a3e">30.61%</strong></td></tr>
+          <tr><td><strong>➕ 其他</strong></td><td>24.49%</td></tr>
+          <tr><td><strong>📦 产品系列</strong></td><td>18.37%</td></tr>
+          <tr><td><strong>📂 品类</strong></td><td>10.20%</td></tr>
+          <tr><td><strong>🚗 本SPU</strong></td><td>6.12%</td></tr>
+          <tr><td><strong>⚔️ 竞品SPU</strong></td><td>4.08%</td></tr>
+          <tr><td><strong>⚔️ 竞品</strong></td><td>2.04%</td></tr>
+          <tr><td><strong>📍 poi</strong></td><td>2.04%</td></tr>
+          <tr><td><strong>🎨 颜色</strong></td><td>2.04%</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="insight-card" style="margin-top:20px">
+      <div class="insight-text"><strong>搜索意图洞察：</strong>品牌词与产品系列词合计近 50%，但「其他」占 24.49% 且本SPU仅占 6.12%，说明用户搜索更发散，处于「认品牌、看品类」阶段，对 N90 具体车型的直接检索还不高。</div>
+    </div>
+  </div>
+
+  <!-- 02B -->
+  <div class="section">
+    <div class="section-title"><div class="num">02B</div>搜索关键词下高阅读笔记</div>
+    <div class="note-bar" style="margin:0 0 20px"><strong>分析逻辑：</strong>按搜索量占比TOP类别展示对应高阅读笔记，同一笔记可能被不同搜索类别命中。</div>
+    <div class="keyword-block">
+      <div class="keyword-head"><span>搜索关键词下高阅读笔记</span><strong>TOP5</strong></div>
+      <div class="keyword-note-list">
+<a class="keyword-note" href="https://www.xiaohongshu.com/explore/6a536e84000000002201820f?xsec_token=ZBbc7uy3eJDi-lEPuWN2UAmphGM9xsdzdLmZj-mAAbX8E=&amp;xsec_source=pc_idea" target="_blank" rel="noopener noreferrer"><span class="keyword-rank">#1</span><span>小米澎程还可以这样？心动💗（图文）</span><span class="direct-mark">直达 ↗</span></a>
+<a class="keyword-note" href="https://www.xiaohongshu.com/explore/6a69bded0000000013024eea?xsec_token=ZBgR9jWiy0ZShau1Tnr_bPBc1Ta4iF6pdkHH6Z65CHhgI=&amp;xsec_source=pc_idea" target="_blank" rel="noopener noreferrer"><span class="keyword-rank">#2</span><span>为什么说加92、95、98号燃油都能吵翻全网？（图文）</span><span class="direct-mark">直达 ↗</span></a>
+<a class="keyword-note" href="https://www.xiaohongshu.com/explore/6a69ff2c0000000009037a7a?xsec_token=ZBgR9jWiy0ZShau1Tnr_bPBWmtepDJHfQmcXCstAxIDxA=&amp;xsec_source=pc_idea" target="_blank" rel="noopener noreferrer"><span class="keyword-rank">#3</span><span>把家搬进小米澎程，装备党的移动生活王炸💥（视频）</span><span class="direct-mark">直达 ↗</span></a>
+<a class="keyword-note" href="https://www.xiaohongshu.com/explore/6a5324d20000000022015ccd?xsec_token=ZBbc7uy3eJDi-lEPuWN2UAmseJ__mLhhj0cK6t_GNjpoA=&amp;xsec_source=pc_idea" target="_blank" rel="noopener noreferrer"><span class="keyword-rank">#4</span><span>官方新号！一组武汉的宣传海报（图文）</span><span class="direct-mark">直达 ↗</span></a>
+<a class="keyword-note" href="https://www.xiaohongshu.com/explore/6a4f87810000000007026144?xsec_token=ZBShr4XKNdQd-YmekIqVEKnMLv4CczyV0P2bJ9P3DYK_Q=&amp;xsec_source=pc_idea" target="_blank" rel="noopener noreferrer"><span class="keyword-rank">#5</span><span>小米澎程SUV内饰解读，宝宸只说细节（视频）</span><span class="direct-mark">直达 ↗</span></a>
+      </div>
+    </div>
+  </div>
+
+  <!-- 03 转化阻力与内容解法 -->
+  <div class="section">
+    <div class="section-title"><div class="num">03</div>各阶段转化阻力与内容解法</div>
+    <div class="note-bar" style="margin:0 0 20px"><strong>说明：</strong>本报告覆盖首阅→小定完整漏斗，按决策时序分为四阶段（灵犀 AI 识别），分别回答「用户卡在哪里、用什么内容推动到下一步」。</div>
+    <div class="funnel">
+      <div class="funnel-step"><div class="funnel-box"><div class="funnel-label">需求触发期</div><div class="funnel-sub">T-90 ~ T-60</div></div></div>
+      <div class="funnel-arrow">→</div>
+      <div class="funnel-step"><div class="funnel-box"><div class="funnel-label">深度功课期</div><div class="funnel-sub">T-60 ~ T-30</div></div></div>
+      <div class="funnel-arrow">→</div>
+      <div class="funnel-step"><div class="funnel-box"><div class="funnel-label">体验验证期</div><div class="funnel-sub">T-30 ~ T-7</div></div></div>
+      <div class="funnel-arrow">→</div>
+      <div class="funnel-step"><div class="funnel-box"><div class="funnel-label">决策转化期</div><div class="funnel-sub">T-7 ~ 转化</div></div></div>
+    </div>
+
+    <div class="conversion-grid" style="margin-top:24px">
+      <div class="conversion-box problem"><div class="conversion-label">阶段一 · 需求触发期</div><div class="conversion-title">用户有家庭空间升级或新能源换代需求，但车型选择尚未聚焦</div><div class="conversion-text"><strong>数据证据：</strong>内容关键词中人群（33.86%）和场景（31.38%）占绝对主导；需求类型中家庭扩容约45%、技术升级约30%。<br/><strong>内容解法：</strong>以「七座家庭出行解决方案」「露营/办公/追剧多场景空间」切入，绑定亲子家庭、家用标签。<br/><strong>转化目标：</strong>把泛需求落到「大空间家用 SUV → 澎程 N90」。</div></div>
+      <div class="conversion-box evidence"><div class="conversion-label">阶段二 · 深度功课期</div><div class="conversion-title">开始研究具体车型，但品牌系列搜索占主导，本SPU检索偏弱</div><div class="conversion-text"><strong>数据证据：</strong>品牌词 30.61%、产品系列 18.37%，本SPU仅 6.12%；搜索出现「小米澎程n90」「sky nomad」「n90内饰」等。<br/><strong>内容解法：</strong>强化 N90 专属内容（内饰、七座布局、后排床、纯电续航），把系列流量导到具体车型。<br/><strong>转化目标：</strong>建立「N90 是澎程系列里最适合家庭/多场景」的心智。</div></div>
+      <div class="conversion-box goal"><div class="conversion-label">阶段三 · 体验验证期</div><div class="conversion-title">已有购买倾向，需线下体验与真实反馈降低决策风险</div><div class="conversion-text"><strong>数据证据：</strong>poi 搜索出现「来福士汽车体验店」「小米汽车 江阴」；临门一脚中服务保障型占25%。<br/><strong>内容解法：</strong>门店探店、实车到店、首批车主体验、交付流程透明化。<br/><strong>转化目标：</strong>把线上兴趣转化为到店/预约行为。</div></div>
+      <div class="conversion-box problem"><div class="conversion-label">阶段四 · 决策转化期</div><div class="conversion-title">最终决策受功能验证与价格权益双重驱动</div><div class="conversion-text"><strong>数据证据：</strong>临门一脚中功能验证型40%、价格敏感型35%、服务保障型25%。<br/><strong>内容解法：</strong>真实场景实测（办公模式、后排床、露营）、价格表/权益/首发活动、订单状态引导。<br/><strong>转化目标：</strong>抓住决策窗口，完成小定转化。</div></div>
+    </div>
+
+    <div class="focus-statement" style="margin-top:20px"><strong>全链路结论：</strong>首阅阶段用家庭/场景种草建立需求 → 研究阶段用 N90 专属内容承接系列流量 → 验证阶段用门店+真实反馈降低风险 → 决策阶段用场景实测+权益促成小定。</div>
+  </div>
+
+  <!-- 04 竞品 -->
+  <div class="section">
+    <div class="section-title"><div class="num">04</div>竞品内容影响力</div>
+    <div class="note-bar" style="margin:0 0 20px"><strong>口径说明：</strong>灵犀「本竞品阅读占比」在本链路下无数据。以下用 TOP 用户阅读笔记对应的 SPU/品牌提及分布，说明本品集中度。</div>
+    <div style="overflow-x:auto">
+      <table class="comparison-table">
+        <thead><tr><th>用户阅读集中的 TOP SPU / 品牌</th><th>提及占比</th></tr></thead>
+        <tbody>
+          <tr><td><strong>小米澎程n90</strong></td><td><strong style="color:#c79a3e">30.6%</strong></td></tr>
+          <tr><td><strong>小米澎程系列</strong></td><td>18.4%</td></tr>
+          <tr><td><strong>sky nomad</strong></td><td>12.2%</td></tr>
+          <tr><td><strong>品牌 · 小米澎程</strong></td><td>30.6%</td></tr>
+          <tr><td><strong>品牌 · 小米汽车</strong></td><td>6.1%</td></tr>
+          <tr><td><strong>品牌 · 理想汽车</strong></td><td>2.0%</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="insight-card" style="margin-top:20px">
+      <div class="insight-text"><strong>竞争含义：</strong>N90 用户路径高度集中在小米体系内（澎程 n90 + 系列 + sky nomad 合计 61.2%）。外部竞品仅理想汽车出现 1 次（2.0%），跨品牌拦截压力小。竞争主要发生在小米内部车型之间，需防止用户被系列内其他车型分流。</div>
+    </div>
+  </div>
+
+  <!-- 05 行为全景 -->
+  <div class="section">
+    <div class="section-title"><div class="num">05</div>用户行为数据全景</div>
+    <div class="note-bar" style="margin:0 0 20px"><strong>计算口径：</strong>决策周期占比 = 该档决策人数 ÷ 有完整决策路径的人数。</div>
+    <div style="overflow-x:auto">
+      <table class="comparison-table">
+        <thead><tr><th>决策周期</th><th>完成比例</th></tr></thead>
+        <tbody>
+          <tr><td><strong>7天内完成</strong></td><td><strong style="color:#c79a3e">98.75%</strong></td></tr>
+          <tr><td><strong>8-14天完成</strong></td><td>1.25%</td></tr>
+          <tr><td>15-30天完成</td><td>0%</td></tr>
+          <tr><td>31-60天完成</td><td>0%</td></tr>
+          <tr><td>60天以上完成</td><td>0%</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div style="overflow-x:auto;margin-top:20px">
+      <table class="comparison-table">
+        <thead><tr><th>阅读场域</th><th>阅读量占比</th><th>首次阅读占比</th><th>末次阅读占比</th></tr></thead>
+        <tbody>
+          <tr><td><strong>信息流</strong></td><td><strong style="color:#c79a3e">62.44%</strong></td><td>66.29%</td><td>66.67%</td></tr>
+          <tr><td><strong>搜索流</strong></td><td>19.72%</td><td>19.10%</td><td>17.78%</td></tr>
+          <tr><td>视频内流</td><td>15.96%</td><td>14.61%</td><td>13.33%</td></tr>
+          <tr><td>其他</td><td>1.88%</td><td>0.00%</td><td>2.22%</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div style="overflow-x:auto;margin-top:20px">
+      <table class="comparison-table">
+        <thead><tr><th>行为频次</th><th>均值</th></tr></thead>
+        <tbody>
+          <tr><td>平均阅读次数</td><td>2.61</td></tr>
+          <tr><td>平均搜索次数</td><td>0.46</td></tr>
+          <tr><td>平均互动次数</td><td>0.08</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="insight-card" style="margin-top:20px">
+      <div class="insight-text"><strong>行为洞察：</strong>决策周期比 N70 更短（98.75% 在 7 天内完成），信息流占比更高且首末次阅读均由信息流主导，说明 N90 用户更易被信息流内容直接打动；搜索流占比不足 20%，主动调研深度弱于 N70。</div>
+    </div>
+  </div>
+
+  <!-- 06 建议 -->
+  <div class="section">
+    <div class="section-title"><div class="num">06</div>营销战略建议</div>
+    <div class="strategy-list">
+      <div class="card"><div class="card-title"><span class="strategy-num">1</span>信息流主导，抢占家庭场景心智</div><div class="strategy-content">N90 信息流阅读量占比 62.44% 且首末次阅读均由信息流主导。重点投放亲子家庭、七座空间、露营/办公/追剧多场景内容，用生活方式共鸣直接激发需求。</div></div>
+      <div class="card"><div class="card-title"><span class="strategy-num">2</span>把「系列流量」转化为「N90 专属认知」</div><div class="strategy-content">品牌词+产品系列词搜索合计近 50%，但本SPU仅占 6.12%。需加强 N90 内饰、后排床、七座布局、sky nomad 等专属内容，承接系列兴趣并明确车型指向。</div></div>
+      <div class="card"><div class="card-title"><span class="strategy-num">3</span>临门一脚靠场景实测 + 权益 + 到店引导</div><div class="strategy-content">决策转化期功能验证型占 40%、价格敏感型占 35%。投放真实车主场景实测（办公模式、后排床）、首发权益/价格表，并引导到店/预约，抓住 7 天内成交窗口。</div></div>
+      <div class="card"><div class="card-title"><span class="strategy-num">4</span>防御小米体系内分流</div><div class="strategy-content">竞品拦截压力小，但小米体系内车型（澎程系列、sky nomad、YU7 GT 等）分流风险高。N90 内容要突出「七座大空间」「家庭/办公多场景」等差异化定位。</div></div>
+    </div>
+  </div>
+
+  <div style="text-align:center;color:var(--muted);font-size:12px;margin-top:40px;padding:20px;border-top:1px solid var(--border)">
+    澎程N90 · 分析周期 2026-06-05 至 2026-08-05 · 数据来源：小红书灵犀 · 报告由 OpenClaw 自动生成
+  </div>
+</div>
+</div>
+
+<script>
+function switchTab(id, btn){
+  document.querySelectorAll('.tab-panel').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+  document.getElementById('tab-'+id).classList.add('active');
+  btn.classList.add('active');
+  window.scrollTo(0,0);
+}
+</script>
+
+
+</body></html>
